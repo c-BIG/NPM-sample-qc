@@ -1,0 +1,30 @@
+From: continuumio/miniconda
+Bootstrap: docker
+
+%environment
+    PATH=/opt/conda/envs/NPM-sample-qc/bin:$PATH
+    export PATH
+
+%files
+    conda_env.yaml /
+
+%post
+    # Update the base version of conda
+    /opt/conda/bin/conda update -n base conda
+
+    # Create conda environment from template
+    /opt/conda/bin/conda env create -f /conda_env.yaml
+    /opt/conda/bin/conda clean -a
+
+    # Add sg10k-cov binary
+    apt-get install -y build-essential zlib1g-dev libbz2-dev && \
+      git clone https://andreas-wilm@bitbucket.org/andreas-wilm/sg10k-cov.git && \
+      cd sg10k-cov/ && \
+      git checkout 6b74ab8 && \
+      bash make.sh && \
+      cp sg10k-cov-062017.sh samtools-M /usr/local/bin/ && \
+      cd .. && rm -rf sg10k-cov/ && \
+      apt-get remove -y build-essential zlib1g-dev libbz2-dev && apt-get clean -y
+
+    # NSCC-specific directories
+    mkdir /data /seq /secure /scratch

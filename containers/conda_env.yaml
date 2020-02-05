@@ -1,0 +1,11 @@
+name: sample_qc
+channels:
+    - bioconda
+    - conda-forge
+    - defaults
+dependencies:
+    - bcftools=1.10.2
+    - samtools=1.10
+    - picard=2.21.7
+    - verifybamid2=1.0.5
+    - multiqc=1.8
