@@ -1,1 +1,3 @@
 .nextflow*
+*.swp
+*__pycache__*

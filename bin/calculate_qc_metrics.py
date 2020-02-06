@@ -4,7 +4,7 @@ import logging
 import argparse
 import json
 import pprint as pp
-import numpy as np
+import metrics
 
 
 def parse_args():
@@ -33,21 +33,15 @@ def load_multi_qc(args):
         d = json.load(json_file)
         # keep raw data to simplify parsing downstream
         mqc = d["report_saved_raw_data"]
-        return mqc
+    return mqc
 
 
 def calculate_metrics(mqc):
     result = dict()
 
-    # samtools flagstat
-    samtools_flagstat = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    # % mapped
-    result["perc_mapped_reads"] = samtools_flagstat["mapped_passed_pct"]
-    # % properly paired
-    result["perc_properly_paired"] = samtools_flagstat["properly paired_passed_pct"]
-    # % diff chrom
-    x = 100 * np.divide(samtools_flagstat["with mate mapped to a different chr (mapQ >= 5)_passed"], samtools_flagstat["total_passed"])
-    result["perc_diff_chrom_mapqge5"] = np.round(x, 2)
+    result["perc_mapped_reads"] = metrics.perc_mapped_reads(mqc)
+    result["perc_properly_paired"] = metrics.perc_properly_paired(mqc)
+    result["perc_diff_chrom_mapqge5"] = metrics.perc_diff_chrom_mapqge5(mqc)
 
     # done
     return result
