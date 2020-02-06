@@ -38,12 +38,9 @@ def load_multi_qc(args):
 
 def calculate_metrics(mqc):
     result = dict()
-
     result["perc_mapped_reads"] = metrics.perc_mapped_reads(mqc)
     result["perc_properly_paired"] = metrics.perc_properly_paired(mqc)
     result["perc_diff_chrom_mapqge5"] = metrics.perc_diff_chrom_mapqge5(mqc)
-
-    # done
     return result
 
 
