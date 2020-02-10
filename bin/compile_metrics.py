@@ -22,7 +22,7 @@ def parse_args():
 def set_logging(args):
     numeric_level = getattr(logging, args.loglevel.upper(), None)
     if not isinstance(numeric_level, int):
-        raise ValueError('Invalid log level: %s' % loglevel)
+        raise ValueError('Invalid log level: %s' % args.loglevel)
     logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
                         level=numeric_level)
 
