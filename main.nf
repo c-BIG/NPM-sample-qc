@@ -80,29 +80,13 @@ Channel
 
 Channel
     .fromPath(params.ref_fa)
-    .set { ref_fa_ch_cram_to_bam }
+    .into { ref_fa_ch_cram_to_bam; ref_fa_ch_picard_collect_alignment_summary_metrics }
 
 /*
 ----------------------------------------------------------------------
 PROCESSES
 ---------------------------------------------------------------------
 */
-//process samtools_stats {
-//
-//    publishDir "${params.publishdir}/samtools-stats"
-//
-//    input:
-//    file cram from cram_ch_samtools_stats
-//
-//    output:
-//    file "*" into samtools_stats_ch
-//
-//    script:
-//    """
-//    samtools stats ${cram} > ${cram}.stats
-//    """
-//
-//}
 
 process cram_to_bam {
 
@@ -111,7 +95,7 @@ process cram_to_bam {
     file cram from cram_ch_cram_to_bam
 
     output:
-    file "*" into cram_to_bam_ch
+    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, cram_to_bam_ch_picard_collect_alignment_summary_metrics
 
     script:
     """
@@ -120,6 +104,23 @@ process cram_to_bam {
     """
 
 }
+
+//process samtools_stats {
+
+    //publishDir "${params.publishdir}/samtools"
+
+    //input:
+    //file cram from cram_ch_samtools_stats
+
+    //output:
+    //file "*" into samtools_stats_ch
+
+    //script:
+    //"""
+    //samtools stats ${cram} > ${cram}.stats
+    //"""
+
+//}
 
 process samtools_flagstat {
 
@@ -160,7 +161,7 @@ process picard_collect_quality_yield_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file "*" from cram_to_bam_ch
+    file "*" from cram_to_bam_ch_picard_collect_quality_yield_metrics
 
     output:
     file "quality_yield_metrics.txt" into picard_collect_quality_yield_metrics_ch
@@ -172,15 +173,34 @@ process picard_collect_quality_yield_metrics {
 
 }
 
+process picard_collect_alignment_summary_metrics {
+
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file ref_fa from ref_fa_ch_picard_collect_alignment_summary_metrics
+    file "*" from cram_to_bam_ch_picard_collect_alignment_summary_metrics
+
+    output:
+    file "alignment_summary_metrics.txt" into picard_collect_alignment_summary_metrics_ch
+
+    script:
+    """
+    picard CollectAlignmentSummaryMetrics R=${ref_fa} I=sample.bam O=alignment_summary_metrics.txt
+    """
+
+}
 
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
+    //file "samtools/*stats" from samtools_stats_ch
     file "samtools/*flagstat" from samtools_flagstat_ch
     file "bcftools/*stats" from bcftools_stats_ch
     file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
+    file "picard/*alignment_summary_metrics.txt" from picard_collect_alignment_summary_metrics_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
