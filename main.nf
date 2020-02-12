@@ -72,12 +72,15 @@ INPUT CHANNELS
 */
 Channel
     .fromPath(params.cram)
-    .into { cram_ch_samtools_stats; cram_ch_samtools_flagstat }
+    .into { cram_ch_cram_to_bam; cram_ch_samtools_stats; cram_ch_samtools_flagstat }
 
 Channel
     .fromPath(params.vcf)
     .set { vcf_ch } 
 
+Channel
+    .fromPath(params.ref_fa)
+    .set { ref_fa_ch_cram_to_bam }
 
 /*
 ----------------------------------------------------------------------
@@ -85,8 +88,6 @@ PROCESSES
 ---------------------------------------------------------------------
 */
 //process samtools_stats {
-//
-//    tag "samtools stats"
 //
 //    publishDir "${params.publishdir}/samtools-stats"
 //
@@ -103,11 +104,26 @@ PROCESSES
 //
 //}
 
+process cram_to_bam {
+
+    input:
+    file ref_fa from ref_fa_ch_cram_to_bam
+    file cram from cram_ch_cram_to_bam
+
+    output:
+    file "*" into cram_to_bam_ch
+
+    script:
+    """
+    samtools view -h -T ${ref_fa} -b ${cram} -o sample.bam
+    samtools index sample.bam sample.bam.bai
+    """
+
+}
+
 process samtools_flagstat {
 
-    tag "samtools flagstat"
-
-    publishDir "${params.publishdir}/samtools-flagstat", mode: "copy"
+    publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
     file cram from cram_ch_samtools_flagstat
@@ -117,16 +133,14 @@ process samtools_flagstat {
 
     script:
     """
-    samtools flagstat ${cram} > ${cram}.stats
+    samtools flagstat ${cram} > ${cram}.flagstat
     """
 
 }
 
 process bcftools_stats {
 
-    tag "bcftools stats"
-
-    publishDir "${params.publishdir}/bcftools-stats", mode: "copy"
+    publishDir "${params.publishdir}/bcftools", mode: "copy"
 
     input:
     file vcf from vcf_ch
@@ -141,15 +155,32 @@ process bcftools_stats {
 
 }
 
-process multiqc {
+process picard_collect_quality_yield_metrics {
 
-    tag "multiqc"
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file "*" from cram_to_bam_ch
+
+    output:
+    file "quality_yield_metrics.txt" into picard_collect_quality_yield_metrics_ch
+
+    script:
+    """
+    picard CollectQualityYieldMetrics I=sample.bam O=quality_yield_metrics.txt
+    """
+
+}
+
+
+process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
-    file "samtools-flagstat/*" from samtools_flagstat_ch
-    file "bcftools-stats/*" from bcftools_stats_ch
+    file "samtools/*flagstat" from samtools_flagstat_ch
+    file "bcftools/*stats" from bcftools_stats_ch
+    file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
@@ -162,8 +193,6 @@ process multiqc {
 }
 
 process compile_metrics {
-
-    tag "compile_metrics"
 
     publishDir "${params.publishdir}", mode: "copy"
 

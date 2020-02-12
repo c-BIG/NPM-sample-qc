@@ -1,3 +1,4 @@
 sample_id: ERR194147-fake1
 cram: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*cram
 vcf: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*fb.vcf.gz
+ref_fa: /data/users/astar/gis/rpd/genomes.testing/GRCh38/gatk-bundle/Homo_sapiens_assembly38.fasta
