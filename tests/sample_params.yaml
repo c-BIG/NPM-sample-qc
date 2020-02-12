@@ -2,6 +2,6 @@ sample_id: ERR194147-fake1
 cram: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*cram
 vcf: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*fb.vcf.gz
 ref_fa: /data/users/astar/gis/rpd/genomes.testing/GRCh38/gatk-bundle/Homo_sapiens_assembly38.fasta
-dbsnp_vcf: /data/13000026/pipeline/dev/NPM-sample-qc/tests/sandbox/common_all_20180418.vcf.gz
+dbsnp_vcf: /data/13000026/pipeline/dev/NPM-sample-qc/tests/sandbox/common_all_20180418.chr.vcf.gz
 pst_vcf: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake2/ERR194147-fake2.fb.vcf.gz
 vbi2_svdprefix: /home/users/astar/gis/gonzalez/.conda/envs/mgonzalezporta-nscc/share/verifybamid2-1.0.6-0/resource/1000g.phase3.10k.b38.vcf.gz.dat

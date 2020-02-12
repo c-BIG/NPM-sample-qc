@@ -79,25 +79,25 @@ INPUT CHANNELS
 
 Channel
     .fromPath(params.cram)
-    .into { cram_ch_cram_to_bam \
+    .into { cram_ch_cram_to_bam
           ; cram_ch_samtools_flagstat }
 
 Channel
     .fromPath(params.vcf)
-    .into { vcf_ch_bcftools_stats \
-          ; vcf_ch_bcftools_gtcheck \
+    .into { vcf_ch_bcftools_stats
+          ; vcf_ch_bcftools_gtcheck
           ; vcf_ch_picard_collect_variant_calling_metrics }
 
 Channel
     .fromPath(params.ref_fa)
-    .into { ref_fa_ch_cram_to_bam \
-          ; ref_fa_ch_picard_collect_alignment_summary_metrics \
-          ; ref_fa_ch_picard_collect_wgs_metrics \
-          ; ref_fa_ch_picard_collect_gc_bias_metrics \
+    .into { ref_fa_ch_cram_to_bam
+          ; ref_fa_ch_picard_collect_alignment_summary_metrics
+          ; ref_fa_ch_picard_collect_wgs_metrics
+          ; ref_fa_ch_picard_collect_gc_bias_metrics
           ; ref_fa_ch_verifybamid2 }
 
 Channel
-    .fromPath(params.dbsnp_vcf) \
+    .fromPath(params.dbsnp_vcf)
     .set { dbsnp_vcf_ch_picard_collect_variant_calling_metrics }
 /*
 ----------------------------------------------------------------------
@@ -284,23 +284,24 @@ process picard_collect_gc_bias_metrics {
 
 }
 
-//process picard_collect_variant_calling_metrics {
+process picard_collect_variant_calling_metrics {
 
-    //publishDir "${params.publishdir}/picard", mode: "copy"
+    publishDir "${params.publishdir}/picard", mode: "copy"
 
-    //input:
-    //file vcf from vcf_ch_picard_collect_variant_calling_metrics
-    //file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics
+    input:
+    file vcf from vcf_ch_picard_collect_variant_calling_metrics
+    file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics
     
-    //output:
-    //file "*" into picard_collect_variant_calling_metrics_ch
+    output:
+    file "*" into picard_collect_variant_calling_metrics_ch
 
-    //script:
-    //"""
-    //picard CollectVariantCallingMetrics I=${vcf} O=${params.sample_id}.variant_calling_metrics.txt DBSNP=${dbsnp_vcf}
-    //"""
+    script:
+    """
+    bcftools index --tbi ${vcf}
+    picard CollectVariantCallingMetrics I=${vcf} O=${params.sample_id} DBSNP=${dbsnp_vcf}
+    """
 
-//}
+}
 
 //process verifybamid2 {
     
@@ -334,7 +335,7 @@ process multiqc {
     file "picard/*wgs_metrics.txt" from picard_collect_wgs_metrics_ch
     file "picard/*insert_size_metrics.txt" from picard_collect_insert_size_metrics_ch
     file "picard/*gc_bias_metrics.txt" from picard_collect_gc_bias_metrics_ch
-    //file "picard/*variant_calling_metrics.txt" from picard_collect_variant_calling_metrics_ch
+    file "picard/*variant_calling_metrics.txt" from picard_collect_variant_calling_metrics_ch
     //file "verifybamid2/*" from verifybamid2_ch
 
     output:
