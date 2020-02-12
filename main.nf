@@ -73,7 +73,9 @@ INPUT CHANNELS
 
 Channel
     .fromPath(params.cram)
-    .into { cram_ch_cram_to_bam; cram_ch_samtools_stats; cram_ch_samtools_flagstat }
+    .into { cram_ch_cram_to_bam \
+          ; cram_ch_samtools_stats \
+          ; cram_ch_samtools_flagstat }
 
 Channel
     .fromPath(params.vcf)
@@ -81,7 +83,10 @@ Channel
 
 Channel
     .fromPath(params.ref_fa)
-    .into { ref_fa_ch_cram_to_bam; ref_fa_ch_picard_collect_alignment_summary_metrics; ref_fa_ch_picard_collect_wgs_metrics }
+    .into { ref_fa_ch_cram_to_bam \
+          ; ref_fa_ch_picard_collect_alignment_summary_metrics \
+          ; ref_fa_ch_picard_collect_wgs_metrics \
+          ; ref_fa_ch_picard_collect_gc_bias_metrics }
 
 /*
 ----------------------------------------------------------------------
@@ -96,10 +101,11 @@ process cram_to_bam {
     file cram from cram_ch_cram_to_bam
 
     output:
-    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, \
-        cram_to_bam_ch_picard_collect_alignment_summary_metrics, \
-        cram_to_bam_ch_picard_collect_wgs_metrics, \
-        cram_to_bam_ch_picard_collect_insert_size_metrics
+    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics \
+                , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
+                , cram_to_bam_ch_picard_collect_wgs_metrics \
+                , cram_to_bam_ch_picard_collect_insert_size_metrics \
+                , cram_to_bam_ch_picard_collect_gc_bias_metrics
 
     script:
     """
@@ -226,6 +232,24 @@ process picard_collect_insert_size_metrics {
     script:
     """
     picard CollectInsertSizeMetrics I=sample.bam O=insert_size_metrics.txt H=insert_size_histogram.pdf M=0.5
+    """
+
+}
+
+process picard_collect_gc_bias_metrics {
+
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file ref_fa from ref_fa_ch_picard_collect_gc_bias_metrics
+    file "*" from cram_to_bam_ch_picard_collect_gc_bias_metrics
+
+    output:
+    file "insert_size_metrics.txt" into picard_collect_gc_bias_metrics_ch
+
+    script:
+    """
+    picard CollectGcBiasMetrics I=sample.bam O=gc_bias_metrics.txt CHART=gc_bias_metrics.pdf S=gc_bias_summary_metrics.txt R=${ref_fa}
     """
 
 }
