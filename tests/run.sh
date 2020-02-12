@@ -7,17 +7,16 @@ which nextflow >/dev/null || { echo "ERROR: nextflow is not available"; exit 1; 
 ls ../main.nf ../tests  >& /dev/null || { echo "ERROR: must run from NPM-sample-qc/tests directory"; exit 1; }
 
 # define directories
-basedir="$1"
-if [ -z "$basedir" ]; then
-    echo "ERROR: Missing basedir argument. This is where results and workdir will be created." 1>&2
-    echo "You can for example use: basedir='/data/13000026/pipeline/dev/NPM-sample-qc/tests'" 1>&2
+testdir="$1"
+if [ -z "$testdir" ]; then
+    echo "ERROR: Missing testdir argument. This is where results and workdir will be created." 1>&2
+    echo "You can for example use: testdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
+    echo "Then run: ./run.sh \$basedir"
     exit 1
 fi
-suffix="run-$(date +%Y%m%d-%H%M)"
-tmpdir=$(mktemp -d ${basedir}/${suffix}-XXXXXX) || exit  1
+workdir=$testdir/work
+publishdir=$testdir/results
 projectdir=$(realpath "$(pwd)/..")
-workdir=$tmpdir/work
-publishdir=$tmpdir/results
 
 # run nextflow
 nextflow run ${projectdir}/main.nf \

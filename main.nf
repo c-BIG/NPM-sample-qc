@@ -156,28 +156,26 @@ process multiqc {
 
     script:
     """
-    multiqc . \
-        --data-format json \
-        --module samtools \
-        --module bcftools
+    multiqc . --data-format json --module samtools --module bcftools
     """
 
 }
 
-process calculate_qc_metrics {
+process compile_metrics {
 
-    tag "calculate_qc_metrics"
+    tag "compile_metrics"
 
     publishDir "${params.publishdir}", mode: "copy"
 
     input:
     file "multiqc_data/*" from multiqc_ch
     
-//    output:
+    output:
+    file "metrics.json" into compile_metrics_ch
 
     script:
     """
-    calculate_qc_metrics.py
+    compile_metrics.py --multiqc_json multiqc_data/multiqc_data.json --output_json metrics.json
     """
 
 }
