@@ -67,6 +67,12 @@ startMessage()
 
 /*
 ----------------------------------------------------------------------
+SAMPLE SETTINGS
+----------------------------------------------------------------------
+*/
+
+/*
+----------------------------------------------------------------------
 INPUT CHANNELS
 ----------------------------------------------------------------------
 */
@@ -74,12 +80,13 @@ INPUT CHANNELS
 Channel
     .fromPath(params.cram)
     .into { cram_ch_cram_to_bam \
-          ; cram_ch_samtools_stats \
           ; cram_ch_samtools_flagstat }
 
 Channel
     .fromPath(params.vcf)
-    .set { vcf_ch } 
+    .into { vcf_ch_bcftools_stats \
+          ; vcf_ch_bcftools_gtcheck \
+          ; vcf_ch_picard_collect_variant_calling_metrics }
 
 Channel
     .fromPath(params.ref_fa)
@@ -88,6 +95,9 @@ Channel
           ; ref_fa_ch_picard_collect_wgs_metrics \
           ; ref_fa_ch_picard_collect_gc_bias_metrics }
 
+Channel
+    .fromPath(params.dbsnp_vcf) \
+    .set { dbsnp_vcf_ch_picard_collect_variant_calling_metrics }
 /*
 ----------------------------------------------------------------------
 PROCESSES
@@ -101,7 +111,8 @@ process cram_to_bam {
     file cram from cram_ch_cram_to_bam
 
     output:
-    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics \
+    file "*" into cram_to_bam_ch_samtools_stats \
+                , cram_to_bam_ch_picard_collect_quality_yield_metrics \
                 , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
                 , cram_to_bam_ch_picard_collect_wgs_metrics \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
@@ -109,28 +120,28 @@ process cram_to_bam {
 
     script:
     """
-    samtools view -h -T ${ref_fa} -b ${cram} -o sample.bam
-    samtools index sample.bam sample.bam.bai
+    samtools view -h -T ${ref_fa} -b ${cram} -o ${params.sample_id}.bam
+    samtools index ${params.sample_id}.bam ${params.sample_id}.bam.bai
     """
 
 }
 
-//process samtools_stats {
+process samtools_stats {
 
-    //publishDir "${params.publishdir}/samtools"
+    publishDir "${params.publishdir}/samtools", mode: "copy"
 
-    //input:
-    //file cram from cram_ch_samtools_stats
+    input:
+    file "*" from cram_to_bam_ch_samtools_stats
 
-    //output:
-    //file "*" into samtools_stats_ch
+    output:
+    file "*" into samtools_stats_ch
 
-    //script:
-    //"""
-    //samtools stats ${cram} > ${cram}.stats
-    //"""
+    script:
+    """
+    samtools stats ${params.sample_id}.bam > ${params.sample_id}.stats
+    """
 
-//}
+}
 
 process samtools_flagstat {
 
@@ -144,7 +155,7 @@ process samtools_flagstat {
 
     script:
     """
-    samtools flagstat ${cram} > ${cram}.flagstat
+    samtools flagstat ${cram} > ${params.sample_id}.flagstat
     """
 
 }
@@ -154,16 +165,33 @@ process bcftools_stats {
     publishDir "${params.publishdir}/bcftools", mode: "copy"
 
     input:
-    file vcf from vcf_ch
+    file vcf from vcf_ch_bcftools_stats
 
     output:
     file "*" into bcftools_stats_ch
 
     script:
     """
-    bcftools stats ${vcf} > ${vcf}.stats
+    bcftools stats ${vcf} > ${params.sample_id}.bcftools_stats.txt
     """
 
+}
+
+process bcftools_gtcheck {
+
+    publishDir "${params.publishdir}/bcftools", mode: "copy"
+
+    input:
+    file vcf from vcf_ch_bcftools_gtcheck
+
+    output:
+    file "*" into bcftools_gtcheck_ch
+
+    script:
+    """
+    bcftools index --tbi ${vcf}
+    bcftools gtcheck --GTs-only 1 --genotypes ${params.pst_vcf} ${vcf} > ${params.sample_id}.bcftools_gtcheck.txt
+    """
 }
 
 process picard_collect_quality_yield_metrics {
@@ -174,11 +202,11 @@ process picard_collect_quality_yield_metrics {
     file "*" from cram_to_bam_ch_picard_collect_quality_yield_metrics
 
     output:
-    file "quality_yield_metrics.txt" into picard_collect_quality_yield_metrics_ch
+    file "*" into picard_collect_quality_yield_metrics_ch
 
     script:
     """
-    picard CollectQualityYieldMetrics I=sample.bam O=quality_yield_metrics.txt
+    picard CollectQualityYieldMetrics I=${params.sample_id}.bam O=${params.sample_id}.quality_yield_metrics.txt
     """
 
 }
@@ -192,11 +220,11 @@ process picard_collect_alignment_summary_metrics {
     file "*" from cram_to_bam_ch_picard_collect_alignment_summary_metrics
 
     output:
-    file "alignment_summary_metrics.txt" into picard_collect_alignment_summary_metrics_ch
+    file "*" into picard_collect_alignment_summary_metrics_ch
 
     script:
     """
-    picard CollectAlignmentSummaryMetrics R=${ref_fa} I=sample.bam O=alignment_summary_metrics.txt
+    picard CollectAlignmentSummaryMetrics R=${ref_fa} I=${params.sample_id}.bam O=${params.sample_id}.alignment_summary_metrics.txt
     """
 
 }
@@ -210,11 +238,11 @@ process picard_collect_wgs_metrics {
     file "*" from cram_to_bam_ch_picard_collect_wgs_metrics
 
     output:
-    file "wgs_metrics.txt" into picard_collect_wgs_metrics_ch
+    file "*" into picard_collect_wgs_metrics_ch
 
     script:
     """
-    picard CollectWgsMetrics R=${ref_fa} I=sample.bam O=wgs_metrics.txt
+    picard CollectWgsMetrics R=${ref_fa} I=${params.sample_id}.bam O=${params.sample_id}.wgs_metrics.txt
     """
 
 }
@@ -227,11 +255,11 @@ process picard_collect_insert_size_metrics {
     file "*" from cram_to_bam_ch_picard_collect_insert_size_metrics
 
     output:
-    file "insert_size_metrics.txt" into picard_collect_insert_size_metrics_ch
+    file "*" into picard_collect_insert_size_metrics_ch
 
     script:
     """
-    picard CollectInsertSizeMetrics I=sample.bam O=insert_size_metrics.txt H=insert_size_histogram.pdf M=0.5
+    picard CollectInsertSizeMetrics I=${params.sample_id}.bam O=${params.sample_id}.insert_size_metrics.txt H=${params.sample_id}.insert_size_histogram.pdf M=0.5
     """
 
 }
@@ -245,27 +273,48 @@ process picard_collect_gc_bias_metrics {
     file "*" from cram_to_bam_ch_picard_collect_gc_bias_metrics
 
     output:
-    file "insert_size_metrics.txt" into picard_collect_gc_bias_metrics_ch
+    file "*" into picard_collect_gc_bias_metrics_ch
 
     script:
     """
-    picard CollectGcBiasMetrics I=sample.bam O=gc_bias_metrics.txt CHART=gc_bias_metrics.pdf S=gc_bias_summary_metrics.txt R=${ref_fa}
+    picard CollectGcBiasMetrics I=${params.sample_id}.bam O=${params.sample_id}.gc_bias_metrics.txt CHART=${params.sample_id}.gc_bias_metrics.pdf S=${params.sample_id}.gc_bias_summary_metrics.txt R=${ref_fa}
     """
 
 }
+
+//process picard_collect_variant_calling_metrics {
+
+    //publishDir "${params.publishdir}/picard", mode: "copy"
+
+    //input:
+    //file vcf from vcf_ch_picard_collect_variant_calling_metrics
+    //file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics
+    
+    //output:
+    //file "*" into picard_collect_variant_calling_metrics_ch
+
+    //script:
+    //"""
+    //picard CollectVariantCallingMetrics I=${vcf} O=${params.sample_id}.variant_calling_metrics.txt DBSNP=${dbsnp_vcf}
+    //"""
+
+//}
 
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
-    //file "samtools/*stats" from samtools_stats_ch
+    file "samtools/*stats" from samtools_stats_ch
     file "samtools/*flagstat" from samtools_flagstat_ch
     file "bcftools/*stats" from bcftools_stats_ch
+    file "bcftools/*bcftools_gtcheck" from bcftools_gtcheck_ch
     file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
     file "picard/*alignment_summary_metrics.txt" from picard_collect_alignment_summary_metrics_ch
     file "picard/*wgs_metrics.txt" from picard_collect_wgs_metrics_ch
     file "picard/*insert_size_metrics.txt" from picard_collect_insert_size_metrics_ch
+    file "picard/*gc_bias_metrics.txt" from picard_collect_gc_bias_metrics_ch
+    //file "picard/*variant_calling_metrics.txt" from picard_collect_variant_calling_metrics_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
@@ -289,7 +338,7 @@ process compile_metrics {
 
     script:
     """
-    compile_metrics.py --multiqc_json multiqc_data/multiqc_data.json --output_json metrics.json
+    compile_metrics.py --multiqc_json multiqc_data/multiqc_data.json --output_json ${params.sample_id}.metrics.json
     """
 
 }
