@@ -93,7 +93,8 @@ Channel
     .into { ref_fa_ch_cram_to_bam \
           ; ref_fa_ch_picard_collect_alignment_summary_metrics \
           ; ref_fa_ch_picard_collect_wgs_metrics \
-          ; ref_fa_ch_picard_collect_gc_bias_metrics }
+          ; ref_fa_ch_picard_collect_gc_bias_metrics \
+          ; ref_fa_ch_verifybamid2 }
 
 Channel
     .fromPath(params.dbsnp_vcf) \
@@ -116,7 +117,8 @@ process cram_to_bam {
                 , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
                 , cram_to_bam_ch_picard_collect_wgs_metrics \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
-                , cram_to_bam_ch_picard_collect_gc_bias_metrics
+                , cram_to_bam_ch_picard_collect_gc_bias_metrics \
+                , cram_to_bam_ch_verifybamid2
 
     script:
     """
@@ -277,7 +279,7 @@ process picard_collect_gc_bias_metrics {
 
     script:
     """
-    picard CollectGcBiasMetrics I=${params.sample_id}.bam O=${params.sample_id}.gc_bias_metrics.txt CHART=${params.sample_id}.gc_bias_metrics.pdf S=${params.sample_id}.gc_bias_summary_metrics.txt R=${ref_fa}
+    picard CollectGcBiasMetrics I=${params.sample_id}.bam O=${params.sample_id}.gc_bias_metrics.txt chart=${params.sample_id}.gc_bias_metrics.pdf S=${params.sample_id}.gc_bias_summary_metrics.txt R=${ref_fa}
     """
 
 }
@@ -300,6 +302,24 @@ process picard_collect_gc_bias_metrics {
 
 //}
 
+//process verifybamid2 {
+    
+    //publishDir "${params.publishdir}/verifybamid2", mode: "copy"
+
+    //input:
+    //file ref_fa from ref_fa_ch_verifybamid2
+    //file "*" from cram_to_bam_ch_verifybamid2
+
+    //output:
+    //file "*" into verifybamid2_ch
+
+    //script:
+    //"""
+    ///home/users/astar/gis/gonzalez/.conda/envs/mgonzalezporta-nscc/share/verifybamid2-1.0.6-0/VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${ref_fa} --BamFile ${params.sample_id}.bam
+    //"""
+
+//}
+
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
@@ -315,6 +335,7 @@ process multiqc {
     file "picard/*insert_size_metrics.txt" from picard_collect_insert_size_metrics_ch
     file "picard/*gc_bias_metrics.txt" from picard_collect_gc_bias_metrics_ch
     //file "picard/*variant_calling_metrics.txt" from picard_collect_variant_calling_metrics_ch
+    //file "verifybamid2/*" from verifybamid2_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
@@ -334,7 +355,7 @@ process compile_metrics {
     file "multiqc_data/*" from multiqc_ch
     
     output:
-    file "metrics.json" into compile_metrics_ch
+    file "*" into compile_metrics_ch
 
     script:
     """
