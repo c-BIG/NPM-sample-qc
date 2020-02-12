@@ -70,6 +70,7 @@ startMessage()
 INPUT CHANNELS
 ----------------------------------------------------------------------
 */
+
 Channel
     .fromPath(params.cram)
     .into { cram_ch_cram_to_bam; cram_ch_samtools_stats; cram_ch_samtools_flagstat }
@@ -95,7 +96,10 @@ process cram_to_bam {
     file cram from cram_ch_cram_to_bam
 
     output:
-    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, cram_to_bam_ch_picard_collect_alignment_summary_metrics, cram_to_bam_ch_picard_collect_wgs_metrics
+    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, \
+        cram_to_bam_ch_picard_collect_alignment_summary_metrics, \
+        cram_to_bam_ch_picard_collect_wgs_metrics, \
+        cram_to_bam_ch_picard_collect_insert_size_metrics
 
     script:
     """
@@ -209,6 +213,23 @@ process picard_collect_wgs_metrics {
 
 }
 
+process picard_collect_insert_size_metrics {
+
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file "*" from cram_to_bam_ch_picard_collect_insert_size_metrics
+
+    output:
+    file "insert_size_metrics.txt" into picard_collect_insert_size_metrics_ch
+
+    script:
+    """
+    picard CollectInsertSizeMetrics I=sample.bam O=insert_size_metrics.txt H=insert_size_histogram.pdf M=0.5
+    """
+
+}
+
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
@@ -220,6 +241,7 @@ process multiqc {
     file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
     file "picard/*alignment_summary_metrics.txt" from picard_collect_alignment_summary_metrics_ch
     file "picard/*wgs_metrics.txt" from picard_collect_wgs_metrics_ch
+    file "picard/*insert_size_metrics.txt" from picard_collect_insert_size_metrics_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
