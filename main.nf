@@ -80,7 +80,7 @@ Channel
 
 Channel
     .fromPath(params.ref_fa)
-    .into { ref_fa_ch_cram_to_bam; ref_fa_ch_picard_collect_alignment_summary_metrics }
+    .into { ref_fa_ch_cram_to_bam; ref_fa_ch_picard_collect_alignment_summary_metrics; ref_fa_ch_picard_collect_wgs_metrics }
 
 /*
 ----------------------------------------------------------------------
@@ -95,7 +95,7 @@ process cram_to_bam {
     file cram from cram_ch_cram_to_bam
 
     output:
-    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, cram_to_bam_ch_picard_collect_alignment_summary_metrics
+    file "*" into cram_to_bam_ch_picard_collect_quality_yield_metrics, cram_to_bam_ch_picard_collect_alignment_summary_metrics, cram_to_bam_ch_picard_collect_wgs_metrics
 
     script:
     """
@@ -191,6 +191,24 @@ process picard_collect_alignment_summary_metrics {
 
 }
 
+process picard_collect_wgs_metrics {
+
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file ref_fa from ref_fa_ch_picard_collect_wgs_metrics
+    file "*" from cram_to_bam_ch_picard_collect_wgs_metrics
+
+    output:
+    file "wgs_metrics.txt" into picard_collect_wgs_metrics_ch
+
+    script:
+    """
+    picard CollectWgsMetrics R=${ref_fa} I=sample.bam O=wgs_metrics.txt
+    """
+
+}
+
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
@@ -201,6 +219,7 @@ process multiqc {
     file "bcftools/*stats" from bcftools_stats_ch
     file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
     file "picard/*alignment_summary_metrics.txt" from picard_collect_alignment_summary_metrics_ch
+    file "picard/*wgs_metrics.txt" from picard_collect_wgs_metrics_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
