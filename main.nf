@@ -2,7 +2,7 @@
 
 /*
 Developed by the Genome Institute of Singapore for
-the National Precision Medicine Program 
+the National Precision Medicine Programme
 
 Copyright: 2020 Genome Institute of Singapore
 License: The MIT License (MIT)
@@ -64,12 +64,6 @@ LAUNCH INFO
 */
 
 startMessage()
-
-/*
-----------------------------------------------------------------------
-SAMPLE SETTINGS
-----------------------------------------------------------------------
-*/
 
 /*
 ----------------------------------------------------------------------
@@ -208,7 +202,9 @@ process picard_collect_quality_yield_metrics {
 
     script:
     """
-    picard CollectQualityYieldMetrics I=${params.sample_id}.bam O=${params.sample_id}.quality_yield_metrics.txt
+    picard CollectQualityYieldMetrics \
+        I=${params.sample_id}.bam \
+        O=${params.sample_id}.quality_yield_metrics.txt
     """
 
 }
@@ -226,7 +222,10 @@ process picard_collect_alignment_summary_metrics {
 
     script:
     """
-    picard CollectAlignmentSummaryMetrics R=${ref_fa} I=${params.sample_id}.bam O=${params.sample_id}.alignment_summary_metrics.txt
+    picard CollectAlignmentSummaryMetrics \
+        R=${ref_fa} \
+        I=${params.sample_id}.bam \
+        O=${params.sample_id}.alignment_summary_metrics.txt
     """
 
 }
@@ -244,7 +243,10 @@ process picard_collect_wgs_metrics {
 
     script:
     """
-    picard CollectWgsMetrics R=${ref_fa} I=${params.sample_id}.bam O=${params.sample_id}.wgs_metrics.txt
+    picard CollectWgsMetrics \
+        R=${ref_fa} \
+        I=${params.sample_id}.bam \
+        O=${params.sample_id}.wgs_metrics.txt
     """
 
 }
@@ -261,7 +263,11 @@ process picard_collect_insert_size_metrics {
 
     script:
     """
-    picard CollectInsertSizeMetrics I=${params.sample_id}.bam O=${params.sample_id}.insert_size_metrics.txt H=${params.sample_id}.insert_size_histogram.pdf M=0.5
+    picard CollectInsertSizeMetrics \
+        I=${params.sample_id}.bam \
+        O=${params.sample_id}.insert_size_metrics.txt \
+        H=${params.sample_id}.insert_size_histogram.pdf \
+        M=0.5
     """
 
 }
@@ -279,7 +285,12 @@ process picard_collect_gc_bias_metrics {
 
     script:
     """
-    picard CollectGcBiasMetrics I=${params.sample_id}.bam O=${params.sample_id}.gc_bias_metrics.txt chart=${params.sample_id}.gc_bias_metrics.pdf S=${params.sample_id}.gc_bias_summary_metrics.txt R=${ref_fa}
+    picard CollectGcBiasMetrics \
+        I=${params.sample_id}.bam \
+        O=${params.sample_id}.gc_bias_metrics.txt \
+        CHART=${params.sample_id}.gc_bias_metrics.pdf \
+        S=${params.sample_id}.gc_bias_summary_metrics.txt \
+        R=${ref_fa}
     """
 
 }
@@ -298,7 +309,10 @@ process picard_collect_variant_calling_metrics {
     script:
     """
     bcftools index --tbi ${vcf}
-    picard CollectVariantCallingMetrics I=${vcf} O=${params.sample_id} DBSNP=${dbsnp_vcf}
+    picard CollectVariantCallingMetrics \
+        I=${vcf} \
+        O=${params.sample_id} \
+        DBSNP=${dbsnp_vcf}
     """
 
 }
