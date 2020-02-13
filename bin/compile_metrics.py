@@ -40,10 +40,26 @@ def load_multi_qc(multiqc_json):
 
 
 def calculate_metrics(mqc):
+    metrics_list = [
+        # primary metrics
+        "yield_raw_reads", "yield_pf_reads", "pct_pf_reads",
+        # alignment
+        "pct_aligned_bases", "pct_reads_aligned", "pct_reads_aligned_mapqge20",
+        "pct_reads_unaligned", "pct_reads_aligned_in_pairs", "pct_reads_properly_paired",
+        "total_alignments", "pct_singleton_alignments", "pct_alignments_diff_chrom",
+        "pct_alignments_diff_chrom_mapqge5", "pct_chimeras", "pct_secondary_alignments",
+        "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
+        # insert size
+        "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
+        "pct_adapters",
+        # gc bias
+        "at_dropout", "gc_dropout", "gc_nc_0_19", "gc_nc_20_39", "gc_nc_40_59",
+        "gc_nc_60_79", "gc_nc_80_100"
+    ]
     result = dict()
-    result["perc_mapped_reads"] = metrics.perc_mapped_reads(mqc)
-    result["perc_properly_paired"] = metrics.perc_properly_paired(mqc)
-    result["perc_diff_chrom_mapqge5"] = metrics.perc_diff_chrom_mapqge5(mqc)
+    for m in metrics_list:
+        r = eval("metrics." + m + "(mqc)")
+        result.update(r)
     return result
 
 
@@ -63,7 +79,7 @@ if __name__ == "__main__":
 
     mqc = load_multi_qc(args.multiqc_json)
     final_metrics = calculate_metrics(mqc)
-    pp.pprint(final_metrics)
-
     save_output(final_metrics, args.output_json)
+    
+    pp.pprint(final_metrics)
     done()

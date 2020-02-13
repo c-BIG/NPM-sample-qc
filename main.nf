@@ -357,7 +357,7 @@ process multiqc {
 
     script:
     """
-    multiqc . --data-format json --module samtools --module bcftools
+    multiqc . --data-format json
     """
 
 }
@@ -367,14 +367,14 @@ process compile_metrics {
     publishDir "${params.publishdir}", mode: "copy"
 
     input:
-    file "multiqc_data/*" from multiqc_ch
+    file "*" from multiqc_ch
     
     output:
     file "*" into compile_metrics_ch
 
     script:
     """
-    compile_metrics.py --multiqc_json multiqc_data/multiqc_data.json --output_json ${params.sample_id}.metrics.json
+    compile_metrics.py --multiqc_json multiqc_data.json --output_json ${params.sample_id}.metrics.json
     """
 
 }
