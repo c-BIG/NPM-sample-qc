@@ -80,6 +80,6 @@ if __name__ == "__main__":
     mqc = load_multi_qc(args.multiqc_json)
     final_metrics = calculate_metrics(mqc)
     save_output(final_metrics, args.output_json)
-    
+
     pp.pprint(final_metrics)
     done()

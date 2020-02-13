@@ -340,16 +340,16 @@ process multiqc {
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
-    file "samtools/*stats" from samtools_stats_ch
-    file "samtools/*flagstat" from samtools_flagstat_ch
-    file "bcftools/*stats" from bcftools_stats_ch
-    file "bcftools/*bcftools_gtcheck" from bcftools_gtcheck_ch
-    file "picard/*quality_yield_metrics.txt" from picard_collect_quality_yield_metrics_ch
-    file "picard/*alignment_summary_metrics.txt" from picard_collect_alignment_summary_metrics_ch
-    file "picard/*wgs_metrics.txt" from picard_collect_wgs_metrics_ch
-    file "picard/*insert_size_metrics.txt" from picard_collect_insert_size_metrics_ch
-    file "picard/*gc_bias_metrics.txt" from picard_collect_gc_bias_metrics_ch
-    file "picard/*variant_calling_metrics.txt" from picard_collect_variant_calling_metrics_ch
+    file "samtools/*" from samtools_stats_ch
+    file "samtools/*" from samtools_flagstat_ch
+    file "bcftools/*" from bcftools_stats_ch
+    file "bcftools/*" from bcftools_gtcheck_ch
+    file "picard/*" from picard_collect_quality_yield_metrics_ch
+    file "picard/*" from picard_collect_alignment_summary_metrics_ch
+    file "picard/*" from picard_collect_wgs_metrics_ch
+    file "picard/*" from picard_collect_insert_size_metrics_ch
+    file "picard/*" from picard_collect_gc_bias_metrics_ch
+    file "picard/*" from picard_collect_variant_calling_metrics_ch
     //file "verifybamid2/*" from verifybamid2_ch
 
     output:
@@ -357,6 +357,7 @@ process multiqc {
 
     script:
     """
+    fix_multiqc_picard_wgsmetrics.py --input picard/*wgs_metrics.txt
     multiqc . --data-format json
     """
 
