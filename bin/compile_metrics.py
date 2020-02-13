@@ -49,12 +49,18 @@ def calculate_metrics(mqc):
         "total_alignments", "pct_singleton_alignments", "pct_alignments_diff_chrom",
         "pct_alignments_diff_chrom_mapqge5", "pct_chimeras", "pct_secondary_alignments",
         "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
+        # coverage
+        "genome_territory", "mean_coverage", "sd_coverage", "median_coverage", "mad_coverage",
+        "pct_1x", "pct_15x", "pct_30x", "pct_40x",
         # insert size
         "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
         "pct_adapters",
         # gc bias
         "at_dropout", "gc_dropout", "gc_nc_0_19", "gc_nc_20_39", "gc_nc_40_59",
-        "gc_nc_60_79", "gc_nc_80_100"
+        "gc_nc_60_79", "gc_nc_80_100",
+        # variant calling
+        "all_snps", "pass_snps", "all_indels", "pass_indels", "pass_sites_multiallelic",
+        "pass_snps_multiallelic", "pass_mnps", "pass_complex_indels", "snp_ts_tv"
     ]
     result = dict()
     for m in metrics_list:

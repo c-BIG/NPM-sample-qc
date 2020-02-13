@@ -40,6 +40,8 @@ def pct_pf_reads(mqc):
     """
     The percentage of reads that are PF, i.e. yield_pf_reads / yield_raw_reads.
 
+    Note: picard reports a fraction, re-mapped to a percentage here.
+
     Source: picard AlignmentSummaryMetrics (PCT_PF_READS)
     """
     k = inspect.currentframe().f_code.co_name
@@ -73,6 +75,8 @@ def pct_reads_aligned(mqc):
     """
     The percentage of PF reads that aligned to the reference.
 
+    Note: picard reports a fraction, re-mapped to a percentage here.
+
     Source: picard AlignmentSummaryMetrics (PCT_PF_READS_ALIGNED)
     """
     k = inspect.currentframe().f_code.co_name
@@ -88,6 +92,8 @@ def pct_reads_aligned(mqc):
 def pct_reads_aligned_mapqge20(mqc):
     """
     The percentage of PF reads that were aligned to the reference with a mapping quality of Q20 or higher.
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
 
     Source: picard AlignmentSummaryMetrics (PF_HQ_ALIGNED_READS / TOTAL_READS)
     """
@@ -220,8 +226,10 @@ def pct_alignments_diff_chrom_mapqge5(mqc):
 
 def pct_chimeras(mqc):
     """
-    The fraction of reads that map outside of a maximum insert size (usually 100kb)
+    The percentage of reads that map outside of a maximum insert size (usually 100kb)
     or that have the two ends mapping to different chromosomes.
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
 
     Source: picard AlignmentSummaryMetrics (PCT_CHIMERAS)
     """
@@ -317,9 +325,158 @@ def mismatch_rate_mapqge20(mqc):
     return r
 
 
+def genome_territory(mqc):
+    """
+    The number of non-N bases in the genome reference over which coverage will be evaluated.
+
+    Source: picard WgsMetrics (GENOME_TERRITORY)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["GENOME_TERRITORY"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def mean_coverage(mqc):
+    """
+    The mean coverage in bases of the genome territory, after all filters are applied.
+
+    Note: picard filters out
+    - bases in reads with low mapping quality (default is < 20; PCT_EXC_MAPQ)
+    - bases  in reads marked as duplicates (PCT_EXC_DUPE)
+    - bases in reads without a mapped mate pair (PCT_EXC_UNPAIRED)
+    - bases with low base quality (default is < 20; PCT_EXC_BASEQ)
+    - bases that correspond to the second observation from an insert with overlapping reads (PCT_EXC_OVERLAP)
+    - bases that would have raised coverage above the capped value (default cap = 250x; PCT_EXC_CAPPED)
+
+    Source: picard WgsMetrics (MEAN_COVERAGE)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["MEAN_COVERAGE"]
+    v = np.round(v, 4)
+
+    r = {k:v}
+    return r
+
+
+def sd_coverage(mqc):
+    """
+    The standard deviation of coverage of the genome after all filters are applied.
+
+    Source: picard WgsMetrics (SD_COVERAGE)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["SD_COVERAGE"]
+    v = np.round(v, 4)
+
+    r = {k:v}
+    return r
+
+
+def median_coverage(mqc):
+    """
+    The median coverage in bases of the genome territory, after all filters are applied.
+
+    Source: picard WgsMetrics (MEDIAN_COVERAGE)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["MEDIAN_COVERAGE"]
+    v = np.round(v, 4)
+
+    r = {k:v}
+    return r
+
+
+def mad_coverage(mqc):
+    """
+    The median absolute deviation of coverage of the genome after all filters are applied.
+
+    Source: picard WgsMetrics (MAD_COVERAGE)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["MAD_COVERAGE"]
+    v = np.round(v, 4)
+
+    r = {k:v}
+    return r
+
+
+def pct_1x(mqc):
+    """
+    The percentage of bases that attained at least 1X sequence coverage in post-filtering bases.
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
+
+    Source: picard WgsMetrics (PCT_1X)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_1X"]
+    v = np.round(v*100, 4)
+
+    r = {k:v}
+    return r
+
+
+def pct_15x(mqc):
+    """
+    Analogous to pct_1x.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_15X"]
+    v = np.round(v*100, 4)
+
+    r = {k:v}
+    return r
+
+
+def pct_30x(mqc):
+    """
+    Analogous to pct_1x.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_30X"]
+    v = np.round(v*100, 4)
+
+    r = {k:v}
+    return r
+
+
+def pct_40x(mqc):
+    """
+    Analogous to pct_1x.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_40X"]
+    v = np.round(v*100, 4)
+
+    r = {k:v}
+    return r
+
+
 def mean_insert_size(mqc):
     """
     The mean insert size over the "core" of the distribution.
+
     Note: Artefactual outliers in the distribution often cause calculation of nonsensical mean and
     stdev values. To avoid this the distribution is first trimmed to a "core" distribution of +/- N
     median absolute deviations around the median insert size.
@@ -502,6 +659,138 @@ def gc_nc_80_100(mqc):
     d = next(iter(mqc["multiqc_picard_gcbias"].values()))
     v = d["GC_NC_80_100"]
     v = np.round(v, 2)
+
+    r = {k:v}
+    return r
+
+
+def all_snps(mqc):
+    """
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    r = {k:"NA"}
+    return r
+
+
+def pass_snps(mqc):
+    """
+    The number of passing bi-allelic SNPs.
+
+    Source: bcftools stats (number_of_SNPs)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["number_of_SNPs"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def all_indels(mqc):
+    """
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    r = {k:"NA"}
+    return r
+
+
+def pass_indels(mqc):
+    """
+    The number of passing bi-allelic indels.
+
+    Source: bcftools stats (number_of_indels)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["number_of_indels"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def pass_sites_multiallelic(mqc):
+    """
+    The number of passing multi-allelic variants (all types).
+
+    Source: bcftools stats (number_of_multiallelic_sites)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["number_of_multiallelic_sites"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def pass_snps_multiallelic(mqc):
+    """
+    The number of passing multi-allelic SNPs.
+
+    Source: bcftools stats (number_of_multiallelic_SNP_sites)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["number_of_multiallelic_SNP_sites"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def pass_mnps(mqc):
+    """
+    The number of passing MNPs.
+
+    Source: bcftools stats (number_of_MNPs)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["number_of_MNPs"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def pass_complex_indels(mqc):
+    """
+    The number of passing complex indels.
+
+    Source: picard VariantCallingMetrics (TOTAL_COMPLEX_INDELS)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    # typo in multiqc outputs
+    # reported: https://github.com/ewels/MultiQC/issues/1105
+    d = next(iter(mqc["multiqc_picard_varientCalling"].values()))
+    v = d["TOTAL_COMPLEX_INDELS"]
+    v = int(v)
+
+    r = {k:v}
+    return r
+
+
+def snp_ts_tv(mqc):
+    """
+    The transition to transversion ratio of passing bi-allelic SNPs.
+
+    Source: bcftools stats (tstv)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+    v = d["tstv"]
+    v = np.round(v, 4)
 
     r = {k:v}
     return r

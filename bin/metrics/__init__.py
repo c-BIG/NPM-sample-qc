@@ -1,2 +1,1 @@
-from .bam import *
-from .vcf import *
+from .metrics import *
