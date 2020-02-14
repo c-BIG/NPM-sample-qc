@@ -64,8 +64,8 @@ def calculate_metrics(mqc):
     ]
     result = dict()
     for m in metrics_list:
-        r = eval("metrics." + m + "(mqc)")
-        result.update(r)
+        k, v = eval("metrics." + m + "(mqc)")
+        result[k] = v
     return result
 
 

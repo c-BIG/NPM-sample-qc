@@ -16,8 +16,7 @@ def yield_raw_reads(mqc):
     v = d["TOTAL_READS"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def yield_pf_reads(mqc):
@@ -32,8 +31,7 @@ def yield_pf_reads(mqc):
     v = d["PF_READS"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_pf_reads(mqc):
@@ -50,8 +48,7 @@ def pct_pf_reads(mqc):
     v = d["PCT_PF_READS"]
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_aligned_bases(mqc):
@@ -67,8 +64,7 @@ def pct_aligned_bases(mqc):
                   d["total_length"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_reads_aligned(mqc):
@@ -85,8 +81,7 @@ def pct_reads_aligned(mqc):
     v = d["PCT_PF_READS_ALIGNED"]
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_reads_aligned_mapqge20(mqc):
@@ -104,8 +99,7 @@ def pct_reads_aligned_mapqge20(mqc):
                   d["TOTAL_READS"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_reads_unaligned(mqc):
@@ -121,8 +115,7 @@ def pct_reads_unaligned(mqc):
                   d["sequences"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_reads_aligned_in_pairs(mqc):
@@ -138,8 +131,7 @@ def pct_reads_aligned_in_pairs(mqc):
                   d["sequences"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_reads_properly_paired(mqc):
@@ -154,8 +146,7 @@ def pct_reads_properly_paired(mqc):
     v = d["reads_properly_paired_percent"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def total_alignments(mqc):
@@ -170,8 +161,7 @@ def total_alignments(mqc):
     d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
     v = int(d["total_passed"])
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_singleton_alignments(mqc):
@@ -186,8 +176,7 @@ def pct_singleton_alignments(mqc):
     v = d["singletons_passed_pct"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_alignments_diff_chrom(mqc):
@@ -203,8 +192,7 @@ def pct_alignments_diff_chrom(mqc):
                   d["total_passed"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_alignments_diff_chrom_mapqge5(mqc):
@@ -220,8 +208,7 @@ def pct_alignments_diff_chrom_mapqge5(mqc):
                   d["total_passed"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_chimeras(mqc):
@@ -239,8 +226,7 @@ def pct_chimeras(mqc):
     v = d["PCT_CHIMERAS"]
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_secondary_alignments(mqc):
@@ -256,8 +242,7 @@ def pct_secondary_alignments(mqc):
                   d["total_passed"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_supplementary_alignments(mqc):
@@ -273,8 +258,7 @@ def pct_supplementary_alignments(mqc):
                   d["total_passed"])
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_duplicate_reads(mqc):
@@ -289,8 +273,7 @@ def pct_duplicate_reads(mqc):
     v = d["reads_duplicated_percent"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mismatch_rate(mqc):
@@ -305,8 +288,7 @@ def mismatch_rate(mqc):
     v = d["PF_MISMATCH_RATE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mismatch_rate_mapqge20(mqc):
@@ -321,8 +303,7 @@ def mismatch_rate_mapqge20(mqc):
     v = d["PF_HQ_ERROR_RATE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def genome_territory(mqc):
@@ -337,8 +318,7 @@ def genome_territory(mqc):
     v = d["GENOME_TERRITORY"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mean_coverage(mqc):
@@ -362,8 +342,7 @@ def mean_coverage(mqc):
     v = d["MEAN_COVERAGE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def sd_coverage(mqc):
@@ -378,8 +357,7 @@ def sd_coverage(mqc):
     v = d["SD_COVERAGE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def median_coverage(mqc):
@@ -394,8 +372,7 @@ def median_coverage(mqc):
     v = d["MEDIAN_COVERAGE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mad_coverage(mqc):
@@ -410,8 +387,7 @@ def mad_coverage(mqc):
     v = d["MAD_COVERAGE"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_1x(mqc):
@@ -428,8 +404,7 @@ def pct_1x(mqc):
     v = d["PCT_1X"]
     v = np.round(v*100, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_15x(mqc):
@@ -442,8 +417,7 @@ def pct_15x(mqc):
     v = d["PCT_15X"]
     v = np.round(v*100, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_30x(mqc):
@@ -456,8 +430,7 @@ def pct_30x(mqc):
     v = d["PCT_30X"]
     v = np.round(v*100, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_40x(mqc):
@@ -470,8 +443,7 @@ def pct_40x(mqc):
     v = d["PCT_40X"]
     v = np.round(v*100, 4)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mean_insert_size(mqc):
@@ -490,8 +462,7 @@ def mean_insert_size(mqc):
     v = d["MEAN_INSERT_SIZE"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def sd_insert_size(mqc):
@@ -506,8 +477,7 @@ def sd_insert_size(mqc):
     v = d["STANDARD_DEVIATION"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def median_insert_size(mqc):
@@ -522,8 +492,7 @@ def median_insert_size(mqc):
     v = d["MEDIAN_INSERT_SIZE"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def mad_insert_size(mqc):
@@ -538,8 +507,7 @@ def mad_insert_size(mqc):
     v = d["MEDIAN_ABSOLUTE_DEVIATION"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pct_adapters(mqc):
@@ -555,8 +523,7 @@ def pct_adapters(mqc):
     v = d["PCT_ADAPTER"]
     v = np.round(v*100, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def at_dropout(mqc):
@@ -572,8 +539,7 @@ def at_dropout(mqc):
     v = d["AT_DROPOUT"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_dropout(mqc):
@@ -589,8 +555,7 @@ def gc_dropout(mqc):
     v = d["GC_DROPOUT"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_nc_0_19(mqc):
@@ -605,8 +570,7 @@ def gc_nc_0_19(mqc):
     v = d["GC_NC_0_19"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_nc_20_39(mqc):
@@ -619,8 +583,7 @@ def gc_nc_20_39(mqc):
     v = d["GC_NC_20_39"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_nc_40_59(mqc):
@@ -633,8 +596,7 @@ def gc_nc_40_59(mqc):
     v = d["GC_NC_40_59"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_nc_60_79(mqc):
@@ -647,8 +609,7 @@ def gc_nc_60_79(mqc):
     v = d["GC_NC_60_79"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def gc_nc_80_100(mqc):
@@ -661,17 +622,15 @@ def gc_nc_80_100(mqc):
     v = d["GC_NC_80_100"]
     v = np.round(v, 2)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def all_snps(mqc):
     """
     """
     k = inspect.currentframe().f_code.co_name
-
-    r = {k:"NA"}
-    return r
+    v = "NA"
+    return k, v
 
 
 def pass_snps(mqc):
@@ -686,17 +645,15 @@ def pass_snps(mqc):
     v = d["number_of_SNPs"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def all_indels(mqc):
     """
     """
     k = inspect.currentframe().f_code.co_name
-
-    r = {k:"NA"}
-    return r
+    v = "NA"
+    return k, v
 
 
 def pass_indels(mqc):
@@ -711,8 +668,7 @@ def pass_indels(mqc):
     v = d["number_of_indels"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pass_sites_multiallelic(mqc):
@@ -727,8 +683,7 @@ def pass_sites_multiallelic(mqc):
     v = d["number_of_multiallelic_sites"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pass_snps_multiallelic(mqc):
@@ -743,8 +698,7 @@ def pass_snps_multiallelic(mqc):
     v = d["number_of_multiallelic_SNP_sites"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pass_mnps(mqc):
@@ -759,8 +713,7 @@ def pass_mnps(mqc):
     v = d["number_of_MNPs"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def pass_complex_indels(mqc):
@@ -777,8 +730,7 @@ def pass_complex_indels(mqc):
     v = d["TOTAL_COMPLEX_INDELS"]
     v = int(v)
 
-    r = {k:v}
-    return r
+    return k, v
 
 
 def snp_ts_tv(mqc):
@@ -793,5 +745,4 @@ def snp_ts_tv(mqc):
     v = d["tstv"]
     v = np.round(v, 4)
 
-    r = {k:v}
-    return r
+    return k, v
