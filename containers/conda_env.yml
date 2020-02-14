@@ -1,4 +1,4 @@
-name: sample_qc
+name: npm-sample-qc
 channels:
     - bioconda
     - conda-forge

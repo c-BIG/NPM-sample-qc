@@ -7,5 +7,6 @@
 # auto-generate metrics docs
 sphinx-apidoc --output-dir api --no-toc ../bin/metrics
 
-# create sphinx site
+# create sphinx docs
 make html
+#make latexpdf
