@@ -9,19 +9,28 @@ ls ../main.nf ../tests  >& /dev/null || { echo "ERROR: must run from NPM-sample-
 # define directories
 testdir="$1"
 if [ -z "$testdir" ]; then
-    echo "ERROR: Missing testdir argument. This is where results and workdir will be created." 1>&2
-    echo "You can for example use: testdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
-    echo "Then run: ./run.sh \$basedir"
+    echo "ERROR: Missing testdir argument, e.g.:" 1>&2
+    echo "  testdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
+    echo "  ./run.sh \$basedir"
     exit 1
 fi
 workdir=$testdir/work
 publishdir=$testdir/results
 projectdir=$(realpath "$(pwd)/..")
 
+# define profile
+profile="$2"
+if [ -z "$profile" ]; then
+    profile="standard"
+fi
+echo "Running with profile \"${profile}\"."
+echo "This option can be changed when calling the script:"
+echo "  ./run.sh <testdir> <profile>"
+
 # run nextflow
 nextflow run ${projectdir}/main.nf \
     -config ${projectdir}/nextflow.config \
-    -params-file ${projectdir}/tests/sample_params.yaml \
+    -params-file ${projectdir}/tests/sample_params.yml \
     -w ${workdir} \
     --publishdir ${publishdir} \
-    -profile standard -resume --keep_workdir
+    -profile ${profile} -resume --keep_workdir

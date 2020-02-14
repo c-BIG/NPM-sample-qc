@@ -1,0 +1,4 @@
+sample_id: ERR194147-fake1
+cram: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*cram
+vcf: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake1/*fb.vcf.gz
+pst_vcf: /data/13000026/pipeline/dev/gonzalez/data/NA12878-HG001.ERR194147/ERR194147-fake2/ERR194147-fake2.fb.vcf.gz
