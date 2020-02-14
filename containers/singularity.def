@@ -1,0 +1,41 @@
+Bootstrap: docker
+From: ubuntu:16.04
+
+%environment
+    export PATH="$PATH:/usr/local/conda/bin"
+
+%files
+    conda_env.yml /
+
+%post
+    # gather essential packages
+    apt-get update
+    apt-get install -y \
+      build-essential \
+      libtool \
+      libarchive-dev \
+      make cmake m4 automake \
+      gcc g++ \
+      python3 python-pip python-dev \
+      git \
+      wget
+
+    # install conda
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local/conda
+    export PATH="/usr/local/conda/bin:$PATH"
+    conda update -n base -c defaults conda
+
+    # create conda environment from template
+    conda env create -f /conda_env.yml
+    conda clean -a
+
+    # add sg10k-cov binary
+    apt-get install -y zlib1g-dev libbz2-dev
+    git clone https://github.com/c-BIG/sg10k-cov.git
+    cd sg10k-cov/ && git checkout 6b74ab8
+    bash make.sh
+    cp sg10k-cov-062017.sh samtools-M /usr/local/bin/
+
+    # create mountpoints for NSCC
+    mkdir /data /seq /secure /scratch
