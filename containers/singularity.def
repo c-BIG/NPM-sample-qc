@@ -4,7 +4,7 @@ From: ubuntu:16.04
 %environment
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8
-    export PATH="$PATH:/usr/local/conda/bin"
+    export PATH="/usr/local/conda/envs/npm-sample-qc/bin/:$PATH"
 
 %files
     conda_env.yml /
