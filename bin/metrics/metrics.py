@@ -346,6 +346,7 @@ def mean_coverage(mqc):
     The mean coverage in bases of the genome territory, after all filters are applied.
 
     Note: picard filters out
+
     - bases in reads with low mapping quality (default is < 20; PCT_EXC_MAPQ)
     - bases  in reads marked as duplicates (PCT_EXC_DUPE)
     - bases in reads without a mapped mate pair (PCT_EXC_UNPAIRED)
