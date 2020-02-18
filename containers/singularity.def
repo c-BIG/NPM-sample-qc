@@ -5,6 +5,8 @@ From: ubuntu:16.04
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8
     export PATH="/usr/local/conda/envs/npm-sample-qc/bin/:$PATH"
+    export PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-1.0.5-3/:$PATH"
+    export PATH="/usr/local/conda/bin/:$PATH"
 
 %files
     conda_env.yml /
@@ -31,6 +33,11 @@ From: ubuntu:16.04
     # create conda environment from template
     conda env create -f /conda_env.yml
     conda clean -a
+
+    # install MultiQC and MultiQC_NPM plugin
+    git clone https://github.com/c-BIG/MultiQC_NPM.git
+    cd MultiQC_NPM
+    python3 setup.py install
 
     # add sg10k-cov binary
     apt-get install -y zlib1g-dev libbz2-dev
