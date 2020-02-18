@@ -29,6 +29,10 @@ def helpMessage() {
     """.stripIndent()
 }
 
+def nextflowMessage() {
+    log.info "N E X T F L O W  ~  version ${workflow.nextflow.version} ${workflow.nextflow.build}"
+}
+
 def minimalInformationMessage() {
     log.info "User name    : " + workflow.userName
     log.info "Command Line : " + workflow.commandLine
@@ -36,17 +40,16 @@ def minimalInformationMessage() {
     log.info "Project Dir  : " + workflow.projectDir
     log.info "Launch Dir   : " + workflow.launchDir
     log.info "Work Dir     : " + workflow.workDir
+    log.info "Publish Dir  : " + params.publishdir
 }
 
-def nextflowMessage() {
-    log.info "N E X T F L O W  ~  version ${workflow.nextflow.version} ${workflow.nextflow.build}"
-}
-
-def startMessage() {
+def startWorkflow() {
+    // set working dir from params
+    workflow.workDir = ((params.workdir) as Path).complete()
+    // run info
     this.nextflowMessage()
     this.minimalInformationMessage()
 }
-
 
 /*
 ----------------------------------------------------------------------
@@ -54,7 +57,6 @@ USAGE
 ----------------------------------------------------------------------
 */
 
-params.help = null
 if (params.help) exit 0, helpMessage()
 
 /*
@@ -63,7 +65,7 @@ LAUNCH INFO
 ----------------------------------------------------------------------
 */
 
-startMessage()
+startWorkflow()
 
 /*
 ----------------------------------------------------------------------
@@ -357,23 +359,23 @@ process picard_collect_variant_calling_metrics_gvcf {
     """
 }
 
-//process verifybamid2 {
-    
-    //publishDir "${params.publishdir}/verifybamid2", mode: "copy"
+process verifybamid2 {
 
-    //input:
-    //file ref_fa from ref_fa_ch_verifybamid2
-    //file "*" from cram_to_bam_ch_verifybamid2
+    publishDir "${params.publishdir}/verifybamid2", mode: "copy"
 
-    //output:
-    //file "*" into verifybamid2_ch
+    input:
+    file ref_fa from ref_fa_ch_verifybamid2
+    file "*" from cram_to_bam_ch_verifybamid2
 
-    //script:
-    //"""
-    ///home/users/astar/gis/gonzalez/.conda/envs/mgonzalezporta-nscc/share/verifybamid2-1.0.6-0/VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${ref_fa} --BamFile ${params.sample_id}.bam
-    //"""
+    output:
+    file "*" into verifybamid2_ch
 
-//}
+    script:
+    """
+    VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.bam
+    """
+
+}
 
 process multiqc {
 
@@ -391,7 +393,7 @@ process multiqc {
     file "picard/*" from picard_collect_gc_bias_metrics_ch.collect().ifEmpty([])
     file "picard/*" from picard_collect_variant_calling_metrics_vcf_ch.collect().ifEmpty([])
     file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
-    //file "verifybamid2/*" from verifybamid2_ch
+    file "verifybamid2/*" from verifybamid2_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch

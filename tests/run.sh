@@ -7,15 +7,13 @@ which nextflow >/dev/null || { echo "ERROR: nextflow is not available"; exit 1; 
 ls ../main.nf ../tests  >& /dev/null || { echo "ERROR: must run from NPM-sample-qc/tests directory"; exit 1; }
 
 # define directories
-testdir="$1"
-if [ -z "$testdir" ]; then
-    echo "ERROR: Missing testdir argument, e.g.:" 1>&2
-    echo "  testdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
-    echo "  ./run.sh \$testdir"
+outdir="$1"
+if [ -z "$outdir" ]; then
+    echo "ERROR: Missing outdir argument, e.g.:" 1>&2
+    echo "  outdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
+    echo "  ./run.sh \$outdir"
     exit 1
 fi
-workdir=$testdir/work
-publishdir=$testdir/results
 projectdir=$(realpath "$(pwd)/..")
 
 # define profile
@@ -25,12 +23,13 @@ if [ -z "$profile" ]; then
 fi
 echo "Running with profile \"${profile}\"."
 echo "This option can be changed when calling the script:"
-echo "  ./run.sh <testdir> <profile>"
+echo "  ./run.sh <outdir> <profile>"
 
 # run nextflow
 nextflow run ${projectdir}/main.nf \
-    -config ${projectdir}/nextflow.config \
+    -config ${projectdir}/conf/nextflow.config \
     -params-file $(pwd)/sample_params.yml \
-    -w ${workdir} \
-    --publishdir ${publishdir} \
-    -profile ${profile} -resume --keep_workdir
+    -profile ${profile} \
+    -resume \
+    --outdir ${outdir} \
+    --keep_workdir
