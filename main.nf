@@ -80,7 +80,12 @@ Channel
     .fromPath(params.vcf)
     .into { vcf_ch_bcftools_stats
           ; vcf_ch_bcftools_gtcheck
-          ; vcf_ch_picard_collect_variant_calling_metrics }
+          ; vcf_ch_picard_collect_variant_calling_metrics_vcf
+          ; vcf_ch_picard_collect_variant_calling_metrics_gvcf }
+
+Channel
+    .fromPath(params.pst_vcf)
+    .set { pst_vcf_ch_bcftools_gtcheck }
 
 Channel
     .fromPath(params.ref_fa)
@@ -92,7 +97,8 @@ Channel
 
 Channel
     .fromPath(params.dbsnp_vcf)
-    .set { dbsnp_vcf_ch_picard_collect_variant_calling_metrics }
+    .into { dbsnp_vcf_ch_picard_collect_variant_calling_metrics_vcf
+          ; dbsnp_vcf_ch_picard_collect_variant_calling_metrics_gvcf }
 /*
 ----------------------------------------------------------------------
 PROCESSES
@@ -164,10 +170,11 @@ process bcftools_stats {
     file vcf from vcf_ch_bcftools_stats
 
     output:
-    file "*" into bcftools_stats_ch
+    file "*.bcftools_stats.txt" into bcftools_stats_ch
 
     script:
     """
+    bcftools index --tbi ${vcf}
     bcftools stats ${vcf} > ${params.sample_id}.bcftools_stats.txt
     """
 
@@ -179,14 +186,19 @@ process bcftools_gtcheck {
 
     input:
     file vcf from vcf_ch_bcftools_gtcheck
+    file pst_vcf from pst_vcf_ch_bcftools_gtcheck
 
     output:
-    file "*" into bcftools_gtcheck_ch
+    file "*.bcftools_gtcheck.txt" into bcftools_gtcheck_ch
+
+    when:
+    params.pst_vcf
 
     script:
     """
     bcftools index --tbi ${vcf}
-    bcftools gtcheck --GTs-only 1 --genotypes ${params.pst_vcf} ${vcf} > ${params.sample_id}.bcftools_gtcheck.txt
+    bcftools index --tbi ${pst_vcf}
+    bcftools gtcheck --GTs-only 1 --genotypes ${pst_vcf} ${vcf} > ${params.sample_id}.bcftools_gtcheck.txt
     """
 }
 
@@ -295,16 +307,19 @@ process picard_collect_gc_bias_metrics {
 
 }
 
-process picard_collect_variant_calling_metrics {
+process picard_collect_variant_calling_metrics_vcf {
 
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file vcf from vcf_ch_picard_collect_variant_calling_metrics
-    file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics
-    
+    file vcf from vcf_ch_picard_collect_variant_calling_metrics_vcf
+    file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics_vcf
+
     output:
-    file "*" into picard_collect_variant_calling_metrics_ch
+    file "*metrics" into picard_collect_variant_calling_metrics_vcf_ch
+
+    when:
+    vcf.name =~ /.*\.vcf.gz$/
 
     script:
     """
@@ -315,6 +330,31 @@ process picard_collect_variant_calling_metrics {
         DBSNP=${dbsnp_vcf}
     """
 
+}
+
+process picard_collect_variant_calling_metrics_gvcf {
+
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    file vcf from vcf_ch_picard_collect_variant_calling_metrics_gvcf
+    file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics_gvcf
+
+    output:
+    file "*metrics" into picard_collect_variant_calling_metrics_gvcf_ch
+
+    when:
+    vcf.name =~ /.*\.gvcf.gz$/
+
+    script:
+    """
+    bcftools view -v snps,indels -O z -o ${params.sample_id}.vcf.gz ${vcf}
+    bcftools index --tbi ${params.sample_id}.vcf.gz
+    picard CollectVariantCallingMetrics \
+        I=${params.sample_id}.vcf.gz \
+        O=${params.sample_id} \
+        DBSNP=${dbsnp_vcf}
+    """
 }
 
 //process verifybamid2 {
@@ -340,16 +380,17 @@ process multiqc {
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
-    file "samtools/*" from samtools_stats_ch
-    file "samtools/*" from samtools_flagstat_ch
-    file "bcftools/*" from bcftools_stats_ch
-    file "bcftools/*" from bcftools_gtcheck_ch
-    file "picard/*" from picard_collect_quality_yield_metrics_ch
-    file "picard/*" from picard_collect_alignment_summary_metrics_ch
-    file "picard/*" from picard_collect_wgs_metrics_ch
-    file "picard/*" from picard_collect_insert_size_metrics_ch
-    file "picard/*" from picard_collect_gc_bias_metrics_ch
-    file "picard/*" from picard_collect_variant_calling_metrics_ch
+    file "samtools/*" from samtools_stats_ch.collect().ifEmpty([])
+    file "samtools/*" from samtools_flagstat_ch.collect().ifEmpty([])
+    file "bcftools/*" from bcftools_stats_ch.collect().ifEmpty([])
+    file "bcftools/*" from bcftools_gtcheck_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_quality_yield_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_alignment_summary_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_wgs_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_insert_size_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_gc_bias_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_variant_calling_metrics_vcf_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
     //file "verifybamid2/*" from verifybamid2_ch
 
     output:
