@@ -18,7 +18,10 @@ FUNCTIONS
 
 def helpMessage() {
     log.info """
-    Usage: nextflow run main.nf -config nextflow.config -params-file sample_params.yaml -profile nscc [-resume] [--keep_workdir] [--help]
+    Usage: nextflow run main.nf -config nextflow.config -params-file sample_params.yaml 
+                                -profile nscc -work-dir ./ --outdir ./
+                                [-resume] [--keep_workdir] [--help]
+    
     Options:
     -config           Generic workflow settings
     -params-file      Sample-specific settings
