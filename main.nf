@@ -40,13 +40,11 @@ def minimalInformationMessage() {
     log.info "Project Dir  : " + workflow.projectDir
     log.info "Launch Dir   : " + workflow.launchDir
     log.info "Work Dir     : " + workflow.workDir
-    log.info "Publish Dir  : " + params.publishdir
+    log.info "Results Dir  : " + params.publishdir
+    log.info "Info Dir     : " + params.infodir
 }
 
-def startWorkflow() {
-    // set working dir from params
-    workflow.workDir = ((params.workdir) as Path).complete()
-    // run info
+def startMessage() {
     this.nextflowMessage()
     this.minimalInformationMessage()
 }
@@ -65,7 +63,7 @@ LAUNCH INFO
 ----------------------------------------------------------------------
 */
 
-startWorkflow()
+startMessage()
 
 /*
 ----------------------------------------------------------------------
@@ -85,9 +83,15 @@ Channel
           ; vcf_ch_picard_collect_variant_calling_metrics_vcf
           ; vcf_ch_picard_collect_variant_calling_metrics_gvcf }
 
-Channel
-    .fromPath(params.pst_vcf)
-    .set { pst_vcf_ch_bcftools_gtcheck }
+if (params.pst_vcf) {
+    Channel
+        .fromPath(params.pst_vcf)
+        .set { pst_vcf_ch_bcftools_gtcheck }
+} else {
+    Channel
+        .empty()
+        .set { pst_vcf_ch_bcftools_gtcheck }
+}
 
 Channel
     .fromPath(params.ref_fa)
@@ -194,7 +198,7 @@ process bcftools_gtcheck {
     file "*.bcftools_gtcheck.txt" into bcftools_gtcheck_ch
 
     when:
-    params.pst_vcf
+    params.pst_vcf != null
 
     script:
     """

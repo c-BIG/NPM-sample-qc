@@ -7,6 +7,7 @@ which nextflow >/dev/null || { echo "ERROR: nextflow is not available"; exit 1; 
 ls ../main.nf ../tests  >& /dev/null || { echo "ERROR: must run from NPM-sample-qc/tests directory"; exit 1; }
 
 # define directories
+projectdir=$(realpath "$(pwd)/..")
 outdir="$1"
 if [ -z "$outdir" ]; then
     echo "ERROR: Missing outdir argument, e.g.:" 1>&2
@@ -14,7 +15,7 @@ if [ -z "$outdir" ]; then
     echo "  ./run.sh \$outdir"
     exit 1
 fi
-projectdir=$(realpath "$(pwd)/..")
+workdir="${outdir}/work"
 
 # define profile
 profile="$2"
@@ -31,5 +32,6 @@ nextflow run ${projectdir}/main.nf \
     -params-file $(pwd)/sample_params.yml \
     -profile ${profile} \
     -resume \
+    -work-dir ${workdir} \
     --outdir ${outdir} \
     --keep_workdir
