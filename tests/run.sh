@@ -11,7 +11,7 @@ testdir="$1"
 if [ -z "$testdir" ]; then
     echo "ERROR: Missing testdir argument, e.g.:" 1>&2
     echo "  testdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
-    echo "  ./run.sh \$basedir"
+    echo "  ./run.sh \$testdir"
     exit 1
 fi
 workdir=$testdir/work
@@ -30,7 +30,7 @@ echo "  ./run.sh <testdir> <profile>"
 # run nextflow
 nextflow run ${projectdir}/main.nf \
     -config ${projectdir}/nextflow.config \
-    -params-file ${projectdir}/tests/sample_params.yml \
+    -params-file $(pwd)/sample_params.yml \
     -w ${workdir} \
     --publishdir ${publishdir} \
     -profile ${profile} -resume --keep_workdir
