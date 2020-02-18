@@ -51,7 +51,7 @@ def calculate_metrics(mqc):
         "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
         # coverage
         "genome_territory", "mean_coverage", "sd_coverage", "median_coverage", "mad_coverage",
-        "pct_1x", "pct_15x", "pct_30x", "pct_40x",
+        "pct_1x", "pct_10x", "pct_15x", "pct_30x", "pct_40x",
         # insert size
         "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
         "pct_adapters",

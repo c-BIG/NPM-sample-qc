@@ -286,7 +286,7 @@ def mismatch_rate(mqc):
 
     d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
     v = d["PF_MISMATCH_RATE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -301,7 +301,7 @@ def mismatch_rate_mapqge20(mqc):
 
     d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
     v = d["PF_HQ_ERROR_RATE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -340,7 +340,7 @@ def mean_coverage(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["MEAN_COVERAGE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -355,7 +355,7 @@ def sd_coverage(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["SD_COVERAGE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -370,7 +370,7 @@ def median_coverage(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["MEDIAN_COVERAGE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -385,7 +385,7 @@ def mad_coverage(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["MAD_COVERAGE"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
 
@@ -402,10 +402,21 @@ def pct_1x(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["PCT_1X"]
-    v = np.round(v*100, 4)
+    v = np.round(v*100, 2)
 
     return k, v
 
+def pct_10x(mqc):
+    """
+    Analogous to pct_1x.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_10X"]
+    v = np.round(v*100, 2)
+
+    return k, v
 
 def pct_15x(mqc):
     """
@@ -415,7 +426,7 @@ def pct_15x(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["PCT_15X"]
-    v = np.round(v*100, 4)
+    v = np.round(v*100, 2)
 
     return k, v
 
@@ -428,7 +439,7 @@ def pct_30x(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["PCT_30X"]
-    v = np.round(v*100, 4)
+    v = np.round(v*100, 2)
 
     return k, v
 
@@ -441,7 +452,7 @@ def pct_40x(mqc):
 
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["PCT_40X"]
-    v = np.round(v*100, 4)
+    v = np.round(v*100, 2)
 
     return k, v
 
@@ -516,6 +527,9 @@ def pct_adapters(mqc):
     from the start of the read.
 
     Source: picard AlignmentSummaryMetrics (PCT_ADAPTER)
+
+    See picard's source code for details on the adapter sequences
+    considered: https://github.com/broadinstitute/picard/blob/master/src/main/java/picard/util/IlluminaUtil.java#L130
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -743,6 +757,6 @@ def snp_ts_tv(mqc):
 
     d = next(iter(mqc["multiqc_bcftools_stats"].values()))
     v = d["tstv"]
-    v = np.round(v, 4)
+    v = np.round(v, 2)
 
     return k, v
