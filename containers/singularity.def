@@ -22,7 +22,8 @@ From: ubuntu:16.04
       gcc g++ \
       python3 python-pip python-dev \
       git \
-      wget
+      wget \
+      gnuplot
 
     # install conda
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
