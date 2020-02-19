@@ -8,3 +8,5 @@ dependencies:
     - samtools=1.10
     - picard=2.21.7
     - verifybamid2=1.0.5
+    - pandas
+    - gnuplot
