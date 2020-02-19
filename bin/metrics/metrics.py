@@ -4,6 +4,75 @@ import numpy as np
 import inspect
 
 
+def yield_raw_gb(mqc):
+    """
+    The total number of bases in all reads.
+
+    Source: picard QualityYieldMetrics (TOTAL_BASES)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+    v = np.round(np.divide(d["TOTAL_BASES"], 1e9), 2)
+
+    return k, v
+
+
+def yield_pf_gb(mqc):
+    """
+    The total number of bases in all PF reads.
+
+    Source: picard QualityYieldMetrics (PF_BASES)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+    v = np.round(np.divide(d["PF_BASES"], 1e9), 2)
+
+    return k, v
+
+
+def pct_q30_bases(mqc):
+    """
+    The percentage of PF bases with base quality >= 30.
+
+    Source: picard QualityYieldMetrics (PF_Q30_BASES/PF_BASES)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+    v = np.round(np.divide(d["PF_Q30_BASES"],
+                           d["PF_BASES"])*100, 2)
+
+    return k, v
+
+
+def pct_q30_bases_read1(mqc):
+    """
+    The percentage of PF bases in read 1 with base quality >= 30.
+
+    Source: samtools stats (FFQ) + MultiQC_NPM
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
+    v = np.round(d["pct_q30_bases_read1"], 2)
+
+    return k, v
+
+
+def pct_q30_bases_read2(mqc):
+    """
+    Analogous to pct_q30_bases_read1.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
+    v = np.round(d["pct_q30_bases_read2"], 2)
+
+    return k, v
+
+
 def yield_raw_reads(mqc):
     """
     The total number of reads including all PF and non-PF reads.
@@ -38,9 +107,9 @@ def pct_pf_reads(mqc):
     """
     The percentage of reads that are PF, i.e. yield_pf_reads / yield_raw_reads.
 
-    Note: picard reports a fraction, re-mapped to a percentage here.
-
     Source: picard AlignmentSummaryMetrics (PCT_PF_READS)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -71,9 +140,9 @@ def pct_reads_aligned(mqc):
     """
     The percentage of PF reads that aligned to the reference.
 
-    Note: picard reports a fraction, re-mapped to a percentage here.
-
     Source: picard AlignmentSummaryMetrics (PCT_PF_READS_ALIGNED)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -216,9 +285,9 @@ def pct_chimeras(mqc):
     The percentage of reads that map outside of a maximum insert size (usually 100kb)
     or that have the two ends mapping to different chromosomes.
 
-    Note: picard reports a fraction, re-mapped to a percentage here.
-
     Source: picard AlignmentSummaryMetrics (PCT_CHIMERAS)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -323,7 +392,7 @@ def genome_territory(mqc):
 
 def mean_coverage(mqc):
     """
-    The mean coverage in bases of the genome territory, after all filters are applied.
+    The mean coverage in bases of the genome territory, after picard filters are applied.
 
     Note: picard filters out
 
@@ -347,7 +416,7 @@ def mean_coverage(mqc):
 
 def sd_coverage(mqc):
     """
-    The standard deviation of coverage of the genome after all filters are applied.
+    The standard deviation of coverage of the genome after picard filters are applied.
 
     Source: picard WgsMetrics (SD_COVERAGE)
     """
@@ -362,7 +431,7 @@ def sd_coverage(mqc):
 
 def median_coverage(mqc):
     """
-    The median coverage in bases of the genome territory, after all filters are applied.
+    The median coverage in bases of the genome territory, after picard filters are applied.
 
     Source: picard WgsMetrics (MEDIAN_COVERAGE)
     """
@@ -377,7 +446,7 @@ def median_coverage(mqc):
 
 def mad_coverage(mqc):
     """
-    The median absolute deviation of coverage of the genome after all filters are applied.
+    The median absolute deviation of coverage of the genome after picard filters are applied.
 
     Source: picard WgsMetrics (MAD_COVERAGE)
     """
@@ -394,9 +463,9 @@ def pct_1x(mqc):
     """
     The percentage of bases that attained at least 1X sequence coverage in post-filtering bases.
 
-    Note: picard reports a fraction, re-mapped to a percentage here.
-
     Source: picard WgsMetrics (PCT_1X)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -453,6 +522,30 @@ def pct_40x(mqc):
     d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
     v = d["PCT_40X"]
     v = np.round(v*100, 2)
+
+    return k, v
+
+
+def coverage_sg10k_062017(mqc):
+    """
+    The mean coverage in bases of the genome territory, after SG10K filters are applied.
+
+    Note: filters include the following
+
+    - before mapping: remove reads with >50% of bases with base quality <= 10
+    - after mapping: remove duplicate reads, clipped bases and bases with base quality < 5
+
+    Source: sg10k-cov-062017.sh (bases_sg10k_062017) + picard WgsMetrics (GENOME_TERRITORY)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d1 = next(iter(mqc["multiqc_npm_sg10k_cov_062017"].values()))
+    covered_bases = d1["bases_sg10k_062017"]
+
+    d2 = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    total_bases = d2["GENOME_TERRITORY"]
+
+    v = np.round(np.divide(covered_bases, total_bases), 2)
 
     return k, v
 
@@ -521,12 +614,31 @@ def mad_insert_size(mqc):
     return k, v
 
 
+def pct_overlapping_bases(mqc):
+    """
+    The percentage of bases that correspond to the second observation from an insert with overlapping reads.
+
+    Source: picard WgsMetrics (PCT_EXC_OVERLAP)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+    v = d["PCT_EXC_OVERLAP"]
+    v = np.round(v*100, 2)
+
+    return k, v
+
+
 def pct_adapters(mqc):
     """
-    The fraction of PF reads that are unaligned and match to a known adapter sequence right
+    The percentage of PF reads that are unaligned and match to a known adapter sequence right
     from the start of the read.
 
     Source: picard AlignmentSummaryMetrics (PCT_ADAPTER)
+
+    Note: picard reports a fraction, re-mapped to a percentage here.
 
     See picard's source code for details on the adapter sequences
     considered: https://github.com/broadinstitute/picard/blob/master/src/main/java/picard/util/IlluminaUtil.java#L130
@@ -758,5 +870,50 @@ def snp_ts_tv(mqc):
     d = next(iter(mqc["multiqc_bcftools_stats"].values()))
     v = d["tstv"]
     v = np.round(v, 2)
+
+    return k, v
+
+
+def pct_contamination(mqc):
+    """
+    The percentage of cross-individual contamination.
+
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_verifybamid"].values()))
+    v = d["FREEMIX"]
+    v = np.round(v*100, 2)
+
+    return k, v
+
+
+def pst_pct_concordance(mqc):
+    """
+    The percentage of sites with concordant genotypes between a query VCF and a PST VCF (positive sample tracking).
+    Includes SNPs and INDELs.
+
+    Source: bcftools gtcheck + MultiQC_NPM (pst_pct_concordance)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    d = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
+    v = d["pst_pct_concordance"]
+    v = np.round(v, 2)
+
+    return k, v
+
+
+def pst_pct_usage(mqc):
+    """
+    TODO
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    # d1 = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
+    # sites_compared = d["pst_sites_compared"]
+    # v = np.round(v, 2)
+    v = "NA"
 
     return k, v

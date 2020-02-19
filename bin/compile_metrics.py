@@ -42,6 +42,7 @@ def load_multi_qc(multiqc_json):
 def calculate_metrics(mqc):
     metrics_list = [
         # primary metrics
+        "yield_raw_gb", "yield_pf_gb", "pct_q30_bases", "pct_q30_bases_read1", "pct_q30_bases_read2",
         "yield_raw_reads", "yield_pf_reads", "pct_pf_reads",
         # alignment
         "pct_aligned_bases", "pct_reads_aligned", "pct_reads_aligned_mapqge20",
@@ -51,16 +52,18 @@ def calculate_metrics(mqc):
         "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
         # coverage
         "genome_territory", "mean_coverage", "sd_coverage", "median_coverage", "mad_coverage",
-        "pct_1x", "pct_10x", "pct_15x", "pct_30x", "pct_40x",
+        "pct_1x", "pct_10x", "pct_15x", "pct_30x", "pct_40x", "coverage_sg10k_062017",
         # insert size
         "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
-        "pct_adapters",
+        "pct_adapters", "pct_overlapping_bases",
         # gc bias
         "at_dropout", "gc_dropout", "gc_nc_0_19", "gc_nc_20_39", "gc_nc_40_59",
         "gc_nc_60_79", "gc_nc_80_100",
         # variant calling
         "all_snps", "pass_snps", "all_indels", "pass_indels", "pass_sites_multiallelic",
-        "pass_snps_multiallelic", "pass_mnps", "pass_complex_indels", "snp_ts_tv"
+        "pass_snps_multiallelic", "pass_mnps", "pass_complex_indels", "snp_ts_tv",
+        # contamination and pst
+        "pct_contamination", "pst_pct_concordance", "pst_pct_usage"
     ]
     result = dict()
     for m in metrics_list:

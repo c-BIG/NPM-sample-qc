@@ -39,12 +39,12 @@ def nextflowMessage() {
 def minimalInformationMessage() {
     log.info "User name    : " + workflow.userName
     log.info "Command Line : " + workflow.commandLine
-    log.info "Profile      : " + workflow.profile
     log.info "Project Dir  : " + workflow.projectDir
     log.info "Launch Dir   : " + workflow.launchDir
     log.info "Work Dir     : " + workflow.workDir
     log.info "Results Dir  : " + params.publishdir
     log.info "Info Dir     : " + params.infodir
+    log.info "Profile      : " + workflow.profile
 }
 
 def startMessage() {
@@ -125,6 +125,7 @@ process cram_to_bam {
                 , cram_to_bam_ch_picard_collect_quality_yield_metrics \
                 , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
                 , cram_to_bam_ch_picard_collect_wgs_metrics \
+                , cram_to_bam_ch_sg10k_cov_062017 \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
                 , cram_to_bam_ch_picard_collect_gc_bias_metrics \
                 , cram_to_bam_ch_verifybamid2
@@ -145,7 +146,8 @@ process samtools_stats {
     file "*" from cram_to_bam_ch_samtools_stats
 
     output:
-    file "*" into samtools_stats_ch
+    file "*" into samtools_stats_ch \
+                , samtools_stats_ch_plotbamstats
 
     script:
     """
@@ -272,6 +274,23 @@ process picard_collect_wgs_metrics {
 
 }
 
+process sg10k_cov_062017 {
+
+    publishDir "${params.publishdir}/sg10k_cov_062017", mode: "copy"
+
+    input:
+    file "*" from cram_to_bam_ch_sg10k_cov_062017
+
+    output:
+    file "*" into sg10k_cov_062017_ch
+
+    script:
+    """
+    sg10k-cov-062017.sh ${params.sample_id}.bam > ${params.sample_id}.sg10k_cov_062017.txt
+    """
+
+}
+
 process picard_collect_insert_size_metrics {
 
     publishDir "${params.publishdir}/picard", mode: "copy"
@@ -384,31 +403,49 @@ process verifybamid2 {
 
 }
 
+process plot_bamstats {
+
+    publishDir "${params.publishdir}/plot_bamstats", mode: "copy"
+
+    input:
+    file "samtools/*" from samtools_stats_ch_plotbamstats
+
+    output:
+    file "${params.sample_id}*" into plot_bamstats_ch
+
+    script:
+    """
+    plot-bamstats -p ${params.sample_id} samtools/${params.sample_id}.stats
+    """
+
+}
+
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
 
     input:
-    file "samtools/*" from samtools_stats_ch.collect().ifEmpty([])
-    file "samtools/*" from samtools_flagstat_ch.collect().ifEmpty([])
-    file "bcftools/*" from bcftools_stats_ch.collect().ifEmpty([])
+    file "samtools/*" from samtools_stats_ch
+    file "samtools/*" from samtools_flagstat_ch
+    file "bcftools/*" from bcftools_stats_ch
     file "bcftools/*" from bcftools_gtcheck_ch.collect().ifEmpty([])
-    file "picard/*" from picard_collect_quality_yield_metrics_ch.collect().ifEmpty([])
-    file "picard/*" from picard_collect_alignment_summary_metrics_ch.collect().ifEmpty([])
-    file "picard/*" from picard_collect_wgs_metrics_ch.collect().ifEmpty([])
-    file "picard/*" from picard_collect_insert_size_metrics_ch.collect().ifEmpty([])
-    file "picard/*" from picard_collect_gc_bias_metrics_ch.collect().ifEmpty([])
+    file "picard/*" from picard_collect_quality_yield_metrics_ch
+    file "picard/*" from picard_collect_alignment_summary_metrics_ch
+    file "picard/*" from picard_collect_wgs_metrics_ch
+    file "picard/*" from picard_collect_insert_size_metrics_ch
+    file "picard/*" from picard_collect_gc_bias_metrics_ch
     file "picard/*" from picard_collect_variant_calling_metrics_vcf_ch.collect().ifEmpty([])
     file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
     file "verifybamid2/*" from verifybamid2_ch
+    file "sg10k_cov_062017/*" from sg10k_cov_062017_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
 
     script:
     """
-    fix_multiqc_picard_wgsmetrics.py --input picard/*wgs_metrics.txt
-    multiqc . --data-format json
+    fix_multiqc_picard_wgsmetrics.py --input picard/${params.sample_id}.wgs_metrics.txt
+    multiqc . --data-format json --enable-npm-plugin
     """
 
 }
@@ -419,7 +456,7 @@ process compile_metrics {
 
     input:
     file "*" from multiqc_ch
-    
+
     output:
     file "*" into compile_metrics_ch
 
