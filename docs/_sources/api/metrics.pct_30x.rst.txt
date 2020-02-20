@@ -1,0 +1,6 @@
+pct_30x
+=======
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_30x

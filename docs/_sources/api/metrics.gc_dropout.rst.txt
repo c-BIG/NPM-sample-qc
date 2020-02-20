@@ -1,0 +1,6 @@
+gc_dropout
+==========
+
+.. currentmodule:: metrics
+
+.. autofunction:: gc_dropout

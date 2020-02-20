@@ -1,0 +1,6 @@
+pass_snps_multiallelic
+======================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_snps_multiallelic

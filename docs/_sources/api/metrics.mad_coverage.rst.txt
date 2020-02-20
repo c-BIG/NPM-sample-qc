@@ -1,0 +1,6 @@
+mad_coverage
+============
+
+.. currentmodule:: metrics
+
+.. autofunction:: mad_coverage

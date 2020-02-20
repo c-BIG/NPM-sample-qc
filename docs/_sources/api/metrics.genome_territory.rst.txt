@@ -1,0 +1,6 @@
+genome_territory
+================
+
+.. currentmodule:: metrics
+
+.. autofunction:: genome_territory

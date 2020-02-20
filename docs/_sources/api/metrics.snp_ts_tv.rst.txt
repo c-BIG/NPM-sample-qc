@@ -1,0 +1,6 @@
+snp_ts_tv
+=========
+
+.. currentmodule:: metrics
+
+.. autofunction:: snp_ts_tv

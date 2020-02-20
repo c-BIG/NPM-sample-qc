@@ -1,0 +1,6 @@
+pct_reads_properly_paired
+=========================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_reads_properly_paired

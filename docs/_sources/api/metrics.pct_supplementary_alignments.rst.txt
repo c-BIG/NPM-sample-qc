@@ -1,0 +1,6 @@
+pct_supplementary_alignments
+============================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_supplementary_alignments

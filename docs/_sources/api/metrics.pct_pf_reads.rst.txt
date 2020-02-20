@@ -1,0 +1,6 @@
+pct_pf_reads
+============
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_pf_reads

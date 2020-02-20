@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metrics package &mdash; NPM-sample-qc  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> NPM-sample-qc
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Metric definitions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics.html">Functions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NPM-sample-qc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>metrics package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/metrics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metrics-package">
+<h1>metrics package<a class="headerlink" href="#metrics-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-metrics.metrics">
+<span id="metrics-metrics-module"></span><h2>metrics.metrics module<a class="headerlink" href="#module-metrics.metrics" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="metrics.metrics.all_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_indels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_snps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.at_dropout">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">at_dropout</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.at_dropout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Illumina-style AT dropout metric. Calculated by taking each GC bin independently
+and calculating (%ref_at_gc - %reads_at_gc) and summing all positive values for GC=[0..50].</p>
+<p>Source: picard GcBiasSummaryMetrics (AT_DROPOUT)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.coverage_sg10k_062017">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">coverage_sg10k_062017</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.coverage_sg10k_062017" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean coverage in bases of the entire genome (3.1e9), after SG10K filters are applied.</p>
+<p>Note: filters include the following</p>
+<ul class="simple">
+<li><p>before mapping: remove reads with &gt;50% of bases with base quality &lt;= 10</p></li>
+<li><p>after mapping: remove duplicate reads, clipped bases and bases with base quality &lt; 5</p></li>
+</ul>
+<p>Source: sg10k-cov-062017.sh (bases_sg10k_062017)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_dropout">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_dropout</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_dropout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Illumina-style GC dropout metric. Calculated by taking each GC bin independently
+and calculating (%ref_at_gc - %reads_at_gc) and summing all positive values for GC=[50..100].</p>
+<p>Source: picard GcBiasSummaryMetrics (GC_DROPOUT)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_nc_0_19">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_nc_0_19</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_nc_0_19" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized coverage over quintile of GC content ranging from 0 - 19.</p>
+<p>Source:  picard GcBiasSummaryMetrics (GC_NC_0_19)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_nc_20_39">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_nc_20_39</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_nc_20_39" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to gc_nc_0_19.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_nc_40_59">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_nc_40_59</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_nc_40_59" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to gc_nc_0_19.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_nc_60_79">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_nc_60_79</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_nc_60_79" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to gc_nc_0_19.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.gc_nc_80_100">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">gc_nc_80_100</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.gc_nc_80_100" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to gc_nc_0_19.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.genome_territory">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">genome_territory</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.genome_territory" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of non-N bases in the genome reference over which coverage will be evaluated.</p>
+<p>Source: picard WgsMetrics (GENOME_TERRITORY)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mad_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mad_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median absolute deviation of coverage of the genome after picard filters are applied.</p>
+<p>Source: picard WgsMetrics (MAD_COVERAGE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mad_insert_size">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mad_insert_size</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_insert_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median absolute deviation of insert sizes over the “core” of the distribution.</p>
+<p>Source: picard InsertSizeMetrics (MEDIAN_ABSOLUTE_DEVIATION)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mean_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mean_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean coverage in bases of the genome territory, after picard filters are applied.</p>
+<p>Note: picard filters out</p>
+<ul class="simple">
+<li><p>bases in reads with low mapping quality (default is &lt; 20; PCT_EXC_MAPQ)</p></li>
+<li><p>bases  in reads marked as duplicates (PCT_EXC_DUPE)</p></li>
+<li><p>bases in reads without a mapped mate pair (PCT_EXC_UNPAIRED)</p></li>
+<li><p>bases with low base quality (default is &lt; 20; PCT_EXC_BASEQ)</p></li>
+<li><p>bases that correspond to the second observation from an insert with overlapping reads (PCT_EXC_OVERLAP)</p></li>
+<li><p>bases that would have raised coverage above the capped value (default cap = 250x; PCT_EXC_CAPPED)</p></li>
+</ul>
+<p>Source: picard WgsMetrics (MEAN_COVERAGE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mean_insert_size">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mean_insert_size</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_insert_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean insert size over the “core” of the distribution.</p>
+<p>Note: Artefactual outliers in the distribution often cause calculation of nonsensical mean and
+stdev values. To avoid this the distribution is first trimmed to a “core” distribution of +/- N
+median absolute deviations around the median insert size.</p>
+<p>Source: picard InsertSizeMetrics (MEAN_INSERT_SIZE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.median_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">median_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.median_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median coverage in bases of the genome territory, after picard filters are applied.</p>
+<p>Source: picard WgsMetrics (MEDIAN_COVERAGE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.median_insert_size">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">median_insert_size</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.median_insert_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median insert size over the “core” of the distribution.</p>
+<p>Source: picard InsertSizeMetrics (MEDIAN_INSERT_SIZE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mismatch_rate">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mismatch_rate</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mismatch_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fraction of bases mismatching the reference for all bases aligned to the reference sequence.</p>
+<p>Source: picard AlignmentSummaryMetrics (PF_MISMATCH_RATE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.mismatch_rate_mapqge20">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mismatch_rate_mapqge20</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mismatch_rate_mapqge20" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fraction of bases that mismatch the reference in reads with MAPQ&gt;=20.</p>
+<p>Source: picard AlignmentSummaryMetrics (PF_HQ_ERROR_RATE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_complex_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_complex_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_complex_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing complex indels.</p>
+<p>Source: picard VariantCallingMetrics (TOTAL_COMPLEX_INDELS)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing bi-allelic indels.</p>
+<p>Source: bcftools stats (number_of_indels)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_mnps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_mnps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_mnps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing MNPs.</p>
+<p>Source: bcftools stats (number_of_MNPs)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_sites_multiallelic">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_sites_multiallelic</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_sites_multiallelic" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing multi-allelic variants (all types).</p>
+<p>Source: bcftools stats (number_of_multiallelic_sites)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing bi-allelic SNPs.</p>
+<p>Source: bcftools stats (number_of_SNPs)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_snps_multiallelic">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snps_multiallelic</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snps_multiallelic" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of passing multi-allelic SNPs.</p>
+<p>Source: bcftools stats (number_of_multiallelic_SNP_sites)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_10x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_10x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_10x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_15x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_15x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_15x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_1x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_1x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_1x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of bases that attained at least 1X sequence coverage in post-filtering bases.</p>
+<p>Source: picard WgsMetrics (PCT_1X)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_30x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_30x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_30x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_40x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_40x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_40x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_adapters">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_adapters</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_adapters" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of PF reads that are unaligned and match to a known adapter sequence right
+from the start of the read.</p>
+<p>Source: picard AlignmentSummaryMetrics (PCT_ADAPTER)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+<p>See picard’s source code for details on the adapter sequences
+considered: <a class="reference external" href="https://github.com/broadinstitute/picard/blob/master/src/main/java/picard/util/IlluminaUtil.java#L130">https://github.com/broadinstitute/picard/blob/master/src/main/java/picard/util/IlluminaUtil.java#L130</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_aligned_bases">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_aligned_bases</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_aligned_bases" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of bases that are aligned to the reference.</p>
+<p>Source: samtools stats (bases mapped cigar / total length)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_alignments_diff_chrom">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_alignments_diff_chrom</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_alignments_diff_chrom" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of alignments with mates aligned to different chromosomes.</p>
+<p>Source: samtools flagstat (with mate mapped to a different chr_passed / total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_alignments_diff_chrom_mapqge5">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_alignments_diff_chrom_mapqge5</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_alignments_diff_chrom_mapqge5" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of alignments with MAPQ&gt;=5 and with mates aligned to different chromosomes.</p>
+<p>Source: samtools flagstat (with mate mapped to a different chr (mapQ &gt;= 5)_passed / total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_chimeras">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_chimeras</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_chimeras" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of reads that map outside of a maximum insert size (usually 100kb)
+or that have the two ends mapping to different chromosomes.</p>
+<p>Source: picard AlignmentSummaryMetrics (PCT_CHIMERAS)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_contamination">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_contamination</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_contamination" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of cross-individual contamination.</p>
+<p>Source: VerifyBamID2 (FREEMIX)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_duplicate_reads">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_duplicate_reads</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_duplicate_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of reads marked as duplicates.</p>
+<p>Source: samtools stats (reads_duplicated_percent)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_overlapping_bases">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_overlapping_bases</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_overlapping_bases" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of bases that correspond to the second observation from an insert with overlapping reads.</p>
+<p>Source: picard WgsMetrics (PCT_EXC_OVERLAP)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_pf_reads">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_pf_reads</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_pf_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of reads that are PF, i.e. yield_pf_reads / yield_raw_reads.</p>
+<p>Source: picard AlignmentSummaryMetrics (PCT_PF_READS)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_q30_bases">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_q30_bases</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_q30_bases" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of PF bases with base quality &gt;= 30.</p>
+<p>Source: picard QualityYieldMetrics (PF_Q30_BASES/PF_BASES)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_q30_bases_read1">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_q30_bases_read1</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_q30_bases_read1" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of PF bases in read 1 with base quality &gt;= 30.</p>
+<p>Source: samtools stats (FFQ) + MultiQC_NPM</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_q30_bases_read2">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_q30_bases_read2</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_q30_bases_read2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_q30_bases_read1.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_reads_aligned">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_reads_aligned</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_aligned" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of PF reads that aligned to the reference.</p>
+<p>Source: picard AlignmentSummaryMetrics (PCT_PF_READS_ALIGNED)</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_reads_aligned_in_pairs">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_reads_aligned_in_pairs</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_aligned_in_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.</p>
+<p>Source: samtools stats (reads_mapped_and_paired / sequences)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_reads_aligned_mapqge20">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_reads_aligned_mapqge20</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_aligned_mapqge20" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of PF reads that were aligned to the reference with a mapping quality of Q20 or higher.</p>
+<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
+<p>Source: picard AlignmentSummaryMetrics (PF_HQ_ALIGNED_READS / TOTAL_READS)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_reads_properly_paired">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_reads_properly_paired</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_properly_paired" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of reads that have been aligned as proper pairs.</p>
+<p>Source: samtools stats (reads_properly_paired_percent)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_reads_unaligned">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_reads_unaligned</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_unaligned" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of unmapped reads.</p>
+<p>Source: samtools stats (reads_unmapped / sequences)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_secondary_alignments">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_secondary_alignments</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_secondary_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of alignments marked as secondary.</p>
+<p>Source: samtools flagstat (secondary_passed / total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_singleton_alignments">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_singleton_alignments</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_singleton_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of alignments that are singletons.</p>
+<p>Source: samtools flagstat (singletons_passed_pct)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_supplementary_alignments">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_supplementary_alignments</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_supplementary_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of alignments marked as supplementary.</p>
+<p>Source: samtools flagstat (supplementary_passed / total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pst_pct_concordance">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pst_pct_concordance</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pst_pct_concordance" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of sites with concordant genotypes between a query VCF and a PST VCF (positive sample tracking).
+Includes SNPs and INDELs.</p>
+<p>Source: bcftools gtcheck + MultiQC_NPM (pst_pct_concordance)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pst_pct_usage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pst_pct_usage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pst_pct_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.sd_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">sd_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.sd_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard deviation of coverage of the genome after picard filters are applied.</p>
+<p>Source: picard WgsMetrics (SD_COVERAGE)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.sd_insert_size">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">sd_insert_size</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.sd_insert_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard deviation of insert sizes over the “core” of the distribution.</p>
+<p>Source: picard InsertSizeMetrics (STANDARD_DEVIATION)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.snp_ts_tv">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">snp_ts_tv</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.snp_ts_tv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The transition to transversion ratio of passing bi-allelic SNPs.</p>
+<p>Source: bcftools stats (tstv)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.total_alignments">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">total_alignments</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.total_alignments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of alignments in the BAM/CRAM file.
+Includes primary, secondary and supplementary alignments; excludes duplicates.</p>
+<p>Source: samtools flagstat (total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.yield_pf_gb">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">yield_pf_gb</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_pf_gb" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of bases in all PF reads.</p>
+<p>Source: picard QualityYieldMetrics (PF_BASES)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.yield_pf_reads">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">yield_pf_reads</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_pf_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PF reads where PF is defined as passing Illumina’s filter.</p>
+<p>Source: picard AlignmentSummaryMetrics (PF_READS)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.yield_raw_gb">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">yield_raw_gb</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_raw_gb" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of bases in all reads.</p>
+<p>Source: picard QualityYieldMetrics (TOTAL_BASES)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.yield_raw_reads">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">yield_raw_reads</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_raw_reads" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of reads including all PF and non-PF reads.</p>
+<p>Source: picard AlignmentSummaryMetrics (TOTAL_READS)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-metrics">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-metrics" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, GIS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
