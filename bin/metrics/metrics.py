@@ -12,8 +12,11 @@ def yield_raw_gb(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-    v = np.round(np.divide(d["TOTAL_BASES"], 1e9), 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+        v = np.round(np.divide(d["TOTAL_BASES"], 1e9), 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -26,8 +29,11 @@ def yield_pf_gb(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-    v = np.round(np.divide(d["PF_BASES"], 1e9), 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+        v = np.round(np.divide(d["PF_BASES"], 1e9), 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -40,9 +46,12 @@ def pct_q30_bases(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-    v = np.round(np.divide(d["PF_Q30_BASES"],
-                           d["PF_BASES"])*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+        v = np.round(np.divide(d["PF_Q30_BASES"],
+                               d["PF_BASES"])*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -55,8 +64,11 @@ def pct_q30_bases_read1(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
-    v = np.round(d["pct_q30_bases_read1"], 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
+        v = np.round(d["pct_q30_bases_read1"], 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -67,8 +79,11 @@ def pct_q30_bases_read2(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
-    v = np.round(d["pct_q30_bases_read2"], 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
+        v = np.round(d["pct_q30_bases_read2"], 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -81,9 +96,12 @@ def yield_raw_reads(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["TOTAL_READS"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["TOTAL_READS"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -96,9 +114,12 @@ def yield_pf_reads(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PF_READS"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PF_READS"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -113,9 +134,12 @@ def pct_pf_reads(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PCT_PF_READS"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PCT_PF_READS"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -128,10 +152,13 @@ def pct_aligned_bases(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_stats"].values()))
-    v = np.divide(d["bases_mapped_(cigar)"],
-                  d["total_length"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = np.divide(d["bases_mapped_(cigar)"],
+                      d["total_length"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -146,9 +173,12 @@ def pct_reads_aligned(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PCT_PF_READS_ALIGNED"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PCT_PF_READS_ALIGNED"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -163,10 +193,13 @@ def pct_reads_aligned_mapqge20(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = np.divide(d["PF_HQ_ALIGNED_READS"],
-                  d["TOTAL_READS"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = np.divide(d["PF_HQ_ALIGNED_READS"],
+                      d["TOTAL_READS"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -179,10 +212,13 @@ def pct_reads_unaligned(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_stats"].values()))
-    v = np.divide(d["reads_unmapped"],
-                  d["sequences"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = np.divide(d["reads_unmapped"],
+                      d["sequences"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -195,10 +231,13 @@ def pct_reads_aligned_in_pairs(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_stats"].values()))
-    v = np.divide(d["reads_mapped_and_paired"],
-                  d["sequences"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = np.divide(d["reads_mapped_and_paired"],
+                      d["sequences"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -211,9 +250,12 @@ def pct_reads_properly_paired(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_stats"].values()))
-    v = d["reads_properly_paired_percent"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["reads_properly_paired_percent"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -227,8 +269,11 @@ def total_alignments(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = int(d["total_passed"])
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = int(d["total_passed"])
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -241,9 +286,12 @@ def pct_singleton_alignments(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = d["singletons_passed_pct"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = d["singletons_passed_pct"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -256,10 +304,13 @@ def pct_alignments_diff_chrom(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = np.divide(d["with mate mapped to a different chr_passed"],
-                  d["total_passed"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = np.divide(d["with mate mapped to a different chr_passed"],
+                      d["total_passed"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -272,10 +323,13 @@ def pct_alignments_diff_chrom_mapqge5(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = np.divide(d["with mate mapped to a different chr (mapQ >= 5)_passed"],
-                  d["total_passed"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = np.divide(d["with mate mapped to a different chr (mapQ >= 5)_passed"],
+                      d["total_passed"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -291,9 +345,12 @@ def pct_chimeras(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PCT_CHIMERAS"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PCT_CHIMERAS"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -306,10 +363,13 @@ def pct_secondary_alignments(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = np.divide(d["secondary_passed"],
-                  d["total_passed"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = np.divide(d["secondary_passed"],
+                      d["total_passed"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -322,10 +382,13 @@ def pct_supplementary_alignments(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
-    v = np.divide(d["supplementary_passed"],
-                  d["total_passed"])
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
+        v = np.divide(d["supplementary_passed"],
+                      d["total_passed"])
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -338,9 +401,12 @@ def pct_duplicate_reads(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_samtools_stats"].values()))
-    v = d["reads_duplicated_percent"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["reads_duplicated_percent"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -353,9 +419,12 @@ def mismatch_rate(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PF_MISMATCH_RATE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PF_MISMATCH_RATE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -368,9 +437,12 @@ def mismatch_rate_mapqge20(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PF_HQ_ERROR_RATE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PF_HQ_ERROR_RATE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -383,9 +455,12 @@ def genome_territory(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["GENOME_TERRITORY"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["GENOME_TERRITORY"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -407,9 +482,12 @@ def mean_coverage(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["MEAN_COVERAGE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["MEAN_COVERAGE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -422,9 +500,12 @@ def sd_coverage(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["SD_COVERAGE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["SD_COVERAGE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -437,9 +518,12 @@ def median_coverage(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["MEDIAN_COVERAGE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["MEDIAN_COVERAGE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -452,9 +536,12 @@ def mad_coverage(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["MAD_COVERAGE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["MAD_COVERAGE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -469,11 +556,15 @@ def pct_1x(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_1X"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_1X"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
+
 
 def pct_10x(mqc):
     """
@@ -481,11 +572,15 @@ def pct_10x(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_10X"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_10X"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
+
 
 def pct_15x(mqc):
     """
@@ -493,9 +588,12 @@ def pct_15x(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_15X"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_15X"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -506,9 +604,12 @@ def pct_30x(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_30X"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_30X"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -519,33 +620,36 @@ def pct_40x(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_40X"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_40X"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
 
 def coverage_sg10k_062017(mqc):
     """
-    The mean coverage in bases of the genome territory, after SG10K filters are applied.
+    The mean coverage in bases of the entire genome (3.1e9), after SG10K filters are applied.
 
     Note: filters include the following
 
     - before mapping: remove reads with >50% of bases with base quality <= 10
     - after mapping: remove duplicate reads, clipped bases and bases with base quality < 5
 
-    Source: sg10k-cov-062017.sh (bases_sg10k_062017) + picard WgsMetrics (GENOME_TERRITORY)
+    Source: sg10k-cov-062017.sh (bases_sg10k_062017)
     """
     k = inspect.currentframe().f_code.co_name
 
-    d1 = next(iter(mqc["multiqc_npm_sg10k_cov_062017"].values()))
-    covered_bases = d1["bases_sg10k_062017"]
-
-    d2 = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    total_bases = d2["GENOME_TERRITORY"]
-
-    v = np.round(np.divide(covered_bases, total_bases), 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_sg10k_cov_062017"].values()))
+        covered_bases = d["bases_sg10k_062017"]
+        total_bases = float(3.1e9)
+        v = np.round(np.divide(covered_bases, total_bases), 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -562,9 +666,12 @@ def mean_insert_size(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-    v = d["MEAN_INSERT_SIZE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
+        v = d["MEAN_INSERT_SIZE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -577,9 +684,12 @@ def sd_insert_size(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-    v = d["STANDARD_DEVIATION"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
+        v = d["STANDARD_DEVIATION"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -592,9 +702,12 @@ def median_insert_size(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-    v = d["MEDIAN_INSERT_SIZE"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
+        v = d["MEDIAN_INSERT_SIZE"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -607,9 +720,12 @@ def mad_insert_size(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-    v = d["MEDIAN_ABSOLUTE_DEVIATION"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
+        v = d["MEDIAN_ABSOLUTE_DEVIATION"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -624,9 +740,12 @@ def pct_overlapping_bases(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-    v = d["PCT_EXC_OVERLAP"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
+        v = d["PCT_EXC_OVERLAP"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -645,9 +764,12 @@ def pct_adapters(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
-    v = d["PCT_ADAPTER"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
+        v = d["PCT_ADAPTER"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -661,9 +783,12 @@ def at_dropout(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["AT_DROPOUT"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["AT_DROPOUT"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -677,9 +802,12 @@ def gc_dropout(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_DROPOUT"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_DROPOUT"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -692,9 +820,12 @@ def gc_nc_0_19(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_NC_0_19"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_NC_0_19"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -705,9 +836,12 @@ def gc_nc_20_39(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_NC_20_39"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_NC_20_39"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -718,9 +852,12 @@ def gc_nc_40_59(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_NC_40_59"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_NC_40_59"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -731,9 +868,12 @@ def gc_nc_60_79(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_NC_60_79"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_NC_60_79"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -744,9 +884,12 @@ def gc_nc_80_100(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_picard_gcbias"].values()))
-    v = d["GC_NC_80_100"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_picard_gcbias"].values()))
+        v = d["GC_NC_80_100"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -767,9 +910,12 @@ def pass_snps(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["number_of_SNPs"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["number_of_SNPs"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -790,9 +936,12 @@ def pass_indels(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["number_of_indels"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["number_of_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -805,9 +954,12 @@ def pass_sites_multiallelic(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["number_of_multiallelic_sites"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["number_of_multiallelic_sites"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -820,9 +972,12 @@ def pass_snps_multiallelic(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["number_of_multiallelic_SNP_sites"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["number_of_multiallelic_SNP_sites"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -835,9 +990,12 @@ def pass_mnps(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["number_of_MNPs"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["number_of_MNPs"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -852,9 +1010,12 @@ def pass_complex_indels(mqc):
 
     # typo in multiqc outputs
     # reported: https://github.com/ewels/MultiQC/issues/1105
-    d = next(iter(mqc["multiqc_picard_varientCalling"].values()))
-    v = d["TOTAL_COMPLEX_INDELS"]
-    v = int(v)
+    try:
+        d = next(iter(mqc["multiqc_picard_varientCalling"].values()))
+        v = d["TOTAL_COMPLEX_INDELS"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -867,9 +1028,12 @@ def snp_ts_tv(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-    v = d["tstv"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
+        v = d["tstv"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -882,9 +1046,12 @@ def pct_contamination(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_verifybamid"].values()))
-    v = d["FREEMIX"]
-    v = np.round(v*100, 2)
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
+        v = np.round(v*100, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
@@ -898,9 +1065,12 @@ def pst_pct_concordance(mqc):
     """
     k = inspect.currentframe().f_code.co_name
 
-    d = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
-    v = d["pst_pct_concordance"]
-    v = np.round(v, 2)
+    try:
+        d = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
+        v = d["pst_pct_concordance"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
 
     return k, v
 
