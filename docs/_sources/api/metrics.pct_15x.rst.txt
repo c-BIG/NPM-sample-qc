@@ -1,0 +1,6 @@
+pct_15x
+=======
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_15x

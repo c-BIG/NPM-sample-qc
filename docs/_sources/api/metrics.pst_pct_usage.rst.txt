@@ -1,0 +1,6 @@
+pst_pct_usage
+=============
+
+.. currentmodule:: metrics
+
+.. autofunction:: pst_pct_usage

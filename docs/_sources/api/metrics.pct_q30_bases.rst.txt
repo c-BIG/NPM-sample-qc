@@ -1,0 +1,6 @@
+pct_q30_bases
+=============
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_q30_bases

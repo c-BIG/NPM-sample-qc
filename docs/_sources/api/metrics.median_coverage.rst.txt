@@ -1,0 +1,6 @@
+median_coverage
+===============
+
+.. currentmodule:: metrics
+
+.. autofunction:: median_coverage

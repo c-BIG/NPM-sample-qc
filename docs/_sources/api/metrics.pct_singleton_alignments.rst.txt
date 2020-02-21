@@ -1,0 +1,6 @@
+pct_singleton_alignments
+========================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_singleton_alignments

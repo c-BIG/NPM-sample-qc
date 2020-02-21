@@ -1,0 +1,6 @@
+yield_raw_gb
+============
+
+.. currentmodule:: metrics
+
+.. autofunction:: yield_raw_gb

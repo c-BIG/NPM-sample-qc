@@ -1,0 +1,6 @@
+pass_snps
+=========
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_snps

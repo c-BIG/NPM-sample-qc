@@ -1,0 +1,6 @@
+all_snps
+========
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_snps

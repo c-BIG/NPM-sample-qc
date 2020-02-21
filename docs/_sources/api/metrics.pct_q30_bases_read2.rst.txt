@@ -1,0 +1,6 @@
+pct_q30_bases_read2
+===================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pct_q30_bases_read2

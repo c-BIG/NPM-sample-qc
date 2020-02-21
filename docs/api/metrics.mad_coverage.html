@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mad_coverage &mdash; NPM-sample-qc  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mad_insert_size" href="metrics.mad_insert_size.html" />
+    <link rel="prev" title="genome_territory" href="metrics.genome_territory.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> NPM-sample-qc
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Metric definitions</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../metrics.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="metrics.all_indels.html">all_indels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.all_snps.html">all_snps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.at_dropout.html">at_dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.coverage_sg10k_062017.html">coverage_sg10k_062017</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_dropout.html">gc_dropout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_nc_0_19.html">gc_nc_0_19</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_nc_20_39.html">gc_nc_20_39</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_nc_40_59.html">gc_nc_40_59</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_nc_60_79.html">gc_nc_60_79</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.gc_nc_80_100.html">gc_nc_80_100</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.genome_territory.html">genome_territory</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mad_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mad_insert_size.html">mad_insert_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mean_coverage.html">mean_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mean_insert_size.html">mean_insert_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.median_coverage.html">median_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.median_insert_size.html">median_insert_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mismatch_rate.html">mismatch_rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mismatch_rate_mapqge20.html">mismatch_rate_mapqge20</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_complex_indels.html">pass_complex_indels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_indels.html">pass_indels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_mnps.html">pass_mnps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_sites_multiallelic.html">pass_sites_multiallelic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_snps.html">pass_snps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pass_snps_multiallelic.html">pass_snps_multiallelic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_10x.html">pct_10x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_15x.html">pct_15x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_1x.html">pct_1x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_30x.html">pct_30x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_40x.html">pct_40x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_adapters.html">pct_adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_aligned_bases.html">pct_aligned_bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_alignments_diff_chrom.html">pct_alignments_diff_chrom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_alignments_diff_chrom_mapqge5.html">pct_alignments_diff_chrom_mapqge5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_chimeras.html">pct_chimeras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_contamination.html">pct_contamination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_duplicate_reads.html">pct_duplicate_reads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_overlapping_bases.html">pct_overlapping_bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_pf_reads.html">pct_pf_reads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_q30_bases.html">pct_q30_bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_q30_bases_read1.html">pct_q30_bases_read1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_q30_bases_read2.html">pct_q30_bases_read2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_aligned.html">pct_reads_aligned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_aligned_in_pairs.html">pct_reads_aligned_in_pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_aligned_mapqge20.html">pct_reads_aligned_mapqge20</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_unaligned.html">pct_reads_unaligned</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_secondary_alignments.html">pct_secondary_alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_singleton_alignments.html">pct_singleton_alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_supplementary_alignments.html">pct_supplementary_alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pst_pct_concordance.html">pst_pct_concordance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pst_pct_usage.html">pst_pct_usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.sd_coverage.html">sd_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.sd_insert_size.html">sd_insert_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.snp_ts_tv.html">snp_ts_tv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.total_alignments.html">total_alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.yield_pf_gb.html">yield_pf_gb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.yield_pf_reads.html">yield_pf_reads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.yield_raw_gb.html">yield_raw_gb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.yield_raw_reads.html">yield_raw_reads</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NPM-sample-qc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../metrics.html">Functions</a> &raquo;</li>
+        
+      <li>mad_coverage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/metrics.mad_coverage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mad-coverage">
+<h1>mad_coverage<a class="headerlink" href="#mad-coverage" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="metrics.mad_coverage">
+<code class="sig-prename descclassname">metrics.</code><code class="sig-name descname">mad_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.mad_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median absolute deviation of coverage of the genome after picard filters are applied.</p>
+<p>Source: picard WgsMetrics (MAD_COVERAGE)</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metrics.mad_insert_size.html" class="btn btn-neutral float-right" title="mad_insert_size" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metrics.genome_territory.html" class="btn btn-neutral float-left" title="genome_territory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, GIS
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

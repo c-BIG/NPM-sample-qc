@@ -1,6 +1,6 @@
 .nextflow*
 *.swp
 *__pycache__*
-build/
-api/
+docsrc/build/
+docsrc/api/
 *.simg

@@ -1,0 +1,6 @@
+sd_insert_size
+==============
+
+.. currentmodule:: metrics
+
+.. autofunction:: sd_insert_size

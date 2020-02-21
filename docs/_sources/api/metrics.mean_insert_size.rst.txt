@@ -1,0 +1,6 @@
+mean_insert_size
+================
+
+.. currentmodule:: metrics
+
+.. autofunction:: mean_insert_size

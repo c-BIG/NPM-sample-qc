@@ -1,0 +1,6 @@
+mad_insert_size
+===============
+
+.. currentmodule:: metrics
+
+.. autofunction:: mad_insert_size

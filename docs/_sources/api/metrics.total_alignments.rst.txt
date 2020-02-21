@@ -1,0 +1,6 @@
+total_alignments
+================
+
+.. currentmodule:: metrics
+
+.. autofunction:: total_alignments

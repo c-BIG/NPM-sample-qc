@@ -8,5 +8,8 @@
 sphinx-apidoc --output-dir api --no-toc ../bin/metrics
 
 # create sphinx docs
-make html
-#make latexpdf
+make github
+
+# clean up docsrc
+[ -d api ] && rm -r api
+[ -d build ] && rm -r build
