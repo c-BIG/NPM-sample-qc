@@ -81,10 +81,16 @@ Channel
 
 Channel
     .fromPath(params.vcf)
-    .into { vcf_ch_bcftools_stats
+    .into { vcf_ch_count_variants
+          ; vcf_ch_bcftools_stats
           ; vcf_ch_bcftools_gtcheck
           ; vcf_ch_picard_collect_variant_calling_metrics_vcf
-          ; vcf_ch_picard_collect_variant_calling_metrics_gvcf }
+          ; vcf_ch_picard_collect_variant_calling_metrics_gvcf
+          ; vcf_ch_calculate_callability_gvcf }
+
+Channel
+    .fromPath(params.autosomes_bed)
+    .set { autosomed_bed_ch_calculate_callability }
 
 if (params.pst_vcf) {
     Channel
@@ -173,6 +179,53 @@ process samtools_flagstat {
 
 }
 
+process count_variants {
+
+    publishDir "${params.publishdir}/count_variants", mode: "copy"
+
+    input:
+    file vcf from vcf_ch_count_variants
+
+    output:
+    file "*" into count_variants_ch
+
+    script:
+    """
+    # calls bcftools stats
+    count_variants.py \
+        --input_vcf ${vcf} \
+        --output_json ${params.sample_id}.variant_counts.json \
+        --loglevel DEBUG
+    """
+
+}
+
+process calculate_callability {
+
+    publishDir "${params.publishdir}/calculate_callability", mode: "copy"
+
+    input:
+    file vcf from vcf_ch_calculate_callability_gvcf
+    file autosomes_bed from autosomed_bed_ch_calculate_callability
+
+    output:
+    file "*" into calculate_callability_ch
+
+    when:
+    vcf.name =~ /.*\.gvcf.gz$/
+
+    script:
+    """
+    # calls bcftools stats
+    calculate_callability.py \
+        --input_gvcf ${vcf} \
+        --autosomes_bed ${autosomes_bed} \
+        --output_json ${params.sample_id}.callability.json \
+        --loglevel DEBUG
+    """
+
+}
+
 process bcftools_stats {
 
     publishDir "${params.publishdir}/bcftools", mode: "copy"
@@ -181,14 +234,12 @@ process bcftools_stats {
     file vcf from vcf_ch_bcftools_stats
 
     output:
-    file "*.bcftools_stats.txt" into bcftools_stats_ch
+    file "*" into bcftools_stats_ch
 
     script:
     """
-    bcftools index --tbi ${vcf}
-    bcftools stats ${vcf} > ${params.sample_id}.bcftools_stats.txt
+    bcftools stats -f PASS ${vcf} > ${params.sample_id}.pass.stats
     """
-
 }
 
 process bcftools_gtcheck {
@@ -427,6 +478,8 @@ process multiqc {
     input:
     file "samtools/*" from samtools_stats_ch
     file "samtools/*" from samtools_flagstat_ch
+    file "count_variants/*" from count_variants_ch
+    file "calculate_callability/*" from calculate_callability_ch
     file "bcftools/*" from bcftools_stats_ch
     file "bcftools/*" from bcftools_gtcheck_ch.collect().ifEmpty([])
     file "picard/*" from picard_collect_quality_yield_metrics_ch

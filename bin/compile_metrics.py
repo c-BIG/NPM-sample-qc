@@ -3,7 +3,6 @@
 import logging
 import argparse
 import json
-import pprint as pp
 import metrics
 
 
@@ -62,6 +61,17 @@ def calculate_metrics(mqc):
         # variant calling
         "all_snps", "pass_snps", "all_indels", "pass_indels", "pass_sites_multiallelic",
         "pass_snps_multiallelic", "pass_mnps", "pass_complex_indels", "snp_ts_tv",
+        # "all_snps", "all_het_snps", "all_homalt_snps", "all_snp_het_hom",
+        # "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
+        # "all_indels", "all_het_indels", "all_homalt_indels", "all_indel_het_hom",
+        # "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
+        # "all_del", "all_ins", "pass_del", "pass_ins",
+        # "all_mnps", "pass_mnps",
+        # "all_complex_indels", "all_complex_ins", "all_complex_del",
+        # "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
+        # "all_multiallelic_sites", "all_multiallelic_sites",
+        # "all_snp_ts_tv", "pass_snp_ts_tv"
+        # "pct_autosome_callability",
         # contamination and pst
         "pct_contamination", "pst_pct_concordance", "pst_pct_usage"
     ]
@@ -90,5 +100,4 @@ if __name__ == "__main__":
     final_metrics = calculate_metrics(mqc)
     save_output(final_metrics, args.output_json)
 
-    pp.pprint(final_metrics)
     done()
