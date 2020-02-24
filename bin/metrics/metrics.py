@@ -896,24 +896,142 @@ def gc_nc_80_100(mqc):
 
 def all_snps(mqc):
     """
+    The total number of SNPs.
+
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
-    v = "NA"
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_het_snps(mqc):
+    """
+    The total number of het SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_het_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_homalt_snps(mqc):
+    """
+    The total number of hom alt SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_homalt_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_snp_het_hom(mqc):
+    """
+    The het/hom ratio for all SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_snp_het_hom"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
+
     return k, v
 
 
 def pass_snps(mqc):
     """
-    The number of passing bi-allelic SNPs.
+    The number of PASS SNPs.
 
-    Source: bcftools stats (number_of_SNPs)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["number_of_SNPs"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snps"]
         v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_het_snps(mqc):
+    """
+    The number of PASS het SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_het_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_homalt_snps(mqc):
+    """
+    The number of PASS hom alt SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_homalt_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_snp_het_hom(mqc):
+    """
+    The het/hom ratio for PASS SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snp_het_hom"]
+        v = np.round(v, 2)
     except KeyError:
         v = "NA"
 
@@ -922,23 +1040,87 @@ def pass_snps(mqc):
 
 def all_indels(mqc):
     """
+    The total number of INDELs.
+
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
-    v = "NA"
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_het_indels(mqc):
+    """
+    The total number of het INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_het_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_homalt_indels(mqc):
+    """
+    The total number of homalt INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_homalt_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_indel_het_hom(mqc):
+    """
+    The het/hom ratio for all INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_indel_het_hom"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
+
     return k, v
 
 
 def pass_indels(mqc):
     """
-    The number of passing bi-allelic indels.
+    The number of PASS INDELs.
 
-    Source: bcftools stats (number_of_indels)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["number_of_indels"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_indels"]
         v = int(v)
     except KeyError:
         v = "NA"
@@ -946,17 +1128,17 @@ def pass_indels(mqc):
     return k, v
 
 
-def pass_sites_multiallelic(mqc):
+def pass_het_indels(mqc):
     """
-    The number of passing multi-allelic variants (all types).
+    The number of PASS het INDELs.
 
-    Source: bcftools stats (number_of_multiallelic_sites)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["number_of_multiallelic_sites"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_het_indels"]
         v = int(v)
     except KeyError:
         v = "NA"
@@ -964,17 +1146,126 @@ def pass_sites_multiallelic(mqc):
     return k, v
 
 
-def pass_snps_multiallelic(mqc):
+def pass_homalt_indels(mqc):
     """
-    The number of passing multi-allelic SNPs.
+    The number of PASS homalt INDELs.
 
-    Source: bcftools stats (number_of_multiallelic_SNP_sites)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["number_of_multiallelic_SNP_sites"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_homalt_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_indel_het_hom(mqc):
+    """
+    The het/hom ratio for PASS INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_indel_het_hom"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+
+def all_del(mqc):
+    """
+    The total number of deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_del"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_ins(mqc):
+    """
+    The total number of insertions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_ins"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_del(mqc):
+    """
+    The number of PASS deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_del"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_ins(mqc):
+    """
+    The number of PASS insertions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_ins"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_mnps(mqc):
+    """
+    The total number of MNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_mnps"]
         v = int(v)
     except KeyError:
         v = "NA"
@@ -984,15 +1275,69 @@ def pass_snps_multiallelic(mqc):
 
 def pass_mnps(mqc):
     """
-    The number of passing MNPs.
+    The number of PASS MNPs.
 
-    Source: bcftools stats (number_of_MNPs)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["number_of_MNPs"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_mnps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_complex_indels(mqc):
+    """
+    The total number of complex INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_complex_indels"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_complex_ins(mqc):
+    """
+    The total number of complex insertions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_complex_ins"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_complex_del(mqc):
+    """
+    The total number of complex deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_complex_del"]
         v = int(v)
     except KeyError:
         v = "NA"
@@ -1002,17 +1347,15 @@ def pass_mnps(mqc):
 
 def pass_complex_indels(mqc):
     """
-    The number of passing complex indels.
+    The number of PASS complex INDELs.
 
-    Source: picard VariantCallingMetrics (TOTAL_COMPLEX_INDELS)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
-    # typo in multiqc outputs
-    # reported: https://github.com/ewels/MultiQC/issues/1105
     try:
-        d = next(iter(mqc["multiqc_picard_varientCalling"].values()))
-        v = d["TOTAL_COMPLEX_INDELS"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_complex_indels"]
         v = int(v)
     except KeyError:
         v = "NA"
@@ -1020,17 +1363,107 @@ def pass_complex_indels(mqc):
     return k, v
 
 
-def snp_ts_tv(mqc):
+def pass_complex_ins(mqc):
     """
-    The transition to transversion ratio of passing bi-allelic SNPs.
+    The number of PASS complex insertions.
 
-    Source: bcftools stats (tstv)
+    Source: count_variants.py (bcftools view)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_bcftools_stats"].values()))
-        v = d["tstv"]
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_complex_ins"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_complex_del(mqc):
+    """
+    The number of PASS complex deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_complex_del"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_multiallelic_sites(mqc):
+    """
+    The total number of multiallelic sites.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_multiallelic_sites"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_multiallelic_sites(mqc):
+    """
+    The number of PASS multiallelic sites.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_multiallelic_sites"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def all_snp_ts_tv(mqc):
+    """
+    The transition to transversion ratio of all bi-allelic SNPs.
+
+    Source: count_variants.py (bcftools stats - tstv)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["all_snp_ts_tv"]
+        v = np.round(v, 2)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_snp_ts_tv(mqc):
+    """
+    The transition to transversion ratio of passing bi-allelic SNPs.
+
+    Source: count_variants.py (bcftools stats - tstv)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snp_ts_tv"]
         v = np.round(v, 2)
     except KeyError:
         v = "NA"
