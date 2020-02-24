@@ -67,12 +67,13 @@ def calculate_metrics(mqc):
         "all_mnps", "pass_mnps",
         "all_complex_indels", "all_complex_ins", "all_complex_del",
         "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
-        "all_multiallelic_sites", "all_multiallelic_sites",
+        "all_multiallelic_sites", "pass_multiallelic_sites",
         "all_snp_ts_tv", "pass_snp_ts_tv",
         # contamination and pst
         "pct_contamination", "pst_pct_concordance", "pst_pct_usage"
     ]
     result = dict()
+    logging.info("Calculating %d metrics..." % len(metrics_list))
     for m in metrics_list:
         k, v = eval("metrics." + m + "(mqc)")
         result[k] = v
