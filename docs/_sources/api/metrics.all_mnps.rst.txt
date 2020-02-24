@@ -1,0 +1,6 @@
+all_mnps
+========
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_mnps

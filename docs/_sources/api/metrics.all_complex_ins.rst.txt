@@ -1,0 +1,6 @@
+all_complex_ins
+===============
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_complex_ins

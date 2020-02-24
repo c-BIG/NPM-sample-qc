@@ -33,7 +33,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../static/theme_overrides.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -154,14 +154,116 @@
 <div class="section" id="module-metrics.metrics">
 <span id="metrics-metrics-module"></span><h2>metrics.metrics module<a class="headerlink" href="#module-metrics.metrics" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
+<dt id="metrics.metrics.all_complex_del">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_complex_del</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_complex_del" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of complex deletions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_complex_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_complex_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_complex_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of complex INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_complex_ins">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_complex_ins</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_complex_ins" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of complex insertions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_del">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_del</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_del" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of deletions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_het_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_het_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_het_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of het INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_het_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_het_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_het_snps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of het SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_homalt_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_homalt_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_homalt_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of homalt INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_homalt_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_homalt_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_homalt_snps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of hom alt SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_indel_het_hom">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_indel_het_hom</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_indel_het_hom" title="Permalink to this definition">¶</a></dt>
+<dd><p>The het/hom ratio for all INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="metrics.metrics.all_indels">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_indels" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The total number of INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_ins">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_ins</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_ins" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of insertions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_mnps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_mnps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_mnps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of MNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_multiallelic_sites">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_multiallelic_sites</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_multiallelic_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of multiallelic sites.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_snp_het_hom">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_snp_het_hom</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_snp_het_hom" title="Permalink to this definition">¶</a></dt>
+<dd><p>The het/hom ratio for all SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.all_snp_ts_tv">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_snp_ts_tv</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_snp_ts_tv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The transition to transversion ratio of all bi-allelic SNPs.</p>
+<p>Source: count_variants.py (bcftools stats - tstv)</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="metrics.metrics.all_snps">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">all_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.all_snps" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The total number of SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="metrics.metrics.at_dropout">
@@ -298,45 +400,115 @@ median absolute deviations around the median insert size.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="metrics.metrics.pass_complex_del">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_complex_del</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_complex_del" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS complex deletions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="metrics.metrics.pass_complex_indels">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_complex_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_complex_indels" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing complex indels.</p>
-<p>Source: picard VariantCallingMetrics (TOTAL_COMPLEX_INDELS)</p>
+<dd><p>The number of PASS complex INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_complex_ins">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_complex_ins</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_complex_ins" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS complex insertions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_del">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_del</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_del" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS deletions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_het_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_het_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_het_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS het INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_het_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_het_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_het_snps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS het SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_homalt_indels">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_homalt_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_homalt_indels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS homalt INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_homalt_snps">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_homalt_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_homalt_snps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS hom alt SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_indel_het_hom">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_indel_het_hom</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_indel_het_hom" title="Permalink to this definition">¶</a></dt>
+<dd><p>The het/hom ratio for PASS INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="metrics.metrics.pass_indels">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_indels</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_indels" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing bi-allelic indels.</p>
-<p>Source: bcftools stats (number_of_indels)</p>
+<dd><p>The number of PASS INDELs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_ins">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_ins</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_ins" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS insertions.</p>
+<p>Source: count_variants.py (bcftools view)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="metrics.metrics.pass_mnps">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_mnps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_mnps" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing MNPs.</p>
-<p>Source: bcftools stats (number_of_MNPs)</p>
+<dd><p>The number of PASS MNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.pass_sites_multiallelic">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_sites_multiallelic</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_sites_multiallelic" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing multi-allelic variants (all types).</p>
-<p>Source: bcftools stats (number_of_multiallelic_sites)</p>
+<dt id="metrics.metrics.pass_multiallelic_sites">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_multiallelic_sites</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_multiallelic_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of PASS multiallelic sites.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_snp_het_hom">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snp_het_hom</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snp_het_hom" title="Permalink to this definition">¶</a></dt>
+<dd><p>The het/hom ratio for PASS SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pass_snp_ts_tv">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snp_ts_tv</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snp_ts_tv" title="Permalink to this definition">¶</a></dt>
+<dd><p>The transition to transversion ratio of passing bi-allelic SNPs.</p>
+<p>Source: count_variants.py (bcftools stats - tstv)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="metrics.metrics.pass_snps">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snps</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snps" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing bi-allelic SNPs.</p>
-<p>Source: bcftools stats (number_of_SNPs)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.pass_snps_multiallelic">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pass_snps_multiallelic</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pass_snps_multiallelic" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of passing multi-allelic SNPs.</p>
-<p>Source: bcftools stats (number_of_multiallelic_SNP_sites)</p>
+<dd><p>The number of PASS SNPs.</p>
+<p>Source: count_variants.py (bcftools view)</p>
 </dd></dl>
 
 <dl class="function">
@@ -546,13 +718,6 @@ Includes SNPs and INDELs.</p>
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">sd_insert_size</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.sd_insert_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The standard deviation of insert sizes over the “core” of the distribution.</p>
 <p>Source: picard InsertSizeMetrics (STANDARD_DEVIATION)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.snp_ts_tv">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">snp_ts_tv</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.snp_ts_tv" title="Permalink to this definition">¶</a></dt>
-<dd><p>The transition to transversion ratio of passing bi-allelic SNPs.</p>
-<p>Source: bcftools stats (tstv)</p>
 </dd></dl>
 
 <dl class="function">

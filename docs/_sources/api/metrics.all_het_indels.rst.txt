@@ -1,0 +1,6 @@
+all_het_indels
+==============
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_het_indels

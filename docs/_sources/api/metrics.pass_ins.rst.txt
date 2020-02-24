@@ -1,0 +1,6 @@
+pass_ins
+========
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_ins

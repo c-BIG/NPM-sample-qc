@@ -1,0 +1,6 @@
+all_homalt_indels
+=================
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_homalt_indels

@@ -1,0 +1,6 @@
+all_del
+=======
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_del

@@ -1,0 +1,6 @@
+pass_multiallelic_sites
+=======================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_multiallelic_sites

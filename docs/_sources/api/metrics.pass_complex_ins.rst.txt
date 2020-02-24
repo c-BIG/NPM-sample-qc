@@ -1,0 +1,6 @@
+pass_complex_ins
+================
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_complex_ins

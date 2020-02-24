@@ -1,0 +1,6 @@
+pass_snp_ts_tv
+==============
+
+.. currentmodule:: metrics
+
+.. autofunction:: pass_snp_ts_tv

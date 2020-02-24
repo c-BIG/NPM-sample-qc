@@ -1,0 +1,6 @@
+all_ins
+=======
+
+.. currentmodule:: metrics
+
+.. autofunction:: all_ins
