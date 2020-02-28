@@ -32,9 +32,9 @@ Required inputs
 
 NPM-sample-qc input requirements can be split into two categories:
 
-- **Generic workflow settings** (``conf/nextflow.config``) specify parameters that will not vary from run to run, e.g. nextflow profile declarations, trace/timeline/dag generation, output structure, paths to data resources...
+- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See ``conf/nextflow.config`` for additional details.
 
-- **Sample-specific settings** (e.g. ``tests/sample_params.yml``) contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see :ref:`Metric definitions`).
+- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see the **Metric definitions** section). See ``tests/sample_params.yml`` for an example.
 
 NPM users will only be required to update ``sample_params.yml`` to match their sample of interest. In addition, any user can update the global settings by following standard `Nextflow configuration`_ guidelines.
 
@@ -68,33 +68,33 @@ Workflow logic
 We provide a schematic representation of the workflow in the figure below:
 
 .. image:: npm-sample-qc-overview.PNG
+   :scale: 50 %
 
-In a nutshell, the NPM-sample-qc workflow generates QC metrics from single-sample WGS results in three stages: (1) metrics calculation, (2) parsing of intermediate outputs and (3) generation of a final report. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
+In a nutshell, NPM-sample-qc generates QC metrics from single-sample WGS results in three stages: metrics calculation, parsing of intermediate outputs and generation of a final report. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
 
 **Metrics calculation**
 
-The current workflow combines well-established third-party tools (samtools, bcftools, picard, VerifyBamID2) and custom scripts (e.g. count_variants.py) to obtain a rich set of QC metrics. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag (``tests/example_dag.pdf``) for a more visual representation.
+The current workflow combines widely-used third-party tools (samtools, bcftools, picard, VerifyBamID2) and custom scripts (e.g. count_variants.py) to obtain a rich set of QC metrics. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/example_dag.pdf``).
 
 
 **Metrics parsing**
 
-Next, output files for each individual metrics tool are parsed and combined into a single json file. This is done by calling MultiQC_NPM_, a MultiQC_ plugin that extends the base tool to support additional metrics outputs (e.g. bcftools gtcheck, picard CollectQualityYieldMetrics, count_variants.py...).
+Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling MultiQC_NPM_, a MultiQC_ plugin that extends the base tool to support additional files (e.g. outputs from bcftools gtcheck, picard CollectQualityYieldMetrics and count_variants.py).
 
 .. _MultiQC_NPM: https://github.com/c-BIG/MultiQC_NPM/
 .. _MultiQC: https://github.com/ewels/MultiQC
 
 **Metrics reporting**
 
-Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the compile_metrics.py script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see :ref:`Metric definitions`).
+Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the compile_metrics.py script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the **Metric definitions** section).
 
-.. _Metric definitions:
 
 Metric definitions
 ==================
 
-The full list of metrics reported by the NPM-sample-qc workflow can be found here_. Each metric has been documented with its definition and details on how it has been calculated.
+The full list of metrics reported by the NPM-sample-qc workflow and details on how they've been calculated can be found here_.
 
-.. _here https://c-big.github.io/NPM-sample-qc/metrics.html
+.. _here: https://c-big.github.io/NPM-sample-qc/metrics.html
 
 When needed, page contents can be updated by running the following command: ::
 
