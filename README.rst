@@ -2,7 +2,7 @@
 NPM-sample-qc
 =============
 
-NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing initiatives.
+NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
 
 .. _Nextflow: https://www.nextflow.io/
 
@@ -99,4 +99,4 @@ The full list of metrics reported by the NPM-sample-qc workflow and details on h
 
 When needed, page contents can be updated by running the following command: ::
 
-  cd docsrc ; ./build.sh
+  cd docsrc; ./build.sh
