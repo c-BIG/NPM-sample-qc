@@ -11,7 +11,7 @@ projectdir=$(realpath "$(pwd)/..")
 outdir="$1"
 if [ -z "$outdir" ]; then
     echo "ERROR: Missing outdir argument, e.g.:" 1>&2
-    echo "  outdir='/data/13000026/pipeline/dev/NPM-sample-qc/tests/<my_run>'" 1>&2
+    echo "  outdir='/data/13000026/pipeline/dev/NPM-sample-qc-aux/tests/<my_run>'" 1>&2
     echo "  ./run.sh \$outdir"
     exit 1
 fi

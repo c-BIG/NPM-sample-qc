@@ -4,6 +4,9 @@ import numpy as np
 import inspect
 
 
+DECIMALS = 5
+
+
 def yield_raw_gb(mqc):
     """
     The total number of bases in all reads.
@@ -14,7 +17,7 @@ def yield_raw_gb(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-        v = np.round(np.divide(d["TOTAL_BASES"], 1e9), 2)
+        v = np.round(np.divide(d["TOTAL_BASES"], 1e9), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -31,7 +34,7 @@ def yield_pf_gb(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-        v = np.round(np.divide(d["PF_BASES"], 1e9), 2)
+        v = np.round(np.divide(d["PF_BASES"], 1e9), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -49,7 +52,7 @@ def pct_q30_bases(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
         v = np.round(np.divide(d["PF_Q30_BASES"],
-                               d["PF_BASES"])*100, 2)
+                               d["PF_BASES"])*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -66,7 +69,7 @@ def pct_q30_bases_read1(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
-        v = np.round(d["pct_q30_bases_read1"], 2)
+        v = np.round(d["pct_q30_bases_read1"], DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -81,7 +84,7 @@ def pct_q30_bases_read2(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_samtools_stats_bq"].values()))
-        v = np.round(d["pct_q30_bases_read2"], 2)
+        v = np.round(d["pct_q30_bases_read2"], DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -137,7 +140,7 @@ def pct_pf_reads(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PCT_PF_READS"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -156,7 +159,7 @@ def pct_aligned_bases(mqc):
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = np.divide(d["bases_mapped_(cigar)"],
                       d["total_length"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -176,7 +179,7 @@ def pct_reads_aligned(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PCT_PF_READS_ALIGNED"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -197,7 +200,7 @@ def pct_reads_aligned_mapqge20(mqc):
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = np.divide(d["PF_HQ_ALIGNED_READS"],
                       d["TOTAL_READS"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -216,7 +219,7 @@ def pct_reads_unaligned(mqc):
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = np.divide(d["reads_unmapped"],
                       d["sequences"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -235,7 +238,7 @@ def pct_reads_aligned_in_pairs(mqc):
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = np.divide(d["reads_mapped_and_paired"],
                       d["sequences"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -253,7 +256,7 @@ def pct_reads_properly_paired(mqc):
     try:
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = d["reads_properly_paired_percent"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -289,7 +292,7 @@ def pct_singleton_alignments(mqc):
     try:
         d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
         v = d["singletons_passed_pct"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -308,7 +311,7 @@ def pct_alignments_diff_chrom(mqc):
         d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
         v = np.divide(d["with mate mapped to a different chr_passed"],
                       d["total_passed"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -327,7 +330,7 @@ def pct_alignments_diff_chrom_mapqge5(mqc):
         d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
         v = np.divide(d["with mate mapped to a different chr (mapQ >= 5)_passed"],
                       d["total_passed"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -348,7 +351,7 @@ def pct_chimeras(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PCT_CHIMERAS"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -367,7 +370,7 @@ def pct_secondary_alignments(mqc):
         d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
         v = np.divide(d["secondary_passed"],
                       d["total_passed"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -386,7 +389,7 @@ def pct_supplementary_alignments(mqc):
         d = next(iter(mqc["multiqc_samtools_flagstat"].values()))
         v = np.divide(d["supplementary_passed"],
                       d["total_passed"])
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -404,7 +407,7 @@ def pct_duplicate_reads(mqc):
     try:
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = d["reads_duplicated_percent"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -422,7 +425,7 @@ def mismatch_rate(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PF_MISMATCH_RATE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -440,7 +443,7 @@ def mismatch_rate_mapqge20(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PF_HQ_ERROR_RATE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -485,7 +488,7 @@ def mean_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["MEAN_COVERAGE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -503,7 +506,7 @@ def sd_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["SD_COVERAGE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -521,7 +524,7 @@ def median_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["MEDIAN_COVERAGE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -539,7 +542,7 @@ def mad_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["MAD_COVERAGE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -559,7 +562,7 @@ def pct_1x(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_1X"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -575,7 +578,7 @@ def pct_10x(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_10X"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -591,7 +594,7 @@ def pct_15x(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_15X"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -607,7 +610,7 @@ def pct_30x(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_30X"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -623,7 +626,7 @@ def pct_40x(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_40X"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -647,7 +650,7 @@ def coverage_sg10k_062017(mqc):
         d = next(iter(mqc["multiqc_npm_sg10k_cov_062017"].values()))
         covered_bases = d["bases_sg10k_062017"]
         total_bases = float(3.1e9)
-        v = np.round(np.divide(covered_bases, total_bases), 2)
+        v = np.round(np.divide(covered_bases, total_bases), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -669,7 +672,7 @@ def mean_insert_size(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEAN_INSERT_SIZE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -687,7 +690,7 @@ def sd_insert_size(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["STANDARD_DEVIATION"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -705,7 +708,7 @@ def median_insert_size(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEDIAN_INSERT_SIZE"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -723,7 +726,7 @@ def mad_insert_size(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEDIAN_ABSOLUTE_DEVIATION"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -743,7 +746,7 @@ def pct_overlapping_bases(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
         v = d["PCT_EXC_OVERLAP"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -767,7 +770,7 @@ def pct_adapters(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_AlignmentSummaryMetrics"].values()))
         v = d["PCT_ADAPTER"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -786,7 +789,7 @@ def at_dropout(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["AT_DROPOUT"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -805,7 +808,7 @@ def gc_dropout(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_DROPOUT"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -823,7 +826,7 @@ def gc_nc_0_19(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_NC_0_19"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -839,7 +842,7 @@ def gc_nc_20_39(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_NC_20_39"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -855,7 +858,7 @@ def gc_nc_40_59(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_NC_40_59"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -871,7 +874,7 @@ def gc_nc_60_79(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_NC_60_79"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -887,7 +890,7 @@ def gc_nc_80_100(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_gcbias"].values()))
         v = d["GC_NC_80_100"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -959,7 +962,7 @@ def all_snp_het_hom(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["all_snp_het_hom"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1031,7 +1034,7 @@ def pass_snp_het_hom(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["pass_snp_het_hom"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1103,7 +1106,7 @@ def all_indel_het_hom(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["all_indel_het_hom"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1175,7 +1178,7 @@ def pass_indel_het_hom(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["pass_indel_het_hom"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1446,7 +1449,7 @@ def all_snp_ts_tv(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["all_snp_ts_tv"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1464,7 +1467,7 @@ def pass_snp_ts_tv(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_count_variants"].values()))
         v = d["pass_snp_ts_tv"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1482,7 +1485,7 @@ def pct_contamination(mqc):
     try:
         d = next(iter(mqc["multiqc_verifybamid"].values()))
         v = d["FREEMIX"]
-        v = np.round(v*100, 2)
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -1501,22 +1504,8 @@ def pst_pct_concordance(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
         v = d["pst_pct_concordance"]
-        v = np.round(v, 2)
+        v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
-
-    return k, v
-
-
-def pst_pct_usage(mqc):
-    """
-    TODO
-    """
-    k = inspect.currentframe().f_code.co_name
-
-    # d1 = next(iter(mqc["multiqc_npm_bcftools_gtcheck"].values()))
-    # sites_compared = d["pst_sites_compared"]
-    # v = np.round(v, 2)
-    v = "NA"
 
     return k, v
