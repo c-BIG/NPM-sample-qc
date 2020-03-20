@@ -248,7 +248,8 @@ process picard_collect_quality_yield_metrics {
     """
     picard CollectQualityYieldMetrics \
         I=${params.sample_id}.bam \
-        O=${params.sample_id}.quality_yield_metrics.txt
+        O=${params.sample_id}.quality_yield_metrics.txt \
+        OQ=false
     """
 
 }
