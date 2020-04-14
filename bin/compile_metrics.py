@@ -77,7 +77,13 @@ def calculate_metrics(mqc):
     for m in metrics_list:
         k, v = eval("metrics." + m + "(mqc)")
         result[k] = v
-    result["metrics_version"] = metrics.__version__
+
+    # append version info
+    version = "NA"
+    with open("../version_info") as f:
+        version = f.read().strip()
+    result["metrics_version"] = version
+
     return result
 
 
