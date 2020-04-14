@@ -11,7 +11,7 @@ fi
 # NSCC
 if [ ${HOSTNAME} = "gis01" ]
 then
-    BASEDIR="/data/13000026/pipeline/dev/NPM-sample-qc/containers"
+    BASEDIR="/data/13000026/pipeline/dev/NPM-sample-qc-aux/containers"
     aws s3 cp s3://npm-sample-qc/npm-sample-qc.simg ${BASEDIR}
     singularity exec ${BASEDIR}/npm-sample-qc.simg echo "Deployment complete"
 fi
