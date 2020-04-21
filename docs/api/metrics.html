@@ -327,15 +327,15 @@ and calculating (%ref_at_gc - %reads_at_gc) and summing all positive values for 
 <dl class="function">
 <dt id="metrics.metrics.genome_territory">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">genome_territory</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.genome_territory" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of non-N bases in the genome reference over which coverage will be evaluated.</p>
-<p>Source: picard WgsMetrics (GENOME_TERRITORY)</p>
+<dd><p>The number of non-N bases in autosomes over which coverage will be evaluated.</p>
+<p>Source: run_mosdepth.sh (total_autosome_bases)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.mad_coverage">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mad_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_coverage" title="Permalink to this definition">¶</a></dt>
-<dd><p>The median absolute deviation of coverage of the genome after picard filters are applied.</p>
-<p>Source: picard WgsMetrics (MAD_COVERAGE)</p>
+<dt id="metrics.metrics.mad_autosome_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mad_autosome_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_autosome_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (mad_autosome_coverage)</p>
 </dd></dl>
 
 <dl class="function">
@@ -346,19 +346,15 @@ and calculating (%ref_at_gc - %reads_at_gc) and summing all positive values for 
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.mean_coverage">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mean_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_coverage" title="Permalink to this definition">¶</a></dt>
-<dd><p>The mean coverage in bases of the genome territory, after picard filters are applied.</p>
-<p>Note: picard filters out</p>
+<dt id="metrics.metrics.mean_autosome_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">mean_autosome_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_autosome_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mean coverage in autosomes (as defined in genome_territory). Excludes:</p>
 <ul class="simple">
-<li><p>bases in reads with low mapping quality (default is &lt; 20; PCT_EXC_MAPQ)</p></li>
-<li><p>bases  in reads marked as duplicates (PCT_EXC_DUPE)</p></li>
-<li><p>bases in reads without a mapped mate pair (PCT_EXC_UNPAIRED)</p></li>
-<li><p>bases with low base quality (default is &lt; 20; PCT_EXC_BASEQ)</p></li>
-<li><p>bases that correspond to the second observation from an insert with overlapping reads (PCT_EXC_OVERLAP)</p></li>
-<li><p>bases that would have raised coverage above the capped value (default cap = 250x; PCT_EXC_CAPPED)</p></li>
+<li><p>bases in reads with low mapping quality (mapq &lt; 20)</p></li>
+<li><p>bases in reads marked as duplicates</p></li>
+<li><p>overlapping bases in read pairs</p></li>
 </ul>
-<p>Source: picard WgsMetrics (MEAN_COVERAGE)</p>
+<p>Source: run_mosdepth.sh (mean_autosome_coverage)</p>
 </dd></dl>
 
 <dl class="function">
@@ -372,10 +368,10 @@ median absolute deviations around the median insert size.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.median_coverage">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">median_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.median_coverage" title="Permalink to this definition">¶</a></dt>
-<dd><p>The median coverage in bases of the genome territory, after picard filters are applied.</p>
-<p>Source: picard WgsMetrics (MEDIAN_COVERAGE)</p>
+<dt id="metrics.metrics.median_autosome_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">median_autosome_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.median_autosome_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The median coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (median_autosome_coverage)</p>
 </dd></dl>
 
 <dl class="function">
@@ -512,38 +508,6 @@ median absolute deviations around the median insert size.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.pct_10x">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_10x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_10x" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analogous to pct_1x.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.pct_15x">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_15x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_15x" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analogous to pct_1x.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.pct_1x">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_1x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_1x" title="Permalink to this definition">¶</a></dt>
-<dd><p>The percentage of bases that attained at least 1X sequence coverage in post-filtering bases.</p>
-<p>Source: picard WgsMetrics (PCT_1X)</p>
-<p>Note: picard reports a fraction, re-mapped to a percentage here.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.pct_30x">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_30x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_30x" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analogous to pct_1x.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.pct_40x">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_40x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_40x" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analogous to pct_1x.</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="metrics.metrics.pct_adapters">
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_adapters</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_adapters" title="Permalink to this definition">¶</a></dt>
 <dd><p>The percentage of PF reads that are unaligned and match to a known adapter sequence right
@@ -573,6 +537,37 @@ considered: <a class="reference external" href="https://github.com/broadinstitut
 <code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_alignments_diff_chrom_mapqge5</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_alignments_diff_chrom_mapqge5" title="Permalink to this definition">¶</a></dt>
 <dd><p>The percentage of alignments with MAPQ&gt;=5 and with mates aligned to different chromosomes.</p>
 <p>Source: samtools flagstat (with mate mapped to a different chr (mapQ &gt;= 5)_passed / total_passed)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_autosomes_10x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_autosomes_10x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_10x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_autosomes_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_autosomes_15x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_autosomes_15x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_15x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_autosomes_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_autosomes_1x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_autosomes_1x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_1x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The percentage of bases that attained at least 1X sequence coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (ge_1x_autosome_bases/total_autosome_bases*100)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_autosomes_30x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_autosomes_30x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_30x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_autosomes_1x.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="metrics.metrics.pct_autosomes_40x">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pct_autosomes_40x</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_40x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analogous to pct_autosomes_1x.</p>
 </dd></dl>
 
 <dl class="function">
@@ -701,16 +696,10 @@ Includes SNPs and INDELs.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="metrics.metrics.pst_pct_usage">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">pst_pct_usage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pst_pct_usage" title="Permalink to this definition">¶</a></dt>
-<dd><p>TODO</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="metrics.metrics.sd_coverage">
-<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">sd_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.sd_coverage" title="Permalink to this definition">¶</a></dt>
-<dd><p>The standard deviation of coverage of the genome after picard filters are applied.</p>
-<p>Source: picard WgsMetrics (SD_COVERAGE)</p>
+<dt id="metrics.metrics.sd_autosome_coverage">
+<code class="sig-prename descclassname">metrics.metrics.</code><code class="sig-name descname">sd_autosome_coverage</code><span class="sig-paren">(</span><em class="sig-param">mqc</em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.sd_autosome_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (sd_autosome_coverage)</p>
 </dd></dl>
 
 <dl class="function">

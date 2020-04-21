@@ -20,7 +20,7 @@ workdir="${outdir}/work"
 # define profile
 profile="$2"
 if [ -z "$profile" ]; then
-    profile="standard"
+    profile="nscc"
 fi
 echo "Running with profile \"${profile}\"."
 echo "This option can be changed when calling the script:"

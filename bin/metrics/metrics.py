@@ -452,116 +452,110 @@ def mismatch_rate_mapqge20(mqc):
 
 def genome_territory(mqc):
     """
-    The number of non-N bases in the genome reference over which coverage will be evaluated.
+    The number of non-N bases in autosomes over which coverage will be evaluated.
 
-    Source: picard WgsMetrics (GENOME_TERRITORY)
+    Source: run_mosdepth.sh (total_autosome_bases)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["GENOME_TERRITORY"]
-        v = int(v)
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = d["total_autosome_bases"]
+        v = int(np.float(v))
     except KeyError:
         v = "NA"
 
     return k, v
 
 
-def mean_coverage(mqc):
+def mean_autosome_coverage(mqc):
     """
-    The mean coverage in bases of the genome territory, after picard filters are applied.
+    The mean coverage in autosomes (as defined in genome_territory). Excludes:
 
-    Note: picard filters out
+    - bases in reads with low mapping quality (mapq < 20)
+    - bases in reads marked as duplicates
+    - overlapping bases in read pairs
 
-    - bases in reads with low mapping quality (default is < 20; PCT_EXC_MAPQ)
-    - bases  in reads marked as duplicates (PCT_EXC_DUPE)
-    - bases in reads without a mapped mate pair (PCT_EXC_UNPAIRED)
-    - bases with low base quality (default is < 20; PCT_EXC_BASEQ)
-    - bases that correspond to the second observation from an insert with overlapping reads (PCT_EXC_OVERLAP)
-    - bases that would have raised coverage above the capped value (default cap = 250x; PCT_EXC_CAPPED)
-
-    Source: picard WgsMetrics (MEAN_COVERAGE)
+    Source: run_mosdepth.sh (mean_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["MEAN_COVERAGE"]
-        v = np.round(v, DECIMALS)
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = d["mean_autosome_coverage"]
+        v = np.round(np.float(v), DECIMALS)
     except KeyError:
         v = "NA"
 
     return k, v
 
 
-def sd_coverage(mqc):
+def sd_autosome_coverage(mqc):
     """
-    The standard deviation of coverage of the genome after picard filters are applied.
+    The standard deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
 
-    Source: picard WgsMetrics (SD_COVERAGE)
+    Source: run_mosdepth.sh (sd_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["SD_COVERAGE"]
-        v = np.round(v, DECIMALS)
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = d["sd_autosome_coverage"]
+        v = np.round(np.float(v), DECIMALS)
     except KeyError:
         v = "NA"
 
     return k, v
 
 
-def median_coverage(mqc):
+def median_autosome_coverage(mqc):
     """
-    The median coverage in bases of the genome territory, after picard filters are applied.
+    The median coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
 
-    Source: picard WgsMetrics (MEDIAN_COVERAGE)
+    Source: run_mosdepth.sh (median_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["MEDIAN_COVERAGE"]
-        v = np.round(v, DECIMALS)
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = d["median_autosome_coverage"]
+        v = np.round(np.float(v), DECIMALS)
     except KeyError:
         v = "NA"
 
     return k, v
 
 
-def mad_coverage(mqc):
+def mad_autosome_coverage(mqc):
     """
-    The median absolute deviation of coverage of the genome after picard filters are applied.
+    The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
 
-    Source: picard WgsMetrics (MAD_COVERAGE)
+    Source: run_mosdepth.sh (mad_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["MAD_COVERAGE"]
-        v = np.round(v, DECIMALS)
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = d["mad_autosome_coverage"]
+        v = np.round(np.float(v), DECIMALS)
     except KeyError:
         v = "NA"
 
     return k, v
 
 
-def pct_1x(mqc):
+def pct_autosomes_1x(mqc):
     """
-    The percentage of bases that attained at least 1X sequence coverage in post-filtering bases.
+    The percentage of bases that attained at least 1X sequence coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
 
-    Source: picard WgsMetrics (PCT_1X)
-
-    Note: picard reports a fraction, re-mapped to a percentage here.
+    Source: run_mosdepth.sh (ge_1x_autosome_bases/total_autosome_bases*100)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["PCT_1X"]
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float(d["ge_1x_autosome_bases"]),
+                      np.float(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -569,15 +563,16 @@ def pct_1x(mqc):
     return k, v
 
 
-def pct_10x(mqc):
+def pct_autosomes_10x(mqc):
     """
-    Analogous to pct_1x.
+    Analogous to pct_autosomes_1x.
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["PCT_10X"]
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float(d["ge_10x_autosome_bases"]),
+                      np.float(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -585,15 +580,16 @@ def pct_10x(mqc):
     return k, v
 
 
-def pct_15x(mqc):
+def pct_autosomes_15x(mqc):
     """
-    Analogous to pct_1x.
+    Analogous to pct_autosomes_1x.
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["PCT_15X"]
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float(d["ge_15x_autosome_bases"]),
+                      np.float(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -601,15 +597,16 @@ def pct_15x(mqc):
     return k, v
 
 
-def pct_30x(mqc):
+def pct_autosomes_30x(mqc):
     """
-    Analogous to pct_1x.
+    Analogous to pct_autosomes_1x.
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["PCT_30X"]
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float(d["ge_30x_autosome_bases"]),
+                      np.float(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -617,15 +614,16 @@ def pct_30x(mqc):
     return k, v
 
 
-def pct_40x(mqc):
+def pct_autosomes_40x(mqc):
     """
-    Analogous to pct_1x.
+    Analogous to pct_autosomes_1x.
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_wgsmetrics"].values()))
-        v = d["PCT_40X"]
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float(d["ge_40x_autosome_bases"]),
+                      np.float(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"

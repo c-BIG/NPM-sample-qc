@@ -21,7 +21,7 @@ def helpMessage() {
     Usage: nextflow run main.nf -config nextflow.config -params-file sample_params.yaml 
                                 -profile nscc -work-dir ./ --outdir ./
                                 [-resume] [--keep_workdir] [--help]
-    
+
     Options:
     -config           Generic workflow settings
     -params-file      Sample-specific settings
@@ -104,12 +104,22 @@ Channel
           ; ref_fa_ch_picard_collect_alignment_summary_metrics
           ; ref_fa_ch_picard_collect_wgs_metrics
           ; ref_fa_ch_picard_collect_gc_bias_metrics
-          ; ref_fa_ch_verifybamid2 }
+          ; ref_fa_ch_verifybamid2 
+          ; ref_fa_ch_mosdepth }
 
 Channel
     .fromPath(params.dbsnp_vcf)
     .into { dbsnp_vcf_ch_picard_collect_variant_calling_metrics_vcf
           ; dbsnp_vcf_ch_picard_collect_variant_calling_metrics_gvcf }
+
+Channel
+    .fromPath(params.autosomes_bed)
+    .set { autosomes_bed_ch_mosdepth }
+
+Channel
+    .fromPath(params.n_regions_bed)
+    .set { n_regions_bed_ch_mosdepth }
+
 /*
 ----------------------------------------------------------------------
 PROCESSES
@@ -130,7 +140,8 @@ process cram_to_bam {
                 , cram_to_bam_ch_sg10k_cov_062017 \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
                 , cram_to_bam_ch_picard_collect_gc_bias_metrics \
-                , cram_to_bam_ch_verifybamid2
+                , cram_to_bam_ch_verifybamid2 \
+                , cram_to_bam_ch_mosdepth
 
     script:
     """
@@ -234,6 +245,30 @@ process bcftools_gtcheck {
     """
 }
 
+process mosdepth {
+
+    publishDir "${params.publishdir}/mosdepth", mode: "copy"
+
+    input:
+    file "*" from cram_to_bam_ch_mosdepth
+    file autosomes_bed from autosomes_bed_ch_mosdepth
+    file n_regions_bed from n_regions_bed_ch_mosdepth
+
+    output:
+    file "*" into mosdepth_ch
+
+    script:
+    """
+    run_mosdepth.sh \
+        --input_bam=${params.sample_id}.bam \
+        --autosomes_bed=${autosomes_bed} \
+        --n_regions_bed=${n_regions_bed} \
+        --output_csv=${params.sample_id}.mosdepth.csv \
+        --work_dir=.
+    """
+
+}
+
 process picard_collect_quality_yield_metrics {
 
     publishDir "${params.publishdir}/picard", mode: "copy"
@@ -248,7 +283,8 @@ process picard_collect_quality_yield_metrics {
     """
     picard CollectQualityYieldMetrics \
         I=${params.sample_id}.bam \
-        O=${params.sample_id}.quality_yield_metrics.txt
+        O=${params.sample_id}.quality_yield_metrics.txt \
+        OQ=false
     """
 
 }
@@ -460,6 +496,7 @@ process multiqc {
     file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
     file "verifybamid2/*" from verifybamid2_ch
     file "sg10k_cov_062017/*" from sg10k_cov_062017_ch
+    file "mosdepth/*" from mosdepth_ch
 
     output:
     file "multiqc_data/*" into multiqc_ch
@@ -484,7 +521,10 @@ process compile_metrics {
 
     script:
     """
-    compile_metrics.py --multiqc_json multiqc_data.json --output_json ${params.sample_id}.metrics.json
+    compile_metrics.py \
+        --multiqc_json multiqc_data.json \
+        --output_json ${params.sample_id}.metrics.json \
+        --version_info ${workflow.projectDir}/version_info
     """
 
 }

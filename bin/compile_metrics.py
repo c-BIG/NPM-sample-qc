@@ -14,6 +14,9 @@ def parse_args():
     parser.add_argument("--output_json", dest="output_json", required=False,
                         default="./metrics.json",
                         help="Path to output json. Default: ./metrics.json")
+    parser.add_argument("--version_info", dest="version_info", required=False,
+                        default=None,
+                        help="Path to version_info file. Default: None")
     parser.add_argument("--loglevel", dest="loglevel", required=False,
                         default="INFO",
                         help="Set logging level to INFO (default), WARNING or DEBUG.")
@@ -50,8 +53,8 @@ def calculate_metrics(mqc):
         "pct_alignments_diff_chrom_mapqge5", "pct_chimeras", "pct_secondary_alignments",
         "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
         # coverage
-        "genome_territory", "mean_coverage", "sd_coverage", "median_coverage", "mad_coverage",
-        "pct_1x", "pct_10x", "pct_15x", "pct_30x", "pct_40x", "coverage_sg10k_062017",
+        "genome_territory", "mean_autosome_coverage", "sd_autosome_coverage", "median_autosome_coverage", "mad_autosome_coverage",
+        "pct_autosomes_1x", "pct_autosomes_10x", "pct_autosomes_15x", "pct_autosomes_30x", "pct_autosomes_40x", "coverage_sg10k_062017",
         # insert size
         "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
         "pct_adapters", "pct_overlapping_bases",
@@ -77,8 +80,17 @@ def calculate_metrics(mqc):
     for m in metrics_list:
         k, v = eval("metrics." + m + "(mqc)")
         result[k] = v
-    result["metrics_version"] = metrics.__version__
+
     return result
+
+
+def add_version_info(parsed_metrics, version_info):
+    version = "NA"
+    if version_info is not None:
+        with open(version_info) as f:
+            version = f.read().strip()
+    parsed_metrics["metrics_version"] = version
+    return parsed_metrics
 
 
 def save_output(d, outfile):
@@ -96,7 +108,8 @@ if __name__ == "__main__":
     set_logging(args.loglevel)
 
     mqc = load_multi_qc(args.multiqc_json)
-    final_metrics = calculate_metrics(mqc)
+    parsed_metrics = calculate_metrics(mqc)
+    final_metrics = add_version_info(parsed_metrics, args.version_info)
     save_output(final_metrics, args.output_json)
 
     done()
