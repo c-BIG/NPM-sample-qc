@@ -1,0 +1,6 @@
+mean_autosome_coverage
+======================
+
+.. currentmodule:: metrics
+
+.. autofunction:: mean_autosome_coverage

@@ -1,0 +1,6 @@
+mad_autosome_coverage
+=====================
+
+.. currentmodule:: metrics
+
+.. autofunction:: mad_autosome_coverage
