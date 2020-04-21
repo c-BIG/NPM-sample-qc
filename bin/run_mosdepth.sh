@@ -58,7 +58,7 @@ echo "WORK_DIR      = $WORK_DIR"
 echo "SAMPLE_ID     = $SAMPLE_ID"
 
 #### run mosdepth
-mosdepth --no-per-base --by 1000 --use-median --mapq 20 --threads 4 $WORK_DIR/$SAMPLE_ID $INPUT_BAM
+mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 $WORK_DIR/$SAMPLE_ID $INPUT_BAM
 
 #### filter outputs
 # focus on autosomes
