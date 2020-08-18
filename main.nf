@@ -104,7 +104,7 @@ Channel
           ; ref_fa_ch_picard_collect_alignment_summary_metrics
           ; ref_fa_ch_picard_collect_wgs_metrics
           ; ref_fa_ch_picard_collect_gc_bias_metrics
-          ; ref_fa_ch_verifybamid2 
+          ; ref_fa_ch_verifybamid2
           ; ref_fa_ch_mosdepth }
 
 Channel
@@ -323,7 +323,11 @@ process picard_collect_wgs_metrics {
 
     script:
     """
-    picard CollectWgsMetrics \
+    java -Dsamjdk.compression_level=2 -Xmx${task.memory.toGiga()}G -Xms4000m \
+        -XX:ConcGCThreads=${task.cpus} -XX:+UseConcMarkSweepGC \
+        -XX:ParallelGCThreads=${task.cpus} \
+        -jar /usr/local/conda/envs/npm-sample-qc/share/picard-2.21.7-0/picard.jar \
+        CollectWgsMetrics \
         R=${ref_fa} \
         I=${params.sample_id}.bam \
         O=${params.sample_id}.wgs_metrics.txt
