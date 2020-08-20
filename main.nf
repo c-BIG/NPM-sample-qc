@@ -88,6 +88,10 @@ Channel
           ; vcf_ch_picard_collect_variant_calling_metrics_gvcf
           }
 
+Channel
+    .fromPath(params.vcf_tbi)
+    .set { vcf_tbi_ch_picard_collect_variant_calling_metrics_vcf }
+
 if (params.pst_vcf) {
     Channel
         .fromPath(params.pst_vcf)
@@ -402,6 +406,7 @@ process picard_collect_variant_calling_metrics_vcf {
 
     input:
     file vcf from vcf_ch_picard_collect_variant_calling_metrics_vcf
+    file vcf_tbi from vcf_tbi_ch_picard_collect_variant_calling_metrics_vcf
     file dbsnp_vcf from dbsnp_vcf_ch_picard_collect_variant_calling_metrics_vcf
 
     output:
@@ -412,7 +417,6 @@ process picard_collect_variant_calling_metrics_vcf {
 
     script:
     """
-    bcftools index --tbi ${vcf}
     picard CollectVariantCallingMetrics \
         I=${vcf} \
         O=${params.sample_id} \
