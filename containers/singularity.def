@@ -24,7 +24,8 @@ From: ubuntu:22.04
       python3 python-pip python-dev-is-python3 \
       git \
       wget \
-      gnuplot
+      gnuplot \
+      datamash
 
     # install conda
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
