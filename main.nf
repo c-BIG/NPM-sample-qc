@@ -154,7 +154,6 @@ process cram_to_bam {
                 , cram_to_bam_ch_picard_collect_quality_yield_metrics \
                 , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
                 , cram_to_bam_ch_picard_collect_wgs_metrics \
-                , cram_to_bam_ch_sg10k_cov_062017 \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
                 , cram_to_bam_ch_picard_collect_gc_bias_metrics \
                 , cram_to_bam_ch_picard_collect_multiple_metrics \
@@ -357,24 +356,6 @@ process picard_collect_wgs_metrics {
     """
 
 }
-/*
-process sg10k_cov_062017 {
-
-    publishDir "${params.publishdir}/sg10k_cov_062017", mode: "copy"
-
-    input:
-    file "*" from cram_to_bam_ch_sg10k_cov_062017
-
-    output:
-    file "*" into sg10k_cov_062017_ch
-
-    script:
-    """
-    sg10k-cov-062017.sh ${params.sample_id}.qc.${ftype} > ${params.sample_id}.sg10k_cov_062017.txt
-    """
-
-}
-*/
 
 process picard_collect_insert_size_metrics {
 
@@ -560,7 +541,6 @@ process multiqc {
     file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
 //    file "picardmultiple/*" from picard_collect_multiple_metrics_ch
     file "verifybamid2/*" from verifybamid2_ch
-//    file "sg10k_cov_062017/*" from sg10k_cov_062017_ch
     file "mosdepth/*" from mosdepth_ch
 
     output:
