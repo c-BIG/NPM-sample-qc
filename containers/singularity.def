@@ -41,12 +41,5 @@ From: ubuntu:22.04
     cd MultiQC_NPM
     python3 setup.py install
 
-    # add sg10k-cov binary
-    # apt-get install -y zlib1g-dev libbz2-dev datamash
-    # git clone https://github.com/c-BIG/sg10k-cov.git
-    # cd sg10k-cov/ && git checkout 6b74ab8
-    # bash make.sh
-    # cp sg10k-cov-062017.sh samtools-M /usr/local/bin/
-
     # create mountpoints for NSCC
     mkdir /data /seq /secure /scratch
