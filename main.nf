@@ -500,7 +500,6 @@ process verifybamid2 {
 
     script:
     """
-    //VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
     VerifyBamID --UDPath ${params.vbi2_ud} --BedPath ${params.vbi2_bed} --MeanPath ${params.vbi2_mean} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
     """
 
