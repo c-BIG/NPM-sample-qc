@@ -283,8 +283,8 @@ process mosdepth {
     script:
     """
     run_mosdepth.sh \
-        --ref_fasta=${ref_fa} \
         --input_bam=${params.sample_id}.qc.${ftype} \
+        --ref_fasta=${ref_fa} \
         --autosomes_bed=${autosomes_bed} \
         --n_regions_bed=${n_regions_bed} \
         --output_csv=${params.sample_id}.mosdepth.csv \
@@ -307,8 +307,8 @@ process picard_collect_quality_yield_metrics {
     script:
     """
     picard CollectQualityYieldMetrics \
-        R=${ref_fa} \
         I=${params.sample_id}.qc.${ftype} \
+        R=${ref_fa} \
         O=${params.sample_id}.quality_yield_metrics.txt \
         OQ=false
     """
@@ -329,8 +329,8 @@ process picard_collect_alignment_summary_metrics {
     script:
     """
     picard CollectAlignmentSummaryMetrics \
-        R=${ref_fa} \
         I=${params.sample_id}.qc.${ftype} \
+        R=${ref_fa} \
         O=${params.sample_id}.alignment_summary_metrics.txt
     """
 
@@ -500,7 +500,8 @@ process verifybamid2 {
 
     script:
     """
-    VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
+    //VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
+    VerifyBamID --UDPath ${params.vbi2_ud} --BedPath ${params.vbi2_bed} --MeanPath ${params.vbi2_mean} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
     """
 
 }
