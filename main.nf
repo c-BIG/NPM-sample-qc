@@ -135,6 +135,17 @@ Channel
     .fromPath(params.n_regions_bed)
     .set { n_regions_bed_ch_mosdepth }
 
+Channel
+    .fromPath(params.vbi2_ud)
+    .set { ud_path_ch_verifybamid2 }
+
+Channel
+    .fromPath(params.vbi2_bed)
+    .set { bed_path_ch_verifybamid2 }
+
+Channel
+    .fromPath(params.vbi2_mean)
+    .set { mean_path_ch_verifybamid2 }
 
 /*
 ----------------------------------------------------------------------
@@ -493,6 +504,9 @@ process verifybamid2 {
 
     input:
     file ref_fa from ref_fa_ch_verifybamid2
+    file vbi2_ud from ud_path_ch_verifybamid2
+    file vbi2_bed from bed_path_ch_verifybamid2
+    file vbi2_mean from mean_path_ch_verifybamid2
     file "*" from cram_to_bam_ch_verifybamid2
 
     output:
@@ -500,7 +514,7 @@ process verifybamid2 {
 
     script:
     """
-    VerifyBamID --UDPath ${params.vbi2_ud} --BedPath ${params.vbi2_bed} --MeanPath ${params.vbi2_mean} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
+    VerifyBamID --UDPath ${vbi2_ud} --BedPath ${vbi2_bed} --MeanPath ${vbi2_mean} --Reference ${ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
     """
 
 }
