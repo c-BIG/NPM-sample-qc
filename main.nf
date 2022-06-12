@@ -147,6 +147,10 @@ Channel
     .fromPath(params.vbi2_mean)
     .set { mean_path_ch_verifybamid2 }
 
+Channel
+    .fromPath(params.version_info)
+    .set { version_info_ch }
+
 /*
 ----------------------------------------------------------------------
 PROCESSES
@@ -574,6 +578,7 @@ process compile_metrics {
 
     input:
     file "*" from multiqc_ch
+    file version_info from version_info_ch
 
     output:
     file "*" into compile_metrics_ch
@@ -583,7 +588,7 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --version_info ${params.version_info}/version_info
+        --version_info ${version_info}
     """
 
 }
