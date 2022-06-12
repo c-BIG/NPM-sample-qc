@@ -1,0 +1,4 @@
+sample_id: NA12878-PCRF450-1_Proband_S1
+cram: s3://npm-grids/gnanakkan/npm-sample-qc/data/NA12878-PCRF450-1_Proband_S1.cram 
+vcf: s3://npm-grids/gnanakkan/npm-sample-qc/data/NA12878-PCRF450-1_Proband_S1.hard-filtered.gvcf.gz
+//pst_vcf: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_HiSeq_2000/NA12877/dragen_gl_3.2.8_15X/NA12877.variant-sites.vcf.gz
