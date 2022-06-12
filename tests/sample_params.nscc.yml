@@ -1,0 +1,4 @@
+sample_id: NA12878
+cram: s3://npm-ica-staging-sse/ica-byob/npm-ica-staging-sse/1000G-DRAGEN-3.7.6-NA12878/4e43930e-f246-4ddb-af1e-1bb6cbeb0e4d/output/try-1/NA12878.cram
+vcf: s3://npm-ica-staging-sse/ica-byob/npm-ica-staging-sse/1000G-DRAGEN-3.7.6-NA12878/4e43930e-f246-4ddb-af1e-1bb6cbeb0e4d/output/try-1/NA12878.hard-filtered.gvcf.gz
+//pst_vcf: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_HiSeq_2000/NA12877/dragen_gl_3.2.8_15X/NA12877.variant-sites.vcf.gz
