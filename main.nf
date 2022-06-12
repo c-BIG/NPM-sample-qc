@@ -583,7 +583,7 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --version_info ${workflow.projectDir}/version_info
+        --version_info ${params.version_info}/version_info
     """
 
 }
