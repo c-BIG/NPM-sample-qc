@@ -14,7 +14,7 @@ ADD conda_env.yml /conda_env.yml
 
 RUN export DEBIAN_FRONTEND="noninteractive" && \
     apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       build-essential \
       libtool \
       libarchive-dev \
@@ -25,6 +25,7 @@ RUN export DEBIAN_FRONTEND="noninteractive" && \
       wget \
       gnuplot \
       datamash \
+      graphviz \
       && rm -rf /var/lib/apt/lists/*
 
     # install conda
