@@ -1,0 +1,242 @@
+digraph "dag" {
+p0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p14 [label="cram_to_bam"];
+p0 -> p14 [label="cram_ch_cram_to_bam"];
+
+p1 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p1 -> p2;
+
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p18 [label="count_variants"];
+p2 -> p18 [label="vcf_ch_count_variants"];
+
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p27 [label="picard_collect_variant_calling_metrics_vcf"];
+p2 -> p27 [label="vcf_ch_picard_collect_variant_calling_metrics_vcf"];
+
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p19 [label="bcftools_stats"];
+p2 -> p19 [label="vcf_ch_bcftools_stats"];
+
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p20 [label="bcftools_gtcheck"];
+p2 -> p20 [label="vcf_ch_bcftools_gtcheck"];
+
+p2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p28 [label="picard_collect_variant_calling_metrics_gvcf"];
+p2 -> p28 [label="vcf_ch_picard_collect_variant_calling_metrics_gvcf"];
+
+p3 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.empty"];
+p20 [label="bcftools_gtcheck"];
+p3 -> p20 [label="pst_vcf_ch_bcftools_gtcheck"];
+
+p4 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p4 -> p5;
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p6 [shape=point];
+p5 -> p6 [label="ref_fa_ch_picard_collect_multiple_metrics"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p24 [label="picard_collect_wgs_metrics"];
+p5 -> p24 [label="ref_fa_ch_picard_collect_wgs_metrics"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p23 [label="picard_collect_alignment_summary_metrics"];
+p5 -> p23 [label="ref_fa_ch_picard_collect_alignment_summary_metrics"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p25 [label="picard_collect_insert_size_metrics"];
+p5 -> p25 [label="ref_fa_ch_picard_collect_insert_size_metrics"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p29 [label="verifybamid2"];
+p5 -> p29 [label="ref_fa_ch_verifybamid2"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p14 [label="cram_to_bam"];
+p5 -> p14 [label="ref_fa_ch_cram_to_bam"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p22 [label="picard_collect_quality_yield_metrics"];
+p5 -> p22 [label="ref_fa_ch_picard_collect_quality_yield_metrics"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p21 [label="mosdepth"];
+p5 -> p21 [label="ref_fa_ch_mosdepth"];
+
+p5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p26 [label="picard_collect_gc_bias_metrics"];
+p5 -> p26 [label="ref_fa_ch_picard_collect_gc_bias_metrics"];
+
+p7 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p7 -> p8;
+
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p27 [label="picard_collect_variant_calling_metrics_vcf"];
+p8 -> p27 [label="dbsnp_vcf_ch_picard_collect_variant_calling_metrics_vcf"];
+
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p28 [label="picard_collect_variant_calling_metrics_gvcf"];
+p8 -> p28 [label="dbsnp_vcf_ch_picard_collect_variant_calling_metrics_gvcf"];
+
+p9 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p21 [label="mosdepth"];
+p9 -> p21 [label="autosomes_bed_ch_mosdepth"];
+
+p10 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p21 [label="mosdepth"];
+p10 -> p21 [label="n_regions_bed_ch_mosdepth"];
+
+p11 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p29 [label="verifybamid2"];
+p11 -> p29 [label="ud_path_ch_verifybamid2"];
+
+p12 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p29 [label="verifybamid2"];
+p12 -> p29 [label="bed_path_ch_verifybamid2"];
+
+p13 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p29 [label="verifybamid2"];
+p13 -> p29 [label="mean_path_ch_verifybamid2"];
+
+p14 [label="cram_to_bam"];
+p16 [label="samtools_stats"];
+p14 -> p16 [label="cram_to_bam_ch_samtools_stats"];
+
+p14 [label="cram_to_bam"];
+p17 [label="samtools_flagstat"];
+p14 -> p17 [label="cram_to_bam_ch_samtools_flagstat"];
+
+p14 [label="cram_to_bam"];
+p22 [label="picard_collect_quality_yield_metrics"];
+p14 -> p22 [label="cram_to_bam_ch_picard_collect_quality_yield_metrics"];
+
+p14 [label="cram_to_bam"];
+p23 [label="picard_collect_alignment_summary_metrics"];
+p14 -> p23 [label="cram_to_bam_ch_picard_collect_alignment_summary_metrics"];
+
+p14 [label="cram_to_bam"];
+p24 [label="picard_collect_wgs_metrics"];
+p14 -> p24 [label="cram_to_bam_ch_picard_collect_wgs_metrics"];
+
+p14 [label="cram_to_bam"];
+p25 [label="picard_collect_insert_size_metrics"];
+p14 -> p25 [label="cram_to_bam_ch_picard_collect_insert_size_metrics"];
+
+p14 [label="cram_to_bam"];
+p26 [label="picard_collect_gc_bias_metrics"];
+p14 -> p26 [label="cram_to_bam_ch_picard_collect_gc_bias_metrics"];
+
+p14 [label="cram_to_bam"];
+p15 [shape=point];
+p14 -> p15 [label="cram_to_bam_ch_picard_collect_multiple_metrics"];
+
+p14 [label="cram_to_bam"];
+p29 [label="verifybamid2"];
+p14 -> p29 [label="cram_to_bam_ch_verifybamid2"];
+
+p14 [label="cram_to_bam"];
+p21 [label="mosdepth"];
+p14 -> p21 [label="cram_to_bam_ch_mosdepth"];
+
+p16 [label="samtools_stats"];
+p38 [label="multiqc"];
+p16 -> p38 [label="samtools_stats_ch"];
+
+p16 [label="samtools_stats"];
+p30 [label="plot_bamstats"];
+p16 -> p30 [label="samtools_stats_ch_plotbamstats"];
+
+p17 [label="samtools_flagstat"];
+p38 [label="multiqc"];
+p17 -> p38 [label="samtools_flagstat_ch"];
+
+p18 [label="count_variants"];
+p38 [label="multiqc"];
+p18 -> p38 [label="count_variants_ch"];
+
+p19 [label="bcftools_stats"];
+p38 [label="multiqc"];
+p19 -> p38 [label="bcftools_stats_ch"];
+
+p20 [label="bcftools_gtcheck"];
+p32 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p20 -> p32 [label="bcftools_gtcheck_ch"];
+
+p21 [label="mosdepth"];
+p38 [label="multiqc"];
+p21 -> p38 [label="mosdepth_ch"];
+
+p22 [label="picard_collect_quality_yield_metrics"];
+p38 [label="multiqc"];
+p22 -> p38 [label="picard_collect_quality_yield_metrics_ch"];
+
+p23 [label="picard_collect_alignment_summary_metrics"];
+p38 [label="multiqc"];
+p23 -> p38 [label="picard_collect_alignment_summary_metrics_ch"];
+
+p24 [label="picard_collect_wgs_metrics"];
+p38 [label="multiqc"];
+p24 -> p38 [label="picard_collect_wgs_metrics_ch"];
+
+p25 [label="picard_collect_insert_size_metrics"];
+p38 [label="multiqc"];
+p25 -> p38 [label="picard_collect_insert_size_metrics_ch"];
+
+p26 [label="picard_collect_gc_bias_metrics"];
+p38 [label="multiqc"];
+p26 -> p38 [label="picard_collect_gc_bias_metrics_ch"];
+
+p27 [label="picard_collect_variant_calling_metrics_vcf"];
+p34 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p27 -> p34 [label="picard_collect_variant_calling_metrics_vcf_ch"];
+
+p28 [label="picard_collect_variant_calling_metrics_gvcf"];
+p36 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p28 -> p36 [label="picard_collect_variant_calling_metrics_gvcf_ch"];
+
+p29 [label="verifybamid2"];
+p38 [label="multiqc"];
+p29 -> p38 [label="verifybamid2_ch"];
+
+p30 [label="plot_bamstats"];
+p31 [shape=point];
+p30 -> p31 [label="plot_bamstats_ch"];
+
+p32 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p33 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p32 -> p33;
+
+p33 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p38 [label="multiqc"];
+p33 -> p38;
+
+p34 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p35 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p34 -> p35;
+
+p35 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p38 [label="multiqc"];
+p35 -> p38;
+
+p36 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+p37 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p36 -> p37;
+
+p37 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+p38 [label="multiqc"];
+p37 -> p38;
+
+p38 [label="multiqc"];
+p39 [label="compile_metrics"];
+p38 -> p39 [label="multiqc_ch"];
+
+p39 [label="compile_metrics"];
+p40 [shape=point];
+p39 -> p40 [label="compile_metrics_ch"];
+
+}
