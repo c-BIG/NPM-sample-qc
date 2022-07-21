@@ -12,8 +12,8 @@ nextflow run NPM-sample-qc/main.nf \
 	-config NPM-sample-qc/conf/nextflow-docker.config \
 	-params-file NPM-sample-qc/tests/sample_params.aws.bam.yml \
 	-resume \
-	--outdir s3://npm-grids/gnanakkan/npm-sample-qc/output/${sampleid} \
-	-bucket-dir s3://npm-grids/gnanakkan/npm-sample-qc/output/${sampleid}-work \
+	--outdir output/${sampleid} \
+	-bucket-dir output/${sampleid}-work \
 	-profile awsbatch \
 	-with-trace \
 	-bg >nf-test.${uid}.log
