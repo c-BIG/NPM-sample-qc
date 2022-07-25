@@ -42,9 +42,9 @@ RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
     # install MultiQC and MultiQC_NPM plugin
-    # RUN git clone https://github.com/c-BIG/MultiQC_NPM.git && cd MultiQC_NPM && python3 setup.py install
-RUN git clone https://github.com/c-BIG/MultiQC_NPM.git
-WORKDIR /MultiQC_NPM
+RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
+WORKDIR /NPM-sample-qc/bin/multiqc_plugins
+RUN git checkout awsbatch-dev
 RUN python3 setup.py install
 
     # create mountpoints for NSCC

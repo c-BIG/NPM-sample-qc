@@ -38,8 +38,8 @@ From: ubuntu:22.04
     conda clean -a
 
     # install MultiQC and MultiQC_NPM plugin
-    git clone https://github.com/c-BIG/MultiQC_NPM.git
-    cd MultiQC_NPM
+    git clone https://github.com/c-BIG/NPM-sample-qc.git
+    cd NPM-sample-qc/bin/multiqc_plugins && git checkout awsbatch-dev
     python3 setup.py install
 
     # create mountpoints for NSCC
