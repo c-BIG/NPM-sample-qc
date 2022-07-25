@@ -36,8 +36,6 @@ NPM-sample-qc input requirements can be split into two categories:
 
 - **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see the **Metric definitions** section). See ``tests/sample_params*.yml`` for an example.
 
-NPM users will only be required to update ``sample_params*.yml`` to match their sample of interest. In addition, any user can update the global settings by following standard `Nextflow configuration`_ guidelines.
-
 .. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
 Output files
