@@ -4,3 +4,4 @@
 docsrc/build/
 docsrc/api/
 *.simg
+*.sg-npm-private
