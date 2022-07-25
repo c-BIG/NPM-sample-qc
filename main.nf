@@ -153,8 +153,6 @@ PROCESSES
 ---------------------------------------------------------------------
 */
 
-includeConfig 'conf/base.config'
-
 process cram_bam_index {
 
     input:
