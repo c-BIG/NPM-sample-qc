@@ -34,9 +34,9 @@ NPM-sample-qc input requirements can be split into two categories:
 
 - **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See ``conf/nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see the **Metric definitions** section). See ``tests/sample_params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see the **Metric definitions** section). See ``tests/sample_params*.yml`` for an example.
 
-
+.. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
 Output files
 ------------
@@ -60,6 +60,13 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
+AWS batch deployment
+====================
+
+Edit the following files to suit your AWS batch configuration  
+* conf/awsbatch.config
+*
+
 Workflow logic
 --------------
 
@@ -67,7 +74,7 @@ We provide a schematic representation of the workflow in the figure below:
   
 .. raw:: html
 
-   <img src="docs/npm-sample-qc-overview.PNG" width="500px"/>   
+   <img src="npm-sample-qc-overview.PNG" width="500px"/>   
 
 In a nutshell, NPM-sample-qc generates QC metrics from single-sample WGS results in three stages: metrics calculation, parsing of intermediate outputs and generation of a final report. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
 
