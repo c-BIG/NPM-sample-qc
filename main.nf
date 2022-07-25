@@ -73,23 +73,11 @@ startMessage()
 INPUT CHANNELS
 ----------------------------------------------------------------------
 */
-fcbam = file( params.cram )
-fvcf = file( params.vcf )
-assert params.cram  != null: "Missing CRAM / BAM input param"
-assert params.vcf  != null: "Missing VCF input param"
-
-ftype = fcbam.getExtension()
-
-if ( fcbam.getExtension() == 'cram') {
-    println "Input file type and name: CRAM : ${params.cram} \n                               ${params.vcf}"
-}
-else if ( fcbam.getExtension() == 'bam') {
-    println "Input file type and name: BAM : ${params.cram} \n                                ${params.vcf}"
-}
 
 Channel
     .fromPath(params.cram)
-    .set { cram_ch_cram_to_bam }
+    .into { cram_ch_cram_to_bam
+          ; cram_ch_samtools_flagstat }
 
 Channel
     .fromPath(params.vcf)
@@ -113,12 +101,9 @@ if (params.pst_vcf) {
 Channel
     .fromPath(params.ref_fa)
     .into { ref_fa_ch_cram_to_bam
-          ; ref_fa_ch_picard_collect_quality_yield_metrics
-          ; ref_fa_ch_picard_collect_insert_size_metrics
           ; ref_fa_ch_picard_collect_alignment_summary_metrics
           ; ref_fa_ch_picard_collect_wgs_metrics
           ; ref_fa_ch_picard_collect_gc_bias_metrics
-          ; ref_fa_ch_picard_collect_multiple_metrics
           ; ref_fa_ch_verifybamid2
           ; ref_fa_ch_mosdepth }
 
@@ -135,22 +120,6 @@ Channel
     .fromPath(params.n_regions_bed)
     .set { n_regions_bed_ch_mosdepth }
 
-Channel
-    .fromPath(params.vbi2_ud)
-    .set { ud_path_ch_verifybamid2 }
-
-Channel
-    .fromPath(params.vbi2_bed)
-    .set { bed_path_ch_verifybamid2 }
-
-Channel
-    .fromPath(params.vbi2_mean)
-    .set { mean_path_ch_verifybamid2 }
-
-Channel
-    .fromPath(params.version_info)
-    .set { version_info_ch }
-
 /*
 ----------------------------------------------------------------------
 PROCESSES
@@ -165,28 +134,21 @@ process cram_to_bam {
 
     output:
     file "*" into cram_to_bam_ch_samtools_stats \
-                , cram_to_bam_ch_samtools_flagstat \
                 , cram_to_bam_ch_picard_collect_quality_yield_metrics \
                 , cram_to_bam_ch_picard_collect_alignment_summary_metrics \
                 , cram_to_bam_ch_picard_collect_wgs_metrics \
+                , cram_to_bam_ch_sg10k_cov_062017 \
                 , cram_to_bam_ch_picard_collect_insert_size_metrics \
                 , cram_to_bam_ch_picard_collect_gc_bias_metrics \
-                , cram_to_bam_ch_picard_collect_multiple_metrics \
                 , cram_to_bam_ch_verifybamid2 \
                 , cram_to_bam_ch_mosdepth
 
     script:
-        if ( fcbam.getExtension() == 'cram')
-            """
-            samtools faidx ${ref_fa} -o ${ref_fa}.fai
-            mv ${cram} ${params.sample_id}.qc.cram
-            samtools index ${params.sample_id}.qc.cram ${params.sample_id}.qc.cram.crai
-            """
-        else if ( fcbam.getExtension() == 'bam')
-            """
-            mv ${cram} ${params.sample_id}.qc.bam
-            samtools index ${params.sample_id}.qc.bam ${params.sample_id}.qc.bam.bai
-            """
+    """
+    samtools view -h -T ${ref_fa} -b ${cram} -o ${params.sample_id}.bam
+    samtools index ${params.sample_id}.bam ${params.sample_id}.bam.bai
+    """
+
 }
 
 process samtools_stats {
@@ -202,7 +164,7 @@ process samtools_stats {
 
     script:
     """
-      samtools stats ${params.sample_id}.qc.${ftype} > ${params.sample_id}.stats
+    samtools stats ${params.sample_id}.bam > ${params.sample_id}.stats
     """
 
 }
@@ -212,14 +174,14 @@ process samtools_flagstat {
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    file cram from cram_to_bam_ch_samtools_flagstat
+    file cram from cram_ch_samtools_flagstat
 
     output:
     file "*" into samtools_flagstat_ch
 
     script:
     """
-    samtools flagstat ${params.sample_id}.qc.${ftype} > ${params.sample_id}.flagstat
+    samtools flagstat ${cram} > ${params.sample_id}.flagstat
     """
 
 }
@@ -236,6 +198,7 @@ process count_variants {
 
     script:
     """
+    # calls bcftools stats
     count_variants.py \
         --input_vcf ${vcf} \
         --output_json ${params.sample_id}.variant_counts.json \
@@ -287,7 +250,6 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_mosdepth
     file "*" from cram_to_bam_ch_mosdepth
     file autosomes_bed from autosomes_bed_ch_mosdepth
     file n_regions_bed from n_regions_bed_ch_mosdepth
@@ -298,8 +260,7 @@ process mosdepth {
     script:
     """
     run_mosdepth.sh \
-        --input_bam=${params.sample_id}.qc.${ftype} \
-        --ref_fasta=${ref_fa} \
+        --input_bam=${params.sample_id}.bam \
         --autosomes_bed=${autosomes_bed} \
         --n_regions_bed=${n_regions_bed} \
         --output_csv=${params.sample_id}.mosdepth.csv \
@@ -313,7 +274,6 @@ process picard_collect_quality_yield_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_picard_collect_quality_yield_metrics
     file "*" from cram_to_bam_ch_picard_collect_quality_yield_metrics
 
     output:
@@ -322,8 +282,7 @@ process picard_collect_quality_yield_metrics {
     script:
     """
     picard CollectQualityYieldMetrics \
-        I=${params.sample_id}.qc.${ftype} \
-        R=${ref_fa} \
+        I=${params.sample_id}.bam \
         O=${params.sample_id}.quality_yield_metrics.txt \
         OQ=false
     """
@@ -344,8 +303,8 @@ process picard_collect_alignment_summary_metrics {
     script:
     """
     picard CollectAlignmentSummaryMetrics \
-        I=${params.sample_id}.qc.${ftype} \
         R=${ref_fa} \
+        I=${params.sample_id}.bam \
         O=${params.sample_id}.alignment_summary_metrics.txt
     """
 
@@ -364,10 +323,31 @@ process picard_collect_wgs_metrics {
 
     script:
     """
-        picard CollectWgsMetrics \
+    java -Dsamjdk.compression_level=2 -Xmx${task.memory.toGiga()}G -Xms4000m \
+        -XX:ConcGCThreads=${task.cpus} -XX:+UseConcMarkSweepGC \
+        -XX:ParallelGCThreads=${task.cpus} \
+        -jar /usr/local/conda/envs/npm-sample-qc/share/picard-2.21.7-0/picard.jar \
+        CollectWgsMetrics \
         R=${ref_fa} \
-        I=${params.sample_id}.qc.${ftype} \
+        I=${params.sample_id}.bam \
         O=${params.sample_id}.wgs_metrics.txt
+    """
+
+}
+
+process sg10k_cov_062017 {
+
+    publishDir "${params.publishdir}/sg10k_cov_062017", mode: "copy"
+
+    input:
+    file "*" from cram_to_bam_ch_sg10k_cov_062017
+
+    output:
+    file "*" into sg10k_cov_062017_ch
+
+    script:
+    """
+    sg10k-cov-062017.sh ${params.sample_id}.bam > ${params.sample_id}.sg10k_cov_062017.txt
     """
 
 }
@@ -377,7 +357,6 @@ process picard_collect_insert_size_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_picard_collect_insert_size_metrics
     file "*" from cram_to_bam_ch_picard_collect_insert_size_metrics
 
     output:
@@ -386,8 +365,7 @@ process picard_collect_insert_size_metrics {
     script:
     """
     picard CollectInsertSizeMetrics \
-        R=${ref_fa} \
-        I=${params.sample_id}.qc.${ftype} \
+        I=${params.sample_id}.bam \
         O=${params.sample_id}.insert_size_metrics.txt \
         H=${params.sample_id}.insert_size_histogram.pdf \
         M=0.5
@@ -409,7 +387,7 @@ process picard_collect_gc_bias_metrics {
     script:
     """
     picard CollectGcBiasMetrics \
-        I=${params.sample_id}.qc.${ftype} \
+        I=${params.sample_id}.bam \
         O=${params.sample_id}.gc_bias_metrics.txt \
         CHART=${params.sample_id}.gc_bias_metrics.pdf \
         S=${params.sample_id}.gc_bias_summary_metrics.txt \
@@ -417,40 +395,6 @@ process picard_collect_gc_bias_metrics {
     """
 
 }
-
-/*
-process picard_collect_multiple_metrics {
-
-    publishDir "${params.publishdir}/picardmultiple", mode: "copy"
-
-    input:
-    file ref_fa from ref_fa_ch_picard_collect_multiple_metrics
-    file "*" from cram_to_bam_ch_picard_collect_multiple_metrics
-
-    output:
-    file "*" into picard_collect_multiple_metrics_ch
-
-    script:
-    """
-    picard CollectMultipleMetrics  \
-        I=${params.sample_id}.qc.${ftype} \
-        O=${params.sample_id} \
-        ASSUME_SORTED=true \
-        PROGRAM=null \
-        PROGRAM=CollectAlignmentSummaryMetrics \
-        PROGRAM=CollectQualityYieldMetrics \
-        PROGRAM=CollectGcBiasMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
-        PROGRAM=CollectBaseDistributionByCycle \
-        PROGRAM=MeanQualityByCycle \
-        PROGRAM=QualityScoreDistribution \
-        METRIC_ACCUMULATION_LEVEL=null \
-        METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${ref_fa}
-    """
-
-}
-*/
 
 process picard_collect_variant_calling_metrics_vcf {
 
@@ -508,9 +452,6 @@ process verifybamid2 {
 
     input:
     file ref_fa from ref_fa_ch_verifybamid2
-    file vbi2_ud from ud_path_ch_verifybamid2
-    file vbi2_bed from bed_path_ch_verifybamid2
-    file vbi2_mean from mean_path_ch_verifybamid2
     file "*" from cram_to_bam_ch_verifybamid2
 
     output:
@@ -518,7 +459,7 @@ process verifybamid2 {
 
     script:
     """
-    VerifyBamID --UDPath ${vbi2_ud} --BedPath ${vbi2_bed} --MeanPath ${vbi2_mean} --Reference ${ref_fa} --BamFile ${params.sample_id}.qc.${ftype}
+    VerifyBamID --SVDPrefix ${params.vbi2_svdprefix} --Reference ${params.ref_fa} --BamFile ${params.sample_id}.bam
     """
 
 }
@@ -557,8 +498,8 @@ process multiqc {
     file "picard/*" from picard_collect_gc_bias_metrics_ch
     file "picard/*" from picard_collect_variant_calling_metrics_vcf_ch.collect().ifEmpty([])
     file "picard/*" from picard_collect_variant_calling_metrics_gvcf_ch.collect().ifEmpty([])
-//    file "picardmultiple/*" from picard_collect_multiple_metrics_ch
     file "verifybamid2/*" from verifybamid2_ch
+    file "sg10k_cov_062017/*" from sg10k_cov_062017_ch
     file "mosdepth/*" from mosdepth_ch
 
     output:
@@ -578,7 +519,6 @@ process compile_metrics {
 
     input:
     file "*" from multiqc_ch
-    file version_info from version_info_ch
 
     output:
     file "*" into compile_metrics_ch
@@ -588,10 +528,11 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --version_info ${version_info}
+        --version_info ${workflow.projectDir}/version_info
     """
 
 }
+
 
 /*
 ----------------------------------------------------------------------

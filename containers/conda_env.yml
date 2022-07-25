@@ -3,12 +3,11 @@ channels:
     - bioconda
     - conda-forge
     - defaults
-channel_priority: strict  
 dependencies:
     - python=3.7
-    - bcftools=1.15
-    - samtools=1.15
-    - picard=2.27.0
-    - verifybamid2=2.0.1
+    - bcftools=1.10.2
+    - samtools=1.10
+    - picard=2.21.7
+    - verifybamid2=1.0.5
     - bedtools=2.29.2
-    - mosdepth=0.3.3
+    - mosdepth=0.2.9
