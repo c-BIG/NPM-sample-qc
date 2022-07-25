@@ -54,7 +54,7 @@ def calculate_metrics(mqc):
         "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
         # coverage
         "genome_territory", "mean_autosome_coverage", "sd_autosome_coverage", "median_autosome_coverage", "mad_autosome_coverage",
-        "pct_autosomes_1x", "pct_autosomes_10x", "pct_autosomes_15x", "pct_autosomes_30x", "pct_autosomes_40x", "coverage_sg10k_062017",
+        "pct_autosomes_1x", "pct_autosomes_10x", "pct_autosomes_15x", "pct_autosomes_30x", "pct_autosomes_40x",
         # insert size
         "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
         "pct_adapters", "pct_overlapping_bases",
