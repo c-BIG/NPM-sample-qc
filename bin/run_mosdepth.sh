@@ -90,7 +90,7 @@ ge_15x_bases=$(zcat $BED | awk '$4>=15' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 
 ge_30x_bases=$(zcat $BED | awk '$4>=30' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM}')
 ge_40x_bases=$(zcat $BED | awk '$4>=40' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM}')
 
-#### save output
+#### write --output_csv
 header="mean_autosome_coverage,sd_autosome_coverage,median_autosome_coverage,mad_autosome_coverage,total_autosome_bases,ge_1x_autosome_bases,ge_10x_autosome_bases,ge_15x_autosome_bases,ge_30x_autosome_bases,ge_40x_autosome_bases"
 row="$mean_coverage,$sd_coverage,$median_coverage,$mad_coverage,$total_bases,$ge_1x_bases,$ge_10x_bases,$ge_15x_bases,$ge_30x_bases,$ge_40x_bases"
 echo "$header" > $OUTPUT_CSV
