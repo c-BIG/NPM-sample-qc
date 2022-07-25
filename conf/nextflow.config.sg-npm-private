@@ -7,7 +7,7 @@ params {
     infodir = "${params.outdir}/pipeline_info"
 
     // resources
-    resourcesdir = "" // provide your resource directory path eg. "s3://npm-sample-qc/resources"
+    resourcesdir = "s3://npm-grids/resources/NPM-sample-qc-aux/resources" // provide your resource directory path eg. "s3://npm-sample-qc/resources"
     ref_fa = "${params.resourcesdir}/Homo_sapiens_assembly38.fasta"
     dbsnp_vcf = "${params.resourcesdir}/common_all_20180418.chr.vcf.gz"
     vbi2_ud = "${params.resourcesdir}/1000g.phase3.100k.b38.vcf.gz.dat.UD"
@@ -33,32 +33,15 @@ aws.client.downloadParallel = true
 profiles {
     local {
         includeConfig 'base.config'
-        process.executor = "local"
-        process.container = 'NPM-sample-qc/containers/npm-sample-qc.simg' //create singularity image by running containers/singularity.sh
-        process.errorStrategy = "retry"
-        process.maxRetries = 2
-        singularity.enabled = true
-        singularity.autoMounts = true
+        includeConfig 'local.config'
     }
     docker {
         includeConfig 'base.config'
-        process.executor = "local"
-        process.container = "npm-sample-qc:latest" // build npm-sample-qc docker image from containers/Dockerfile
-        process.errorStrategy = "retry"
-        process.maxRetries = 2
-        // executor.pollInterval = "2 sec"
-        docker.enabled = true
+        includeConfig 'docker.config'
     }
     awsbatch {
         includeConfig 'base.config'
-        process.executor = "awsbatch"
-        process.region = ""       // your AWS region eg. "ap-southeast-1"
-        process.queue = ""        // your AWS batch queue name eg. "npm-sample-qc-queue"
-        process.container = ""    // the npm-sample-qc container AWS URI eg. "xxxxxxxxx.dkr.ecr.ap-southeast-1.amazonaws.com/npm-sample-qc:latest"
-        aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-        process.errorStrategy = "retry"
-        process.maxRetries = 2 
-        docker.enabled = true
+        includeConfig 'awsbatch.config'
     }
     nscc {
         includeConfig 'base.config'

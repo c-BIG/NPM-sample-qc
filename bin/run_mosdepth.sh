@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --input_bam=<bam> --autosomes_bed=<bed> --n_regions_bed=<bed> --output_csv=<csv> --work_dir=<dir>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --input_bam=<bam> --autosomes_bed=<bed> --n_regions_bed=<bed> --output_csv=<csv> --work_dir=<dir>" >&2
     echo
     exit 1
 }
@@ -10,6 +10,10 @@ display_help() {
 for i in "$@"
 do
 case $i in
+    -f=* | --ref_fasta=*)
+	REF_FASTA="${i#*=}"
+        shift
+        ;;
     -i=* | --input_bam=*)
         INPUT_BAM="${i#*=}"
         shift
@@ -42,14 +46,21 @@ case $i in
 esac
 done
 
-if [ -z "$INPUT_BAM" ] || [ -z "$AUTOSOMES_BED" ] || [ -z "$N_REGIONS_BED" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
+if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM" ] || [ -z "$AUTOSOMES_BED" ] || [ -z "$N_REGIONS_BED" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
   echo "Error: One or more variables are undefined"
   display_help
   exit 1
 fi
 
-SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
+if [ "${INPUT_BAM: -4}" == ".bam" ]
+then
+	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
+elif [ "${INPUT_BAM: -5}" == ".cram" ]
+then
+	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
+fi
 
+echo "REF_FASTA     = $REF_FASTA"
 echo "INPUT_BAM     = $INPUT_BAM"
 echo "AUTOSOMES_BED = $AUTOSOMES_BED"
 echo "N_REGIONS_BED = $N_REGIONS_BED"
@@ -58,7 +69,7 @@ echo "WORK_DIR      = $WORK_DIR"
 echo "SAMPLE_ID     = $SAMPLE_ID"
 
 #### run mosdepth
-mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 $WORK_DIR/$SAMPLE_ID $INPUT_BAM
+mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_DIR/$SAMPLE_ID $INPUT_BAM
 
 #### filter outputs
 # focus on autosomes

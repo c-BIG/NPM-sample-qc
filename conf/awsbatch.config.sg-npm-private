@@ -1,0 +1,19 @@
+/*
+ *  Nextflow config file for awsbatch profile
+ */
+
+executor {
+   name = 'awsbatch'
+}
+
+aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
+
+docker.enabled = true
+
+process {
+    region = "ap-southeast-1"       // your AWS region eg. "ap-southeast-1"
+    queue = "npm-sample-qc-spot70"        // your AWS batch queue name eg. "npm-sample-qc-queue"
+    container = "046503905558.dkr.ecr.ap-southeast-1.amazonaws.com/npm-sample-qc:latest"    // the npm-sample-qc container AWS URI eg. "xxxxxxxxx.dkr.ecr.ap-southeast-1.amazonaws.com/npm-sample-qc:latest"
+    errorStrategy = { task.attempt < 2 ? 'retry' : 'finish' }
+    maxRetries = 2 
+}
