@@ -1,12 +1,11 @@
 Bootstrap: docker
-From: ubuntu:22.04
+From: ubuntu:16.04
 
 %environment
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8
     export PATH="/usr/local/conda/envs/npm-sample-qc/bin/:$PATH"
-    export PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-2.0.1-7/:$PATH"
-    export PATH="/usr/local/conda/envs/npm-sample-qc/share/picard-2.27.0-0/:$PATH"
+    export PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-1.0.5-3/:$PATH"
     export PATH="/usr/local/conda/bin/:$PATH"
 
 %files
@@ -21,11 +20,10 @@ From: ubuntu:22.04
       libarchive-dev \
       make cmake m4 automake \
       gcc g++ \
-      python3 python-pip python-dev-is-python3 \
+      python3 python-pip python-dev \
       git \
       wget \
-      gnuplot \
-      datamash
+      gnuplot
 
     # install conda
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -41,6 +39,13 @@ From: ubuntu:22.04
     git clone https://github.com/c-BIG/MultiQC_NPM.git
     cd MultiQC_NPM
     python3 setup.py install
+
+    # add sg10k-cov binary
+    apt-get install -y zlib1g-dev libbz2-dev datamash
+    git clone https://github.com/c-BIG/sg10k-cov.git
+    cd sg10k-cov/ && git checkout 6b74ab8
+    bash make.sh
+    cp sg10k-cov-062017.sh samtools-M /usr/local/bin/
 
     # create mountpoints for NSCC
     mkdir /data /seq /secure /scratch
