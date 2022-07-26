@@ -60,12 +60,6 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
-AWS batch deployment
-====================
-
-Edit the following files to suit your AWS batch configuration  
-* conf/awsbatch.config
-*
 
 Workflow logic
 --------------
@@ -105,3 +99,11 @@ The full list of metrics reported by the NPM-sample-qc workflow and details on h
 When needed, page contents can be updated by running the following command: ::
 
   cd docsrc; ./build.sh
+  
+
+AWS batch deployment
+====================
+
+Edit the following files to suit your AWS batch configuration  
+* conf/awsbatch.config
+
