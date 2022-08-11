@@ -13,7 +13,7 @@ Quick start
 Here an example command to launch the workflow: ::
 
   nextflow run main.nf \
-  -config conf/nextflow.config \
+  -config nextflow.config \
   -params-file tests/sample_params.yml \
   -work-dir ./work \
   --outdir ./ \
@@ -32,9 +32,9 @@ Required inputs
 
 NPM-sample-qc input requirements can be split into two categories:
 
-- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See ``conf/nextflow.config`` for additional details.
+- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (``pst_vcf``) to calculate genotype concordance against your WGS VCF (see the **Metric definitions** section). See ``tests/sample_params*.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM. See ``tests/sample_params*.yml`` for an example.
 
 .. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
@@ -50,11 +50,7 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
           trace.txt
       results/          # final metrics.json and intermediate outputs
           <sample_id>.metrics.json    
-          bcftools/
-          count_variants/
-          verifybamid2/
           samtools/
-          plot_bamstats/
           picard/
           multiqc/
 
@@ -80,12 +76,12 @@ In a nutshell, NPM-sample-qc generates QC metrics from single-sample WGS results
 
 **Metrics calculation**
 
-The current workflow combines widely-used third-party tools (samtools, bcftools, picard, VerifyBamID2) and custom scripts (e.g. count_variants.py) to obtain a rich set of QC metrics. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/example_dag.pdf``).
+The current workflow combines widely-used third-party tools (samtools, picard) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/example_dag.pdf``).
 
 
 **Metrics parsing**
 
-Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling MultiQC_NPM_, a MultiQC_ plugin that extends the base tool to support additional files (e.g. outputs from bcftools gtcheck, picard CollectQualityYieldMetrics and count_variants.py).
+Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling MultiQC, a MultiQC_ plugin that extends the base tool to support additional files.
 
 .. _MultiQC_NPM: https://github.com/c-BIG/MultiQC_NPM/
 .. _MultiQC: https://github.com/ewels/MultiQC
