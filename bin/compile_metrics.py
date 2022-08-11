@@ -44,36 +44,14 @@ def load_multi_qc(multiqc_json):
 def calculate_metrics(mqc):
     metrics_list = [
         # primary metrics
-        "yield_raw_gb", "yield_pf_gb", "pct_q30_bases", "pct_q30_bases_read1", "pct_q30_bases_read2",
-        "yield_raw_reads", "yield_pf_reads", "pct_pf_reads",
+        "pct_q30_bases",
         # alignment
-        "pct_aligned_bases", "pct_reads_aligned", "pct_reads_aligned_mapqge20",
-        "pct_reads_unaligned", "pct_reads_aligned_in_pairs", "pct_reads_properly_paired",
-        "total_alignments", "pct_singleton_alignments", "pct_alignments_diff_chrom",
-        "pct_alignments_diff_chrom_mapqge5", "pct_chimeras", "pct_secondary_alignments",
-        "pct_supplementary_alignments", "pct_duplicate_reads", "mismatch_rate", "mismatch_rate_mapqge20",
+        "pct_reads_aligned_in_pairs", "pct_reads_properly_paired",
         # coverage
-        "genome_territory", "mean_autosome_coverage", "sd_autosome_coverage", "median_autosome_coverage", "mad_autosome_coverage",
-        "pct_autosomes_1x", "pct_autosomes_10x", "pct_autosomes_15x", "pct_autosomes_30x", "pct_autosomes_40x",
+        "mean_autosome_coverage", "mad_autosome_coverage",
+        "pct_autosomes_15x",
         # insert size
-        "mean_insert_size", "sd_insert_size", "median_insert_size", "mad_insert_size",
-        "pct_adapters", "pct_overlapping_bases",
-        # gc bias
-        "at_dropout", "gc_dropout", "gc_nc_0_19", "gc_nc_20_39", "gc_nc_40_59",
-        "gc_nc_60_79", "gc_nc_80_100",
-        # variant calling
-        "all_snps", "all_het_snps", "all_homalt_snps", "all_snp_het_hom",
-        "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
-        "all_indels", "all_het_indels", "all_homalt_indels", "all_indel_het_hom",
-        "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
-        "all_del", "all_ins", "pass_del", "pass_ins",
-        "all_mnps", "pass_mnps",
-        "all_complex_indels", "all_complex_ins", "all_complex_del",
-        "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
-        "all_multiallelic_sites", "pass_multiallelic_sites",
-        "all_snp_ts_tv", "pass_snp_ts_tv",
-        # contamination and pst
-        "pct_contamination", "pst_pct_concordance"
+        "mean_insert_size"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))
