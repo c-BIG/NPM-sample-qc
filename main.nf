@@ -79,10 +79,10 @@ assert params.bam_cram  != null: "Missing CRAM / BAM input param"
 ftype = fcbam.getExtension()
 
 if ( fcbam.getExtension() == 'cram') {
-    println "Input file type and name: CRAM : ${params.cram} \n                               ${params.vcf}"
+    println "Input file type and name: CRAM : ${params.bam_cram}"
 }
 else if ( fcbam.getExtension() == 'bam') {
-    println "Input file type and name: BAM : ${params.cram} \n                                ${params.vcf}"
+    println "Input file type and name: BAM : ${params.bam_cram}"
 }
 
 Channel
