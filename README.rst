@@ -60,7 +60,7 @@ Resources
 =========
 
 Other than than the required sample specific BAM/CRAM file, it requires the follwing data resources.
-Human reference genome in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``tests/Homo_sapiens_assembly38.autosomes.bed`` and ``tests/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
+Human reference genome in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
 
 .. _UCSC: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
 
