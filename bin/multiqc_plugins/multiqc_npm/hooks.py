@@ -18,7 +18,7 @@ log = logging.getLogger('multiqc')
 
 def before_config():
     my_search_patterns = {
-        'multiqc_npm/picard_quality_yield_metrics': {'fn': '*.quality_yield_metrics', 'shared': 'true'},
+        'multiqc_npm/picard_quality_yield_metrics': {'fn': '*.quality_yield_metrics.txt', 'shared': 'true'},
         'multiqc_npm/samtools_stats_bq': {'fn': '*.stats', 'contents': 'This file was produced by samtools stats', 'shared': 'true'},
         'multiqc_npm/mosdepth': {'fn': '*.mosdepth.csv'}
     }
