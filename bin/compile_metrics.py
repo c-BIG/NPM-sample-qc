@@ -78,15 +78,13 @@ def add_sample_id(version_metrics, sample_id):
     sampleid = "NA"
     if sample_id is not None:
         sampleid = sample_id
-    version_metrics["sample_id"] = sampleid
+    version_metrics["sample"] = sampleid
     return version_metrics
 
 
 def save_output(d, outfile):
     with open(outfile, "w") as f:
-        qctag = {"biosample" : {"id" : args.sample_id}}
-        d.update(qctag)
-        f.seek(0)
+        d = {"biosample" : {"id" : args.sample_id}, "qc-metrics": d}
         json.dump(d, f, sort_keys=True, indent=4)
         f.write("\n")
 
