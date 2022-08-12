@@ -6,7 +6,6 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 ENV PATH="/usr/local/conda/envs/npm-sample-qc/bin/:${PATH}"
-ENV PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-2.0.1-7/:${PATH}"
 ENV PATH="/usr/local/conda/envs/npm-sample-qc/share/picard-2.27.0-0/:${PATH}"
 ENV PATH="/usr/local/conda/bin/:${PATH}"
 
@@ -44,8 +43,4 @@ RUN conda clean -a
     # install MultiQC and MultiQC_NPM plugin
 RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
-RUN git checkout awsbatch-dev
 RUN python3 setup.py install
-
-    # create mountpoints for NSCC
-WORKDIR /data

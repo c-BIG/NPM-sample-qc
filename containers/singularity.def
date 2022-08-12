@@ -5,7 +5,6 @@ From: ubuntu:22.04
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8
     export PATH="/usr/local/conda/envs/npm-sample-qc/bin/:$PATH"
-    export PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-2.0.1-7/:$PATH"
     export PATH="/usr/local/conda/envs/npm-sample-qc/share/picard-2.27.0-0/:$PATH"
     export PATH="/usr/local/conda/bin/:$PATH"
 
@@ -39,8 +38,5 @@ From: ubuntu:22.04
 
     # install MultiQC and MultiQC_NPM plugin
     git clone https://github.com/c-BIG/NPM-sample-qc.git
-    cd NPM-sample-qc/bin/multiqc_plugins && git checkout awsbatch-dev
+    cd NPM-sample-qc/bin/multiqc_plugins
     python3 setup.py install
-
-    # create mountpoints for NSCC
-    mkdir /data /seq /secure /scratch
