@@ -56,6 +56,14 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
+Resources
+=========
+
+Other than than the required sample specific BAM/CRAM file, it requires the follwing data resources.
+Human reference genome in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``tests/Homo_sapiens_assembly38.autosomes.bed`` and ``tests/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
+
+.. _UCSC: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
+
 AWS batch deployment
 ====================
 
@@ -81,7 +89,7 @@ The current workflow combines widely-used third-party tools (samtools, picard) a
 
 **Metrics parsing**
 
-Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling MultiQC, a MultiQC_ plugin that extends the base tool to support additional files.
+Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling MultiQC_NPM_, a MultiQC_ plugin that extends the base tool to support additional files.
 
 .. _MultiQC_NPM: https://github.com/c-BIG/MultiQC_NPM/
 .. _MultiQC: https://github.com/ewels/MultiQC
