@@ -198,6 +198,7 @@ process picard_collect_multiple_metrics {
         I=${params.sample_id}.qc.${ftype} \
         O=${params.sample_id} \
         ASSUME_SORTED=true \
+        FILE_EXTENSION=".txt" \
         PROGRAM=null \
         PROGRAM=CollectQualityYieldMetrics \
         PROGRAM=CollectInsertSizeMetrics \
