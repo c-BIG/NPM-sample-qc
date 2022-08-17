@@ -78,7 +78,7 @@ We provide a schematic representation of the workflow in the figure below:
   
 .. raw:: html
 
-   <img src="npm-sample-qc-overview.PNG" width="500px"/>   
+   <img src="docs/npm-sample-qc-overview.PNG" width="500px"/>   
 
 In a nutshell, NPM-sample-qc generates QC metrics from single-sample WGS results in three stages: metrics calculation, parsing of intermediate outputs and generation of a final report. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
 
