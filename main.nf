@@ -103,9 +103,6 @@ Channel
     .fromPath(params.n_regions_bed)
     .set { n_regions_bed_ch_mosdepth }
 
-Channel
-    .fromPath(params.version_info)
-    .set { version_info_ch }
 
 /*
 ----------------------------------------------------------------------
@@ -234,7 +231,6 @@ process compile_metrics {
 
     input:
     file "*" from multiqc_ch
-    file version_info from version_info_ch
 
     output:
     file "*" into compile_metrics_ch
