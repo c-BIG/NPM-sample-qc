@@ -244,7 +244,6 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --version_info ${version_info} \
         --sample_id ${params.sample_id}
     """
 
