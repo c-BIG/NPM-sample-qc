@@ -14,9 +14,6 @@ def parse_args():
     parser.add_argument("--output_json", dest="output_json", required=False,
                         default="./metrics.json",
                         help="Path to output json. Default: ./metrics.json")
-    parser.add_argument("--version_info", dest="version_info", required=False,
-                        default=None,
-                        help="Path to version_info file. Default: None")
     parser.add_argument("--sample_id", dest="sample_id", required=True,
                         default=None,
                         help="Sample ID. Default: None")
@@ -65,23 +62,6 @@ def calculate_metrics(mqc):
     return result
 
 
-def add_version_info(parsed_metrics, version_info):
-    version = "NA"
-    if version_info is not None:
-        with open(version_info) as f:
-            version = f.read().strip()
-    parsed_metrics["metrics_version"] = version
-    return parsed_metrics
-
-
-def add_sample_id(version_metrics, sample_id):
-    sampleid = "NA"
-    if sample_id is not None:
-        sampleid = sample_id
-    version_metrics["sample"] = sampleid
-    return version_metrics
-
-
 def save_output(d, outfile):
     with open(outfile, "w") as f:
         d = {"biosample" : {"id" : args.sample_id}, "qc-metrics": d}
@@ -99,8 +79,6 @@ if __name__ == "__main__":
 
     mqc = load_multi_qc(args.multiqc_json)
     parsed_metrics = calculate_metrics(mqc)
-    version_metrics = add_version_info(parsed_metrics, args.version_info)
-    final_metrics = add_sample_id(version_metrics, args.sample_id)
-    save_output(final_metrics, args.output_json)
+    save_output(parsed_metrics, args.output_json)
 
     done()
