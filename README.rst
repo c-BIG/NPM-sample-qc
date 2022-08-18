@@ -32,7 +32,7 @@ Required inputs
 
 NPM-sample-qc input requirements can be split into two categories:
 
-- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
+- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
 - **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM. See ``tests/sample_params*.yml`` for an example.
 
@@ -47,11 +47,13 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
       pipeline_info/    # dag, timeline and trace files
           dag.pdf
           timeline.html
+          report.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
           <sample_id>.metrics.json    
           samtools/
           picard/
+          mosdepth/
           multiqc/
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
@@ -60,9 +62,10 @@ If ``keep_workdir`` has been specified, the contents of the Nextflow work direct
 Resources
 =========
 
-Other than than the required sample specific BAM/CRAM file, it requires the follwing data resources.
-Human reference genome in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
+Other than than the sample specific BAM/CRAM file, it requires the follwing data resources.
+Human reference genome GRCh38_ in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
 
+.. _GRCh38: https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle
 .. _UCSC: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
 
 AWS batch deployment
@@ -73,6 +76,10 @@ Edit the following files to suit your AWS batch configuration
 *
 =======
 >>>>>>> 34a598a (Update README.rst)
+
+Limitation with ``awsbatch`` executor, write tracing & visualization files locally and upload it to s3. Issue_
+
+.. _Issue: https://github.com/nextflow-io/nextflow/issues/2342
 
 Workflow logic
 --------------
