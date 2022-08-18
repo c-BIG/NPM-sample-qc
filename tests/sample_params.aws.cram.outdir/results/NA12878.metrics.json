@@ -1,0 +1,14 @@
+{
+    "biosample": {
+        "id": "NA12878"
+    },
+    "qc-metrics": {
+        "mad_autosome_coverage": 2.39,
+        "mean_autosome_coverage": 31.72195,
+        "mean_insert_size": 442.49241,
+        "pct_autosomes_15x": 96.32472,
+        "pct_q30_bases": 96.78739,
+        "pct_reads_aligned_in_pairs": 99.54223,
+        "pct_reads_properly_paired": 98.0929
+    }
+}
