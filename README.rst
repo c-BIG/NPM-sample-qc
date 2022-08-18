@@ -58,7 +58,6 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
-<<<<<<< HEAD
 Resources
 =========
 
@@ -74,10 +73,8 @@ AWS batch deployment
 Edit the following files to suit your AWS batch configuration  
 * conf/awsbatch.config
 *
-=======
->>>>>>> 34a598a (Update README.rst)
 
-Limitation with ``awsbatch`` executor, write tracing & visualization files locally and upload it to s3. Issue_
+Limitation with ``awsbatch`` 'Executor', write tracing & visualization files locally and upload it to s3. Issue_
 
 .. _Issue: https://github.com/nextflow-io/nextflow/issues/2342
 
