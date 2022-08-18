@@ -1,4 +1,4 @@
 sample_id: NA12878-PCRF450-1
-cram: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_NovaSeq_6000/NA12878_rep1/dragen_gl_3.2.8_15X/*cram
-vcf: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_NovaSeq_6000/NA12878_rep1/dragen_gl_3.2.8_15X/*gvcf.gz
+bam_cram: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_NovaSeq_6000/NA12878_rep1/dragen_gl_3.2.8_15X/*cram
+//vcf: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_NovaSeq_6000/NA12878_rep1/dragen_gl_3.2.8_15X/*gvcf.gz
 //pst_vcf: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_HiSeq_2000/NA12877/dragen_gl_3.2.8_15X/NA12877.variant-sites.vcf.gz
