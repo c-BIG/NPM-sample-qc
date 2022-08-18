@@ -5,11 +5,10 @@ export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
 
 uid=`uuidgen`
-# sampleid="NA12878"
 sampleid="NA12878"
 
 nextflow run NPM-sample-qc/main.nf \
-	-config NPM-sample-qc/conf/nextflow-docker.config \
+	-config NPM-sample-qc/nextflow.config \
 	-params-file NPM-sample-qc/tests/sample_params.aws.bam.yml \
 	-resume \
 	--outdir ${sampleid} \
