@@ -58,6 +58,7 @@ Upon completion, NPM-sample-qc will create the following files in the ``outdir``
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
+
 Resources
 =========
 
