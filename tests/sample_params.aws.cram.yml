@@ -1,3 +1,2 @@
 sample_id: NA12878-PCRF450-1_Proband_S1
-cram: "" // path to your cram file eg. "s3://npm-sample-qc/data/NA12878.cram"
-vcf: "" // path to your vcf file eg. "s3://npm-sample-qc/data/NA12878.hard-filtered.vcf.gz"
+bam_cram: "" // path to your cram file eg. "s3://npm-sample-qc/data/NA12878.cram"
