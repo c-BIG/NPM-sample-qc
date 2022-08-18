@@ -1,7 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	1e/dc6df9	28dfc072-c01d-4eff-b8e3-b2712591ca13	cram_bam_index (1)	COMPLETED	0	2022-08-17 11:34:16.215	13m 17s	2m 45s	20.1%	14.7 MB	20.3 MB	13.8 GB	1.4 MB
-4	17/e44319	8f82de56-ceeb-43b3-b13c-35d1432429e9	mosdepth (1)	COMPLETED	0	2022-08-17 11:47:34.839	15m 19s	9m 39s	250.8%	1.9 GB	2 GB	22.1 GB	1.4 GB
-3	80/7046d6	fd8cc225-df21-4754-af4f-043d3388bc0a	picard_collect_multiple_metrics (1)	COMPLETED	0	2022-08-17 11:47:34.736	1h 20m 9s	1h 9m 7s	102.9%	1.5 GB	5.2 GB	16.8 GB	909.3 KB
-2	66/6b8c65	a65b5929-a4dc-4267-89d0-fba546532b61	samtools_stats (1)	COMPLETED	0	2022-08-17 11:47:34.666	5h 26m 19s	5h 16m 26s	14.9%	493.7 MB	620.5 MB	14.5 GB	3 GB
-5	b4/70a51c	871ea63f-3724-4061-be32-c551a94ea3a7	multiqc (1)	COMPLETED	0	2022-08-17 17:13:55.048	28.8s	6.3s	77.9%	145.6 MB	406.7 MB	55.7 MB	18.1 MB
-6	1b/220361	493f532e-e6ae-45b6-bb43-add3cc7847e6	compile_metrics (1)	COMPLETED	0	2022-08-17 17:14:25.416	38.5s	380ms	174.8%	12.2 MB	15.6 MB	4.4 MB	2.3 MB
