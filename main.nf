@@ -103,7 +103,10 @@ Channel
     .fromPath(params.n_regions_bed)
     .set { n_regions_bed_ch_mosdepth }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 480fdd1 (removed version_info and channel)
 /*
 ----------------------------------------------------------------------
 PROCESSES
