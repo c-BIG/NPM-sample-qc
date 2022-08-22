@@ -150,7 +150,7 @@ process samtools_stats {
     """
 
 }
-
+/*
 process mosdepth {
 
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
@@ -243,6 +243,7 @@ process compile_metrics {
     """
 
 }
+*/
 
 /*
 ----------------------------------------------------------------------
