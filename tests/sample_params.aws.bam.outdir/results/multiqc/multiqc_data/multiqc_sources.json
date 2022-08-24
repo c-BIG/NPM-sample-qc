@@ -1,0 +1,21 @@
+{
+    "mosdepth": {
+        "genome_results": {
+            "NA12878.qc": "/tmp/nxf.18szxBsM8B/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
+        }
+    },
+    "Picard": {
+        "InsertSizeMetrics": {
+            "NA12878.qc": "/tmp/nxf.18szxBsM8B/picard/NA12878.insert_size_metrics.txt"
+        },
+        "QualityYieldMetrics": {
+            "NA12878.quality_yield_metrics": "/tmp/nxf.18szxBsM8B/picard/NA12878.quality_yield_metrics.txt",
+            "NA12878.insert_size_metrics": "/tmp/nxf.18szxBsM8B/picard/NA12878.insert_size_metrics.txt"
+        }
+    },
+    "Samtools": {
+        "stats": {
+            "NA12878": "/tmp/nxf.18szxBsM8B/samtools/NA12878.stats"
+        }
+    }
+}
