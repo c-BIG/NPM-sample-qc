@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl=2
+
 /*
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
@@ -73,6 +75,7 @@ startMessage()
 INPUT CHANNELS
 ----------------------------------------------------------------------
 */
+/*
 fcbam = file( params.bam_cram )
 assert params.bam_cram  != null: "Missing CRAM / BAM input param"
 
@@ -102,13 +105,14 @@ Channel
 Channel
     .fromPath(params.n_regions_bed)
     .set { n_regions_bed_ch_mosdepth }
-
+*/
 /*
 ----------------------------------------------------------------------
 PROCESSES
 ---------------------------------------------------------------------
 */
 
+/*
 process cram_bam_index {
 
     input:
@@ -133,23 +137,25 @@ process cram_bam_index {
             samtools index ${params.sample_id}.qc.bam ${params.sample_id}.qc.bam.bai
             """
 }
+*/
 
 process samtools_stats {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    file "*" from cram_bam_ch_samtools_stats
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    file "*" into samtools_stats_ch
+    path "*",  emit: samtools_stats_output
 
     script:
     """
-      samtools stats ${params.sample_id}.qc.${ftype} > ${params.sample_id}.stats
+      samtools stats ${bam} > ${sample_id}.stats
     """
 
 }
+
 /*
 process mosdepth {
 
@@ -244,6 +250,20 @@ process compile_metrics {
 
 }
 */
+// input channels
+reference = channel.fromPath(params.reference)
+    .map{ fa -> tuple(fa, fa + ".fai") }
+
+bam = channel.fromPath(params.bam)
+    .map{ bam -> tuple(bam.simpleName, bam, bam + ".bai") }
+
+inputs = bam.combine(reference)
+
+workflow {
+    samtools_stats(inputs)
+}
+
+
 
 /*
 ----------------------------------------------------------------------
