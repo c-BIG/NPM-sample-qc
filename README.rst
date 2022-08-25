@@ -63,9 +63,9 @@ Resources
 =========
 
 Other than than the sample specific BAM/CRAM file, it requires the follwing data resources.
-Human reference genome GRCh38_ in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
+Human reference genome GRCh38_ in fasta format and size of the autosomes and gapped regions of the autosomes in bed format. The gap regions can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
 
-.. _GRCh38: https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle
+.. _GRCh38: https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta 
 .. _UCSC: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
 
 AWS batch deployment
