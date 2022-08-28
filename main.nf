@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+version = "release-0.6-dev - 63af117"   // NPM-sample-qc workflow version
+
 /*
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
@@ -90,14 +92,10 @@ Channel
     .set { input_ch_cram_bam }
 
 Channel
-    .fromPath(params.ref_fa)
+    .fromPath(params.reference)
     .into { ref_fa_ch_cram_bam_index
           ; ref_fa_ch_picard_collect_multiple_metrics
           ; ref_fa_ch_mosdepth }
-
-Channel
-    .fromPath(params.autosomes_bed)
-    .set { autosomes_bed_ch_mosdepth }
 
 Channel
     .fromPath(params.n_regions_bed)
@@ -112,7 +110,7 @@ PROCESSES
 process cram_bam_index {
 
     input:
-    file ref_fa from ref_fa_ch_cram_bam_index
+    file reference from ref_fa_ch_cram_bam_index
     file bam_cram from input_ch_cram_bam
 
     output:
@@ -123,12 +121,13 @@ process cram_bam_index {
     script:
         if ( fcbam.getExtension() == 'cram')
             """
-            samtools faidx ${ref_fa} -o ${ref_fa}.fai
+            samtools faidx ${reference} -o ${reference}.fai
             mv ${bam_cram} ${params.sample_id}.qc.cram
             samtools index ${params.sample_id}.qc.cram ${params.sample_id}.qc.cram.crai
             """
         else if ( fcbam.getExtension() == 'bam')
             """
+            samtools faidx ${reference} -o ${reference}.fai
             mv ${bam_cram} ${params.sample_id}.qc.bam
             samtools index ${params.sample_id}.qc.bam ${params.sample_id}.qc.bam.bai
             """
@@ -156,20 +155,18 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_mosdepth
+    file reference from ref_fa_ch_mosdepth
     file "*" from cram_bam_ch_mosdepth
-    file autosomes_bed from autosomes_bed_ch_mosdepth
     file n_regions_bed from n_regions_bed_ch_mosdepth
 
     output:
-    file "*" into mosdepth_ch
+    file "${params.sample_id}.*" into mosdepth_ch
 
     script:
     """
     run_mosdepth.sh \
-        --input_bam=${params.sample_id}.qc.${ftype} \
-        --ref_fasta=${ref_fa} \
-        --autosomes_bed=${autosomes_bed} \
+        --input_bam_cram=${params.sample_id}.qc.${ftype} \
+        --ref_fasta=${reference} \
         --n_regions_bed=${n_regions_bed} \
         --output_csv=${params.sample_id}.mosdepth.csv \
         --work_dir=.
@@ -182,7 +179,7 @@ process picard_collect_multiple_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_picard_collect_multiple_metrics
+    file reference from ref_fa_ch_picard_collect_multiple_metrics
     file "*" from cram_bam_ch_picard_collect_multiple_metrics
 
     output:
@@ -200,7 +197,7 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${ref_fa}
+        R=${reference}
     """
 
 }
@@ -240,6 +237,7 @@ process compile_metrics {
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
         --sample_id ${params.sample_id}
+        --version ${version}
     """
 
 }
