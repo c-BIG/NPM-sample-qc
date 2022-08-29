@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-version = "release-0.6-dev - 63af117"   // NPM-sample-qc workflow version
+version = "release-0.6-dev-63af117"   // NPM-sample-qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
@@ -236,7 +236,7 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --sample_id ${params.sample_id}
+        --sample_id ${params.sample_id} \
         --version ${version}
     """
 
