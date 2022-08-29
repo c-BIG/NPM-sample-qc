@@ -68,7 +68,7 @@ mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_
 
 #### filter outputs
 # focus on autosomes
-head -22 "$REF_FASTA.fai" |awk '{print $1,"\t0","\t"$2}' > $WORK_DIR/autosomes.bed
+head -22 "$REF_FASTA.fai" |awk '{print $1"\t0""\t"$2}' > $WORK_DIR/autosomes.bed
 zcat $WORK_DIR/$SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b $WORK_DIR/autosomes.bed | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz
 
 # exclude bins that overlap with N bases in ref
