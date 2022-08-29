@@ -160,7 +160,7 @@ process mosdepth {
     file n_regions_bed from n_regions_bed_ch_mosdepth
 
     output:
-    file "${params.sample_id}.*" into mosdepth_ch
+    file "*" into mosdepth_ch
 
     script:
     """
