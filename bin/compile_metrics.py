@@ -67,7 +67,7 @@ def calculate_metrics(mqc):
 
 def save_output(d, outfile):
     with open(outfile, "w") as f:
-        d = {"biosample" : {"id" : args.sample_id}, "workflow_version" : {"version" : args.version}, "wgs_qc_metrics": d}
+        d = {"biosample" : {"id" : args.sample_id}, "workflow_version" : {"version" : args.version}, "wgs_qc_metrics" : d}
         json.dump(d, f, sort_keys=True, indent=4)
         f.write("\n")
 
