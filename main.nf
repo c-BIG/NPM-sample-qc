@@ -113,16 +113,12 @@ process samtools_stats {
 
 }
 
-/*
 process mosdepth {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_mosdepth
-    file "*" from cram_bam_ch_mosdepth
-    file autosomes_bed from autosomes_bed_ch_mosdepth
-    file n_regions_bed from n_regions_bed_ch_mosdepth
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
     file "*" into mosdepth_ch
@@ -130,16 +126,14 @@ process mosdepth {
     script:
     """
     run_mosdepth.sh \
-        --input_bam=${params.sample_id}.qc.${ftype} \
-        --ref_fasta=${ref_fa} \
-        --autosomes_bed=${autosomes_bed} \
+        --input_bam=${sample_id} \
+        --ref_fasta=${fa} \
         --n_regions_bed=${n_regions_bed} \
-        --output_csv=${params.sample_id}.mosdepth.csv \
+        --output_csv=${sample_id}.mosdepth.csv \
         --work_dir=.
     """
 
 }
-*/
 
 process picard_collect_multiple_metrics {
     tag "${sample_id}"
