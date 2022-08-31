@@ -88,55 +88,12 @@ else if ( fcbam.getExtension() == 'bam') {
     println "Input file type and name: BAM : ${params.bam_cram}"
 }
 
-Channel
-    .fromPath(params.bam_cram)
-    .set { input_ch_cram_bam }
-
-Channel
-    .fromPath(params.ref_fa)
-    .into { ref_fa_ch_cram_bam_index
-          ; ref_fa_ch_picard_collect_multiple_metrics
-          ; ref_fa_ch_mosdepth }
-
-Channel
-    .fromPath(params.autosomes_bed)
-    .set { autosomes_bed_ch_mosdepth }
-
-Channel
-    .fromPath(params.n_regions_bed)
-    .set { n_regions_bed_ch_mosdepth }
 */
+
 /*
 ----------------------------------------------------------------------
 PROCESSES
 ---------------------------------------------------------------------
-*/
-
-/*
-process cram_bam_index {
-
-    input:
-    file ref_fa from ref_fa_ch_cram_bam_index
-    file bam_cram from input_ch_cram_bam
-
-    output:
-    file "*" into cram_bam_ch_samtools_stats \
-                , cram_bam_ch_picard_collect_multiple_metrics \
-                , cram_bam_ch_mosdepth
-
-    script:
-        if ( fcbam.getExtension() == 'cram')
-            """
-            samtools faidx ${ref_fa} -o ${ref_fa}.fai
-            mv ${bam_cram} ${params.sample_id}.qc.cram
-            samtools index ${params.sample_id}.qc.cram ${params.sample_id}.qc.cram.crai
-            """
-        else if ( fcbam.getExtension() == 'bam')
-            """
-            mv ${bam_cram} ${params.sample_id}.qc.bam
-            samtools index ${params.sample_id}.qc.bam ${params.sample_id}.qc.bam.bai
-            """
-}
 */
 
 process samtools_stats {
@@ -182,6 +139,7 @@ process mosdepth {
     """
 
 }
+*/
 
 process picard_collect_multiple_metrics {
 
@@ -211,6 +169,7 @@ process picard_collect_multiple_metrics {
 
 }
 
+/*
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
@@ -250,6 +209,7 @@ process compile_metrics {
 
 }
 */
+
 // input channels
 reference = channel.fromPath(params.reference)
     .map{ fa -> tuple(fa, fa + ".fai") }
