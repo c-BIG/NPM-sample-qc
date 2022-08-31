@@ -1,7 +1,6 @@
 #!/bin/bash
 cd test
 
-export NXF_DEFAULT_DSL=1
 export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
 
@@ -11,4 +10,5 @@ nextflow run ../main.nf \
 	-resume \
 	-work-dir ./work \
 	--outdir ./ \
-	-profile docker
+	-profile docker \
+	-bg
