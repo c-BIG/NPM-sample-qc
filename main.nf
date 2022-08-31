@@ -142,21 +142,20 @@ process mosdepth {
 */
 
 process picard_collect_multiple_metrics {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file ref_fa from ref_fa_ch_picard_collect_multiple_metrics
-    file "*" from cram_bam_ch_picard_collect_multiple_metrics
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    file "*" into picard_collect_multiple_metrics_ch
+    file "*" into picard_collect_multiple_metrics_output
 
     script:
     """
     picard CollectMultipleMetrics  \
-        I=${params.sample_id}.qc.${ftype} \
-        O=${params.sample_id} \
+        I=${bam} \
+        O=${sample_id} \
         ASSUME_SORTED=true \
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
@@ -164,7 +163,7 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${ref_fa}
+        R=${fa}
     """
 
 }
