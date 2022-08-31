@@ -1,2 +1,2 @@
-sample_id: NA12878-PCRF450-1
-bam_cram: /data/13000026/pipeline/dev/NPM-test-data/PCR-Free_NovaSeq_6000/NA12878_rep1/dragen_gl_3.2.8_15X/*cram
+sample_id: NA12878 
+bam_cram: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam
