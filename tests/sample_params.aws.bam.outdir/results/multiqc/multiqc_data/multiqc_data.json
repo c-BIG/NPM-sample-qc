@@ -2,21 +2,21 @@
     "report_data_sources": {
         "mosdepth": {
             "genome_results": {
-                "NA12878.qc": "/tmp/nxf.18szxBsM8B/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
+                "NA12878.qc": "/tmp/nxf.j8sDkPHIPZ/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
             }
         },
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878.qc": "/tmp/nxf.18szxBsM8B/picard/NA12878.insert_size_metrics.txt"
+                "NA12878.qc": "/tmp/nxf.j8sDkPHIPZ/picard/NA12878.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878.quality_yield_metrics": "/tmp/nxf.18szxBsM8B/picard/NA12878.quality_yield_metrics.txt",
-                "NA12878.insert_size_metrics": "/tmp/nxf.18szxBsM8B/picard/NA12878.insert_size_metrics.txt"
+                "NA12878.insert_size_metrics": "/tmp/nxf.j8sDkPHIPZ/picard/NA12878.insert_size_metrics.txt",
+                "NA12878.quality_yield_metrics": "/tmp/nxf.j8sDkPHIPZ/picard/NA12878.quality_yield_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878": "/tmp/nxf.18szxBsM8B/samtools/NA12878.stats"
+                "NA12878": "/tmp/nxf.j8sDkPHIPZ/samtools/NA12878.stats"
             }
         }
     },
@@ -6205,16 +6205,16 @@
         },
         "multiqc_npm_mosdepth": {
             "NA12878": {
-                "mean_autosome_coverage": "31.722552",
-                "sd_autosome_coverage": "23.442348",
-                "median_autosome_coverage": "32.430000",
-                "mad_autosome_coverage": "2.390000",
-                "total_autosome_bases": "2.74455e+09",
-                "ge_1x_autosome_bases": "2.68062e+09",
-                "ge_10x_autosome_bases": "2.65375e+09",
-                "ge_15x_autosome_bases": "2.6437e+09",
-                "ge_30x_autosome_bases": "2069575000",
-                "ge_40x_autosome_bases": "81354000"
+                "mean_autosome_coverage": "31.602051",
+                "sd_autosome_coverage": "27.330824",
+                "median_autosome_coverage": "32.410000",
+                "mad_autosome_coverage": "2.400000",
+                "total_autosome_bases": "2.75589e+09",
+                "ge_1x_autosome_bases": "2.6807e+09",
+                "ge_10x_autosome_bases": "2.65379e+09",
+                "ge_15x_autosome_bases": "2.64373e+09",
+                "ge_30x_autosome_bases": "2069591000",
+                "ge_40x_autosome_bases": "81357000"
             }
         },
         "mosdepth_cumcov_dist": {
@@ -9184,12 +9184,12 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/tmp/nxf.18szxBsM8B"
+        "/tmp/nxf.j8sDkPHIPZ"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2022-08-17, 08:12",
+    "config_creation_date": "2022-08-30, 10:20",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,

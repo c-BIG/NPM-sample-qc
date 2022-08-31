@@ -1,21 +1,21 @@
 {
     "mosdepth": {
         "genome_results": {
-            "NA12878.qc": "/tmp/nxf.119jjAxdWx/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
+            "NA12878.qc": "/tmp/nxf.QqLv5ZWPfr/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
         }
     },
     "Picard": {
         "InsertSizeMetrics": {
-            "NA12878.qc.cram": "/tmp/nxf.119jjAxdWx/picard/NA12878.insert_size_metrics.txt"
+            "NA12878.qc.cram": "/tmp/nxf.QqLv5ZWPfr/picard/NA12878.insert_size_metrics.txt"
         },
         "QualityYieldMetrics": {
-            "NA12878.insert_size_metrics": "/tmp/nxf.119jjAxdWx/picard/NA12878.insert_size_metrics.txt",
-            "NA12878.quality_yield_metrics": "/tmp/nxf.119jjAxdWx/picard/NA12878.quality_yield_metrics.txt"
+            "NA12878.insert_size_metrics": "/tmp/nxf.QqLv5ZWPfr/picard/NA12878.insert_size_metrics.txt",
+            "NA12878.quality_yield_metrics": "/tmp/nxf.QqLv5ZWPfr/picard/NA12878.quality_yield_metrics.txt"
         }
     },
     "Samtools": {
         "stats": {
-            "NA12878": "/tmp/nxf.119jjAxdWx/samtools/NA12878.stats"
+            "NA12878": "/tmp/nxf.QqLv5ZWPfr/samtools/NA12878.stats"
         }
     }
 }
