@@ -1,7 +1,5 @@
 #!/usr/bin/env nextflow
 
-version = "release-0.6-dev 63af117"   // NPM-sample-qc workflow version
-
 /*
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
@@ -98,8 +96,8 @@ Channel
           ; ref_fa_ch_mosdepth }
 
 Channel
-    .fromPath(params.n_regions_bed)
-    .set { n_regions_bed_ch_mosdepth }
+    .fromPath(params.gap_regions)
+    .set { gap_regions_ch_mosdepth }
 
 /*
 ----------------------------------------------------------------------
@@ -157,7 +155,7 @@ process mosdepth {
     input:
     file reference from ref_fa_ch_mosdepth
     file "*" from cram_bam_ch_mosdepth
-    file n_regions_bed from n_regions_bed_ch_mosdepth
+    file gap_regions from gap_regions_ch_mosdepth
 
     output:
     file "*" into mosdepth_ch
@@ -167,7 +165,7 @@ process mosdepth {
     run_mosdepth.sh \
         --input_bam_cram=${params.sample_id}.qc.${ftype} \
         --ref_fasta=${reference} \
-        --n_regions_bed=${n_regions_bed} \
+        --gap_regions=${gap_regions} \
         --output_csv=${params.sample_id}.mosdepth.csv \
         --work_dir=.
     """
@@ -236,8 +234,7 @@ process compile_metrics {
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
-        --sample_id ${params.sample_id} \
-        --version $version 
+        --sample_id ${params.sample_id}
     """
 
 }
