@@ -237,7 +237,7 @@ process compile_metrics {
         --multiqc_json multiqc_data.json \
         --output_json ${params.sample_id}.metrics.json \
         --sample_id ${params.sample_id} \
-        --version version 
+        --version $version 
     """
 
 }
