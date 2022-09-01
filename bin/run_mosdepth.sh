@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --input_bam=<bam> --autosomes_bed=<bed> --n_regions_bed=<bed> --output_csv=<csv> --work_dir=<dir>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --input_bam=<bam> --gap_regions=<gz> --output_csv=<csv> --work_dir=<dir>" >&2
     echo
     exit 1
 }
@@ -18,12 +18,8 @@ case $i in
         INPUT_BAM="${i#*=}"
         shift
         ;;
-    -a=* | --autosomes_bed=*)
-        AUTOSOMES_BED="${i#*=}"
-        shift
-        ;;
-    -n=* | --n_regions_bed=*)
-        N_REGIONS_BED="${i#*=}"
+    -n=* | --gap_regions=*)
+        GAP_REGIONS="${i#*=}"
         shift
         ;;
     -o=* | --output_csv=*)
@@ -46,7 +42,7 @@ case $i in
 esac
 done
 
-if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM" ] || [ -z "$AUTOSOMES_BED" ] || [ -z "$N_REGIONS_BED" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
+if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM" ] || [ -z "$GAP_REGIONS" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
   echo "Error: One or more variables are undefined"
   display_help
   exit 1
@@ -62,8 +58,7 @@ fi
 
 echo "REF_FASTA     = $REF_FASTA"
 echo "INPUT_BAM     = $INPUT_BAM"
-echo "AUTOSOMES_BED = $AUTOSOMES_BED"
-echo "N_REGIONS_BED = $N_REGIONS_BED"
+echo "GAP_REGIONS_BED = $GAP_REGIONS_BED"
 echo "OUTPUT_CSV    = $OUTPUT_CSV"
 echo "WORK_DIR      = $WORK_DIR"
 echo "SAMPLE_ID     = $SAMPLE_ID"

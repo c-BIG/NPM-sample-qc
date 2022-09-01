@@ -118,17 +118,17 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai), file(gap_regions)
 
     output:
-    file "*" into mosdepth_ch
+    path "*", emit: mosdepth_ch
 
     script:
     """
     run_mosdepth.sh \
-        --input_bam=${sample_id} \
+        --input_bam=${bam} \
         --ref_fasta=${fa} \
-        --n_regions_bed=${n_regions_bed} \
+        --gap_regions=${gap_regions} \
         --output_csv=${sample_id}.mosdepth.csv \
         --work_dir=.
     """
@@ -212,8 +212,12 @@ bam = channel.fromPath(params.bam)
 
 inputs = bam.combine(reference)
 
+gap_regions = channel.fromPath(params.gap_regions)
+
 workflow {
     samtools_stats(inputs)
+    picard_collect_multiple_metrics(inputs)
+    mosdepth(inputs, gap_regions)
 }
 
 
