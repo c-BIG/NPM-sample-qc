@@ -1,2 +1,0 @@
-sample_id: NA12878-PCRF450-1_Proband_S1
-bam_cram: "" // path to your cram file eg. "s3://npm-sample-qc/data/NA12878.cram"
