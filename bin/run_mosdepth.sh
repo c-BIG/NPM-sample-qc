@@ -56,12 +56,12 @@ then
 	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
 fi
 
-echo "REF_FASTA     = $REF_FASTA"
-echo "INPUT_BAM     = $INPUT_BAM_CRAM"
-echo "GAP_REGIONS = $GAP_REGIONS"
-echo "OUTPUT_CSV    = $OUTPUT_CSV"
-echo "WORK_DIR      = $WORK_DIR"
-echo "SAMPLE_ID     = $SAMPLE_ID"
+echo "REF_FASTA          = $REF_FASTA"
+echo "INPUT_BAM_CRAM     = $INPUT_BAM_CRAM"
+echo "GAP_REGIONS        = $GAP_REGIONS"
+echo "OUTPUT_CSV         = $OUTPUT_CSV"
+echo "WORK_DIR           = $WORK_DIR"
+echo "SAMPLE_ID          = $SAMPLE_ID"
 
 #### run mosdepth
 mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_DIR/$SAMPLE_ID $INPUT_BAM_CRAM

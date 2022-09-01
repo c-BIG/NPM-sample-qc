@@ -104,7 +104,7 @@ process samtools_stats {
     tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    path "*",  emit: samtools_stats_output
+    path "*"
 
     script:
     """
@@ -118,15 +118,16 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai), file(gap_regions)
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
+    path gap_regions
 
     output:
-    path "*", emit: mosdepth_out
+    path "*"
 
     script:
     """
     run_mosdepth.sh \
-        --input_bam=${bam} \
+        --input_bam_cram=${bam} \
         --ref_fasta=${fa} \
         --gap_regions=${gap_regions} \
         --output_csv=${sample_id}.mosdepth.csv \
@@ -143,7 +144,7 @@ process picard_collect_multiple_metrics {
     tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    path "*", emit:  picard_collect_multiple_metrics_output
+    path "*"
 
     script:
     """
@@ -202,21 +203,21 @@ process compile_metrics {
 */
 
 // input channels
-reference = channel.fromPath(params.reference, checkExists:true)
+reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
-bam = channel.fromPath(params.bam, checkExists:true)
+bam = channel.fromPath(params.bam_cram, checkIfExists: true)
     .map{ bam -> tuple(bam.simpleName, bam, bam + ".bai") }
 
-inputs = bam.combine(reference)
+gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
-gap_regions = channel.fromPath(params.gap_regions, checkExists:true)
+inputs = bam.combine(reference)
 
 workflow {
     samtools_stats(inputs)
     picard_collect_multiple_metrics(inputs)
     mosdepth( inputs, gap_regions )
-    multiqc( samtools.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
+    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
 }
 
 
