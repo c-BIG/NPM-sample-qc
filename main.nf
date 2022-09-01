@@ -180,16 +180,15 @@ process multiqc {
 
 }
 
-/*
 process compile_metrics {
 
     publishDir "${params.publishdir}", mode: "copy"
 
     input:
-    file "*" from multiqc_ch
+    path "multiqc_data.json"
 
     output:
-    file "*" into compile_metrics_ch
+    path "${params.sample_id.metrics.json}", emit: compile_metrics_out
 
     script:
     """
@@ -200,7 +199,6 @@ process compile_metrics {
     """
 
 }
-*/
 
 // input channels
 reference = channel.fromPath(params.reference, checkIfExists: true)
@@ -218,6 +216,7 @@ workflow {
     picard_collect_multiple_metrics(inputs)
     mosdepth( inputs, gap_regions )
     multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
+    compile_metrics(multiqc.out)
 }
 
 
