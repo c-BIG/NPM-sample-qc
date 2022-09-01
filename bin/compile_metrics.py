@@ -35,9 +35,9 @@ def set_logging(loglevel):
 def load_multi_qc(multiqc_json):
     logging.info("Reading multiqc output: %s", multiqc_json)
     with open(multiqc_json) as json_file:
-        d = json.load(json_file)
+        data_metrics = json.load(json_file)
         # keep raw data to simplify parsing downstream
-        mqc = d["report_saved_raw_data"]
+        mqc = data_metrics["report_saved_raw_data"]
     return mqc
 
 
@@ -62,10 +62,10 @@ def calculate_metrics(mqc):
     return result
 
 
-def save_output(d, outfile):
+def save_output(data_metrics, outfile):
     with open(outfile, "w") as f:
-        d = {"biosample" : {"id" : args.sample_id}, "wgs_qc_metrics" : d}
-        json.dump(d, f, sort_keys=True, indent=4)
+        d = {"biosample" : {"id" : args.sample_id}, "wgs_qc_metrics" : data_metrics}
+        json.dump(data_metrics, f, sort_keys=True, indent=4)
         f.write("\n")
 
 

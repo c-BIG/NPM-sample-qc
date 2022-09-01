@@ -1,5 +1,4 @@
 #!/bin/bash
-cd tests
 
 export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
