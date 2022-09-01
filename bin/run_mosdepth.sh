@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --input_bam=<bam> --gap_regions=<gz> --output_csv=<csv> --work_dir=<dir>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --input_bam_cram=<bam> --gap_regions=<gz> --output_csv=<csv> --work_dir=<dir>" >&2
     echo
     exit 1
 }
@@ -14,8 +14,8 @@ case $i in
 	REF_FASTA="${i#*=}"
         shift
         ;;
-    -i=* | --input_bam=*)
-        INPUT_BAM="${i#*=}"
+    -i=* | --input_bam_cram=*)
+        INPUT_BAM_CRAM="${i#*=}"
         shift
         ;;
     -n=* | --gap_regions=*)
@@ -42,35 +42,38 @@ case $i in
 esac
 done
 
-if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM" ] || [ -z "$GAP_REGIONS" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
+if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM_CRAM" ] || [ -z "$GAP_REGIONS" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
   echo "Error: One or more variables are undefined"
   display_help
   exit 1
 fi
 
-if [ "${INPUT_BAM: -4}" == ".bam" ]
+if [ "${INPUT_BAM_CRAM: -4}" == ".bam" ]
 then
-	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
-elif [ "${INPUT_BAM: -5}" == ".cram" ]
+	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
+elif [ "${INPUT_BAM_CRAM: -5}" == ".cram" ]
 then
-	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
+	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
 fi
 
 echo "REF_FASTA     = $REF_FASTA"
-echo "INPUT_BAM     = $INPUT_BAM"
-echo "GAP_REGIONS_BED = $GAP_REGIONS_BED"
+echo "INPUT_BAM     = $INPUT_BAM_CRAM"
+echo "GAP_REGIONS = $GAP_REGIONS"
 echo "OUTPUT_CSV    = $OUTPUT_CSV"
 echo "WORK_DIR      = $WORK_DIR"
 echo "SAMPLE_ID     = $SAMPLE_ID"
 
 #### run mosdepth
-mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_DIR/$SAMPLE_ID $INPUT_BAM
+mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_DIR/$SAMPLE_ID $INPUT_BAM_CRAM
 
 #### filter outputs
 # focus on autosomes
-zcat $WORK_DIR/$SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b $AUTOSOMES_BED | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz
+head -22 "$REF_FASTA.fai" |awk '{print $1"\t0""\t"$2}' > $WORK_DIR/autosomes.bed
+zcat $WORK_DIR/$SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b $WORK_DIR/autosomes.bed | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz
+
 # exclude bins that overlap with N bases in ref
-zcat $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz | bedtools intersect -v -a stdin -b $N_REGIONS_BED | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz
+zcat $GAP_REGIONS |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > $WORK_DIR/gap_regions.bed 
+zcat $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz | bedtools intersect -v -a stdin -b $WORK_DIR/gap_regions.bed | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz
 
 #### calculate metrics
 BED="$WORK_DIR/$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz"
