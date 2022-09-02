@@ -1,7 +1,7 @@
 N E X T F L O W  ~  version 22.04.0
-Launching `../main.nf` [nice_gates] DSL2 - revision: 28137f4d02
+Launching `../main.nf` [small_monod] DSL2 - revision: 79c2dee83c
 N E X T F L O W  ~  version 22.04.0 5697
-NPM-sample-qc  ~  version 0.5 - commitId
+NPM-sample-qc  ~  version 0.5 commitId
 User name    : ubuntu
 Command Line : nextflow run ../main.nf -config ../nextflow.config -params-file sample_params.yml -resume --outdir ./ -work-dir ./work -profile docker -bg
 Project Dir  : /home/ubuntu/test/NPM-sample-qc
@@ -15,8 +15,8 @@ Profile      : docker
 [16/7e234c] Cached process > mosdepth (NA12878)
 [be/778070] Cached process > multiqc
 [5d/c3ef8d] Cached process > compile_metrics
-Started     : 2022-09-02T04:04:04.553075Z
-Completed   : 2022-09-02T04:04:09.711775Z
-Duration    : 5.2s
+Started     : 2022-09-02T04:07:37.293560Z
+Completed   : 2022-09-02T04:07:42.753978Z
+Duration    : 5.5s
 Status      : true
 Publish dir : .//results
