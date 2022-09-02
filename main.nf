@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl=2
 
-// version = "0.5 - commitId"
+version = "0.5 - commitId" // nf qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
@@ -35,6 +35,11 @@ def helpMessage() {
     --help            Print this help message
     """.stripIndent()
 }
+
+def version_message(String version) {
+    println("NPM-sample-qc  ~  version ${version}")
+}
+
 
 def nextflowMessage() {
     log.info "N E X T F L O W  ~  version ${workflow.nextflow.version} ${workflow.nextflow.build}"
@@ -71,12 +76,6 @@ LAUNCH INFO
 */
 
 startMessage()
-
-/*
-----------------------------------------------------------------------
-INPUT CHANNELS
-----------------------------------------------------------------------
-*/
 
 /*
 ----------------------------------------------------------------------
