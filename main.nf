@@ -104,7 +104,7 @@ process samtools_stats {
     tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    path "*"
+    path "${sample_id}.stats"
 
     script:
     """
@@ -122,7 +122,7 @@ process mosdepth {
     path gap_regions
 
     output:
-    path "*"
+    path "${sample_id}.*"
 
     script:
     """
@@ -144,7 +144,7 @@ process picard_collect_multiple_metrics {
     tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
-    path "*"
+    path "${sample_id}.*"
 
     script:
     """
@@ -181,14 +181,13 @@ process multiqc {
 }
 
 process compile_metrics {
-
     publishDir "${params.publishdir}", mode: "copy"
 
     input:
-    path "multiqc_data.json"
+    path multiqc
 
     output:
-    path "${params.sample_id.metrics.json}", emit: compile_metrics_out
+    path "${params.sample_id}.metrics.json", emit: compile_metrics_out
 
     script:
     """
