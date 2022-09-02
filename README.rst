@@ -15,9 +15,9 @@ Here an example command to launch the workflow: ::
   nextflow run main.nf \
   -config nextflow.config \
   -params-file tests/sample_params.yml \
+  -profile docker
   -work-dir ./work \
-  --outdir ./ \
-  --keep_workdir
+  --outdir ./
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -63,10 +63,10 @@ Resources
 =========
 
 Other than than the sample specific BAM/CRAM file, it requires the follwing data resources.
-Human reference genome GRCh38_ in fasta format, length of the autosomes and formatted gapped regions of the assembly in bed format. Which can be downloaded from UCSC_ See ``resources/Homo_sapiens_assembly38.autosomes.bed`` and ``resources/Homo_sapiens_assembly38.autosomes.n_regions.bed`` for an example.
+Human reference genome GRCh38_ and its gap_ regions. See ``resources/gap.txt.gz`` downloaded from ucsc (``2019-03-11 09:51   12K``).
 
-.. _GRCh38: https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle
-.. _UCSC: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
+.. _GRCh38: https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta 
+.. _gap: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
 
 AWS batch deployment
 ====================
