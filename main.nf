@@ -2,6 +2,8 @@
 
 nextflow.enable.dsl=2
 
+// version = "0.5 - commitId"
+
 /*
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
