@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-
 version = "0.5 commitId" // nf qc workflow version
 
 /*
@@ -186,8 +185,13 @@ process compile_metrics {
 
 }
 
+/*
+----------------------------------------------------------------------
+WORKFLOW
+---------------------------------------------------------------------
+*/
+	
 // input channels
-
 reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
@@ -198,6 +202,7 @@ gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
 inputs = bam.combine(reference)
 
+// main
 workflow {
     samtools_stats(inputs)
     picard_collect_multiple_metrics(inputs)
@@ -205,7 +210,6 @@ workflow {
     multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
     compile_metrics(multiqc.out)
 }
-
 
 
 /*
