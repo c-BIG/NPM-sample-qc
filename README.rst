@@ -75,7 +75,7 @@ Edit the following files to suit your AWS batch configuration
 * conf/awsbatch.config
 *
 
-Limitation with ``awsbatch`` 'Executor', write tracing & visualization files locally and upload it to s3. Issue_
+Workflow info files written locally before maually transfer to s3 bucket with the runs using ``awsbatch`` ``Executor``. Issue_
 
 .. _Issue: https://github.com/nextflow-io/nextflow/issues/2342
 
