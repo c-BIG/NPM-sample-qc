@@ -60,6 +60,19 @@ def startMessage() {
     this.minimalInformationMessage()
 }
 
+index_type = ${params.bam_cram}.getExtension()
+println "$index_type check"
+
+/*
+if ( "${params.bam_cram.getExtension()}" == 'bam' )
+     bam = channel.fromPath(params.bam_cram, checkIfExists: true)
+     .map{ bam -> tuple(bam.simpleName, bam, bam + "bai") }
+ else if ( "${params.bam_cram.getExtension()}" == 'crai' )
+     bam = channel.fromPath(params.bam_cram, checkIfExists: true)
+     .map{ bam -> tuple(bam.simpleName, bam, bam + "crai") }
+*/
+
+/*
 
 /*
 ----------------------------------------------------------------------
@@ -88,14 +101,14 @@ process samtools_stats {
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
     path "${sample_id}.stats"
 
     script:
     """
-      samtools stats ${cbam} > ${sample_id}.stats
+      samtools stats ${bam} > ${sample_id}.stats
     """
 
 }
@@ -105,7 +118,7 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
     path gap_regions
 
     output:
@@ -114,7 +127,7 @@ process mosdepth {
     script:
     """
     run_mosdepth.sh \
-        --input_bam_cram=${cbam} \
+        --input_bam_cram=${bam} \
         --ref_fasta=${fa} \
         --gap_regions=${gap_regions} \
         --output_csv=${sample_id}.mosdepth.csv \
@@ -128,7 +141,7 @@ process picard_collect_multiple_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(sample_id), file(bam), file(bai), file(fa), file(fai)
 
     output:
     path "${sample_id}.*"
@@ -136,7 +149,7 @@ process picard_collect_multiple_metrics {
     script:
     """
     picard CollectMultipleMetrics  \
-        I=${cbam} \
+        I=${bam} \
         O=${sample_id} \
         ASSUME_SORTED=true \
         FILE_EXTENSION=".txt" \
@@ -198,20 +211,16 @@ reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
 
-input_file = file ( params.bam_cram )
-index_type = input_file.getExtension()
-
-if (index_type == "bam")
-    cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".bai") }
-else if (index_type == "cram")
-    cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".crai") }
-
+if ( "${params.bam_cram.getExtension()}" == 'bam' )
+    bam = channel.fromPath(params.bam_cram, checkIfExists: true)
+    .map{ bam -> tuple(bam.simpleName, bam, bam + "bai") }
+else if ( "${params.bam_cram.getExtension()}" == 'crai' )
+    bam = channel.fromPath(params.bam_cram, checkIfExists: true)
+    .map{ bam -> tuple(bam.simpleName, bam, bam + "crai") }
 
 gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
-inputs = cbam.combine(reference)
+inputs = bam.combine(reference)
 
 // main
 workflow {
@@ -221,6 +230,7 @@ workflow {
     multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
     compile_metrics(multiqc.out)
 }
+*/
 
 /*
 ----------------------------------------------------------------------
