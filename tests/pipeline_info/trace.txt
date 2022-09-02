@@ -1,0 +1,6 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+2	16/7e234c	2335083	mosdepth (NA12878)	COMPLETED	0	2022-09-02 02:59:38.988	9m 8s	8m 58s	304.8%	1.9 GB	1.9 GB	50 GB	1.4 GB
+3	dc/46dd63	2335060	picard_collect_multiple_metrics (NA12878)	COMPLETED	0	2022-09-02 02:59:38.980	37m 15s	37m 6s	100.2%	1.1 GB	7.2 GB	50.8 GB	908.4 KB
+1	ae/b5c610	2335044	samtools_stats (NA12878)	COMPLETED	0	2022-09-02 02:59:38.963	40m 25s	40m 15s	100.2%	8.7 MB	14.6 MB	47.8 GB	114.5 KB
+4	be/778070	2369977	multiqc	COMPLETED	0	2022-09-02 03:40:03.955	7.7s	6.9s	66.4%	139.4 MB	861.5 MB	55.5 MB	18.1 MB
+5	5d/c3ef8d	2370650	compile_metrics	COMPLETED	0	2022-09-02 03:40:11.684	1.2s	539ms	91.8%	10.9 MB	14.5 MB	4.4 MB	2.3 MB

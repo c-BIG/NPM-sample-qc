@@ -1,0 +1,21 @@
+{
+    "mosdepth": {
+        "genome_results": {
+            "NA12878": "/home/ubuntu/test/NPM-sample-qc/tests/work/be/77807013765954ab6ce46db157ba4d/NA12878.mosdepth.region.dist.txt"
+        }
+    },
+    "Picard": {
+        "InsertSizeMetrics": {
+            "NA12878": "/home/ubuntu/test/NPM-sample-qc/tests/work/be/77807013765954ab6ce46db157ba4d/NA12878.insert_size_metrics.txt"
+        },
+        "QualityYieldMetrics": {
+            "NA12878.insert_size_metrics": "/home/ubuntu/test/NPM-sample-qc/tests/work/be/77807013765954ab6ce46db157ba4d/NA12878.insert_size_metrics.txt",
+            "NA12878.quality_yield_metrics": "/home/ubuntu/test/NPM-sample-qc/tests/work/be/77807013765954ab6ce46db157ba4d/NA12878.quality_yield_metrics.txt"
+        }
+    },
+    "Samtools": {
+        "stats": {
+            "NA12878": "/home/ubuntu/test/NPM-sample-qc/tests/work/be/77807013765954ab6ce46db157ba4d/NA12878.stats"
+        }
+    }
+}
