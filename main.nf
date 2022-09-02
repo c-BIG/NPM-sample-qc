@@ -6,7 +6,7 @@ nextflow.enable.dsl=2
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
 
-Copyright: 2020 Genome Institute of Singapore
+Copyright: 2022 Genome Institute of Singapore
 License: The MIT License (MIT)
 
 See LICENSE for more copyright information
@@ -21,7 +21,7 @@ FUNCTIONS
 def helpMessage() {
     log.info """
     Usage: nextflow run main.nf -config nextflow.config -params-file sample_params.yaml 
-                                -profile nscc -work-dir ./ --outdir ./
+                                -profile docker -work-dir ./ --outdir ./
                                 [-resume] [--keep_workdir] [--help]
 
     Options:
@@ -74,20 +74,6 @@ startMessage()
 ----------------------------------------------------------------------
 INPUT CHANNELS
 ----------------------------------------------------------------------
-*/
-/*
-fcbam = file( params.bam_cram )
-assert params.bam_cram  != null: "Missing CRAM / BAM input param"
-
-ftype = fcbam.getExtension()
-
-if ( fcbam.getExtension() == 'cram') {
-    println "Input file type and name: CRAM : ${params.bam_cram}"
-}
-else if ( fcbam.getExtension() == 'bam') {
-    println "Input file type and name: BAM : ${params.bam_cram}"
-}
-
 */
 
 /*
@@ -200,6 +186,7 @@ process compile_metrics {
 }
 
 // input channels
+
 reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
