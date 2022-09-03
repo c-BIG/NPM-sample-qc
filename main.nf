@@ -197,7 +197,6 @@ WORKFLOW
 reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
-
 input_file = file ( params.bam_cram )
 index_type = input_file.getExtension()
 
@@ -207,7 +206,6 @@ if (index_type == "bam")
 else if (index_type == "cram")
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
         .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".crai") }
-
 
 gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
@@ -227,7 +225,6 @@ workflow {
 COMPLETION INFO
 ----------------------------------------------------------------------
 */
-/*
 workflow.onComplete {
     log.info "Started     : " + workflow.start
     log.info "Completed   : " + workflow.complete
@@ -242,4 +239,3 @@ workflow.onError {
     log.info "Error message : " + workflow.errorMessage
     log.info "Error report  : " + (workflow.errorReport ?: '-')
 }
-*/
