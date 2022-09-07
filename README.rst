@@ -34,7 +34,7 @@ NPM-sample-qc input requirements can be split into two categories:
 
 - **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM. See ``tests/sample_params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM and its index. See ``tests/sample_params.yml`` for an example.
 
 .. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
@@ -62,8 +62,8 @@ If ``keep_workdir`` has been specified, the contents of the Nextflow work direct
 Resources
 =========
 
-Other than than the sample specific BAM/CRAM file, it requires the follwing data resources.
-Human reference genome GRCh38_ and its gap_ regions. See ``resources/gap.txt.gz`` downloaded from ucsc (``2019-03-11 09:51   12K``).
+Other than the sample specific BAM/CRAM file with its index, it requires the follwing data resources.
+Human reference genome GRCh38_ fasta file with index (fai) and its gap_ regions. See ``resources/gap.txt.gz`` downloaded from ucsc (``2019-03-11 09:51   12K``).
 
 .. _GRCh38: https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta 
 .. _gap: http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz
