@@ -34,7 +34,7 @@ NPM-sample-qc input requirements can be split into two categories:
 
 - **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM and its index. See ``tests/sample_params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS results for a given sample, namely CRAM/BAM and its index (bai/crai). See ``tests/sample_params.yml`` for an example.
 
 .. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
