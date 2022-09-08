@@ -14,18 +14,18 @@ Before running, make sure all the required resources have been downloaded as per
 
 Use the following example command to launch a test run: ::
 
-  nextflow run main.nf \
-  -config nextflow.config \
-  -params-file tests/sample_params.yml \
-  -profile docker
-  -work-dir ./test-run/work \
-  --outdir ./test-run
+  nextflow run NPM-sample-qc/main.nf \
+               -config      NPM-sample-qc/nextflow.config \
+               -profile     docker \
+               -params-file NPM-sample-qc/tests/sample_params.yml \
+               -work-dir    ./test-run/work \
+               --outdir     ./test-run
 
 This test workflow uses publicly accessible data (a BAM file) from the *1000 Genomes Phase 3 Reanalysis with DRAGEN 3.5 and 3.7* repository within the Registry of Open Data on AWS (https://registry.opendata.aws/ilmn-dragen-1kgp/).
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
-  nextflow run main.nf --help
+  nextflow run NPM-sample-qc/main.nf --help
 
 
 Understanding the workflow
