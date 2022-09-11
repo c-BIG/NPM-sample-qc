@@ -10,7 +10,7 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Quick start
 ===========
 
-Before running, make sure all the required resources have been downloaded as per the **Resources** section below.
+Before running, make sure all the required resources have been downloaded as per the **Resources** section below and build docker image from Dockerfile or Singularity image from definition file present in ``containers/Dockerfile, containers/singularity.def``.
 
 Use the following example command to launch a test run: ::
 
