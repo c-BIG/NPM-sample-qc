@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --input_bam_cram=<bam> --gap_regions=<gz> --output_csv=<csv> --work_dir=<dir>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --input_bam_cram=<bam> --gap_regions=<gz> --output_csv=<csv> --sample_id=<id>" >&2
     echo
     exit 1
 }
