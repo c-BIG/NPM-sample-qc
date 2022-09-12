@@ -26,8 +26,8 @@ case $i in
         OUTPUT_CSV="${i#*=}"
         shift
         ;;
-    -w=* | --work_dir=*)
-        WORK_DIR="${i#*=}"
+    -s=* | --sample_id=*)
+        SAMPLE_ID="${i#*=}"
         shift
         ;;
     -h | --help)
@@ -41,14 +41,6 @@ case $i in
         ;;
 esac
 done
-
-if [ "${INPUT_BAM_CRAM: -4}" == ".bam" ]
-then
-	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
-elif [ "${INPUT_BAM_CRAM: -5}" == ".cram" ]
-then
-	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
-fi
 
 
 #### run mosdepth

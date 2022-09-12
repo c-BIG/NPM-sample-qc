@@ -167,7 +167,7 @@ process mosdepth {
         --ref_fasta=${reference} \
         --gap_regions=${gap_regions} \
         --output_csv=${params.sample_id}.mosdepth.csv \
-        --work_dir=.
+        --sample_id=${params.sample_id}
     """
 
 }
