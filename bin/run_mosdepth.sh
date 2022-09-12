@@ -42,12 +42,6 @@ case $i in
 esac
 done
 
-if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM_CRAM" ] || [ -z "$GAP_REGIONS" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
-  echo "Error: One or more variables are undefined"
-  display_help
-  exit 1
-fi
-
 if [ "${INPUT_BAM_CRAM: -4}" == ".bam" ]
 then
 	SAMPLE_ID=$(echo $INPUT_BAM_CRAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
