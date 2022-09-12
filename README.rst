@@ -40,7 +40,7 @@ The workflow requires the following resources given in the ``conf/resources.conf
 
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.
 
-- *FASTA file index*. This file can be downloaded from s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai and not required to specify in the congfig. The workflow look fasta index file which the path of the reference fasta file was given.
+- *FASTA file index*. This file can be downloaded from s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai and not required to specify in the congfig. The workflow look fasta index file in which folder reference fasta file present.
 
 Inputs
 ------
