@@ -10,7 +10,7 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Quick start
 ===========
 
-Before running, make sure all the required resources have been downloaded as per the **Resources** section below and build docker image from ``containers/Dockerfile`` or Singularity image from its definition file ``containers/singularity.def``.
+Before running, make sure all the required resources have been specified in the ``conf/resources.config`` as per the **Resources** section below and build the docker image locally by running ``containers/build_npm-sample-qc_docker_image.sh`` or build the Singularity image by running ``containers/build_npm-sample-qc_singularity_image.sh``.
 
 Use the following example command to launch a test run: ::
 
@@ -34,14 +34,13 @@ Understanding the workflow
 Resources
 ---------
 
-The workflow requires the following resources:
+The workflow requires the following resources given in the ``conf/resources.config``
 
-- *N-regions reference file*, used as an input for mosdepth. This file is already present in ``resources/gap.txt.gz``. Originally downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).
+- *N-regions reference file*, used as an input for mosdepth. This file can be downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
-- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file is *not* present in this repository and will need to be downloaded manually from https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta previous to running the workflow. Once downloaded, you will need to provide the file path in ``nextflow.config``.
+- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.
 
-- *FASTA file index*. This file needs to be downloaded from https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai. The FASTA index file should be placed in the same directory as the Human Reference Genome FASTA file.
-
+- *FASTA file index*. This file can be downloaded from s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai and not required to specify in the congfig.
 
 Inputs
 ------
