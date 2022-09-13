@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-version = "0.5 commitId" // nf qc workflow version
+version = "0.5" // nf qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
@@ -118,7 +118,7 @@ process mosdepth {
         --ref_fasta=${fa} \
         --gap_regions=${gap_regions} \
         --output_csv=${sample_id}.mosdepth.csv \
-        --work_dir=.
+        --sample_id=${params.sample_id}
     """
 
 }
