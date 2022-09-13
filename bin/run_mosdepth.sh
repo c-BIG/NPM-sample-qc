@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --input_bam=<bam> --autosomes_bed=<bed> --n_regions_bed=<bed> --output_csv=<csv> --work_dir=<dir>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --input_bam_cram=<bam> --gap_regions=<gz> --output_csv=<csv> --sample_id=<id>" >&2
     echo
     exit 1
 }
@@ -14,24 +14,20 @@ case $i in
 	REF_FASTA="${i#*=}"
         shift
         ;;
-    -i=* | --input_bam=*)
-        INPUT_BAM="${i#*=}"
+    -i=* | --input_bam_cram=*)
+        INPUT_BAM_CRAM="${i#*=}"
         shift
         ;;
-    -a=* | --autosomes_bed=*)
-        AUTOSOMES_BED="${i#*=}"
-        shift
-        ;;
-    -n=* | --n_regions_bed=*)
-        N_REGIONS_BED="${i#*=}"
+    -n=* | --gap_regions=*)
+        GAP_REGIONS="${i#*=}"
         shift
         ;;
     -o=* | --output_csv=*)
         OUTPUT_CSV="${i#*=}"
         shift
         ;;
-    -w=* | --work_dir=*)
-        WORK_DIR="${i#*=}"
+    -s=* | --sample_id=*)
+        SAMPLE_ID="${i#*=}"
         shift
         ;;
     -h | --help)
@@ -46,39 +42,21 @@ case $i in
 esac
 done
 
-if [ -z "$REF_FASTA" ] || [ -z "$INPUT_BAM" ] || [ -z "$AUTOSOMES_BED" ] || [ -z "$N_REGIONS_BED" ] || [ -z "$OUTPUT_CSV" ] || [ -z "$WORK_DIR" ]; then
-  echo "Error: One or more variables are undefined"
-  display_help
-  exit 1
-fi
-
-if [ "${INPUT_BAM: -4}" == ".bam" ]
-then
-	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.bam//g')
-elif [ "${INPUT_BAM: -5}" == ".cram" ]
-then
-	SAMPLE_ID=$(echo $INPUT_BAM | awk -F '/' '{print $NF}' | sed 's/.cram//g')
-fi
-
-echo "REF_FASTA     = $REF_FASTA"
-echo "INPUT_BAM     = $INPUT_BAM"
-echo "AUTOSOMES_BED = $AUTOSOMES_BED"
-echo "N_REGIONS_BED = $N_REGIONS_BED"
-echo "OUTPUT_CSV    = $OUTPUT_CSV"
-echo "WORK_DIR      = $WORK_DIR"
-echo "SAMPLE_ID     = $SAMPLE_ID"
 
 #### run mosdepth
-mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $WORK_DIR/$SAMPLE_ID $INPUT_BAM
+mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $SAMPLE_ID $INPUT_BAM_CRAM
 
 #### filter outputs
 # focus on autosomes
-zcat $WORK_DIR/$SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b $AUTOSOMES_BED | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz
+head -22 "$REF_FASTA.fai" |awk '{print $1"\t0""\t"$2}' > autosomes.bed
+zcat $SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > $SAMPLE_ID.regions.autosomes.bed.gz
+
 # exclude bins that overlap with N bases in ref
-zcat $WORK_DIR/$SAMPLE_ID.regions.autosomes.bed.gz | bedtools intersect -v -a stdin -b $N_REGIONS_BED | gzip -9c > $WORK_DIR/$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz
+zcat $GAP_REGIONS |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > gap_regions.bed 
+zcat $SAMPLE_ID.regions.autosomes.bed.gz | bedtools intersect -v -a stdin -b gap_regions.bed | gzip -9c > $SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz
 
 #### calculate metrics
-BED="$WORK_DIR/$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz"
+BED="$SAMPLE_ID.regions.autosomes_minus_n_bases.bed.gz"
 mean_coverage=$(zcat $BED | datamash --round 6 mean 4)
 sd_coverage=$(zcat $BED | datamash --round 6 sstdev 4)
 median_coverage=$(zcat $BED | datamash --round 6 median 4)
@@ -90,7 +68,7 @@ ge_15x_bases=$(zcat $BED | awk '$4>=15' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 
 ge_30x_bases=$(zcat $BED | awk '$4>=30' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM}')
 ge_40x_bases=$(zcat $BED | awk '$4>=40' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=$3-$2 }END{print SUM}')
 
-#### write --output_csv
+#### save output
 header="mean_autosome_coverage,sd_autosome_coverage,median_autosome_coverage,mad_autosome_coverage,total_autosome_bases,ge_1x_autosome_bases,ge_10x_autosome_bases,ge_15x_autosome_bases,ge_30x_autosome_bases,ge_40x_autosome_bases"
 row="$mean_coverage,$sd_coverage,$median_coverage,$mad_coverage,$total_bases,$ge_1x_bases,$ge_10x_bases,$ge_15x_bases,$ge_30x_bases,$ge_40x_bases"
 echo "$header" > $OUTPUT_CSV
