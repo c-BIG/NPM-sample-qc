@@ -1,67 +1,33 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NPM-sample-qc &mdash; NPM-sample-qc  documentation</title>
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Functions" href="metrics.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="#" class="icon icon-home"> NPM-sample-qc
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,208 +35,171 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Metric definitions</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="metrics.html">Functions</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">NPM-sample-qc</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="#">Docs</a> &raquo;</li>
-        
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
       <li>NPM-sample-qc</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="npm-sample-qc">
-<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="npm-sample-qc">
+<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this heading"></a></h1>
 <p>NPM-sample-qc is a <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.</p>
-<div class="section" id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
-<p>Here an example command to launch the workflow:</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Install Docker</a></p></li>
+<li><p>Install and configure <a class="reference external" href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI</a></p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>Clone this repository</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">c</span><span class="o">-</span><span class="n">BIG</span><span class="o">/</span><span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Build docker image locally</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to containers</span>
+<span class="n">cd</span> <span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">/</span><span class="n">containers</span>
+<span class="c1"># Build docker image locally</span>
+<span class="n">sh</span> <span class="n">build_npm</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc_docker_image</span><span class="o">.</span><span class="n">sh</span>
+<span class="c1"># Move back to project root</span>
+<span class="n">cd</span> <span class="o">../</span>
+</pre></div>
+</div>
+<p>Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">nf</span> \
-<span class="o">-</span><span class="n">config</span> <span class="n">conf</span><span class="o">/</span><span class="n">nextflow</span><span class="o">.</span><span class="n">config</span> \
-<span class="o">-</span><span class="n">params</span><span class="o">-</span><span class="n">file</span> <span class="n">tests</span><span class="o">/</span><span class="n">sample_params</span><span class="o">.</span><span class="n">yml</span> \
-<span class="o">-</span><span class="n">work</span><span class="o">-</span><span class="nb">dir</span> <span class="o">./</span><span class="n">work</span> \
-<span class="o">--</span><span class="n">outdir</span> <span class="o">./</span> \
-<span class="o">--</span><span class="n">keep_workdir</span>
+  <span class="o">-</span><span class="n">config</span>      <span class="n">nextflow</span><span class="o">.</span><span class="n">config</span> \
+  <span class="o">-</span><span class="n">profile</span>     <span class="n">docker</span> \
+  <span class="o">-</span><span class="n">params</span><span class="o">-</span><span class="n">file</span> <span class="n">tests</span><span class="o">/</span><span class="n">sample_params</span><span class="o">.</span><span class="n">yml</span> \
+  <span class="o">-</span><span class="n">work</span><span class="o">-</span><span class="nb">dir</span>    <span class="n">test</span><span class="o">-</span><span class="n">run</span><span class="o">/</span><span class="n">work</span> \
+  <span class="o">--</span><span class="n">outdir</span>     <span class="n">test</span><span class="o">-</span><span class="n">run</span>
 </pre></div>
 </div>
 <p>Please refer to the workflow help for more information on its usage and access to additional options:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">nf</span> <span class="o">--</span><span class="n">help</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">run</span> <span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">nf</span> <span class="o">--</span><span class="n">help</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="understanding-the-workflow">
-<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="required-inputs">
-<h3>Required inputs<a class="headerlink" href="#required-inputs" title="Permalink to this headline">¶</a></h3>
-<p>NPM-sample-qc input requirements can be split into two categories:</p>
+</section>
+<section id="understanding-the-workflow">
+<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Permalink to this heading"></a></h2>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
+<p>The workflow requires the following resources given in the <code class="docutils literal notranslate"><span class="pre">conf/resources.config</span></code></p>
 <ul class="simple">
-<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">conf/nextflow.config</span></code> for additional details.</p></li>
-<li><p><strong>Sample-specific settings</strong> contain paths to WGS results for a given sample, namely CRAM and VCF/gVCFs. Optionally, you can also provide a positive sample tracking VCF (<code class="docutils literal notranslate"><span class="pre">pst_vcf</span></code>) to calculate genotype concordance against your WGS VCF (see the <strong>Metric definitions</strong> section). See <code class="docutils literal notranslate"><span class="pre">tests/sample_params.yml</span></code> for an example.</p></li>
+<li><p><em>N-regions reference file</em>, used as an input for mosdepth. This file can be downloaded from <a class="reference external" href="http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz">http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz</a> (<code class="docutils literal notranslate"><span class="pre">2019-03-11</span> <span class="pre">09:51,</span> <span class="pre">12K</span></code>).</p></li>
+<li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p></li>
+<li><p><em>FASTA file index</em>. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai</span></code> and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.</p></li>
 </ul>
-<p>NPM users will only be required to update <code class="docutils literal notranslate"><span class="pre">sample_params.yml</span></code> to match their sample of interest. In addition, any user can update the global settings by following standard <a class="reference external" href="https://www.nextflow.io/docs/latest/config.html">Nextflow configuration</a> guidelines.</p>
-</div>
-<div class="section" id="output-files">
-<h3>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline">¶</a></h3>
-<p>Upon completion, NPM-sample-qc will create the following files in the <code class="docutils literal notranslate"><span class="pre">outdir</span></code> directory:</p>
+</section>
+<section id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
+<p>Input requirements can be split into two categories:</p>
+<ul class="simple">
+<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
+<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/sample_params.yml</span></code> for an example.</p></li>
+</ul>
+</section>
+<section id="outputs">
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
+<p>Upon completion, the workflow will create the following files in the <code class="docutils literal notranslate"><span class="pre">outdir</span></code> directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outdir</span><span class="o">/</span>
     <span class="n">pipeline_info</span><span class="o">/</span>    <span class="c1"># dag, timeline and trace files</span>
         <span class="n">dag</span><span class="o">.</span><span class="n">pdf</span>
         <span class="n">timeline</span><span class="o">.</span><span class="n">html</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">html</span>
         <span class="n">trace</span><span class="o">.</span><span class="n">txt</span>
     <span class="n">results</span><span class="o">/</span>          <span class="c1"># final metrics.json and intermediate outputs</span>
         <span class="o">&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
-        <span class="n">bcftools</span><span class="o">/</span>
-        <span class="n">count_variants</span><span class="o">/</span>
-        <span class="n">verifybamid2</span><span class="o">/</span>
         <span class="n">samtools</span><span class="o">/</span>
-        <span class="n">plot_bamstats</span><span class="o">/</span>
         <span class="n">picard</span><span class="o">/</span>
+        <span class="n">mosdepth</span><span class="o">/</span>
         <span class="n">multiqc</span><span class="o">/</span>
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">keep_workdir</span></code> has been specified, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
-</div>
-<div class="section" id="workflow-logic">
-<h3>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="workflow-logic">
+<h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this heading"></a></h2>
 <p>We provide a schematic representation of the workflow in the figure below:</p>
-<img src="npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, NPM-sample-qc generates QC metrics from single-sample WGS results in three stages: metrics calculation, parsing of intermediate outputs and generation of a final report. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
+<img src="docs/npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
-<p>The current workflow combines widely-used third-party tools (samtools, bcftools, picard, VerifyBamID2) and custom scripts (e.g. count_variants.py) to obtain a rich set of QC metrics. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/example_dag.pdf</span></code>).</p>
+<p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/example_dag.pdf</span></code>).</p>
 <p><strong>Metrics parsing</strong></p>
-<p>Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling <a class="reference external" href="https://github.com/c-BIG/MultiQC_NPM/">MultiQC_NPM</a>, a <a class="reference external" href="https://github.com/ewels/MultiQC">MultiQC</a> plugin that extends the base tool to support additional files (e.g. outputs from bcftools gtcheck, picard CollectQualityYieldMetrics and count_variants.py).</p>
+<p>Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling <code class="docutils literal notranslate"><span class="pre">bin/multiqc_plugins/multiqc_npm/</span></code>, a MultiQC plugin that extends the base tool to support additional files.</p>
 <p><strong>Metrics reporting</strong></p>
-<p>Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the compile_metrics.py script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the <strong>Metric definitions</strong> section).</p>
-</div>
-</div>
-<div class="section" id="metric-definitions">
-<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this headline">¶</a></h2>
-<p>The full list of metrics reported by the NPM-sample-qc workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
+<p>Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the <code class="docutils literal notranslate"><span class="pre">bin/compile_metrics.py</span></code> script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the <strong>Metric definitions</strong> section).</p>
+</section>
+<section id="metric-definitions">
+<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading"></a></h2>
+<p><em>This section is outdated. New metrics definitions are being worked on and will be updated in coming releases.</em></p>
+<p>The full list of metrics reported by this workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
 <p>When needed, page contents can be updated by running the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">docsrc</span><span class="p">;</span> <span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Metric definitions</span></p>
+<p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="metrics.html">Functions</a></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="metrics.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, GIS
-
-    </p>
+    <p>&#169; Copyright 2020, GIS.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

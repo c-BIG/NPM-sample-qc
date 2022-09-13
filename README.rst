@@ -2,19 +2,19 @@
 NPM-sample-qc
 =============
 
-NPM-sample-qc is a `Nextflow`_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
+NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
 
 .. _Nextflow: https://www.nextflow.io/
 
 Requirements
 ============
 
-* Install `Nextflow`_
-* Install `Docker`_
+* `Install Nextflow`_
+* `Install Docker`_
 * Install and configure `AWS CLI`_
 
-.. _Nextflow: https://www.nextflow.io/docs/latest/getstarted.html#installation
-.. _Docker: https://docs.docker.com/get-docker/
+.. _Install Nextflow: https://www.nextflow.io/docs/latest/getstarted.html#installation
+.. _Install Docker: https://docs.docker.com/get-docker/
 .. _AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 Quick start
@@ -130,4 +130,9 @@ The full list of metrics reported by this workflow and details on how they've be
 
 When needed, page contents can be updated by running the following command: ::
 
-  cd docsrc; ./build.sh
+  # Install sphinx
+  pip install sphinx_rtd_theme sphinx_automodapi
+  # Move to doc source
+  cd docsrc
+  # Build the doc
+  ./build.sh
