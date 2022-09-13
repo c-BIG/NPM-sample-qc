@@ -6,9 +6,56 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 
 .. _Nextflow: https://www.nextflow.io/
 
+Requirements
+============
+
+* Install Nextflow_
+* Install Docker_
+* Install and configure AWS_CLI_
+
+.. _Nextflow: https://www.nextflow.io/docs/latest/getstarted.html#installation
+.. _Docker: https://docs.docker.com/get-docker/
+.. _AWS_CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 Quick start
 ===========
+
+* Clone this repository
+::
+  git clone git@github.com:c-BIG/NPM-sample-qc.git
+  # Change directory
+  cd MPN-sample-qc
+
+* Build docker image
+::
+  docker build -t npm-sample-qc containers/
+
+* Create a new folder
+:: 
+  mkdir test-run/
+
+* Download example bam file: NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
+::
+  aws s3 cp s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam ./test-run
+
+* Create a sample_params file with content below
+:: 
+  touch test-run/sample_params.yml
+
+:: 
+  # In sample_params.yml
+  sample_id: NA12878 
+  bam_cram: NA12878.bam
+
+
+* Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
+::
+  nextflow run main.nf \
+    -config      nextflow.config \
+    -profile     docker \
+    -params-file tests/sample_params.yml \
+    -work-dir    test-run/work \
+    --outdir     test-run
 
 Before running, make sure all the required resources have been specified in the ``conf/resources.config`` as per the **Resources** section below and build the docker image locally by running ``containers/build_npm-sample-qc_docker_image.sh`` or build the Singularity image by running ``containers/build_npm-sample-qc_singularity_image.sh``.
 
