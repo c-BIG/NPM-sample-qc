@@ -6,7 +6,5 @@ docsrc/api/
 *.simg
 *.sg-npm-private
 
-# Resources
-resources/*.fasta*
 # Test
 test-run
