@@ -113,8 +113,8 @@ process mosdepth {
 
     script:
     """
-    run_mosdepth.sh \
-        --input_bam_cram=${cbam} \
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${fa} ${sample_id} ${cbam}
+    run_datamash.sh \
         --ref_fasta=${fa} \
         --gap_regions=${gap_regions} \
         --output_csv=${sample_id}.mosdepth.csv \

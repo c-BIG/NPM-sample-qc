@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --gap_regions=<gz> --sample_id=<id>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --gap_regions=<gz> --output_csv=<csv> --sample_id=<id>" >&2
     echo
     exit 1
 }
@@ -18,6 +18,10 @@ case $i in
         GAP_REGIONS="${i#*=}"
         shift
         ;;
+    -o=* | --output_csv=*)
+        OUTPUT_CSV="${i#*=}"
+        shift
+        ;;	
     -s=* | --sample_id=*)
         SAMPLE_ID="${i#*=}"
         shift
