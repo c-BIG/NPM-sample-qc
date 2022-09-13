@@ -23,30 +23,15 @@ Quick start
 * Clone this repository
 ::
   git clone git@github.com:c-BIG/NPM-sample-qc.git
-  # Change directory
-  cd MPN-sample-qc
 
-* Build docker image
+* Build docker image locally
 ::
-  docker build -t npm-sample-qc containers/
-
-* Create a new folder
-:: 
-  mkdir test-run/
-
-* Download example bam file: NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
-::
-  aws s3 cp s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam ./test-run
-
-* Create a sample_params file with content below
-:: 
-  touch test-run/sample_params.yml
-
-:: 
-  # In sample_params.yml
-  sample_id: NA12878 
-  bam_cram: NA12878.bam
-
+  # Move to containers
+  cd NPM-sample-qc/containers
+  # Build docker image locally
+  sh build_npm-sample-qc_docker_image.sh
+  # Move back to project root
+  cd ../
 
 * Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
 ::
@@ -57,21 +42,8 @@ Quick start
     -work-dir    test-run/work \
     --outdir     test-run
 
-Before running, make sure all the required resources have been specified in the ``conf/resources.config`` as per the **Resources** section below and build the docker image locally by running ``containers/build_npm-sample-qc_docker_image.sh`` or build the Singularity image by running ``containers/build_npm-sample-qc_singularity_image.sh``.
-
-Use the following example command to launch a test run: ::
-
-  nextflow run NPM-sample-qc/main.nf \
-               -config      NPM-sample-qc/nextflow.config \
-               -profile     docker \
-               -params-file NPM-sample-qc/tests/sample_params.yml \
-               -work-dir    ./test-run/work \
-               --outdir     ./test-run
-
-This test workflow uses publicly accessible data (a BAM file) from the *1000 Genomes Phase 3 Reanalysis with DRAGEN 3.5 and 3.7* repository within the Registry of Open Data on AWS (https://registry.opendata.aws/ilmn-dragen-1kgp/).
-
-Please refer to the workflow help for more information on its usage and access to additional options: ::
-
+Please refer to the workflow help for more information on its usage and access to additional options: 
+::
   nextflow run NPM-sample-qc/main.nf --help
 
 
@@ -160,4 +132,3 @@ The full list of metrics reported by this workflow and details on how they've be
 When needed, page contents can be updated by running the following command: ::
 
   cd docsrc; ./build.sh
-
