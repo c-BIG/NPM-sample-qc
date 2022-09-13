@@ -1,68 +1,34 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Functions &mdash; NPM-sample-qc  documentation</title>
+      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="all_complex_del" href="api/metrics.all_complex_del.html" />
+    <link rel="next" title="mad_autosome_coverage" href="api/metrics.mad_autosome_coverage.html" />
     <link rel="prev" title="NPM-sample-qc" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> NPM-sample-qc
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -70,473 +36,107 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Metric definitions</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_complex_del.html">all_complex_del</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_complex_indels.html">all_complex_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_complex_ins.html">all_complex_ins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_del.html">all_del</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_het_indels.html">all_het_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_het_snps.html">all_het_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_homalt_indels.html">all_homalt_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_homalt_snps.html">all_homalt_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_indel_het_hom.html">all_indel_het_hom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_indels.html">all_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_ins.html">all_ins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_mnps.html">all_mnps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_multiallelic_sites.html">all_multiallelic_sites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_snp_het_hom.html">all_snp_het_hom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_snp_ts_tv.html">all_snp_ts_tv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.all_snps.html">all_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.at_dropout.html">at_dropout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.coverage_sg10k_062017.html">coverage_sg10k_062017</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_dropout.html">gc_dropout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_nc_0_19.html">gc_nc_0_19</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_nc_20_39.html">gc_nc_20_39</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_nc_40_59.html">gc_nc_40_59</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_nc_60_79.html">gc_nc_60_79</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.gc_nc_80_100.html">gc_nc_80_100</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.genome_territory.html">genome_territory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mad_autosome_coverage.html">mad_autosome_coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.mad_insert_size.html">mad_insert_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_insert_size.html">mean_insert_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.median_autosome_coverage.html">median_autosome_coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.median_insert_size.html">median_insert_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.mismatch_rate.html">mismatch_rate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.mismatch_rate_mapqge20.html">mismatch_rate_mapqge20</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_complex_del.html">pass_complex_del</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_complex_indels.html">pass_complex_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_complex_ins.html">pass_complex_ins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_del.html">pass_del</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_het_indels.html">pass_het_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_het_snps.html">pass_het_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_homalt_indels.html">pass_homalt_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_homalt_snps.html">pass_homalt_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_indel_het_hom.html">pass_indel_het_hom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_indels.html">pass_indels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_ins.html">pass_ins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_mnps.html">pass_mnps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_multiallelic_sites.html">pass_multiallelic_sites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_snp_het_hom.html">pass_snp_het_hom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_snp_ts_tv.html">pass_snp_ts_tv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pass_snps.html">pass_snps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_adapters.html">pct_adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_aligned_bases.html">pct_aligned_bases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_alignments_diff_chrom.html">pct_alignments_diff_chrom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_alignments_diff_chrom_mapqge5.html">pct_alignments_diff_chrom_mapqge5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_10x.html">pct_autosomes_10x</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_1x.html">pct_autosomes_1x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_30x.html">pct_autosomes_30x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_40x.html">pct_autosomes_40x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_chimeras.html">pct_chimeras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_contamination.html">pct_contamination</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_duplicate_reads.html">pct_duplicate_reads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_overlapping_bases.html">pct_overlapping_bases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_pf_reads.html">pct_pf_reads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_q30_bases.html">pct_q30_bases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_q30_bases_read1.html">pct_q30_bases_read1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_q30_bases_read2.html">pct_q30_bases_read2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_aligned.html">pct_reads_aligned</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html">pct_reads_aligned_in_pairs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_aligned_mapqge20.html">pct_reads_aligned_mapqge20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_unaligned.html">pct_reads_unaligned</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_secondary_alignments.html">pct_secondary_alignments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_singleton_alignments.html">pct_singleton_alignments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_supplementary_alignments.html">pct_supplementary_alignments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pst_pct_concordance.html">pst_pct_concordance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.sd_autosome_coverage.html">sd_autosome_coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.sd_insert_size.html">sd_insert_size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.total_alignments.html">total_alignments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_pf_gb.html">yield_pf_gb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_pf_reads.html">yield_pf_reads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_raw_gb.html">yield_raw_gb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_raw_reads.html">yield_raw_reads</a></li>
 </ul>
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">NPM-sample-qc</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Functions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/metrics.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
-<table class="longtable docutils align-default">
+             
+  <section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_complex_del.html#metrics.all_complex_del" title="metrics.all_complex_del"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_complex_del</span></code></a>(mqc)</p></td>
-<td><p>The total number of complex deletions.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_complex_indels.html#metrics.all_complex_indels" title="metrics.all_complex_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_complex_indels</span></code></a>(mqc)</p></td>
-<td><p>The total number of complex INDELs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_complex_ins.html#metrics.all_complex_ins" title="metrics.all_complex_ins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_complex_ins</span></code></a>(mqc)</p></td>
-<td><p>The total number of complex insertions.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_del.html#metrics.all_del" title="metrics.all_del"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_del</span></code></a>(mqc)</p></td>
-<td><p>The total number of deletions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_het_indels.html#metrics.all_het_indels" title="metrics.all_het_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_het_indels</span></code></a>(mqc)</p></td>
-<td><p>The total number of het INDELs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_het_snps.html#metrics.all_het_snps" title="metrics.all_het_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_het_snps</span></code></a>(mqc)</p></td>
-<td><p>The total number of het SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_homalt_indels.html#metrics.all_homalt_indels" title="metrics.all_homalt_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_homalt_indels</span></code></a>(mqc)</p></td>
-<td><p>The total number of homalt INDELs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_homalt_snps.html#metrics.all_homalt_snps" title="metrics.all_homalt_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_homalt_snps</span></code></a>(mqc)</p></td>
-<td><p>The total number of hom alt SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_indel_het_hom.html#metrics.all_indel_het_hom" title="metrics.all_indel_het_hom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_indel_het_hom</span></code></a>(mqc)</p></td>
-<td><p>The het/hom ratio for all INDELs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_indels.html#metrics.all_indels" title="metrics.all_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_indels</span></code></a>(mqc)</p></td>
-<td><p>The total number of INDELs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_ins.html#metrics.all_ins" title="metrics.all_ins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_ins</span></code></a>(mqc)</p></td>
-<td><p>The total number of insertions.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_mnps.html#metrics.all_mnps" title="metrics.all_mnps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_mnps</span></code></a>(mqc)</p></td>
-<td><p>The total number of MNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_multiallelic_sites.html#metrics.all_multiallelic_sites" title="metrics.all_multiallelic_sites"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_multiallelic_sites</span></code></a>(mqc)</p></td>
-<td><p>The total number of multiallelic sites.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_snp_het_hom.html#metrics.all_snp_het_hom" title="metrics.all_snp_het_hom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_snp_het_hom</span></code></a>(mqc)</p></td>
-<td><p>The het/hom ratio for all SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.all_snp_ts_tv.html#metrics.all_snp_ts_tv" title="metrics.all_snp_ts_tv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_snp_ts_tv</span></code></a>(mqc)</p></td>
-<td><p>The transition to transversion ratio of all bi-allelic SNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.all_snps.html#metrics.all_snps" title="metrics.all_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_snps</span></code></a>(mqc)</p></td>
-<td><p>The total number of SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.at_dropout.html#metrics.at_dropout" title="metrics.at_dropout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_dropout</span></code></a>(mqc)</p></td>
-<td><p>Illumina-style AT dropout metric.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.coverage_sg10k_062017.html#metrics.coverage_sg10k_062017" title="metrics.coverage_sg10k_062017"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coverage_sg10k_062017</span></code></a>(mqc)</p></td>
-<td><p>The mean coverage in bases of the entire genome (3.1e9), after SG10K filters are applied.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.gc_dropout.html#metrics.gc_dropout" title="metrics.gc_dropout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_dropout</span></code></a>(mqc)</p></td>
-<td><p>Illumina-style GC dropout metric.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.gc_nc_0_19.html#metrics.gc_nc_0_19" title="metrics.gc_nc_0_19"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_nc_0_19</span></code></a>(mqc)</p></td>
-<td><p>Normalized coverage over quintile of GC content ranging from 0 - 19.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.gc_nc_20_39.html#metrics.gc_nc_20_39" title="metrics.gc_nc_20_39"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_nc_20_39</span></code></a>(mqc)</p></td>
-<td><p>Analogous to gc_nc_0_19.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.gc_nc_40_59.html#metrics.gc_nc_40_59" title="metrics.gc_nc_40_59"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_nc_40_59</span></code></a>(mqc)</p></td>
-<td><p>Analogous to gc_nc_0_19.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.gc_nc_60_79.html#metrics.gc_nc_60_79" title="metrics.gc_nc_60_79"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_nc_60_79</span></code></a>(mqc)</p></td>
-<td><p>Analogous to gc_nc_0_19.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.gc_nc_80_100.html#metrics.gc_nc_80_100" title="metrics.gc_nc_80_100"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_nc_80_100</span></code></a>(mqc)</p></td>
-<td><p>Analogous to gc_nc_0_19.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.genome_territory.html#metrics.genome_territory" title="metrics.genome_territory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genome_territory</span></code></a>(mqc)</p></td>
-<td><p>The number of non-N bases in autosomes over which coverage will be evaluated.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.mad_autosome_coverage.html#metrics.mad_autosome_coverage" title="metrics.mad_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mad_autosome_coverage</span></code></a>(mqc)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mad_autosome_coverage.html#metrics.mad_autosome_coverage" title="metrics.mad_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mad_autosome_coverage</span></code></a>(mqc)</p></td>
 <td><p>The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mad_insert_size.html#metrics.mad_insert_size" title="metrics.mad_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mad_insert_size</span></code></a>(mqc)</p></td>
-<td><p>The median absolute deviation of insert sizes over the “core” of the distribution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.mean_autosome_coverage.html#metrics.mean_autosome_coverage" title="metrics.mean_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_autosome_coverage</span></code></a>(mqc)</p></td>
 <td><p>The mean coverage in autosomes (as defined in genome_territory).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mean_insert_size.html#metrics.mean_insert_size" title="metrics.mean_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_insert_size</span></code></a>(mqc)</p></td>
-<td><p>The mean insert size over the “core” of the distribution.</p></td>
+<td><p>The mean insert size over the &quot;core&quot; of the distribution.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.median_autosome_coverage.html#metrics.median_autosome_coverage" title="metrics.median_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median_autosome_coverage</span></code></a>(mqc)</p></td>
-<td><p>The median coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.median_insert_size.html#metrics.median_insert_size" title="metrics.median_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median_insert_size</span></code></a>(mqc)</p></td>
-<td><p>The median insert size over the “core” of the distribution.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.mismatch_rate.html#metrics.mismatch_rate" title="metrics.mismatch_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mismatch_rate</span></code></a>(mqc)</p></td>
-<td><p>The fraction of bases mismatching the reference for all bases aligned to the reference sequence.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mismatch_rate_mapqge20.html#metrics.mismatch_rate_mapqge20" title="metrics.mismatch_rate_mapqge20"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mismatch_rate_mapqge20</span></code></a>(mqc)</p></td>
-<td><p>The fraction of bases that mismatch the reference in reads with MAPQ&gt;=20.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_complex_del.html#metrics.pass_complex_del" title="metrics.pass_complex_del"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_complex_del</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS complex deletions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_complex_indels.html#metrics.pass_complex_indels" title="metrics.pass_complex_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_complex_indels</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS complex INDELs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_complex_ins.html#metrics.pass_complex_ins" title="metrics.pass_complex_ins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_complex_ins</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS complex insertions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_del.html#metrics.pass_del" title="metrics.pass_del"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_del</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS deletions.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_het_indels.html#metrics.pass_het_indels" title="metrics.pass_het_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_het_indels</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS het INDELs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_het_snps.html#metrics.pass_het_snps" title="metrics.pass_het_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_het_snps</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS het SNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_homalt_indels.html#metrics.pass_homalt_indels" title="metrics.pass_homalt_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_homalt_indels</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS homalt INDELs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_homalt_snps.html#metrics.pass_homalt_snps" title="metrics.pass_homalt_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_homalt_snps</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS hom alt SNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_indel_het_hom.html#metrics.pass_indel_het_hom" title="metrics.pass_indel_het_hom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_indel_het_hom</span></code></a>(mqc)</p></td>
-<td><p>The het/hom ratio for PASS INDELs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_indels.html#metrics.pass_indels" title="metrics.pass_indels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_indels</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS INDELs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_ins.html#metrics.pass_ins" title="metrics.pass_ins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_ins</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS insertions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_mnps.html#metrics.pass_mnps" title="metrics.pass_mnps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_mnps</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS MNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_multiallelic_sites.html#metrics.pass_multiallelic_sites" title="metrics.pass_multiallelic_sites"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_multiallelic_sites</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS multiallelic sites.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_snp_het_hom.html#metrics.pass_snp_het_hom" title="metrics.pass_snp_het_hom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_snp_het_hom</span></code></a>(mqc)</p></td>
-<td><p>The het/hom ratio for PASS SNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pass_snp_ts_tv.html#metrics.pass_snp_ts_tv" title="metrics.pass_snp_ts_tv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_snp_ts_tv</span></code></a>(mqc)</p></td>
-<td><p>The transition to transversion ratio of passing bi-allelic SNPs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pass_snps.html#metrics.pass_snps" title="metrics.pass_snps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pass_snps</span></code></a>(mqc)</p></td>
-<td><p>The number of PASS SNPs.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_adapters.html#metrics.pct_adapters" title="metrics.pct_adapters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_adapters</span></code></a>(mqc)</p></td>
-<td><p>The percentage of PF reads that are unaligned and match to a known adapter sequence right from the start of the read.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_aligned_bases.html#metrics.pct_aligned_bases" title="metrics.pct_aligned_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_aligned_bases</span></code></a>(mqc)</p></td>
-<td><p>The percentage of bases that are aligned to the reference.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_alignments_diff_chrom.html#metrics.pct_alignments_diff_chrom" title="metrics.pct_alignments_diff_chrom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_alignments_diff_chrom</span></code></a>(mqc)</p></td>
-<td><p>The percentage of alignments with mates aligned to different chromosomes.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_alignments_diff_chrom_mapqge5.html#metrics.pct_alignments_diff_chrom_mapqge5" title="metrics.pct_alignments_diff_chrom_mapqge5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_alignments_diff_chrom_mapqge5</span></code></a>(mqc)</p></td>
-<td><p>The percentage of alignments with MAPQ&gt;=5 and with mates aligned to different chromosomes.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_10x.html#metrics.pct_autosomes_10x" title="metrics.pct_autosomes_10x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_10x</span></code></a>(mqc)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
 <td><p>Analogous to pct_autosomes_1x.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_autosomes_1x.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_1x.html#metrics.pct_autosomes_1x" title="metrics.pct_autosomes_1x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_1x</span></code></a>(mqc)</p></td>
-<td><p>The percentage of bases that attained at least 1X sequence coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_30x.html#metrics.pct_autosomes_30x" title="metrics.pct_autosomes_30x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_30x</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_autosomes_1x.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_40x.html#metrics.pct_autosomes_40x" title="metrics.pct_autosomes_40x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_40x</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_autosomes_1x.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_chimeras.html#metrics.pct_chimeras" title="metrics.pct_chimeras"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_chimeras</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads that map outside of a maximum insert size (usually 100kb) or that have the two ends mapping to different chromosomes.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_contamination.html#metrics.pct_contamination" title="metrics.pct_contamination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_contamination</span></code></a>(mqc)</p></td>
-<td><p>The percentage of cross-individual contamination.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_duplicate_reads.html#metrics.pct_duplicate_reads" title="metrics.pct_duplicate_reads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_duplicate_reads</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads marked as duplicates.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_overlapping_bases.html#metrics.pct_overlapping_bases" title="metrics.pct_overlapping_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_overlapping_bases</span></code></a>(mqc)</p></td>
-<td><p>The percentage of bases that correspond to the second observation from an insert with overlapping reads.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_pf_reads.html#metrics.pct_pf_reads" title="metrics.pct_pf_reads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_pf_reads</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads that are PF, i.e.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases.html#metrics.pct_q30_bases" title="metrics.pct_q30_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases</span></code></a>(mqc)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases.html#metrics.pct_q30_bases" title="metrics.pct_q30_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases</span></code></a>(mqc)</p></td>
 <td><p>The percentage of PF bases with base quality &gt;= 30.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases_read1.html#metrics.pct_q30_bases_read1" title="metrics.pct_q30_bases_read1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases_read1</span></code></a>(mqc)</p></td>
-<td><p>The percentage of PF bases in read 1 with base quality &gt;= 30.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases_read2.html#metrics.pct_q30_bases_read2" title="metrics.pct_q30_bases_read2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases_read2</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_q30_bases_read1.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned.html#metrics.pct_reads_aligned" title="metrics.pct_reads_aligned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned</span></code></a>(mqc)</p></td>
-<td><p>The percentage of PF reads that aligned to the reference.</p></td>
-</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html#metrics.pct_reads_aligned_in_pairs" title="metrics.pct_reads_aligned_in_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_in_pairs</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads that have been aligned as pairs, i.e.</p></td>
+<td><p>The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_mapqge20.html#metrics.pct_reads_aligned_mapqge20" title="metrics.pct_reads_aligned_mapqge20"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_mapqge20</span></code></a>(mqc)</p></td>
-<td><p>The percentage of PF reads that were aligned to the reference with a mapping quality of Q20 or higher.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
 <td><p>The percentage of reads that have been aligned as proper pairs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_unaligned.html#metrics.pct_reads_unaligned" title="metrics.pct_reads_unaligned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_unaligned</span></code></a>(mqc)</p></td>
-<td><p>The percentage of unmapped reads.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_secondary_alignments.html#metrics.pct_secondary_alignments" title="metrics.pct_secondary_alignments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_secondary_alignments</span></code></a>(mqc)</p></td>
-<td><p>The percentage of alignments marked as secondary.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_singleton_alignments.html#metrics.pct_singleton_alignments" title="metrics.pct_singleton_alignments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_singleton_alignments</span></code></a>(mqc)</p></td>
-<td><p>The percentage of alignments that are singletons.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_supplementary_alignments.html#metrics.pct_supplementary_alignments" title="metrics.pct_supplementary_alignments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_supplementary_alignments</span></code></a>(mqc)</p></td>
-<td><p>The percentage of alignments marked as supplementary.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pst_pct_concordance.html#metrics.pst_pct_concordance" title="metrics.pst_pct_concordance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pst_pct_concordance</span></code></a>(mqc)</p></td>
-<td><p>The percentage of sites with concordant genotypes between a query VCF and a PST VCF (positive sample tracking).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.sd_autosome_coverage.html#metrics.sd_autosome_coverage" title="metrics.sd_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sd_autosome_coverage</span></code></a>(mqc)</p></td>
-<td><p>The standard deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.sd_insert_size.html#metrics.sd_insert_size" title="metrics.sd_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sd_insert_size</span></code></a>(mqc)</p></td>
-<td><p>The standard deviation of insert sizes over the “core” of the distribution.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.total_alignments.html#metrics.total_alignments" title="metrics.total_alignments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">total_alignments</span></code></a>(mqc)</p></td>
-<td><p>The total number of alignments in the BAM/CRAM file.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.yield_pf_gb.html#metrics.yield_pf_gb" title="metrics.yield_pf_gb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_pf_gb</span></code></a>(mqc)</p></td>
-<td><p>The total number of bases in all PF reads.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.yield_pf_reads.html#metrics.yield_pf_reads" title="metrics.yield_pf_reads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_pf_reads</span></code></a>(mqc)</p></td>
-<td><p>The number of PF reads where PF is defined as passing Illumina’s filter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.yield_raw_gb.html#metrics.yield_raw_gb" title="metrics.yield_raw_gb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_raw_gb</span></code></a>(mqc)</p></td>
-<td><p>The total number of bases in all reads.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.yield_raw_reads.html#metrics.yield_raw_reads" title="metrics.yield_raw_reads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_raw_reads</span></code></a>(mqc)</p></td>
-<td><p>The total number of reads including all PF and non-PF reads.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="api/metrics.all_complex_del.html" class="btn btn-neutral float-right" title="all_complex_del" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="NPM-sample-qc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="NPM-sample-qc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/metrics.mad_autosome_coverage.html" class="btn btn-neutral float-right" title="mad_autosome_coverage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, GIS
-
-    </p>
+    <p>&#169; Copyright 2020, GIS.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
