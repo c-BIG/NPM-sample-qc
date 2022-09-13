@@ -2,7 +2,7 @@
 
 #### parse args
 display_help() {
-    echo "Usage: $0 --ref_fasta=<fasta> --input_bam_cram=<bam> --gap_regions=<gz> --output_csv=<csv> --sample_id=<id>" >&2
+    echo "Usage: $0 --ref_fasta=<fasta> --gap_regions=<gz> --sample_id=<id>" >&2
     echo
     exit 1
 }
@@ -14,16 +14,8 @@ case $i in
 	REF_FASTA="${i#*=}"
         shift
         ;;
-    -i=* | --input_bam_cram=*)
-        INPUT_BAM_CRAM="${i#*=}"
-        shift
-        ;;
     -n=* | --gap_regions=*)
         GAP_REGIONS="${i#*=}"
-        shift
-        ;;
-    -o=* | --output_csv=*)
-        OUTPUT_CSV="${i#*=}"
         shift
         ;;
     -s=* | --sample_id=*)
@@ -42,11 +34,7 @@ case $i in
 esac
 done
 
-
-#### run mosdepth
-mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta $REF_FASTA $SAMPLE_ID $INPUT_BAM_CRAM
-
-#### filter outputs
+#### filter mosdepth outputs
 # focus on autosomes
 head -22 "$REF_FASTA.fai" |awk '{print $1"\t0""\t"$2}' > autosomes.bed
 zcat $SAMPLE_ID.regions.bed.gz | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > $SAMPLE_ID.regions.autosomes.bed.gz
