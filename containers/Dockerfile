@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM --platform=linux/amd64 ubuntu:22.04
 
 LABEL base_image="ubuntu:22.04"
 
@@ -41,6 +41,6 @@ RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
     # install MultiQC and MultiQC_NPM plugin
-RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
+RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
 RUN python3 setup.py install
