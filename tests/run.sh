@@ -7,7 +7,7 @@ nextflow run ../main.nf \
 	-config ../nextflow.config \
 	-params-file sample_params.yml \
 	-resume \
-	--outdir ./ \
+	--outdir . \
 	-work-dir ./work \
 	-profile docker \
 	-bg > run.log
