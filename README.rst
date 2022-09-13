@@ -6,27 +6,45 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 
 .. _Nextflow: https://www.nextflow.io/
 
+Requirements
+============
+
+* `Install Nextflow`_
+* `Install Docker`_
+* Install and configure `AWS CLI`_
+
+.. _Install Nextflow: https://www.nextflow.io/docs/latest/getstarted.html#installation
+.. _Install Docker: https://docs.docker.com/get-docker/
+.. _AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 Quick start
 ===========
 
-Before running, make sure all the required resources have been downloaded as per the **Resources** section below.
+Clone this repository ::
 
-Use the following example command to launch a test run: ::
+  git clone git@github.com:c-BIG/NPM-sample-qc.git
+
+Build docker image locally ::
+
+  # Move to containers
+  cd NPM-sample-qc/containers
+  # Build docker image locally
+  sh build_npm-sample-qc_docker_image.sh
+  # Move back to project root
+  cd ../
+
+Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
 
   nextflow run main.nf \
-  -config nextflow.config \
-  -params-file tests/sample_params.yml \
-  -profile docker
-  -work-dir ./test-run/work \
-  --outdir ./test-run
-
-This test workflow uses publicly accessible data (a BAM file) from the *1000 Genomes Phase 3 Reanalysis with DRAGEN 3.5 and 3.7* repository within the Registry of Open Data on AWS (https://registry.opendata.aws/ilmn-dragen-1kgp/).
+    -config      nextflow.config \
+    -profile     docker \
+    -params-file tests/sample_params.yml \
+    -work-dir    test-run/work \
+    --outdir     test-run
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
-  nextflow run main.nf --help
-
+  nextflow run NPM-sample-qc/main.nf --help
 
 Understanding the workflow
 ==========================
@@ -34,14 +52,13 @@ Understanding the workflow
 Resources
 ---------
 
-The workflow requires the following resources:
+The workflow requires the following resources given in the ``conf/resources.config``
 
-- *N-regions reference file*, used as an input for mosdepth. This file is already present in ``resources/gap.txt.gz``. Originally downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).
+- *N-regions reference file*, used as an input for mosdepth. This file can be downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
-- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file is *not* present in this repository and will need to be downloaded manually from https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta previous to running the workflow. Once downloaded, you will need to provide the file path in ``nextflow.config``.
+- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
 
-- *FASTA file index*. This file needs to be downloaded from https://storage.cloud.google.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai. The FASTA index file should be placed in the same directory as the Human Reference Genome FASTA file.
-
+- *FASTA file index*. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
 
 Inputs
 ------
@@ -113,5 +130,9 @@ The full list of metrics reported by this workflow and details on how they've be
 
 When needed, page contents can be updated by running the following command: ::
 
-  cd docsrc; ./build.sh
-
+  # Install sphinx
+  pip install sphinx_rtd_theme sphinx_automodapi
+  # Move to doc source
+  cd docsrc
+  # Build the doc
+  ./build.sh

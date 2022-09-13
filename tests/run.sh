@@ -8,6 +8,6 @@ nextflow run ../main.nf \
 	-params-file sample_params.yml \
 	-resume \
 	-work-dir ./work \
-	--outdir ./ \
+	--outdir . \
 	-profile docker \
 	-bg >run.log
