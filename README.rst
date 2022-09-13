@@ -33,7 +33,7 @@ Build docker image locally ::
   # Move back to project root
   cd ../
 
-Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
+Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
 
   nextflow run main.nf \
     -config      nextflow.config \
