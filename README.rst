@@ -20,12 +20,10 @@ Requirements
 Quick start
 ===========
 
-* Clone this repository
-::
+* Clone this repository ::
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 
-* Build docker image locally
-::
+* Build docker image locally ::
   # Move to containers
   cd NPM-sample-qc/containers
   # Build docker image locally
@@ -33,8 +31,7 @@ Quick start
   # Move back to project root
   cd ../
 
-* Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
-::
+* Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
   nextflow run main.nf \
     -config      nextflow.config \
     -profile     docker \
@@ -42,8 +39,7 @@ Quick start
     -work-dir    test-run/work \
     --outdir     test-run
 
-Please refer to the workflow help for more information on its usage and access to additional options: 
-::
+Please refer to the workflow help for more information on its usage and access to additional options: ::
   nextflow run NPM-sample-qc/main.nf --help
 
 
