@@ -2,28 +2,30 @@
 NPM-sample-qc
 =============
 
-NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
+NPM-sample-qc is a `Nextflow`_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
 
 .. _Nextflow: https://www.nextflow.io/
 
 Requirements
 ============
 
-* Install Nextflow_
-* Install Docker_
-* Install and configure AWS_CLI_
+* Install `Nextflow`_
+* Install `Docker`_
+* Install and configure `AWS CLI`_
 
 .. _Nextflow: https://www.nextflow.io/docs/latest/getstarted.html#installation
 .. _Docker: https://docs.docker.com/get-docker/
-.. _AWS_CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+.. _AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 Quick start
 ===========
 
-* Clone this repository ::
+Clone this repository ::
+
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 
-* Build docker image locally ::
+Build docker image locally ::
+
   # Move to containers
   cd NPM-sample-qc/containers
   # Build docker image locally
@@ -31,7 +33,8 @@ Quick start
   # Move back to project root
   cd ../
 
-* Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
+Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
+
   nextflow run main.nf \
     -config      nextflow.config \
     -profile     docker \
@@ -40,8 +43,8 @@ Quick start
     --outdir     test-run
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
-  nextflow run NPM-sample-qc/main.nf --help
 
+  nextflow run NPM-sample-qc/main.nf --help
 
 Understanding the workflow
 ==========================
