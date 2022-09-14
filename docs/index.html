@@ -5,7 +5,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NPM-sample-qc &mdash; NPM-sample-qc  documentation</title>
-      <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -91,7 +93,7 @@
 <span class="n">cd</span> <span class="o">../</span>
 </pre></div>
 </div>
-<p>Run workflow on sample NA12878 from from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7</p>
+<p>Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">nf</span> \
   <span class="o">-</span><span class="n">config</span>      <span class="n">nextflow</span><span class="o">.</span><span class="n">config</span> \
   <span class="o">-</span><span class="n">profile</span>     <span class="n">docker</span> \
@@ -147,7 +149,7 @@
 <section id="workflow-logic">
 <h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this heading"></a></h2>
 <p>We provide a schematic representation of the workflow in the figure below:</p>
-<img src="docs/npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
+<img src="npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
 <p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/example_dag.pdf</span></code>).</p>
 <p><strong>Metrics parsing</strong></p>
@@ -157,10 +159,14 @@
 </section>
 <section id="metric-definitions">
 <h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading"></a></h2>
-<p><em>This section is outdated. New metrics definitions are being worked on and will be updated in coming releases.</em></p>
 <p>The full list of metrics reported by this workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
 <p>When needed, page contents can be updated by running the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">docsrc</span><span class="p">;</span> <span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install sphinx</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span> <span class="n">sphinx_rtd_theme</span> <span class="n">sphinx_automodapi</span>
+<span class="c1"># Move to doc source</span>
+<span class="n">cd</span> <span class="n">docsrc</span>
+<span class="c1"># Build the doc</span>
+<span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">
