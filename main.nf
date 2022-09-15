@@ -1,10 +1,13 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl=2
+version = "0.5" // nf qc workflow version
+
 /*
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
 
-Copyright: 2020 Genome Institute of Singapore
+Copyright: 2022 Genome Institute of Singapore
 License: The MIT License (MIT)
 
 See LICENSE for more copyright information
@@ -19,7 +22,7 @@ FUNCTIONS
 def helpMessage() {
     log.info """
     Usage: nextflow run main.nf -config nextflow.config -params-file sample_params.yaml 
-                                -profile nscc -work-dir ./ --outdir ./
+                                -profile docker -work-dir ./ --outdir ./
                                 [-resume] [--keep_workdir] [--help]
 
     Options:
@@ -36,6 +39,10 @@ def nextflowMessage() {
     log.info "N E X T F L O W  ~  version ${workflow.nextflow.version} ${workflow.nextflow.build}"
 }
 
+def version_message() {
+    println("NPM-sample-qc  ~  version ${version}")
+}
+
 def minimalInformationMessage() {
     log.info "User name    : " + workflow.userName
     log.info "Command Line : " + workflow.commandLine
@@ -49,8 +56,10 @@ def minimalInformationMessage() {
 
 def startMessage() {
     this.nextflowMessage()
+    this.version_message()
     this.minimalInformationMessage()
 }
+
 
 /*
 ----------------------------------------------------------------------
@@ -70,124 +79,65 @@ startMessage()
 
 /*
 ----------------------------------------------------------------------
-INPUT CHANNELS
-----------------------------------------------------------------------
-*/
-fcbam = file( params.bam_cram )
-assert params.bam_cram  != null: "Missing CRAM / BAM input param"
-
-ftype = fcbam.getExtension()
-
-if ( fcbam.getExtension() == 'cram') {
-    println "Input file type and name: CRAM : ${params.bam_cram}"
-}
-else if ( fcbam.getExtension() == 'bam') {
-    println "Input file type and name: BAM : ${params.bam_cram}"
-}
-
-Channel
-    .fromPath(params.bam_cram)
-    .set { input_ch_cram_bam }
-
-Channel
-    .fromPath(params.reference)
-    .into { ref_fa_ch_cram_bam_index
-          ; ref_fa_ch_picard_collect_multiple_metrics
-          ; ref_fa_ch_mosdepth }
-
-Channel
-    .fromPath(params.gap_regions)
-    .set { gap_regions_ch_mosdepth }
-
-/*
-----------------------------------------------------------------------
 PROCESSES
 ---------------------------------------------------------------------
 */
 
-process cram_bam_index {
-
-    input:
-    file reference from ref_fa_ch_cram_bam_index
-    file bam_cram from input_ch_cram_bam
-
-    output:
-    file "*" into cram_bam_ch_samtools_stats \
-                , cram_bam_ch_picard_collect_multiple_metrics \
-                , cram_bam_ch_mosdepth
-
-    script:
-        if ( fcbam.getExtension() == 'cram')
-            """
-            samtools faidx ${reference} -o ${reference}.fai
-            mv ${bam_cram} ${params.sample_id}.qc.cram
-            samtools index ${params.sample_id}.qc.cram ${params.sample_id}.qc.cram.crai
-            """
-        else if ( fcbam.getExtension() == 'bam')
-            """
-            samtools faidx ${reference} -o ${reference}.fai
-            mv ${bam_cram} ${params.sample_id}.qc.bam
-            samtools index ${params.sample_id}.qc.bam ${params.sample_id}.qc.bam.bai
-            """
-}
-
 process samtools_stats {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    file "*" from cram_bam_ch_samtools_stats
+    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
 
     output:
-    file "*" into samtools_stats_ch
+    path "${sample_id}.stats"
 
     script:
     """
-      samtools stats ${params.sample_id}.qc.${ftype} > ${params.sample_id}.stats
+      samtools stats ${cbam} > ${sample_id}.stats
     """
 
 }
 
 process mosdepth {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    file reference from ref_fa_ch_mosdepth
-    file "*" from cram_bam_ch_mosdepth
-    file gap_regions from gap_regions_ch_mosdepth
+    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
+    path gap_regions
 
     output:
-    file "*" into mosdepth_ch
+    path "${sample_id}.*"
 
     script:
     """
-    run_mosdepth.sh \
-        --input_bam_cram=${params.sample_id}.qc.${ftype} \
-        --ref_fasta=${reference} \
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${fa} ${sample_id} ${cbam}
+    run_datamash.sh \
+        --ref_fasta=${fa} \
         --gap_regions=${gap_regions} \
-        --output_csv=${params.sample_id}.mosdepth.csv \
+        --output_csv=${sample_id}.mosdepth.csv \
         --sample_id=${params.sample_id}
     """
 
 }
 
 process picard_collect_multiple_metrics {
-
+    tag "${sample_id}"
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    file reference from ref_fa_ch_picard_collect_multiple_metrics
-    file "*" from cram_bam_ch_picard_collect_multiple_metrics
+    tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
 
     output:
-    file "*" into picard_collect_multiple_metrics_ch
+    path "${sample_id}.*"
 
     script:
     """
     picard CollectMultipleMetrics  \
-        I=${params.sample_id}.qc.${ftype} \
-        O=${params.sample_id} \
+        I=${cbam} \
+        O=${sample_id} \
         ASSUME_SORTED=true \
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
@@ -195,7 +145,7 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${reference}
+        R=${fa}
     """
 
 }
@@ -203,14 +153,12 @@ process picard_collect_multiple_metrics {
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
-
+	
     input:
-    file "samtools/*" from samtools_stats_ch
-    file "picard/*" from picard_collect_multiple_metrics_ch
-    file "mosdepth/*" from mosdepth_ch
+    path "*"
 
     output:
-    file "multiqc_data/*" into multiqc_ch
+    path  "multiqc_data/*", emit: multiqc_ch
 
     script:
     """
@@ -220,14 +168,13 @@ process multiqc {
 }
 
 process compile_metrics {
-
     publishDir "${params.publishdir}", mode: "copy"
 
     input:
-    file "*" from multiqc_ch
+    path multiqc
 
     output:
-    file "*" into compile_metrics_ch
+    path "${params.sample_id}.metrics.json", emit: compile_metrics_out
 
     script:
     """
@@ -241,10 +188,43 @@ process compile_metrics {
 
 /*
 ----------------------------------------------------------------------
+WORKFLOW
+---------------------------------------------------------------------
+*/
+	
+// input channels
+
+reference = channel.fromPath(params.reference, checkIfExists: true)
+    .map{ fa -> tuple(fa, fa + ".fai") }
+
+input_file = file ( params.bam_cram )
+index_type = input_file.getExtension()
+
+if (index_type == "bam")
+    cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
+        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".bai") }
+else if (index_type == "cram")
+    cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
+        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".crai") }
+
+gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
+
+inputs = cbam.combine(reference)
+
+// main
+workflow {
+    samtools_stats(inputs)
+    picard_collect_multiple_metrics(inputs)
+    mosdepth( inputs, gap_regions )
+    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
+    compile_metrics(multiqc.out)
+}
+
+/*
+----------------------------------------------------------------------
 COMPLETION INFO
 ----------------------------------------------------------------------
 */
-
 workflow.onComplete {
     log.info "Started     : " + workflow.start
     log.info "Completed   : " + workflow.complete
