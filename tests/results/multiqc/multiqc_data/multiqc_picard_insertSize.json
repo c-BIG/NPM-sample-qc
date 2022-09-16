@@ -1,6 +1,6 @@
 {
-    "NA12878.qc_FR": {
-        "SAMPLE_NAME": "NA12878.qc",
+    "NA12878_FR": {
+        "SAMPLE_NAME": "NA12878",
         "MEDIAN_INSERT_SIZE": 433.0,
         "MODE_INSERT_SIZE": 407.0,
         "MEDIAN_ABSOLUTE_DEVIATION": 66.0,

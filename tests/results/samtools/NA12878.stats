@@ -1,6 +1,6 @@
 # This file was produced by samtools stats (1.15.1+htslib-1.15.1) and can be plotted using plot-bamstats
 # This file contains statistics for all reads.
-# The command line was:  stats NA12878.qc.bam
+# The command line was:  stats NA12878.bam
 # CHK, Checksum	[2]Read Names	[3]Sequences	[4]Qualities
 # CHK, CRC32 of reads which passed filtering followed by addition (32bit overflow)
 CHK	77109ba8	8b41b50b	13d5ae98

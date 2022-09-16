@@ -2,27 +2,27 @@
     "report_data_sources": {
         "mosdepth": {
             "genome_results": {
-                "NA12878.qc": "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8/mosdepth/NA12878.qc.mosdepth.region.dist.txt"
+                "NA12878": "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02/NA12878.mosdepth.region.dist.txt"
             }
         },
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878.qc": "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8/picard/NA12878.insert_size_metrics.txt"
+                "NA12878": "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02/NA12878.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878.insert_size_metrics": "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8/picard/NA12878.insert_size_metrics.txt",
-                "NA12878.quality_yield_metrics": "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8/picard/NA12878.quality_yield_metrics.txt"
+                "NA12878.insert_size_metrics": "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02/NA12878.insert_size_metrics.txt",
+                "NA12878.quality_yield_metrics": "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02/NA12878.quality_yield_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878": "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8/samtools/NA12878.stats"
+                "NA12878": "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02/NA12878.stats"
             }
         }
     },
     "report_general_stats_data": [
         {
-            "NA12878.qc": {
+            "NA12878": {
                 "mean_coverage": "29.55",
                 "1_x_pc": 91.0,
                 "5_x_pc": 90.0,
@@ -33,7 +33,7 @@
             }
         },
         {
-            "NA12878.qc": {
+            "NA12878": {
                 "TOTAL_READS": 758135204,
                 "PF_READS": 758135204,
                 "READ_LENGTH": 150,
@@ -48,7 +48,7 @@
             }
         },
         {
-            "NA12878.qc": {
+            "NA12878": {
                 "total_count": 331934511,
                 "meansum": 147119749291.20343,
                 "total_pairs": 332375203.0,
@@ -478,7 +478,7 @@
             "datasets": [
                 [
                     {
-                        "name": "NA12878.qc",
+                        "name": "NA12878",
                         "data": [
                             [
                                 0,
@@ -672,7 +672,7 @@
             "datasets": [
                 [
                     {
-                        "name": "NA12878.qc",
+                        "name": "NA12878",
                         "data": [
                             [
                                 0,
@@ -866,7 +866,7 @@
             "datasets": [
                 [
                     {
-                        "name": "NA12878.qc",
+                        "name": "NA12878",
                         "data": [
                             29.210000000000004,
                             31.85000000000001,
@@ -1889,7 +1889,7 @@
             "datasets": [
                 [
                     {
-                        "name": "NA12878.qc",
+                        "name": "NA12878",
                         "data": [
                             [
                                 22,
@@ -3896,7 +3896,7 @@
                 ],
                 [
                     {
-                        "name": "NA12878.qc",
+                        "name": "NA12878",
                         "data": [
                             [
                                 22,
@@ -6179,7 +6179,7 @@
     },
     "report_saved_raw_data": {
         "multiqc_npm_picard_QualityYieldMetrics": {
-            "NA12878.qc": {
+            "NA12878": {
                 "TOTAL_READS": 758135204.0,
                 "PF_READS": 758135204.0,
                 "READ_LENGTH": 150.0,
@@ -6218,7 +6218,7 @@
             }
         },
         "mosdepth_cumcov_dist": {
-            "NA12878.qc": {
+            "NA12878": {
                 "45": 1.0,
                 "44": 1.0,
                 "43": 1.0,
@@ -6268,7 +6268,7 @@
             }
         },
         "mosdepth_cov_dist": {
-            "NA12878.qc": {
+            "NA12878": {
                 "45": 1.0,
                 "44": 0.0,
                 "43": 0.0,
@@ -6318,7 +6318,7 @@
             }
         },
         "mosdepth_perchrom": {
-            "NA12878.qc": {
+            "NA12878": {
                 "chr1": 29.210000000000004,
                 "chr2": 31.629999999999995,
                 "chr3": 31.879999999999995,
@@ -9063,8 +9063,8 @@
             }
         },
         "multiqc_picard_insertSize": {
-            "NA12878.qc_FR": {
-                "SAMPLE_NAME": "NA12878.qc",
+            "NA12878_FR": {
+                "SAMPLE_NAME": "NA12878",
                 "MEDIAN_INSERT_SIZE": 433.0,
                 "MODE_INSERT_SIZE": 407.0,
                 "MEDIAN_ABSOLUTE_DEVIATION": 66.0,
@@ -9093,7 +9093,7 @@
         "picard_histogram": {},
         "picard_histogram_1": {},
         "multiqc_picard_QualityYieldMetrics": {
-            "NA12878.qc": {
+            "NA12878": {
                 "TOTAL_READS": 758135204,
                 "PF_READS": 758135204,
                 "READ_LENGTH": 150,
@@ -9160,7 +9160,7 @@
             }
         },
         "multiqc_general_stats": {
-            "NA12878.qc": {
+            "NA12878": {
                 "mosdepth_mqc-generalstats-mosdepth-10_x_pc": 90.0,
                 "mosdepth_mqc-generalstats-mosdepth-1_x_pc": 91.0,
                 "mosdepth_mqc-generalstats-mosdepth-30_x_pc": 73.0,
@@ -9170,9 +9170,7 @@
                 "mosdepth_mqc-generalstats-mosdepth-median_coverage": 32,
                 "Picard_mqc-generalstats-picard-TOTAL_READS": 758135204,
                 "Picard_mqc-generalstats-picard-summed_median": 433,
-                "Picard_mqc-generalstats-picard-summed_mean": 442.631544
-            },
-            "NA12878": {
+                "Picard_mqc-generalstats-picard-summed_mean": 442.631544,
                 "Samtools_mqc-generalstats-samtools-error_rate": 0.004679882,
                 "Samtools_mqc-generalstats-samtools-non_primary_alignments": 0.0,
                 "Samtools_mqc-generalstats-samtools-reads_mapped": 756319595.0,
@@ -9184,12 +9182,12 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/test/NPM-sample-qc/tests/work/7f/c8079c0a088d6e390a62e2286e4ca8"
+        "/home/ubuntu/Sep16/NPM-sample-qc/tests/work/6d/abf457641d5db265bede6bdf9f2f02"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2022-08-31, 10:41",
+    "config_creation_date": "2022-09-16, 07:30",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,
