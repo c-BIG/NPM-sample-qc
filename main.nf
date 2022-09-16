@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-version = "0.5" // nf qc workflow version
+version = "0.6" // nf qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
