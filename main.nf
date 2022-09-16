@@ -106,7 +106,6 @@ process mosdepth {
 
     input:
     tuple val(sample_id), file(cbam), file(idx), file(fa), file(fai)
-    path gap_regions
 
     output:
     path "${sample_id}.*"
@@ -116,9 +115,27 @@ process mosdepth {
    # run mosdepth    
     mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${fa} ${sample_id} ${cbam}
 
+    """
+
+}
+
+process mosdepth_datamash {
+    tag "${sample_id}"
+    publishDir "${params.publishdir}/mosdepth", mode: "copy"
+
+    input:
+    tuple file(fa), file(fai)
+    path gap_regions
+    path mosdepth 
+
+    output:
+    path "${sample_id}.mosdepth.csv"
+
+    script:
+    """
     # filter outputs
     # focus on autosomes
-    head -22 "${fa}.fai" |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed	
+    head -22 ${fai} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
     zcat "${sample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${sample_id}.regions.autosomes.bed.gz"
 
     # exclude bins that overlap with N bases in ref
@@ -218,6 +235,8 @@ WORKFLOW
 	
 // input channels
 
+sample_id = params.sample_id
+
 reference = channel.fromPath(params.reference, checkIfExists: true)
     .map{ fa -> tuple(fa, fa + ".fai") }
 
@@ -226,21 +245,22 @@ index_type = input_file.getExtension()
 
 if (index_type == "bam")
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".bai") }
+        .map{ cbam -> tuple(sample_id, cbam, cbam + ".bai") }
 else if (index_type == "cram")
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(cbam.simpleName, cbam, cbam + ".crai") }
-
-gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
+        .map{ cbam -> tuple(sample_id, cbam, cbam + ".crai") }
 
 inputs = cbam.combine(reference)
+
+gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
 // main
 workflow {
     samtools_stats(inputs)
     picard_collect_multiple_metrics(inputs)
-    mosdepth( inputs, gap_regions )
-    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out ).collect() )
+    mosdepth( inputs )
+    mosdepth_datamash( reference, gap_regions, mosdepth.out )
+    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out, mosdepth_datamash.out ).collect() )
     compile_metrics(multiqc.out)
 }
 
