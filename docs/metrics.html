@@ -8,14 +8,10 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -78,8 +74,8 @@
            <div itemprop="articleBody">
              
   <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
-<table class="autosummary longtable docutils align-default">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h1>
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -89,13 +85,13 @@
 <td><p>The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.mean_autosome_coverage.html#metrics.mean_autosome_coverage" title="metrics.mean_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_autosome_coverage</span></code></a>(mqc)</p></td>
-<td><p>The mean coverage in autosomes (as defined in genome_territory).</p></td>
+<td><p>The mean coverage in autosomes (The number of non-N bases in autosomes over which coverage will be evaluated).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mean_insert_size.html#metrics.mean_insert_size" title="metrics.mean_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_insert_size</span></code></a>(mqc)</p></td>
 <td><p>The mean insert size over the &quot;core&quot; of the distribution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_autosomes_1x.</p></td>
+<td><p>The percentage of bases that attained at least 15X sequence coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases.html#metrics.pct_q30_bases" title="metrics.pct_q30_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases</span></code></a>(mqc)</p></td>
 <td><p>The percentage of PF bases with base quality &gt;= 30.</p></td>
