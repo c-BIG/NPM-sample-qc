@@ -11,7 +11,15 @@ def pct_q30_bases(mqc):
     """
     The percentage of PF bases with base quality >= 30.
 
-    Source: picard QualityYieldMetrics (PF_Q30_BASES/PF_BASES)
+    - Minimum mapping quality 0 or not set
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
+
+    Source: DRAGEN 3.7.6
+            picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -28,6 +36,16 @@ def pct_q30_bases(mqc):
 def pct_reads_aligned_in_pairs(mqc):
     """
     The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.
+
+    - Genomic reference build GRCh38
+    - Genomic filtering regions - excludes non autosomal regions
+    - Minimum base quality not set
+    - Minimum mapping quality 0 or not set
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
 
     Source: samtools stats (reads_mapped_and_paired / sequences)
     """
@@ -48,6 +66,16 @@ def pct_reads_properly_paired(mqc):
     """
     The percentage of reads that have been aligned as proper pairs.
 
+    - Genomic reference build GRCh38
+    - Genomic filtering regions - excludes non autosomal regions
+    - Minimum base quality not set
+    - Minimum mapping quality 0 or not set
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
+
     Source: samtools stats (reads_properly_paired_percent)
     """
     k = inspect.currentframe().f_code.co_name
@@ -64,13 +92,19 @@ def pct_reads_properly_paired(mqc):
 
 def mean_autosome_coverage(mqc):
     """
-    The mean coverage in autosomes (as defined in genome_territory). Excludes:
+    The mean coverage in autosomes (The number of non-N bases in autosomes over which coverage will be evaluated).
 
-    - bases in reads with low mapping quality (mapq < 20)
-    - bases in reads marked as duplicates
-    - overlapping bases in read pairs
+    - Genomic reference build GRCh38
+    - Genomic filtering regions - non autosomal regions
+    - Minimum base quality not set
+    - Minimum mapping quality 20
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
 
-    Source: run_mosdepth.sh (mean_autosome_coverage)
+    Source: in-house tool based on mosdepth v0.3.3 (mean_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -88,7 +122,17 @@ def mad_autosome_coverage(mqc):
     """
     The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
 
-    Source: run_mosdepth.sh (mad_autosome_coverage)
+    - Genomic reference build GRCh38
+    - Genomic filtering regions - non autosomal regions
+    - Minimum base quality not set
+    - Minimum mapping quality 20
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
+
+    Source: in-house tool based on mosdepth v0.3.3 (mad_autosome_coverage)
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -104,7 +148,19 @@ def mad_autosome_coverage(mqc):
 
 def pct_autosomes_15x(mqc):
     """
-    Analogous to pct_autosomes_1x.
+    The percentage of bases that attained at least 15X sequence coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
+
+    - Genomic reference build GRCh38
+    - Genomic filtering regions - gap region (N bases) in the GRCh38 assembly
+    - Minimum base quality not set
+    - Minimum mapping quality 20
+    - Reads marked as duplicates included
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
+
+    Source: in-house tool based on mosdepth v0.3.3 (ge_15x_autosome_bases/total_autosome_bases*100)
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -127,7 +183,15 @@ def mean_insert_size(mqc):
     stdev values. To avoid this the distribution is first trimmed to a "core" distribution of +/- N
     median absolute deviations around the median insert size.
 
-    Source: picard InsertSizeMetrics (MEAN_INSERT_SIZE)
+    - Reads marked as duplicates are not included
+    - Minimum base quality not set
+    - Minimum mapping quality 0 
+    - Secondary alignments not included
+    - Hard and soft clipped bases included
+    - Overlapping bases included
+    - Unique Molecular Identifiers not used to collapse reads
+
+    Source: picard CollectMultipleMetrics(InsertSizeMetrics) - MEAN_INSERT_SIZE
     """
     k = inspect.currentframe().f_code.co_name
 
