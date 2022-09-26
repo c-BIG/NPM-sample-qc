@@ -97,7 +97,7 @@ def mean_autosome_coverage(mqc):
     - Genomic filtering regions - non autosomes and gap region (N bases) in the GRCh38 assembly
     - Minimum base quality not applied
     - Minimum mapping quality 20
-    - Reads marked as duplicates not excluded
+    - Reads marked as duplicates excluded
     - Secondary alignments excluded
     - Alignments are hard and soft clipped
     - Overlapping bases excluded
@@ -125,7 +125,7 @@ def mad_autosome_coverage(mqc):
     - Genomic filtering regions - non autosomes and gap region (N bases) in the GRCh38 assembly
     - Minimum base quality not applied
     - Minimum mapping quality 20
-    - Reads marked as duplicates not excluded
+    - Reads marked as duplicates excluded
     - Secondary alignments excluded
     - Alignments are hard and soft clipped
     - Overlapping bases excluded
@@ -153,7 +153,7 @@ def pct_autosomes_15x(mqc):
     - Genomic filtering regions - non autosomes and gap region (N bases) in the GRCh38 assembly
     - Minimum base quality not applied
     - Minimum mapping quality 20
-    - Reads marked as duplicates not excluded
+    - Reads marked as duplicates excluded
     - Secondary alignments excluded
     - Alignments are hard and soft clipped
     - Overlapping bases excluded
