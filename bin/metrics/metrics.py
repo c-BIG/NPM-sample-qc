@@ -18,8 +18,7 @@ def pct_q30_bases(mqc):
     - Overlapping bases included
     - Unique Molecular Identifiers not used to collapse reads
 
-    Source: DRAGEN 3.7.6
-            picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES
+    Source: picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -72,7 +71,7 @@ def pct_reads_properly_paired(mqc):
     - Minimum mapping quality 0 or not set
     - Reads marked as duplicates included
     - Secondary alignments not included
-    - Hard and soft clipped bases included
+    - Bases are hard and soft clipped
     - Overlapping bases included
     - Unique Molecular Identifiers not used to collapse reads
 
@@ -99,9 +98,9 @@ def mean_autosome_coverage(mqc):
     - Minimum base quality not set
     - Minimum mapping quality 20
     - Reads marked as duplicates included
-    - Secondary alignments not included
-    - Hard and soft clipped bases included
-    - Overlapping bases included
+    - Secondary alignments excluded
+    - Bases are hard and soft clipped
+    - Overlapping bases excluded
     - Unique Molecular Identifiers not used to collapse reads
 
     Source: in-house tool based on mosdepth v0.3.3 (mean_autosome_coverage)
@@ -127,9 +126,9 @@ def mad_autosome_coverage(mqc):
     - Minimum base quality not set
     - Minimum mapping quality 20
     - Reads marked as duplicates included
-    - Secondary alignments not included
-    - Hard and soft clipped bases included
-    - Overlapping bases included
+    - Secondary alignments excluded
+    - Bases are hard and soft clipped
+    - Overlapping bases excluded
     - Unique Molecular Identifiers not used to collapse reads
 
     Source: in-house tool based on mosdepth v0.3.3 (mad_autosome_coverage)
@@ -155,9 +154,9 @@ def pct_autosomes_15x(mqc):
     - Minimum base quality not set
     - Minimum mapping quality 20
     - Reads marked as duplicates included
-    - Secondary alignments not included
-    - Hard and soft clipped bases included
-    - Overlapping bases included
+    - Secondary alignments excluded
+    - Bases are hard and soft clipped
+    - Overlapping bases excluded
     - Unique Molecular Identifiers not used to collapse reads
 
     Source: in-house tool based on mosdepth v0.3.3 (ge_15x_autosome_bases/total_autosome_bases*100)
