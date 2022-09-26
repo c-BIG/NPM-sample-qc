@@ -79,9 +79,9 @@
 <li><p>Minimum base quality not set</p></li>
 <li><p>Minimum mapping quality 20</p></li>
 <li><p>Reads marked as duplicates included</p></li>
-<li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
-<li><p>Overlapping bases included</p></li>
+<li><p>Secondary alignments excluded</p></li>
+<li><p>Bases are hard and soft clipped</p></li>
+<li><p>Overlapping bases excluded</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
 <p>Source: in-house tool based on mosdepth v0.3.3 (mad_autosome_coverage)</p>
@@ -97,9 +97,9 @@
 <li><p>Minimum base quality not set</p></li>
 <li><p>Minimum mapping quality 20</p></li>
 <li><p>Reads marked as duplicates included</p></li>
-<li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
-<li><p>Overlapping bases included</p></li>
+<li><p>Secondary alignments excluded</p></li>
+<li><p>Bases are hard and soft clipped</p></li>
+<li><p>Overlapping bases excluded</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
 <p>Source: in-house tool based on mosdepth v0.3.3 (mean_autosome_coverage)</p>
@@ -134,9 +134,9 @@ median absolute deviations around the median insert size.</p>
 <li><p>Minimum base quality not set</p></li>
 <li><p>Minimum mapping quality 20</p></li>
 <li><p>Reads marked as duplicates included</p></li>
-<li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
-<li><p>Overlapping bases included</p></li>
+<li><p>Secondary alignments excluded</p></li>
+<li><p>Bases are hard and soft clipped</p></li>
+<li><p>Overlapping bases excluded</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
 <p>Source: in-house tool based on mosdepth v0.3.3 (ge_15x_autosome_bases/total_autosome_bases*100)</p>
@@ -154,10 +154,7 @@ median absolute deviations around the median insert size.</p>
 <li><p>Overlapping bases included</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
-<dl class="simple">
-<dt>Source: DRAGEN 3.7.6</dt><dd><p>picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES</p>
-</dd>
-</dl>
+<p>Source: picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES</p>
 </dd></dl>
 
 <dl class="py function">
@@ -189,7 +186,7 @@ median absolute deviations around the median insert size.</p>
 <li><p>Minimum mapping quality 0 or not set</p></li>
 <li><p>Reads marked as duplicates included</p></li>
 <li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
+<li><p>Bases are hard and soft clipped</p></li>
 <li><p>Overlapping bases included</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
