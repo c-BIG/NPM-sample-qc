@@ -84,12 +84,12 @@
 stdev values. To avoid this the distribution is first trimmed to a “core” distribution of +/- N
 median absolute deviations around the median insert size.</p>
 <ul class="simple">
-<li><p>Reads marked as duplicates are not included</p></li>
-<li><p>Minimum base quality not set</p></li>
+<li><p>Reads marked as duplicates are excluded</p></li>
+<li><p>Minimum base quality not applied</p></li>
 <li><p>Minimum mapping quality 0</p></li>
-<li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
-<li><p>Overlapping bases included</p></li>
+<li><p>Secondary alignments excluded</p></li>
+<li><p>Alignments hard and soft clipped</p></li>
+<li><p>Overlapping bases not excluded</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
 <p>Source: picard CollectMultipleMetrics(InsertSizeMetrics) - MEAN_INSERT_SIZE</p>

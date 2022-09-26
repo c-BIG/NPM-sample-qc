@@ -81,11 +81,11 @@
 <span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_q30_bases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_q30_bases" title="Permalink to this definition"></a></dt>
 <dd><p>The percentage of PF bases with base quality &gt;= 30.</p>
 <ul class="simple">
-<li><p>Minimum mapping quality 0 or not set</p></li>
-<li><p>Reads marked as duplicates included</p></li>
-<li><p>Secondary alignments not included</p></li>
-<li><p>Hard and soft clipped bases included</p></li>
-<li><p>Overlapping bases included</p></li>
+<li><p>Minimum mapping quality 0</p></li>
+<li><p>Reads marked as duplicates not excluded</p></li>
+<li><p>Secondary alignments excluded</p></li>
+<li><p>Alignments are hard and soft clipped</p></li>
+<li><p>Overlapping bases not excluded</p></li>
 <li><p>Unique Molecular Identifiers not used to collapse reads</p></li>
 </ul>
 <p>Source: picard CollectMultipleMetrics(QualityYieldMetrics) - PF_Q30_BASES/PF_BASES</p>
