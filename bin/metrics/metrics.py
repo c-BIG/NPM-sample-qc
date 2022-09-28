@@ -66,13 +66,13 @@ def pct_reads_properly_paired(mqc):
     The percentage of reads that have been aligned as proper pairs.
 
     - Genomic reference build GRCh38
-    - Genomic filtering regions - excluded non autosomal regions
+    - Genomic filtering regions - non autosomal regions
     - Minimum base quality not applied
     - Minimum mapping quality 0
     - Reads marked as duplicates not excluded
     - Secondary alignments excluded
     - Alignments are hard and soft clipped
-    - Overlapping bases included
+    - Overlapping bases not excluded
     - Unique Molecular Identifiers not used to collapse reads
 
     Source: samtools stats (reads_properly_paired_percent)
