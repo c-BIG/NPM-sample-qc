@@ -5,7 +5,7 @@ NXF_ANSI_LOG=false
 
 nextflow run ../main.nf \
 	-config ../nextflow.config \
-	-params-file sample_params.yml \
+	-params-file params.yml \
 	-resume \
 	-work-dir ./work \
 	--outdir . \
