@@ -1,2 +1,2 @@
-sample_id: NA12878 
+biosample_id: NA12878 
 bam_cram: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam

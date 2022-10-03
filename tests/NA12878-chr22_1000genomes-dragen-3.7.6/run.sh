@@ -9,5 +9,4 @@ nextflow run ../main.nf \
 	-resume \
 	-work-dir ./work \
 	--outdir . \
-	-profile docker \
 	-bg >run.log
