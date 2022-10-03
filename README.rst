@@ -38,7 +38,7 @@ Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRA
   nextflow run main.nf \
     -config      nextflow.config \
     -profile     docker \
-    -params-file tests/sample_params.yml \
+    -params-file tests/NA12878_1000genomes-dragen-3.7.6/params.yml \
     -work-dir    test-run/work \
     --outdir     test-run
 
@@ -67,7 +67,7 @@ Input requirements can be split into two categories:
 
 - **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See ``tests/sample_params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example.
 
 .. _Nextflow configuration: https://www.nextflow.io/docs/latest/config.html
 
@@ -107,7 +107,7 @@ In a nutshell, this workflow generates QC metrics from single-sample WGS results
 
 **Metrics calculation**
 
-The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/example_dag.pdf``).
+The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf``).
 
 
 **Metrics parsing**
