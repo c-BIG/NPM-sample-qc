@@ -1,0 +1,2 @@
+mean_autosome_coverage,sd_autosome_coverage,median_autosome_coverage,mad_autosome_coverage,total_autosome_bases,ge_1x_autosome_bases,ge_10x_autosome_bases,ge_15x_autosome_bases,ge_30x_autosome_bases,ge_40x_autosome_bases
+0.431819,3.952776,0.000000,0.000000,2.75589e+09,35997000,34617000,34015000,28715000,3446000

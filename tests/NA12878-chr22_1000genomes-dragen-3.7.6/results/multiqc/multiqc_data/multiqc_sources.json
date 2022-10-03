@@ -1,0 +1,21 @@
+{
+    "mosdepth": {
+        "genome_results": {
+            "NA12878-chr22": "/home/ubuntu/Sep18/NPM-sample-qc/tests/NA12878-chr22_1000genomes-dragen-3.7.6/work/a0/4c7b74956e6a11153145be131f9ec4/NA12878-chr22.mosdepth.region.dist.txt"
+        }
+    },
+    "Picard": {
+        "InsertSizeMetrics": {
+            "NA12878-chr22": "/home/ubuntu/Sep18/NPM-sample-qc/tests/NA12878-chr22_1000genomes-dragen-3.7.6/work/a0/4c7b74956e6a11153145be131f9ec4/NA12878-chr22.insert_size_metrics.txt"
+        },
+        "QualityYieldMetrics": {
+            "NA12878-chr22.quality_yield_metrics": "/home/ubuntu/Sep18/NPM-sample-qc/tests/NA12878-chr22_1000genomes-dragen-3.7.6/work/a0/4c7b74956e6a11153145be131f9ec4/NA12878-chr22.quality_yield_metrics.txt",
+            "NA12878-chr22.insert_size_metrics": "/home/ubuntu/Sep18/NPM-sample-qc/tests/NA12878-chr22_1000genomes-dragen-3.7.6/work/a0/4c7b74956e6a11153145be131f9ec4/NA12878-chr22.insert_size_metrics.txt"
+        }
+    },
+    "Samtools": {
+        "stats": {
+            "NA12878-chr22": "/home/ubuntu/Sep18/NPM-sample-qc/tests/NA12878-chr22_1000genomes-dragen-3.7.6/work/a0/4c7b74956e6a11153145be131f9ec4/NA12878-chr22.stats"
+        }
+    }
+}

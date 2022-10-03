@@ -1,0 +1,21 @@
+{
+    "NA12878-chr22": {
+        "mosdepth_mqc-generalstats-mosdepth-10_x_pc": 1.0,
+        "mosdepth_mqc-generalstats-mosdepth-1_x_pc": 1.0,
+        "mosdepth_mqc-generalstats-mosdepth-30_x_pc": 1.0,
+        "mosdepth_mqc-generalstats-mosdepth-50_x_pc": 0,
+        "mosdepth_mqc-generalstats-mosdepth-5_x_pc": 1.0,
+        "mosdepth_mqc-generalstats-mosdepth-mean_coverage": "0.39",
+        "mosdepth_mqc-generalstats-mosdepth-median_coverage": 0,
+        "Picard_mqc-generalstats-picard-TOTAL_READS": 9885176,
+        "Picard_mqc-generalstats-picard-summed_median": 435,
+        "Picard_mqc-generalstats-picard-summed_mean": 444.839439,
+        "Samtools_mqc-generalstats-samtools-error_rate": 0.004950603,
+        "Samtools_mqc-generalstats-samtools-non_primary_alignments": 0.0,
+        "Samtools_mqc-generalstats-samtools-reads_mapped": 9859819.0,
+        "Samtools_mqc-generalstats-samtools-reads_mapped_percent": 99.74348458742666,
+        "Samtools_mqc-generalstats-samtools-reads_properly_paired_percent": 99.4041583073483,
+        "Samtools_mqc-generalstats-samtools-reads_MQ0_percent": 5.3879769060257505,
+        "Samtools_mqc-generalstats-samtools-raw_total_sequences": 9885176.0
+    }
+}

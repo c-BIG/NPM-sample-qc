@@ -1,0 +1,14 @@
+{
+    "NA12878-chr22": {
+        "mean_autosome_coverage": "0.431819",
+        "sd_autosome_coverage": "3.952776",
+        "median_autosome_coverage": "0.000000",
+        "mad_autosome_coverage": "0.000000",
+        "total_autosome_bases": "2.75589e+09",
+        "ge_1x_autosome_bases": "35997000",
+        "ge_10x_autosome_bases": "34617000",
+        "ge_15x_autosome_bases": "34015000",
+        "ge_30x_autosome_bases": "28715000",
+        "ge_40x_autosome_bases": "3446000"
+    }
+}

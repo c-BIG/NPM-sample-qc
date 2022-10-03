@@ -1,0 +1,10 @@
+{
+    "NA12878-chr22": {
+        "pct_q30_bases_read1": 97.31,
+        "total_bases_read1": 721481532,
+        "q30_bases_read1": 741388200,
+        "pct_q30_bases_read2": 95.8,
+        "total_bases_read2": 710279752,
+        "q30_bases_read2": 741388200
+    }
+}
