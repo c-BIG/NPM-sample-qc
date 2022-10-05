@@ -88,7 +88,7 @@ process samtools_stats {
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    tuple val(biosample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
 
     output:
     path "${biosample_id}.stats"
@@ -105,7 +105,7 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(biosample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
 
     output:
     path "${biosample_id}.*"
@@ -124,7 +124,7 @@ process mosdepth_datamash {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple file(fa), file(fai)
+    tuple path(fa), path(fai)
     path gap_regions
     path mosdepth 
 
@@ -169,7 +169,7 @@ process picard_collect_multiple_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    tuple val(biosample_id), file(cbam), file(idx), file(fa), file(fai)
+    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
 
     output:
     path "${biosample_id}.*"
