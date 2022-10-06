@@ -1,0 +1,15 @@
+{
+    "NA12878-chr14-AKT1": {
+        "TOTAL_READS": 13810,
+        "PF_READS": 13810,
+        "READ_LENGTH": 150,
+        "TOTAL_BASES": 2071500,
+        "PF_BASES": 2071500,
+        "Q20_BASES": 2020718,
+        "PF_Q20_BASES": 2020718,
+        "Q30_BASES": 1996315,
+        "PF_Q30_BASES": 1996315,
+        "Q20_EQUIVALENT_YIELD": 3042758,
+        "PF_Q20_EQUIVALENT_YIELD": 3042758
+    }
+}
