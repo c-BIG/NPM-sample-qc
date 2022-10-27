@@ -56,9 +56,9 @@ The workflow requires the following resources given in the ``conf/resources.conf
 
 - *N-regions reference file*, used as an input for mosdepth. This file can be downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
-- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
+- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa``.
 
-- *FASTA file index*. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
+- *FASTA file index*. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
 
 Inputs
 ------
