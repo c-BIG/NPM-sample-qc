@@ -54,7 +54,7 @@ Resources
 
 The workflow requires the following resources given in the ``conf/resources.config``
 
-- *N-regions reference file*, the formatted gap regions of autosomes ``gap_regions.bed`` can be downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
+- *N-regions reference file*, the formatted gap regions of autosomes ``gap_regions.bed`` downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa``.
 
