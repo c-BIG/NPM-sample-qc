@@ -95,12 +95,32 @@ process samtools_stats {
 
     script:
     """
-      samtools stats ${cbam} > ${biosample_id}.stats
+      samtools stats ${cbam} --threads 8 > ${biosample_id}.stats
     """
 
 }
 
-process mosdepth {
+process mosdepth_bam {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/mosdepth", mode: "copy"
+
+    input:
+    path cbam
+    path cbam_idx
+
+    output:
+    path "${biosample_id}.*"
+
+    script:
+    """
+   # run mosdepth    
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 ${biosample_id} ${cbam}
+
+    """
+
+}
+
+process mosdepth_cram {
     tag "${biosample_id}"
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
@@ -167,7 +187,33 @@ process mosdepth_datamash {
 
 }
 
-process picard_collect_multiple_metrics {
+process picard_collect_multiple_metrics_bam {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    path cbam
+
+    output:
+    path "${biosample_id}.*"
+
+    script:
+    """
+    picard CollectMultipleMetrics  \
+        I=${cbam} \
+        O=${biosample_id} \
+        ASSUME_SORTED=true \
+        FILE_EXTENSION=".txt" \
+        PROGRAM=null \
+        PROGRAM=CollectQualityYieldMetrics \
+        PROGRAM=CollectInsertSizeMetrics \
+        METRIC_ACCUMULATION_LEVEL=null \
+        METRIC_ACCUMULATION_LEVEL=ALL_READS
+    """
+
+}
+
+process picard_collect_multiple_metrics_cram {
     tag "${biosample_id}"
     publishDir "${params.publishdir}/picard", mode: "copy"
 
@@ -246,14 +292,14 @@ biosample_id = params.biosample_id
 reference = channel.fromPath(params.reference, checkIfExists: true)
 reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 
-input_file = file ( params.bam_cram )
-index_type = input_file.getExtension()
+aln_file = file ( params.bam_cram )
+aln_file_type = aln_file.getExtension()
 
-if (index_type == "bam") {
+if (aln_file_type == "bam") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
     cbam_idx = channel.fromPath(params.bam_cram + ".bai", checkIfExists: true)
 }
-else if (index_type == "cram") {
+else if (aln_file_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
     cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
 }
@@ -262,12 +308,21 @@ gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
 // main
 workflow {
-    samtools_stats(cbam)
-    picard_collect_multiple_metrics(cbam, cbam_idx, reference, reference_idx)
-    mosdepth( cbam, cbam_idx, reference, reference_idx )
-    mosdepth_datamash( reference_idx, gap_regions, mosdepth.out )
-    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out, mosdepth_datamash.out ).collect() )
-    compile_metrics(multiqc.out)
+    if (aln_file_type == "bam") {
+        samtools_stats( cbam )
+        picard_collect_multiple_metrics_bam( cbam )
+        mosdepth_bam( cbam, cbam_idx )
+        mosdepth_datamash( reference_idx, gap_regions, mosdepth_bam.out )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
+        compile_metrics(multiqc.out)
+    } else if (aln_file_type == "cram") {
+        samtools_stats( cbam )
+        picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
+        mosdepth_bam_cram( cbam, cbam_idx, reference, reference_idx )
+        mosdepth_datamash( reference_id, gap_regions, mosdepth_cram.out )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
+        compile_metrics(multiqc.out)
+    }
 }
 
 /*
