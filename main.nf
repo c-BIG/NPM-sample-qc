@@ -88,8 +88,8 @@ process samtools_stats {
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
-
+    path cbam
+    
     output:
     path "${biosample_id}.stats"
 
@@ -105,7 +105,10 @@ process mosdepth {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
+    path cbam
+    path cbam_idx
+    path reference
+    path reference_idx
 
     output:
     path "${biosample_id}.*"
@@ -113,7 +116,7 @@ process mosdepth {
     script:
     """
    # run mosdepth    
-    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${fa} ${biosample_id} ${cbam}
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${reference} ${biosample_id} ${cbam}
 
     """
 
@@ -124,7 +127,7 @@ process mosdepth_datamash {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple path(fa), path(fai)
+    path reference_idx
     path gap_regions
     path mosdepth 
 
@@ -135,7 +138,7 @@ process mosdepth_datamash {
     """
     # filter outputs
     # focus on autosomes
-    head -22 ${fai} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
+    head -22 ${reference_idx} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
     zcat "${biosample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${biosample_id}.regions.autosomes.bed.gz"
 
     # exclude bins that overlap with N bases in ref
@@ -169,7 +172,10 @@ process picard_collect_multiple_metrics {
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
+    path cbam
+    path cbam_idx
+    path reference
+    path reference_idx
 
     output:
     path "${biosample_id}.*"
@@ -186,7 +192,7 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${fa}
+        R=${reference}
     """
 
 }
@@ -238,28 +244,28 @@ WORKFLOW
 biosample_id = params.biosample_id
 
 reference = channel.fromPath(params.reference, checkIfExists: true)
-    .map{ fa -> tuple(fa, fa + ".fai") }
+reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 
 input_file = file ( params.bam_cram )
 index_type = input_file.getExtension()
 
-if (index_type == "bam")
+if (index_type == "bam") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(biosample_id, cbam, cbam + ".bai") }
-else if (index_type == "cram")
+    cbam_idx = channel.fromPath(params.bam_cram + ".bai", checkIfExists: true)
+}
+else if (index_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(biosample_id, cbam, cbam + ".crai") }
-
-inputs = cbam.combine(reference)
+    cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
+}
 
 gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
 
 // main
 workflow {
-    samtools_stats(inputs)
-    picard_collect_multiple_metrics(inputs)
-    mosdepth( inputs )
-    mosdepth_datamash( reference, gap_regions, mosdepth.out )
+    samtools_stats(cbam)
+    picard_collect_multiple_metrics(cbam, cbam_idx, reference, reference_idx)
+    mosdepth( cbam, cbam_idx, reference, reference_idx )
+    mosdepth_datamash( reference_idx, gap_regions, mosdepth.out )
     multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out, mosdepth_datamash.out ).collect() )
     compile_metrics(multiqc.out)
 }
