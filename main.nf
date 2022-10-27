@@ -95,7 +95,7 @@ process samtools_stats {
 
     script:
     """
-      samtools stats ${cbam} --threads 8 > ${biosample_id}.stats
+      samtools stats ${cbam} > ${biosample_id}.stats
     """
 
 }
@@ -147,7 +147,6 @@ process mosdepth_datamash {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    path reference_idx
     path gap_regions
     path mosdepth 
 
@@ -158,15 +157,17 @@ process mosdepth_datamash {
     """
     # filter outputs
     # focus on autosomes
-    head -22 ${reference_idx} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
-    zcat "${biosample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${biosample_id}.regions.autosomes.bed.gz"
+    # head -22 ${reference_idx} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
+    # zcat "${biosample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${biosample_id}.regions.autosomes.bed.gz"
 
     # exclude bins that overlap with N bases in ref
-    zcat ${gap_regions} |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > gap_regions.bed
-    zcat "${biosample_id}.regions.autosomes.bed.gz" | bedtools intersect -v -a stdin -b gap_regions.bed | gzip -9c > "${biosample_id}.regions.autosomes_minus_n_bases.bed.gz"
+    #zcat ${gap_regions} |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > gap_regions.bed
+    #zcat "${biosample_id}.regions.autosomes.bed.gz" | bedtools intersect -v -a stdin -b gap_regions.bed | gzip -9c > "${biosample_id}.regions.autosomes_minus_n_bases.bed.gz"
+
+    zcat "${biosample_id}.regions.bed.gz" | egrep -v '_|-|X|Y|M|EBV'| bedtools intersect -v -a stdin -b ${gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_filter_n_bases.bed.gz"
 
     # calculate metrics
-    BED="${biosample_id}.regions.autosomes_minus_n_bases.bed.gz";
+    BED="${biosample_id}.regions.autosomes_filter_n_bases.bed.gz";
     mean_coverage=\$(zcat \$BED | datamash --round 6 mean 4);
     sd_coverage=\$(zcat \$BED | datamash --round 6 sstdev 4);
     median_coverage=\$(zcat \$BED | datamash --round 6 median 4);
@@ -312,14 +313,14 @@ workflow {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
-        mosdepth_datamash( reference_idx, gap_regions, mosdepth_bam.out )
+        mosdepth_datamash( gap_regions, mosdepth_bam.out )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
-        mosdepth_bam_cram( cbam, cbam_idx, reference, reference_idx )
-        mosdepth_datamash( reference_id, gap_regions, mosdepth_cram.out )
+        mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
+        mosdepth_datamash( gap_regions, mosdepth_cram.out )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
         compile_metrics(multiqc.out)
     }
