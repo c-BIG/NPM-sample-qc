@@ -155,16 +155,12 @@ process mosdepth_datamash {
 
     script:
     """
-    # filter outputs
+    # filter mosdepth outputs
     # focus on autosomes
-    # head -22 ${reference_idx} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
-    # zcat "${biosample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${biosample_id}.regions.autosomes.bed.gz"
-
     # exclude bins that overlap with N bases in ref
-    #zcat ${gap_regions} |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > gap_regions.bed
-    #zcat "${biosample_id}.regions.autosomes.bed.gz" | bedtools intersect -v -a stdin -b gap_regions.bed | gzip -9c > "${biosample_id}.regions.autosomes_minus_n_bases.bed.gz"
 
-    zcat "${biosample_id}.regions.bed.gz" | egrep -v '_|-|X|Y|M|EBV'| bedtools intersect -v -a stdin -b ${gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_filter_n_bases.bed.gz"
+    zcat "${biosample_id}.regions.bed.gz" | egrep -w '^chr[1-9]|chr[1-2][0-9]' | bedtools intersect -v -a stdin -b ${gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_filter_n_bases.bed.gz"
+
 
     # calculate metrics
     BED="${biosample_id}.regions.autosomes_filter_n_bases.bed.gz";
