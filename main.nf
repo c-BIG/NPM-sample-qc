@@ -97,7 +97,6 @@ process samtools_stats {
     """
       samtools stats ${cbam} > ${biosample_id}.stats
     """
-
 }
 
 process mosdepth_bam {
@@ -117,7 +116,6 @@ process mosdepth_bam {
     mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 ${biosample_id} ${cbam}
 
     """
-
 }
 
 process mosdepth_cram {
@@ -139,7 +137,6 @@ process mosdepth_cram {
     mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${reference} ${biosample_id} ${cbam}
 
     """
-
 }
 
 process mosdepth_datamash {
@@ -155,8 +152,7 @@ process mosdepth_datamash {
 
     script:
     """
-    # filter mosdepth outputs
-    # focus on autosomes
+    # filter mosdepth outputs to focus on autosomes
     # exclude bins that overlap with N bases in ref
 
     zcat "${biosample_id}.regions.bed.gz" | egrep -w '^chr[1-9]|chr[1-2][0-9]' | bedtools intersect -v -a stdin -b ${gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_filter_n_bases.bed.gz"
@@ -181,7 +177,6 @@ process mosdepth_datamash {
     echo "\$header" > "${biosample_id}.mosdepth.csv";
     echo \$row >> "${biosample_id}.mosdepth.csv"
     """
-
 }
 
 process picard_collect_multiple_metrics_bam {
@@ -207,7 +202,6 @@ process picard_collect_multiple_metrics_bam {
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS
     """
-
 }
 
 process picard_collect_multiple_metrics_cram {
@@ -237,7 +231,6 @@ process picard_collect_multiple_metrics_cram {
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
         R=${reference}
     """
-
 }
 
 process multiqc {
@@ -254,7 +247,6 @@ process multiqc {
     """
     multiqc . --data-format json --enable-npm-plugin
     """
-
 }
 
 process compile_metrics {
@@ -273,7 +265,6 @@ process compile_metrics {
         --output_json ${params.biosample_id}.metrics.json \
         --biosample_id ${params.biosample_id}
     """
-
 }
 
 /*
