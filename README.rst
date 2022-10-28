@@ -37,7 +37,6 @@ Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRA
 
   nextflow run main.nf \
     -config      nextflow.config \
-    -profile     docker \
     -params-file tests/NA12878_1000genomes-dragen-3.7.6/params.yml \
     -work-dir    test-run/work \
     --outdir     test-run
