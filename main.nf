@@ -22,7 +22,7 @@ FUNCTIONS
 def helpMessage() {
     log.info """
     Usage: nextflow run main.nf -config nextflow.config -params-file params.yaml 
-                                -profile docker -work-dir ./ --outdir ./
+                                -work-dir ./ --outdir ./
                                 [-resume] [--keep_workdir] [--help]
 
     Options:
