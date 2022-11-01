@@ -153,7 +153,7 @@ process mosdepth_datamash {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    path autosome_non_gap_regions
+    path autosomes_non_gap_regions
     path mosdepth 
 
     output:
@@ -164,10 +164,10 @@ process mosdepth_datamash {
     # filter mosdepth outputs to focus on autosomes
     # write the bins that overlap with non gap and N bases
 
-    zcat "${biosample_id}.regions.bed.gz" | egrep -w '^chr[1-9]|chr[1-2][0-9]' | bedtools intersect -a stdin -b ${autosome_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_filter_n_bases.bed.gz"
+    zcat "${biosample_id}.regions.bed.gz" | egrep -w '^chr[1-9]|chr[1-2][0-9]' | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
 
     # calculate metrics
-    BED="${biosample_id}.regions.autosomes_filter_n_bases.bed.gz";
+    BED="${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz";
     mean_coverage=\$(zcat \$BED | datamash --round 6 mean 4);
     sd_coverage=\$(zcat \$BED | datamash --round 6 sstdev 4);
     median_coverage=\$(zcat \$BED | datamash --round 6 median 4);
@@ -310,7 +310,7 @@ else if (aln_file_type == "cram") {
     cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
 }
 
-autosome_non_gap_regions = channel.fromPath(params.autosome_non_gap_regions, checkIfExists: true)
+autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
 
 // main
 workflow {
@@ -318,14 +318,14 @@ workflow {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
-        mosdepth_datamash( autosome_non_gap_regions, mosdepth_bam.out )
+        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
         mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
-        mosdepth_datamash( autosome_non_gap_regions, mosdepth_cram.out )
+        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
         compile_metrics(multiqc.out)
     }
