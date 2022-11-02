@@ -161,8 +161,7 @@ process mosdepth_datamash {
 
     script:
     """
-    # filter mosdepth outputs to focus on autosomes
-    # write the bins that overlap with non gap and N bases
+    # filter mosdepth outputs to write the bins that are overlap with autosomes non gap and N bases
 
     zcat ${mosdepth} | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
 
