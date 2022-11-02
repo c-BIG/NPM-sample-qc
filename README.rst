@@ -54,7 +54,7 @@ Resources
 
 The workflow requires the following resources given in the ``conf/resources.config``
 
-- *Non gap and N-regions reference file*, the formatted non gap and N regions of autosomes ``autosomes_non_gap_regions.bed`` downloaded and processed from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
+- *Non gap and N-regions reference file*, originally the gap regions file downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``) and further processed to keep only the autosomes of non gap and N regions as sorted bed format ``autosomes_non_gap_regions.bed``.      
 
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa``.
 
