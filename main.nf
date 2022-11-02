@@ -295,9 +295,6 @@ WORKFLOW
 
 biosample_id = params.biosample_id
 
-reference = channel.fromPath(params.reference, checkIfExists: true)
-reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
-
 aln_file = file ( params.bam_cram )
 aln_file_type = aln_file.getExtension()
 
@@ -308,6 +305,8 @@ if (aln_file_type == "bam") {
 else if (aln_file_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
     cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
+    reference = channel.fromPath(params.reference, checkIfExists: true)
+    reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 }
 
 autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
