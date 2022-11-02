@@ -164,7 +164,7 @@ process mosdepth_datamash {
     # filter mosdepth outputs to focus on autosomes
     # write the bins that overlap with non gap and N bases
 
-    zcat "${biosample_id}.regions.bed.gz" | egrep -w '^chr[1-9]|chr[1-2][0-9]' | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
+    zcat ${mosdepth} | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
 
     # calculate metrics
     BED="${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz";
@@ -275,9 +275,9 @@ process compile_metrics {
     path "${params.biosample_id}.metrics.json", emit: compile_metrics_out
 
     script:
+    """
     # parse and calculate all the metrics in the multiqc output to compile
 
-    """
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.biosample_id}.metrics.json \
