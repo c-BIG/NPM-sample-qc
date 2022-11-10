@@ -6,7 +6,7 @@
 export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
 
-/home/ubuntu/nf22.04.0/nextflow run ../../main.nf \
+nextflow run ../../main.nf \
 	-config ../../nextflow.config \
 	-params-file params.yml \
 	-resume \
