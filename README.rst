@@ -84,7 +84,7 @@ The workflow expects the BAM/CRAM index (bai/crai) to be present in the same loc
 See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example.
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
-append `aws_no_sign_request: true` to your parameter list (`params.yaml` or commandline argument).
+append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
 See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
 
 
