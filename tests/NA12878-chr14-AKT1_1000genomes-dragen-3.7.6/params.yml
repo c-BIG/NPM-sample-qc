@@ -1,2 +1,3 @@
 biosample_id: NA12878-chr14-AKT1
-bam_cram: NA12878-chr14-AKT1.bam 
+bam_cram: NA12878-chr14-AKT1.bam
+aws_no_sign_request: true 
