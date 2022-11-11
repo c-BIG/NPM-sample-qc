@@ -83,11 +83,11 @@ See ``nextflow.config`` for additional details.
 
 - **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. 
 The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. 
-See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example.
+See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example.
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
-See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
+See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example. 
 
 Outputs
 -------
