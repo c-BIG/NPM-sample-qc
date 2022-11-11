@@ -1,4 +1,12 @@
-# Run the below command where you have the Dockerfile and conda_env.yml
-# It will create the docker image named 'npm-sample-qc:latest'
-# This will be your profile 'docker' container name.
-docker build -t npm-sample-qc .
+#!/bin/bash
+
+# Create a docker image named 'npm-sample-qc:latest'
+# This will be used when specify profile 'docker'.
+
+# Test OS
+if [[ ${OSTYPE} = "darwin"* ]]
+then # MacOS
+    docker build --platform linux/amd64 -t npm-sample-qc .
+else # Linux / WSL
+  docker build -t npm-sample-qc .
+fi

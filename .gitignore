@@ -7,4 +7,4 @@ docsrc/api/
 **/*.sg-npm-private/
 	
 # Test
-test-run
+tests/quick-start
