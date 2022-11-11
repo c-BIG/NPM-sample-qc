@@ -42,7 +42,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 	-config ../../nextflow.config \
 	-params-file params.yml \
 	-work-dir ../quick-start/work \
-	--outdir ../quick-start
+	--outdir ../quick-start/output
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
