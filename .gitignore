@@ -9,3 +9,4 @@ docsrc/api/
 # Test
 tests/*/work
 tests/*/output
+tests/*/.nextflow*
