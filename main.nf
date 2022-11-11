@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-version = "0.6" // nf qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
@@ -40,7 +39,7 @@ def nextflowMessage() {
 }
 
 def version_message() {
-    println("NPM-sample-qc  ~  version ${version}")
+    println("NPM-sample-qc  ~  version ${workflow.manifest.version}")
 }
 
 def minimalInformationMessage() {
