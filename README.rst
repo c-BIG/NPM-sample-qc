@@ -33,14 +33,16 @@ Build docker image locally ::
   # Move back to project root
   cd ../
 
-Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
+Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
 
-  nextflow run main.nf \
-    -config      nextflow.config \
-    -profile     docker \
-    -params-file tests/NA12878_1000genomes-dragen-3.7.6/params.yml \
-    -work-dir    test-run/work \
-    --outdir     test-run
+  # Move to test folder
+  cd tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/
+  # Run the workflow
+  nextflow run ../../main.nf \
+	-config ../../nextflow.config \
+	-params-file params.yml \
+	-work-dir ../quick-start/work \
+	--outdir ../quick-start
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -87,8 +89,6 @@ If accessing AWS S3 public resources (for example reference genome .fa, .fai or 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
 See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
 
-
-
 Outputs
 -------
 
@@ -109,8 +109,6 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
-
-
 Workflow logic
 ==============
 
@@ -126,7 +124,6 @@ In a nutshell, this workflow generates QC metrics from single-sample WGS results
 
 The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf``).
 
-
 **Metrics parsing**
 
 Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling ``bin/multiqc_plugins/multiqc_npm/``, a MultiQC plugin that extends the base tool to support additional files.
@@ -135,11 +132,9 @@ Next, output files from each individual tool are parsed and combined into a sing
 
 Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the ``bin/compile_metrics.py`` script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the **Metric definitions** section).
 
-
 Metric definitions
 ==================
 *This section is outdated. New metrics definitions are being worked on and will be updated in coming releases.*
-
 
 The full list of metrics reported by this workflow and details on how they've been calculated can be found here_.
 
