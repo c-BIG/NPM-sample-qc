@@ -7,7 +7,8 @@ NPM-sample-qc resources
 autosomes_non_gap_regions.bed
 ==============================
 
-The white-listed region file 'autosomes_non_gap_regions.bed' derived from the following..
+The white-listed region file 'autosomes_non_gap_regions.bed' derived from the following.
+
 * Create autosomes bed file from reference genome index (fai)
 
 ``head -22 ${fai} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed``
