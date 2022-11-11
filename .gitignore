@@ -7,4 +7,6 @@ docsrc/api/
 **/*.sg-npm-private/
 	
 # Test
-tests/quick-start
+tests/*/work
+tests/*/output
+tests/*/.nextflow*

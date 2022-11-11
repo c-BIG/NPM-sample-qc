@@ -24,25 +24,16 @@ Clone this repository ::
 
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 
-Build docker image locally ::
-
-  # Move to containers
-  cd NPM-sample-qc/containers
-  # Build docker image locally
-  sh build_npm-sample-qc_docker_image.sh
-  # Move back to project root
-  cd ../
-
 Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
 
   # Move to test folder
   cd tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/
   # Run the workflow
-  nextflow run ../../main.nf \
-	-config ../../nextflow.config \
-	-params-file params.yml \
-	-work-dir ../quick-start/work \
-	--outdir ../quick-start
+  sh run.sh
+
+This creates `output` directory with the results that can be compared to the content of `output_certified` ::
+
+  diff output_certified/results/NA12878-chr14-AKT1.metrics.json output/results/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -57,20 +48,21 @@ Resources
 The workflow requires the following resources given in the ``conf/resources.config``
 
 - *N-regions reference file*, used as an input for computing "non-gap regions autosome" coverages (mosdepth).
-Gaps in the GRCh38 (hg38) genome assembly, defined in the AGP file delivered with the sequence, are being closed during the finishing process on the human genome. 
-GRCh38 (hg38) genome assembly still contains the following principal types of gaps:
- -- short_arm - short arm gaps (count: 5; size range: 5,000,000 - 16,990,000 bases)
- -- heterochromatin - heterochromatin gaps (count: 11; size range: 20,000 - 30,000,000 bases)
- -- telomere - telomere gaps (count: 48; all of size 10,000 bases)
- -- contig - gaps between contigs in scaffolds (count: 285; size range: 100 - 400,000 bases)
- -- scaffold - gaps between scaffolds in chromosome assemblies (count: 470; size range: 10 - 624,000 bases)
- 
-Gaps in the GRCh38 (hg38) genome assembly were downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
+
+  - Gaps in the GRCh38 (hg38) genome assembly, defined in the AGP file delivered with the sequence, are being closed during the finishing process on the human genome. GRCh38 (hg38) genome assembly still contains the following principal types of gaps:
+
+    - short_arm - short arm gaps (count: 5; size range: 5,000,000 - 16,990,000 bases)
+    - heterochromatin - heterochromatin gaps (count: 11; size range: 20,000 - 30,000,000 bases)
+    - telomere - telomere gaps (count: 48; all of size 10,000 bases)
+    - contig - gaps between contigs in scaffolds (count: 285; size range: 100 - 400,000 bases)
+    - scaffold - gaps between scaffolds in chromosome assemblies (count: 470; size range: 10 - 624,000 bases)
+
+  - Gaps in the GRCh38 (hg38) genome assembly were downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. 
 This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
 
-- *FASTA file index*. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
+- *FASTA file index*. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
 
 Inputs
 ------
@@ -108,6 +100,16 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
           multiqc/
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
+
+Docker image
+------------
+
+By default the workflow pull the docker image from dockerhub. However you can also build docker image locally ::
+
+  # Move to containers
+  cd NPM-sample-qc/containers
+  # Build docker image locally
+  sh build_npm-sample-qc_docker_image.sh
 
 Workflow logic
 ==============

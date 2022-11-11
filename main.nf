@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
-version = "0.6" // nf qc workflow version
 
 /*
 Developed by the Genome Institute of Singapore for
@@ -22,7 +21,7 @@ FUNCTIONS
 def helpMessage() {
     log.info """
     Usage: nextflow run main.nf -config nextflow.config -params-file params.yaml 
-                                -profile docker -work-dir ./ --outdir ./
+                                -work-dir ./ --outdir ./
                                 [-resume] [--keep_workdir] [--help]
 
     Options:
@@ -40,7 +39,7 @@ def nextflowMessage() {
 }
 
 def version_message() {
-    println("NPM-sample-qc  ~  version ${version}")
+    println("NPM-sample-qc  ~  version ${workflow.manifest.version}")
 }
 
 def minimalInformationMessage() {
@@ -88,35 +87,64 @@ process samtools_stats {
     publishDir "${params.publishdir}/samtools", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
-
+    path cbam
+    
     output:
     path "${biosample_id}.stats"
 
     script:
     """
+    # get the percentage of reads that have been aligned as pairs
+    # get the percentage of reads that have been aligned as proper pairs
+
       samtools stats ${cbam} > ${biosample_id}.stats
     """
-
 }
 
-process mosdepth {
+process mosdepth_bam {
     tag "${biosample_id}"
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
+    path cbam
+    path cbam_idx
 
     output:
-    path "${biosample_id}.*"
+    path "${biosample_id}.regions.bed.gz"
+
+    script:
+    """
+   # run mosdepth
+   # do not output per-base depth and apply 1000bp window-sizes
+   # use the reads with mapping quality 20 and above
+
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 ${biosample_id} ${cbam}
+
+    """
+}
+
+process mosdepth_cram {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/mosdepth", mode: "copy"
+
+    input:
+    path cbam
+    path cbam_idx
+    path reference
+    path reference_idx
+
+    output:
+    path "${biosample_id}.regions.bed.gz"
 
     script:
     """
    # run mosdepth    
-    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${fa} ${biosample_id} ${cbam}
+   # do not output per-base depth and apply 1000bp window-sizes
+   # use the reads with mapping quality 20 and above
+
+    mosdepth --no-per-base --by 1000 --mapq 20 --threads 4 --fasta ${reference} ${biosample_id} ${cbam}
 
     """
-
 }
 
 process mosdepth_datamash {
@@ -124,8 +152,7 @@ process mosdepth_datamash {
     publishDir "${params.publishdir}/mosdepth", mode: "copy"
 
     input:
-    tuple path(fa), path(fai)
-    path gap_regions
+    path autosomes_non_gap_regions
     path mosdepth 
 
     output:
@@ -133,17 +160,12 @@ process mosdepth_datamash {
 
     script:
     """
-    # filter outputs
-    # focus on autosomes
-    head -22 ${fai} |awk '{print \$1"\t0""\t"\$2}' > autosomes.bed
-    zcat "${biosample_id}.regions.bed.gz" | bedtools intersect -a stdin -b autosomes.bed | gzip -9c > "${biosample_id}.regions.autosomes.bed.gz"
+    # filter mosdepth outputs to write the bins that are overlap with autosomes non gap and N bases
 
-    # exclude bins that overlap with N bases in ref
-    zcat ${gap_regions} |cut -f2-4 -|egrep -v '_|-|X|Y'|sort -k1,1V -k2,2n > gap_regions.bed
-    zcat "${biosample_id}.regions.autosomes.bed.gz" | bedtools intersect -v -a stdin -b gap_regions.bed | gzip -9c > "${biosample_id}.regions.autosomes_minus_n_bases.bed.gz"
+    zcat ${mosdepth} | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
 
     # calculate metrics
-    BED="${biosample_id}.regions.autosomes_minus_n_bases.bed.gz";
+    BED="${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz";
     mean_coverage=\$(zcat \$BED | datamash --round 6 mean 4);
     sd_coverage=\$(zcat \$BED | datamash --round 6 sstdev 4);
     median_coverage=\$(zcat \$BED | datamash --round 6 median 4);
@@ -161,21 +183,56 @@ process mosdepth_datamash {
     echo "\$header" > "${biosample_id}.mosdepth.csv";
     echo \$row >> "${biosample_id}.mosdepth.csv"
     """
-
 }
 
-process picard_collect_multiple_metrics {
+process picard_collect_multiple_metrics_bam {
     tag "${biosample_id}"
     publishDir "${params.publishdir}/picard", mode: "copy"
 
     input:
-    tuple val(biosample_id), path(cbam), path(idx), path(fa), path(fai)
+    path cbam
 
     output:
-    path "${biosample_id}.*"
+    path "${biosample_id}.quality_yield_metrics.txt"
+    path "${biosample_id}.insert_size_metrics.txt"
 
     script:
     """
+    # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
+    # program CollectInsertSizeMetrics to get mean insert size
+
+    picard CollectMultipleMetrics  \
+        I=${cbam} \
+        O=${biosample_id} \
+        ASSUME_SORTED=true \
+        FILE_EXTENSION=".txt" \
+        PROGRAM=null \
+        PROGRAM=CollectQualityYieldMetrics \
+        PROGRAM=CollectInsertSizeMetrics \
+        METRIC_ACCUMULATION_LEVEL=null \
+        METRIC_ACCUMULATION_LEVEL=ALL_READS
+    """
+}
+
+process picard_collect_multiple_metrics_cram {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/picard", mode: "copy"
+
+    input:
+    path cbam
+    path cbam_idx
+    path reference
+    path reference_idx
+
+    output:
+    path "${biosample_id}.quality_yield_metrics.txt"
+    path "${biosample_id}.insert_size_metrics.txt"
+
+    script:
+    """
+    # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
+    # program CollectInsertSizeMetrics to get mean insert size
+
     picard CollectMultipleMetrics  \
         I=${cbam} \
         O=${biosample_id} \
@@ -186,9 +243,8 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
-        R=${fa}
+        R=${reference}
     """
-
 }
 
 process multiqc {
@@ -205,7 +261,6 @@ process multiqc {
     """
     multiqc . --data-format json --enable-npm-plugin
     """
-
 }
 
 process compile_metrics {
@@ -219,12 +274,13 @@ process compile_metrics {
 
     script:
     """
+    # parse and calculate all the metrics in the multiqc output to compile
+
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
         --output_json ${params.biosample_id}.metrics.json \
         --biosample_id ${params.biosample_id}
     """
-
 }
 
 /*
@@ -237,31 +293,39 @@ WORKFLOW
 
 biosample_id = params.biosample_id
 
-reference = channel.fromPath(params.reference, checkIfExists: true)
-    .map{ fa -> tuple(fa, fa + ".fai") }
+aln_file = file ( params.bam_cram )
+aln_file_type = aln_file.getExtension()
 
-input_file = file ( params.bam_cram )
-index_type = input_file.getExtension()
-
-if (index_type == "bam")
+if (aln_file_type == "bam") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(biosample_id, cbam, cbam + ".bai") }
-else if (index_type == "cram")
+    cbam_idx = channel.fromPath(params.bam_cram + ".bai", checkIfExists: true)
+}
+else if (aln_file_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
-        .map{ cbam -> tuple(biosample_id, cbam, cbam + ".crai") }
+    cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
+    reference = channel.fromPath(params.reference, checkIfExists: true)
+    reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
+}
 
-inputs = cbam.combine(reference)
-
-gap_regions = channel.fromPath(params.gap_regions, checkIfExists: true)
+autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
 
 // main
 workflow {
-    samtools_stats(inputs)
-    picard_collect_multiple_metrics(inputs)
-    mosdepth( inputs )
-    mosdepth_datamash( reference, gap_regions, mosdepth.out )
-    multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics.out, mosdepth.out, mosdepth_datamash.out ).collect() )
-    compile_metrics(multiqc.out)
+    if (aln_file_type == "bam") {
+        samtools_stats( cbam )
+        picard_collect_multiple_metrics_bam( cbam )
+        mosdepth_bam( cbam, cbam_idx )
+        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
+        compile_metrics(multiqc.out)
+    } else if (aln_file_type == "cram") {
+        samtools_stats( cbam )
+        picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
+        mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
+        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
+        compile_metrics(multiqc.out)
+    }
 }
 
 /*
