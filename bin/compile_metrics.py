@@ -14,9 +14,9 @@ def parse_args():
     parser.add_argument("--output_json", dest="output_json", required=False,
                         default="./metrics.json",
                         help="Path to output json. Default: ./metrics.json")
-    parser.add_argument("--sample_id", dest="sample_id", required=True,
+    parser.add_argument("--biosample_id", dest="biosample_id", required=True,
                         default=None,
-                        help="Sample ID. Default: None")
+                        help="Biosample ID. Default: None")
     parser.add_argument("--loglevel", dest="loglevel", required=False,
                         default="INFO",
                         help="Set logging level to INFO (default), WARNING or DEBUG.")
@@ -64,7 +64,7 @@ def calculate_metrics(mqc):
 
 def save_output(data_metrics, outfile):
     with open(outfile, "w") as f:
-        data_metrics = {"biosample" : {"id" : args.sample_id}, "wgs_qc_metrics" : data_metrics}
+        data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : data_metrics}
         json.dump(data_metrics, f, sort_keys=True, indent=4)
         f.write("\n")
 
