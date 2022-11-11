@@ -42,7 +42,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 	-config ../../nextflow.config \
 	-params-file params.yml \
 	-work-dir ../quick-start/work \
-	--outdir ../quick-start
+	--outdir ../quick-start/output
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -70,7 +70,7 @@ Gaps in the GRCh38 (hg38) genome assembly were downloaded from http://hgdownload
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. 
 This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
 
-- *FASTA file index*. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
+- *FASTA file index*. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
 
 Inputs
 ------
