@@ -29,11 +29,11 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
   # Move to test folder
   cd tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/
   # Run the workflow
-  nextflow run ../../main.nf \
-	-config ../../nextflow.config \
-	-params-file params.yml \
-	-work-dir ../quick-start/work \
-	--outdir ../quick-start/output
+  sh run.sh
+
+This creates `output` directory with the results that can be compared to the content of `output_certified` ::
+
+  diff output_certified/results/NA12878-chr14-AKT1.metrics.json outputs/results/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
