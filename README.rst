@@ -24,15 +24,6 @@ Clone this repository ::
 
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 
-Build docker image locally ::
-
-  # Move to containers
-  cd NPM-sample-qc/containers
-  # Build docker image locally
-  sh build_npm-sample-qc_docker_image.sh
-  # Move back to project root
-  cd ../
-
 Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
 
   # Move to test folder
