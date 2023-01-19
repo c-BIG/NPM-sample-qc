@@ -8,14 +8,10 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -46,9 +42,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_insert_size.html">mean_insert_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_q30_bases.html">pct_q30_bases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html">pct_reads_aligned_in_pairs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_bp_q30.html">yield_bp_q30</a></li>
 </ul>
 </li>
 </ul>
@@ -78,8 +74,8 @@
            <div itemprop="articleBody">
              
   <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
-<table class="autosummary longtable docutils align-default">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h1>
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -97,14 +93,14 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
 <td><p>Analogous to pct_autosomes_1x.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_q30_bases.html#metrics.pct_q30_bases" title="metrics.pct_q30_bases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_q30_bases</span></code></a>(mqc)</p></td>
-<td><p>The percentage of PF bases with base quality &gt;= 30.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html#metrics.pct_reads_aligned_in_pairs" title="metrics.pct_reads_aligned_in_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_in_pairs</span></code></a>(mqc)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html#metrics.pct_reads_aligned_in_pairs" title="metrics.pct_reads_aligned_in_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_in_pairs</span></code></a>(mqc)</p></td>
 <td><p>The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
 <td><p>The percentage of reads that have been aligned as proper pairs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.yield_bp_q30.html#metrics.yield_bp_q30" title="metrics.yield_bp_q30"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_bp_q30</span></code></a>(mqc)</p></td>
+<td><p>The number of PF bases with BQ ≥ 30.</p></td>
 </tr>
 </tbody>
 </table>

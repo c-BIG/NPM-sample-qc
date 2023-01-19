@@ -1,12 +1,5 @@
 {
     "NA12878-chr14-AKT1": {
-        "mosdepth_mqc-generalstats-mosdepth-10_x_pc": 0,
-        "mosdepth_mqc-generalstats-mosdepth-1_x_pc": 0,
-        "mosdepth_mqc-generalstats-mosdepth-30_x_pc": 0,
-        "mosdepth_mqc-generalstats-mosdepth-50_x_pc": 0,
-        "mosdepth_mqc-generalstats-mosdepth-5_x_pc": 0,
-        "mosdepth_mqc-generalstats-mosdepth-mean_coverage": "0.02",
-        "mosdepth_mqc-generalstats-mosdepth-median_coverage": 0,
         "Picard_mqc-generalstats-picard-TOTAL_READS": 13810,
         "Picard_mqc-generalstats-picard-summed_median": 440,
         "Picard_mqc-generalstats-picard-summed_mean": 449.4451470000001,

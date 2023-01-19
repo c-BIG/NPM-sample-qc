@@ -1,0 +1,25 @@
+N E X T F L O W  ~  version 22.04.0
+Launching `../../main.nf` [voluminous_volhard] DSL2 - revision: 1f2eb30b43
+N E X T F L O W  ~  version 22.04.0 5697
+NPM-sample-qc  ~  version 0.7
+User name    : ubuntu
+Command Line : nextflow run ../../main.nf -config ../../nextflow.config -params-file params.yml -work-dir ./work --outdir ./output_certified -bg
+Project Dir  : /home/ubuntu/2023/NPM-sample-qc
+Launch Dir   : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6
+Work Dir     : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work
+Results Dir  : ./output_certified/results
+Info Dir     : ./output_certified/pipeline_info
+Profile      : standard
+Staging foreign file: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam
+Staging foreign file: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam.bai
+[af/de03f7] Submitted process > mosdepth_bam (NA12878)
+[d2/d60399] Submitted process > picard_collect_multiple_metrics_bam (NA12878)
+[f9/e55902] Submitted process > samtools_stats (NA12878)
+[01/69cc03] Submitted process > mosdepth_datamash (NA12878)
+[76/892ac1] Submitted process > multiqc
+[62/b55b86] Submitted process > compile_metrics
+Started     : 2023-01-19T00:24:53.190946Z
+Completed   : 2023-01-19T01:25:32.115111Z
+Duration    : 1h 39s
+Status      : true
+Publish dir : ./output_certified/results
