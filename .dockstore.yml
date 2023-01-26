@@ -7,11 +7,15 @@ workflows:
     publish: True
     authors:
       - name: Justin Jeyakani
+        email: gnanakkan@gis.a-star.edu.sg
         orcid: 0000-0002-1788-0417
       - name: Mar Gonzalez-Porta
+        email: mar@nalagenetics.com
       - name: Maxime HEBRARD
+        email: Maxime_Hebrard@gis.a-star.edu.sg
         orcid: 0000-0003-2346-4513
       - name: Rodrigo Toro
         email: rodrigo_jimenez@gis.a-star.edu.sg
       - name: Nicolas Bertin
+        email: Nicolas_Bertin@gis.a-star.edu.sg
         orcid: 0000-0002-9835-9606 
