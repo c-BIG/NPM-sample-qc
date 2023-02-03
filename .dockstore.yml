@@ -11,6 +11,7 @@ workflows:
         orcid: 0000-0002-1788-0417
       - name: Mar Gonzalez-Porta
         email: mar@nalagenetics.com
+        orcid: 0000-0002-1661-7254  
       - name: Maxime HEBRARD
         email: Maxime_Hebrard@gis.a-star.edu.sg
         orcid: 0000-0003-2346-4513
