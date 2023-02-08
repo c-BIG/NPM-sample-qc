@@ -1,21 +1,16 @@
 {
-    "mosdepth": {
-        "genome_results": {
-            "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.mosdepth.region.dist.txt"
-        }
-    },
     "Picard": {
         "InsertSizeMetrics": {
-            "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.insert_size_metrics.txt"
+            "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
         },
         "QualityYieldMetrics": {
-            "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.quality_yield_metrics.txt",
-            "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.insert_size_metrics.txt"
+            "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.quality_yield_metrics.txt",
+            "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
         }
     },
     "Samtools": {
         "stats": {
-            "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.stats"
+            "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.stats"
         }
     }
 }

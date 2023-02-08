@@ -7,18 +7,18 @@ import inspect
 DECIMALS = 5
 
 
-def pct_q30_bases(mqc):
+def yield_bp_q30(mqc):
     """
-    The percentage of PF bases with base quality >= 30.
+    The number of PF bases with BQ ≥ 30.
 
-    Source: picard QualityYieldMetrics (PF_Q30_BASES/PF_BASES)
+    Source: picard QualityYieldMetrics (PF_Q30_BASES)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
         d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
-        v = np.round(np.divide(d["PF_Q30_BASES"],
-                               d["PF_BASES"])*100, DECIMALS)
+        v = d["PF_Q30_BASES"]
+        v = int(v)
     except KeyError:
         v = "NA"
 

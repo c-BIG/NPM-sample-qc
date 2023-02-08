@@ -44,7 +44,7 @@ def load_multi_qc(multiqc_json):
 def calculate_metrics(mqc):
     metrics_list = [
         # primary metrics
-        "pct_q30_bases",
+        "yield_bp_q30",
         # alignment
         "pct_reads_aligned_in_pairs", "pct_reads_properly_paired",
         # coverage
