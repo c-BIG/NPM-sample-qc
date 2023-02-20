@@ -1,6 +1,0 @@
-pct_reads_unaligned
-===================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_reads_unaligned

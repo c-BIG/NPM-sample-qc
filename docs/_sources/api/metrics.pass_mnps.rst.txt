@@ -1,6 +1,0 @@
-pass_mnps
-=========
-
-.. currentmodule:: metrics
-
-.. autofunction:: pass_mnps

@@ -1,6 +1,0 @@
-pct_chimeras
-============
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_chimeras

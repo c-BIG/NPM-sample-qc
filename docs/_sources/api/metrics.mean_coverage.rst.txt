@@ -1,6 +1,0 @@
-mean_coverage
-=============
-
-.. currentmodule:: metrics
-
-.. autofunction:: mean_coverage

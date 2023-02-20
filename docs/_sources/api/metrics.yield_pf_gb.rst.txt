@@ -1,6 +1,0 @@
-yield_pf_gb
-===========
-
-.. currentmodule:: metrics
-
-.. autofunction:: yield_pf_gb

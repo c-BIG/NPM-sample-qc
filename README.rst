@@ -118,7 +118,7 @@ We provide a schematic representation of the workflow in the figure below:
   
 .. raw:: html
 
-   <img src="docs/npm-sample-qc-overview.PNG" width="500px"/>   
+   <img src="./npm-sample-qc-overview.PNG" width="500px"/>   
 
 In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: **metrics calculation**, **parsing of intermediate outputs** and **generation of a final report**. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
 
@@ -136,7 +136,6 @@ Finally, the contents of the MultiQC json are formatted into a final metrics rep
 
 Metric definitions
 ==================
-*This section is outdated. New metrics definitions are being worked on and will be updated in coming releases.*
 
 The full list of metrics reported by this workflow and details on how they've been calculated can be found here_.
 

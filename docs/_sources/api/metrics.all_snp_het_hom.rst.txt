@@ -1,6 +1,0 @@
-all_snp_het_hom
-===============
-
-.. currentmodule:: metrics
-
-.. autofunction:: all_snp_het_hom

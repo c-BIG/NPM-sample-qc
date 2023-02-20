@@ -1,6 +1,0 @@
-pass_indel_het_hom
-==================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pass_indel_het_hom

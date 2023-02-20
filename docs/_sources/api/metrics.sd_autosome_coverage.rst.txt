@@ -1,6 +1,0 @@
-sd_autosome_coverage
-====================
-
-.. currentmodule:: metrics
-
-.. autofunction:: sd_autosome_coverage
