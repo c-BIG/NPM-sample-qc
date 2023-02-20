@@ -9,7 +9,7 @@ DECIMALS = 5
 
 def yield_bp_q30(mqc):
     """
-    The number of PF bases with BQ ≥ 30.
+    The number of bases that pass filter (PF) and with base quality ≥ 30 (BQ).
 
     Source: picard QualityYieldMetrics (PF_Q30_BASES)
     """
@@ -27,7 +27,7 @@ def yield_bp_q30(mqc):
 
 def pct_reads_aligned_in_pairs(mqc):
     """
-    The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.
+    The percentage of reads that have been aligned as pairs.
 
     Source: samtools stats (reads_mapped_and_paired / sequences)
     """
@@ -104,7 +104,9 @@ def mad_autosome_coverage(mqc):
 
 def pct_autosomes_15x(mqc):
     """
-    Analogous to pct_autosomes_1x.
+    The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
+
+    Source: run_mosdepth.sh (ge_15x_autosome_bases * 100 / total_autosome_bases)
     """
     k = inspect.currentframe().f_code.co_name
 
