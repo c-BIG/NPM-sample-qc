@@ -1,6 +1,0 @@
-pct_reads_aligned_mapqge20
-==========================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_reads_aligned_mapqge20

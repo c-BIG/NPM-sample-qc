@@ -105,20 +105,14 @@ median absolute deviations around the median insert size.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.pct_autosomes_15x">
 <span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_autosomes_15x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_15x" title="Permalink to this definition"></a></dt>
-<dd><p>Analogous to pct_autosomes_1x.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="metrics.metrics.pct_q30_bases">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_q30_bases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_q30_bases" title="Permalink to this definition"></a></dt>
-<dd><p>The percentage of PF bases with base quality &gt;= 30.</p>
-<p>Source: picard QualityYieldMetrics (PF_Q30_BASES/PF_BASES)</p>
+<dd><p>The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (ge_15x_autosome_bases * 100 / total_autosome_bases)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.pct_reads_aligned_in_pairs">
 <span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_aligned_in_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_aligned_in_pairs" title="Permalink to this definition"></a></dt>
-<dd><p>The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.</p>
+<dd><p>The percentage of reads that have been aligned as pairs.</p>
 <p>Source: samtools stats (reads_mapped_and_paired / sequences)</p>
 </dd></dl>
 
@@ -127,6 +121,13 @@ median absolute deviations around the median insert size.</p>
 <span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
 <dd><p>The percentage of reads that have been aligned as proper pairs.</p>
 <p>Source: samtools stats (reads_properly_paired_percent)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.yield_bp_q30">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">yield_bp_q30</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_bp_q30" title="Permalink to this definition"></a></dt>
+<dd><p>The number of bases that pass filter (PF) and with base quality ≥ 30 (BQ).</p>
+<p>Source: picard QualityYieldMetrics (PF_Q30_BASES)</p>
 </dd></dl>
 
 </section>
@@ -143,7 +144,7 @@ median absolute deviations around the median insert size.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, GIS.</p>
+    <p>&#169; Copyright 2020-2023, GIS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,6 +1,0 @@
-mismatch_rate_mapqge20
-======================
-
-.. currentmodule:: metrics
-
-.. autofunction:: mismatch_rate_mapqge20

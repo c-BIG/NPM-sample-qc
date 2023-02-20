@@ -1,6 +1,0 @@
-pct_1x
-======
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_1x

@@ -1,37 +1,21 @@
 {
     "report_data_sources": {
-        "mosdepth": {
-            "genome_results": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.mosdepth.region.dist.txt"
-            }
-        },
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.quality_yield_metrics.txt",
-                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.quality_yield_metrics.txt",
+                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361/NA12878-chr14-AKT1.stats"
+                "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.stats"
             }
         }
     },
     "report_general_stats_data": [
-        {
-            "NA12878-chr14-AKT1": {
-                "mean_coverage": "0.02",
-                "1_x_pc": 0,
-                "5_x_pc": 0,
-                "10_x_pc": 0,
-                "30_x_pc": 0,
-                "50_x_pc": 0,
-                "median_coverage": 0
-            }
-        },
         {
             "NA12878-chr14-AKT1": {
                 "TOTAL_READS": 13810,
@@ -110,155 +94,6 @@
     ],
     "report_general_stats_headers": [
         {
-            "1_x_pc": {
-                "title": "&ge; 1X",
-                "description": "Fraction of genome with at least 1X coverage",
-                "max": 100,
-                "min": 0,
-                "suffix": "%",
-                "scale": "RdYlGn",
-                "hidden": true,
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-1_x_pc",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 100.0,
-                "dmin": 0.0
-            },
-            "5_x_pc": {
-                "title": "&ge; 5X",
-                "description": "Fraction of genome with at least 5X coverage",
-                "max": 100,
-                "min": 0,
-                "suffix": "%",
-                "scale": "RdYlGn",
-                "hidden": true,
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-5_x_pc",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 100.0,
-                "dmin": 0.0
-            },
-            "10_x_pc": {
-                "title": "&ge; 10X",
-                "description": "Fraction of genome with at least 10X coverage",
-                "max": 100,
-                "min": 0,
-                "suffix": "%",
-                "scale": "RdYlGn",
-                "hidden": true,
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-10_x_pc",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 100.0,
-                "dmin": 0.0
-            },
-            "30_x_pc": {
-                "title": "&ge; 30X",
-                "description": "Fraction of genome with at least 30X coverage",
-                "max": 100,
-                "min": 0,
-                "suffix": "%",
-                "scale": "RdYlGn",
-                "hidden": false,
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-30_x_pc",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 100.0,
-                "dmin": 0.0
-            },
-            "50_x_pc": {
-                "title": "&ge; 50X",
-                "description": "Fraction of genome with at least 50X coverage",
-                "max": 100,
-                "min": 0,
-                "suffix": "%",
-                "scale": "RdYlGn",
-                "hidden": true,
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-50_x_pc",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 100.0,
-                "dmin": 0.0
-            },
-            "median_coverage": {
-                "title": "Median",
-                "description": "Median coverage",
-                "min": 0,
-                "suffix": "X",
-                "scale": "BuPu",
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-median_coverage",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "hidden": null,
-                "max": null,
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 0,
-                "dmin": 0.0
-            },
-            "mean_coverage": {
-                "title": "Mean Cov.",
-                "description": "Mean coverage",
-                "min": 0,
-                "suffix": "X",
-                "scale": "BuPu",
-                "namespace": "mosdepth",
-                "rid": "mqc-generalstats-mosdepth-mean_coverage",
-                "format": "{:,.1f}",
-                "colour": "55,126,184",
-                "hidden": null,
-                "max": null,
-                "ceiling": null,
-                "floor": null,
-                "minRange": null,
-                "shared_key": null,
-                "modify": null,
-                "placement": 1000.0,
-                "dmax": 0.02,
-                "dmin": 0.0
-            }
-        },
-        {
             "TOTAL_READS": {
                 "title": "M Reads",
                 "description": "The total number of reads in the input file (millions)",
@@ -269,7 +104,7 @@
                 "rid": "mqc-generalstats-picard-TOTAL_READS",
                 "min": 0,
                 "format": "{:,.1f}",
-                "colour": "77,175,74",
+                "colour": "55,126,184",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -290,7 +125,7 @@
                 "scale": "GnBu",
                 "namespace": "Picard",
                 "rid": "mqc-generalstats-picard-summed_median",
-                "colour": "152,78,163",
+                "colour": "77,175,74",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -312,7 +147,7 @@
                 "hidden": true,
                 "namespace": "Picard",
                 "rid": "mqc-generalstats-picard-summed_mean",
-                "colour": "152,78,163",
+                "colour": "77,175,74",
                 "max": null,
                 "ceiling": null,
                 "floor": null,
@@ -336,7 +171,7 @@
                 "modify": 100.0,
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-error_rate",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "hidden": null,
                 "ceiling": null,
                 "floor": null,
@@ -356,7 +191,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-non_primary_alignments",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -376,7 +211,7 @@
                 "rid": "mqc-generalstats-samtools-reads_mapped",
                 "scale": "GnBu",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -396,7 +231,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_mapped_percent",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "hidden": null,
                 "ceiling": null,
                 "floor": null,
@@ -418,7 +253,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_properly_paired_percent",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "ceiling": null,
                 "floor": null,
                 "minRange": null,
@@ -439,7 +274,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_MQ0_percent",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "ceiling": null,
                 "floor": null,
                 "minRange": null,
@@ -459,7 +294,7 @@
                 "rid": "mqc-generalstats-samtools-raw_total_sequences",
                 "scale": "GnBu",
                 "format": "{:,.1f}",
-                "colour": "255,127,0",
+                "colour": "152,78,163",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -473,58 +308,6 @@
     ],
     "report_multiqc_command": "/usr/local/conda/bin/multiqc . --data-format json --enable-npm-plugin",
     "report_plot_data": {
-        "mosdepth-cumcoverage-dist-id": {
-            "plot_type": "xy_line",
-            "datasets": [
-                [
-                    {
-                        "name": "NA12878-chr14-AKT1",
-                        "data": [
-                            [
-                                0,
-                                100.0
-                            ]
-                        ]
-                    }
-                ]
-            ],
-            "config": {
-                "id": "mosdepth-cumcoverage-dist-id",
-                "title": "Mosdepth: Cumulative coverage distribution",
-                "xlab": "Cumulative Coverage (X)",
-                "ylab": "% bases in genome/regions covered by at least X reads",
-                "ymax": 100,
-                "xmax": 0,
-                "tt_label": "<b>{point.x}X</b>: {point.y:.2f}%",
-                "smooth_points": 500
-            }
-        },
-        "mosdepth-coverage-dist-id": {
-            "plot_type": "xy_line",
-            "datasets": [
-                [
-                    {
-                        "name": "NA12878-chr14-AKT1",
-                        "data": [
-                            [
-                                0,
-                                100.0
-                            ]
-                        ]
-                    }
-                ]
-            ],
-            "config": {
-                "id": "mosdepth-coverage-dist-id",
-                "title": "Mosdepth: Coverage distribution",
-                "xlab": "Coverage (X)",
-                "ylab": "% bases in genome/regions covered by X reads",
-                "ymax": 100,
-                "xmax": 0,
-                "tt_label": "<b>{point.x}X</b>: {point.y:.2f}%",
-                "smooth_points": 500
-            }
-        },
         "picard_insert_size": {
             "plot_type": "xy_line",
             "datasets": [
@@ -4847,30 +4630,15 @@
         "multiqc_npm_mosdepth": {
             "NA12878-chr14-AKT1": {
                 "mean_autosome_coverage": "0.000654",
-                "sd_autosome_coverage": "0.163043",
+                "sd_autosome_coverage": "0.163015",
                 "median_autosome_coverage": "0.000000",
                 "mad_autosome_coverage": "0.000000",
-                "total_autosome_bases": "2.75589e+09",
+                "total_autosome_bases": "2.75635e+09",
                 "ge_1x_autosome_bases": "47000",
                 "ge_10x_autosome_bases": "45000",
                 "ge_15x_autosome_bases": "45000",
                 "ge_30x_autosome_bases": "43000",
                 "ge_40x_autosome_bases": "23000"
-            }
-        },
-        "mosdepth_cumcov_dist": {
-            "NA12878-chr14-AKT1": {
-                "0": 100.0
-            }
-        },
-        "mosdepth_cov_dist": {
-            "NA12878-chr14-AKT1": {
-                "0": 100.0
-            }
-        },
-        "mosdepth_perchrom": {
-            "NA12878-chr14-AKT1": {
-                "chr14": 0.0
             }
         },
         "multiqc_picard_insertSize": {
@@ -4972,13 +4740,6 @@
         },
         "multiqc_general_stats": {
             "NA12878-chr14-AKT1": {
-                "mosdepth_mqc-generalstats-mosdepth-10_x_pc": 0,
-                "mosdepth_mqc-generalstats-mosdepth-1_x_pc": 0,
-                "mosdepth_mqc-generalstats-mosdepth-30_x_pc": 0,
-                "mosdepth_mqc-generalstats-mosdepth-50_x_pc": 0,
-                "mosdepth_mqc-generalstats-mosdepth-5_x_pc": 0,
-                "mosdepth_mqc-generalstats-mosdepth-mean_coverage": "0.02",
-                "mosdepth_mqc-generalstats-mosdepth-median_coverage": 0,
                 "Picard_mqc-generalstats-picard-TOTAL_READS": 13810,
                 "Picard_mqc-generalstats-picard-summed_median": 440,
                 "Picard_mqc-generalstats-picard-summed_mean": 449.4451470000001,
@@ -4993,12 +4754,12 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/Sep18/oct2/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/a6/377cdeee4fea1967391a8309da0361"
+        "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2022-10-06, 09:22 UTC",
+    "config_creation_date": "2023-01-18, 07:20 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,

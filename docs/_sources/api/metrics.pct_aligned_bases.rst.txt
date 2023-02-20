@@ -1,6 +1,0 @@
-pct_aligned_bases
-=================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_aligned_bases

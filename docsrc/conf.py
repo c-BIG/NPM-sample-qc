@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../bin'))
 # -- Project information -----------------------------------------------------
 
 project = 'NPM-sample-qc'
-copyright = '2020, GIS'
+copyright = '2020-2023, GIS'
 author = 'GIS'
 
 # -- General configuration ---------------------------------------------------

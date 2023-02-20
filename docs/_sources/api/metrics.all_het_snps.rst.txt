@@ -1,6 +1,0 @@
-all_het_snps
-============
-
-.. currentmodule:: metrics
-
-.. autofunction:: all_het_snps

@@ -84,22 +84,15 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">c</span><span class="o">-</span><span class="n">BIG</span><span class="o">/</span><span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p>Build docker image locally</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to containers</span>
-<span class="n">cd</span> <span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">/</span><span class="n">containers</span>
-<span class="c1"># Build docker image locally</span>
-<span class="n">sh</span> <span class="n">build_npm</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc_docker_image</span><span class="o">.</span><span class="n">sh</span>
-<span class="c1"># Move back to project root</span>
-<span class="n">cd</span> <span class="o">../</span>
+<p>Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to test folder</span>
+<span class="n">cd</span> <span class="n">tests</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1_1000genomes</span><span class="o">-</span><span class="n">dragen</span><span class="o">-</span><span class="mf">3.7.6</span><span class="o">/</span>
+<span class="c1"># Run the workflow</span>
+<span class="n">sh</span> <span class="n">run</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
-<p>Run workflow on sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nextflow</span> <span class="n">run</span> <span class="n">main</span><span class="o">.</span><span class="n">nf</span> \
-  <span class="o">-</span><span class="n">config</span>      <span class="n">nextflow</span><span class="o">.</span><span class="n">config</span> \
-  <span class="o">-</span><span class="n">profile</span>     <span class="n">docker</span> \
-  <span class="o">-</span><span class="n">params</span><span class="o">-</span><span class="n">file</span> <span class="n">tests</span><span class="o">/</span><span class="n">sample_params</span><span class="o">.</span><span class="n">yml</span> \
-  <span class="o">-</span><span class="n">work</span><span class="o">-</span><span class="nb">dir</span>    <span class="n">test</span><span class="o">-</span><span class="n">run</span><span class="o">/</span><span class="n">work</span> \
-  <span class="o">--</span><span class="n">outdir</span>     <span class="n">test</span><span class="o">-</span><span class="n">run</span>
+<p>This creates <cite>output</cite> directory with the results that can be compared to the content of <cite>output_certified</cite></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 <p>Please refer to the workflow help for more information on its usage and access to additional options:</p>
@@ -113,18 +106,43 @@
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
 <p>The workflow requires the following resources given in the <code class="docutils literal notranslate"><span class="pre">conf/resources.config</span></code></p>
 <ul class="simple">
-<li><p><em>N-regions reference file</em>, used as an input for mosdepth. This file can be downloaded from <a class="reference external" href="http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz">http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz</a> (<code class="docutils literal notranslate"><span class="pre">2019-03-11</span> <span class="pre">09:51,</span> <span class="pre">12K</span></code>).</p></li>
-<li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p></li>
-<li><p><em>FASTA file index</em>. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai</span></code> and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.</p></li>
+<li><p><em>N-regions reference file</em>, used as an input for computing “non-gap regions autosome” coverages (mosdepth).</p>
+<ul>
+<li><p>Gaps in the GRCh38 (hg38) genome assembly, defined in the AGP file delivered with the sequence, are being closed during the finishing process on the human genome. GRCh38 (hg38) genome assembly still contains the following principal types of gaps:</p>
+<ul>
+<li><p>short_arm - short arm gaps (count: 5; size range: 5,000,000 - 16,990,000 bases)</p></li>
+<li><p>heterochromatin - heterochromatin gaps (count: 11; size range: 20,000 - 30,000,000 bases)</p></li>
+<li><p>telomere - telomere gaps (count: 48; all of size 10,000 bases)</p></li>
+<li><p>contig - gaps between contigs in scaffolds (count: 285; size range: 100 - 400,000 bases)</p></li>
+<li><p>scaffold - gaps between scaffolds in chromosome assemblies (count: 470; size range: 10 - 624,000 bases)</p></li>
+</ul>
+</li>
+<li><p>Gaps in the GRCh38 (hg38) genome assembly were downloaded from <a class="reference external" href="http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz">http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz</a> (<code class="docutils literal notranslate"><span class="pre">2019-03-11</span> <span class="pre">09:51,</span> <span class="pre">12K</span></code>).</p></li>
+</ul>
+</li>
+<li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools.</p></li>
+</ul>
+<p>This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p>
+<ul class="simple">
+<li><p><em>FASTA file index</em>. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai</span></code> and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.</p></li>
 </ul>
 </section>
 <section id="inputs">
 <h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
-<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
-<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/sample_params.yml</span></code> for an example.</p></li>
+<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g.</p></li>
 </ul>
+<p>Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources.
+See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p>
+<ul class="simple">
+<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM.</p></li>
+</ul>
+<p>The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location.
+See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
+<p>If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential,
+append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_request:</span> <span class="pre">true</span></code> to your parameter list (<code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> or commandline argument).
+See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
 </section>
 <section id="outputs">
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
@@ -145,13 +163,23 @@
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">keep_workdir</span></code> has been specified, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
 </section>
+<section id="docker-image">
+<h3>Docker image<a class="headerlink" href="#docker-image" title="Permalink to this heading"></a></h3>
+<p>By default the workflow pull the docker image from dockerhub. However you can also build docker image locally</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to containers</span>
+<span class="n">cd</span> <span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">/</span><span class="n">containers</span>
+<span class="c1"># Build docker image locally</span>
+<span class="n">sh</span> <span class="n">build_npm</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc_docker_image</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="workflow-logic">
 <h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this heading"></a></h2>
 <p>We provide a schematic representation of the workflow in the figure below:</p>
-<img src="npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
+<img src="./npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
-<p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/example_dag.pdf</span></code>).</p>
+<p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf</span></code>).</p>
 <p><strong>Metrics parsing</strong></p>
 <p>Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling <code class="docutils literal notranslate"><span class="pre">bin/multiqc_plugins/multiqc_npm/</span></code>, a MultiQC plugin that extends the base tool to support additional files.</p>
 <p><strong>Metrics reporting</strong></p>
@@ -162,7 +190,7 @@
 <p>The full list of metrics reported by this workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
 <p>When needed, page contents can be updated by running the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install sphinx</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx</span> <span class="n">sphinx_rtd_theme</span> <span class="n">sphinx_automodapi</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">sphinx_rtd_theme</span> <span class="n">sphinx_automodapi</span>
 <span class="c1"># Move to doc source</span>
 <span class="n">cd</span> <span class="n">docsrc</span>
 <span class="c1"># Build the doc</span>
@@ -188,7 +216,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, GIS.</p>
+    <p>&#169; Copyright 2020-2023, GIS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
