@@ -247,6 +247,28 @@ process picard_collect_multiple_metrics_cram {
     """
 }
 
+process verifybamid2 {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/verifybamid2", mode: "copy"
+
+    input:
+    path cbam
+    path cbam_idx
+    path reference
+
+    output:
+    path "result*"
+
+    script:
+    """
+   # run verifybamid2
+   # get the percentage of cross-individual contamination rate 
+
+    verifybamid2 --SVDPrefix ${params.vbi2_svdprefix} --Reference ${reference} --BamFile ${cbam}
+
+    """
+}
+
 process multiqc {
 
     publishDir "${params.publishdir}/multiqc", mode: "copy"
@@ -303,10 +325,10 @@ if (aln_file_type == "bam") {
 else if (aln_file_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
     cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
-    reference = channel.fromPath(params.reference, checkIfExists: true)
-    reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 }
 
+reference = channel.fromPath(params.reference, checkIfExists: true)
+reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
 
 // main
@@ -316,14 +338,16 @@ workflow {
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
-        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
+        verifybamid2( cbam, cbam_idx, reference )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
         mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
-        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
+        verifybamid2( cbam, cbam_idx, reference )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     }
 }

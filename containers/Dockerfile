@@ -7,6 +7,7 @@ ENV LANG=C.UTF-8
 
 ENV PATH="/usr/local/conda/envs/npm-sample-qc/bin/:${PATH}"
 ENV PATH="/usr/local/conda/envs/npm-sample-qc/share/picard-2.27.0-0/:${PATH}"
+ENV PATH="/usr/local/conda/envs/npm-sample-qc/share/verifybamid2-2.0.1-7/:${PATH}"
 ENV PATH="/usr/local/conda/bin/:${PATH}"
 
 ADD conda_env.yml /conda_env.yml

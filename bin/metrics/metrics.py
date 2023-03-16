@@ -25,17 +25,17 @@ def yield_bp_q30(mqc):
     return k, v
 
 
-def pct_reads_aligned_in_pairs(mqc):
+def pct_reads_mapped(mqc):
     """
-    The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.
+    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment.
 
-    Source: samtools stats (reads_mapped_and_paired / sequences)
+    Source: samtools stats (reads_mapped / sequences)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
-        v = np.divide(d["reads_mapped_and_paired"],
+        v = np.divide(d["reads_mapped"],
                       d["sequences"])
         v = np.round(v*100, DECIMALS)
     except KeyError:
@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -95,7 +95,7 @@ def mad_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mad_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -110,8 +110,8 @@ def pct_autosomes_15x(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
-        v = np.divide(np.float(d["ge_15x_autosome_bases"]),
-                      np.float(d["total_autosome_bases"]))
+        v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
+                      np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -135,6 +135,23 @@ def mean_insert_size(mqc):
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEAN_INSERT_SIZE"]
         v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pct_contamination(mqc):
+    """
+    The percentage of cross-individual contamination.
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
