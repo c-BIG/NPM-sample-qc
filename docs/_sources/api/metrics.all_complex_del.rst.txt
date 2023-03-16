@@ -1,6 +1,0 @@
-all_complex_del
-===============
-
-.. currentmodule:: metrics
-
-.. autofunction:: all_complex_del

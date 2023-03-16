@@ -1,6 +1,0 @@
-at_dropout
-==========
-
-.. currentmodule:: metrics
-
-.. autofunction:: at_dropout

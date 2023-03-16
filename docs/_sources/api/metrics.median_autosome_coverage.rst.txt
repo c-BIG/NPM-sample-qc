@@ -1,6 +1,0 @@
-median_autosome_coverage
-========================
-
-.. currentmodule:: metrics
-
-.. autofunction:: median_autosome_coverage

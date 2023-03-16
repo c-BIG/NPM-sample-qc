@@ -1,6 +1,0 @@
-pass_homalt_snps
-================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pass_homalt_snps

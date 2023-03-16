@@ -1,6 +1,0 @@
-gc_nc_80_100
-============
-
-.. currentmodule:: metrics
-
-.. autofunction:: gc_nc_80_100

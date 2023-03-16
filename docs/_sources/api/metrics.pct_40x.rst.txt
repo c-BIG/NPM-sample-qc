@@ -1,6 +1,0 @@
-pct_40x
-=======
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_40x

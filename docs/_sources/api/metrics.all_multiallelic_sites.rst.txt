@@ -1,6 +1,0 @@
-all_multiallelic_sites
-======================
-
-.. currentmodule:: metrics
-
-.. autofunction:: all_multiallelic_sites

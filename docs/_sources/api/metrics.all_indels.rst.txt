@@ -1,6 +1,0 @@
-all_indels
-==========
-
-.. currentmodule:: metrics
-
-.. autofunction:: all_indels

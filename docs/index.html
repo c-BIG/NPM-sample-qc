@@ -8,10 +8,14 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -64,10 +68,10 @@
            <div itemprop="articleBody">
              
   <section id="npm-sample-qc">
-<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this headline"></a></h1>
+<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this heading"></a></h1>
 <p>NPM-sample-qc is a <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.</p>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
 <li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Install Docker</a></p></li>
@@ -75,7 +79,7 @@
 </ul>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
 <p>Clone this repository</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">c</span><span class="o">-</span><span class="n">BIG</span><span class="o">/</span><span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -97,9 +101,9 @@
 </div>
 </section>
 <section id="understanding-the-workflow">
-<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Permalink to this headline"></a></h2>
+<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Permalink to this heading"></a></h2>
 <section id="resources">
-<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline"></a></h3>
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
 <p>The workflow requires the following resources given in the <code class="docutils literal notranslate"><span class="pre">conf/resources.config</span></code></p>
 <ul class="simple">
 <li><p><em>N-regions reference file</em>, used as an input for computing “non-gap regions autosome” coverages (mosdepth).</p>
@@ -124,7 +128,7 @@
 </ul>
 </section>
 <section id="inputs">
-<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline"></a></h3>
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
 <li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g.</p></li>
@@ -141,7 +145,7 @@ append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_
 See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
 </section>
 <section id="outputs">
-<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline"></a></h3>
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
 <p>Upon completion, the workflow will create the following files in the <code class="docutils literal notranslate"><span class="pre">outdir</span></code> directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outdir</span><span class="o">/</span>
     <span class="n">pipeline_info</span><span class="o">/</span>    <span class="c1"># dag, timeline and trace files</span>
@@ -160,7 +164,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-c
 <p>If <code class="docutils literal notranslate"><span class="pre">keep_workdir</span></code> has been specified, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
 </section>
 <section id="docker-image">
-<h3>Docker image<a class="headerlink" href="#docker-image" title="Permalink to this headline"></a></h3>
+<h3>Docker image<a class="headerlink" href="#docker-image" title="Permalink to this heading"></a></h3>
 <p>By default the workflow pull the docker image from dockerhub. However you can also build docker image locally</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to containers</span>
 <span class="n">cd</span> <span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">/</span><span class="n">containers</span>
@@ -171,9 +175,9 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-c
 </section>
 </section>
 <section id="workflow-logic">
-<h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this headline"></a></h2>
+<h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this heading"></a></h2>
 <p>We provide a schematic representation of the workflow in the figure below:</p>
-<img src="docs/npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
+<img src="./npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
 <p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf</span></code>).</p>
 <p><strong>Metrics parsing</strong></p>
@@ -182,8 +186,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-c
 <p>Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the <code class="docutils literal notranslate"><span class="pre">bin/compile_metrics.py</span></code> script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the <strong>Metric definitions</strong> section).</p>
 </section>
 <section id="metric-definitions">
-<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this headline"></a></h2>
-<p><em>This section is outdated. New metrics definitions are being worked on and will be updated in coming releases.</em></p>
+<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading"></a></h2>
 <p>The full list of metrics reported by this workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
 <p>When needed, page contents can be updated by running the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install sphinx</span>
@@ -213,7 +216,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-c
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, GIS.</p>
+    <p>&#169; Copyright 2020-2023, GIS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

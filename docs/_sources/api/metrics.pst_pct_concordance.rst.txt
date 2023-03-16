@@ -1,6 +1,0 @@
-pst_pct_concordance
-===================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pst_pct_concordance
