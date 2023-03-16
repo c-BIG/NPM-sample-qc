@@ -255,6 +255,9 @@ process verifybamid2 {
     path cbam
     path cbam_idx
     path reference
+    path vbi2_ud
+    path vbi2_bed
+    path vbi2_mean
 
     output:
     path "result*"
@@ -330,6 +333,10 @@ else if (aln_file_type == "cram") {
 reference = channel.fromPath(params.reference, checkIfExists: true)
 reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
+vbi2_ud = channel.fromPath(params.vbi2_ud, checkIfExists: true)
+vbi2_bed = channel.fromPath(params.vbi2_bed, checkIfExists: true)
+vbi2_mean = channel.fromPath(params.vbi2_mean, checkIfExists: true)
+
 
 // main
 workflow {
@@ -338,7 +345,7 @@ workflow {
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
-        verifybamid2( cbam, cbam_idx, reference )
+        verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
@@ -346,7 +353,7 @@ workflow {
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
         mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
-        verifybamid2( cbam, cbam_idx, reference )
+        verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     }
