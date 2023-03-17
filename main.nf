@@ -349,12 +349,13 @@ workflow {
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
-        samtools_stats( cbam )
-        picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
-        mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
-        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
+//        samtools_stats( cbam )
+//        picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
+//        mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
+//        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
         verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
-        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
+        multiqc( verifybamid2.out )
+//        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     }
 }
