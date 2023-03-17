@@ -266,8 +266,8 @@ process verifybamid2 {
     """
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
-
-    verifybamid2 --NumPC 4 --SVDPrefix ${params.vbi2_svdprefix} --Reference ${reference} --BamFile ${cbam}
+    
+    verifybamid2 --NumPC 4 --SVDPrefix 1000g.phase3.100k.b38.vcf.gz.dat --Reference ${reference} --BamFile ${cbam}
 
     """
 }
