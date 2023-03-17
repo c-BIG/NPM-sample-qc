@@ -1,6 +1,0 @@
-pass_del
-========
-
-.. currentmodule:: metrics
-
-.. autofunction:: pass_del

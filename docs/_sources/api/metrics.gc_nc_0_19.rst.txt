@@ -1,6 +1,0 @@
-gc_nc_0_19
-==========
-
-.. currentmodule:: metrics
-
-.. autofunction:: gc_nc_0_19

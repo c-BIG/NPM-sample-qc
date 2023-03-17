@@ -10,3 +10,6 @@ docsrc/api/
 tests/*/work
 tests/*/output
 tests/*/.nextflow*
+
+# MacOS
+**/.DS*

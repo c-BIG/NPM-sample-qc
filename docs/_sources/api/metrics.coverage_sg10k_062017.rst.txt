@@ -1,6 +1,0 @@
-coverage_sg10k_062017
-=====================
-
-.. currentmodule:: metrics
-
-.. autofunction:: coverage_sg10k_062017

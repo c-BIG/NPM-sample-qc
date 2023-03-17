@@ -1,6 +1,0 @@
-yield_pf_reads
-==============
-
-.. currentmodule:: metrics
-
-.. autofunction:: yield_pf_reads

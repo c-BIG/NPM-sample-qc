@@ -1,6 +1,0 @@
-sd_coverage
-===========
-
-.. currentmodule:: metrics
-
-.. autofunction:: sd_coverage

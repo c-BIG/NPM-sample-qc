@@ -1,6 +1,0 @@
-pct_adapters
-============
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_adapters

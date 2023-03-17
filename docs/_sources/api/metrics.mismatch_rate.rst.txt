@@ -1,6 +1,0 @@
-mismatch_rate
-=============
-
-.. currentmodule:: metrics
-
-.. autofunction:: mismatch_rate

@@ -1,6 +1,0 @@
-pct_alignments_diff_chrom
-=========================
-
-.. currentmodule:: metrics
-
-.. autofunction:: pct_alignments_diff_chrom

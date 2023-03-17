@@ -8,10 +8,14 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -74,8 +78,8 @@
            <div itemprop="articleBody">
              
   <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h1>
-<table class="longtable docutils align-default">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h1>
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -91,16 +95,16 @@
 <td><p>The mean insert size over the &quot;core&quot; of the distribution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
-<td><p>Analogous to pct_autosomes_1x.</p></td>
+<td><p>The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html#metrics.pct_reads_aligned_in_pairs" title="metrics.pct_reads_aligned_in_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_in_pairs</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads that have been aligned as pairs, i.e. percent aligned pairs * 2.</p></td>
+<td><p>The percentage of reads that have been aligned as pairs.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
 <td><p>The percentage of reads that have been aligned as proper pairs.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.yield_bp_q30.html#metrics.yield_bp_q30" title="metrics.yield_bp_q30"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_bp_q30</span></code></a>(mqc)</p></td>
-<td><p>The number of PF bases with BQ ≥ 30.</p></td>
+<td><p>The number of bases that pass filter (PF) and with base quality ≥ 30 (BQ).</p></td>
 </tr>
 </tbody>
 </table>
@@ -117,7 +121,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, GIS.</p>
+    <p>&#169; Copyright 2020-2023, GIS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

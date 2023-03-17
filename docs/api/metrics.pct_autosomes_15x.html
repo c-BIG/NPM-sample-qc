@@ -8,10 +8,14 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -75,11 +79,12 @@
            <div itemprop="articleBody">
              
   <section id="pct-autosomes-15x">
-<h1>pct_autosomes_15x<a class="headerlink" href="#pct-autosomes-15x" title="Permalink to this headline"></a></h1>
+<h1>pct_autosomes_15x<a class="headerlink" href="#pct-autosomes-15x" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.pct_autosomes_15x">
 <span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_autosomes_15x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_autosomes_15x" title="Permalink to this definition"></a></dt>
-<dd><p>Analogous to pct_autosomes_1x.</p>
+<dd><p>The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
+<p>Source: run_mosdepth.sh (ge_15x_autosome_bases * 100 / total_autosome_bases)</p>
 </dd></dl>
 
 </section>
@@ -95,7 +100,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, GIS.</p>
+    <p>&#169; Copyright 2020-2023, GIS.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
