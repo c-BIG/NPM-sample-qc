@@ -25,17 +25,17 @@ def yield_bp_q30(mqc):
     return k, v
 
 
-def pct_reads_aligned_in_pairs(mqc):
+def pct_reads_mapped(mqc):
     """
-    The percentage of reads that have been aligned as pairs.
+    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment. 
 
-    Source: samtools stats (reads_mapped_and_paired / sequences)
+    Source: samtools stats (reads_mapped / sequences)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
-        v = np.divide(d["reads_mapped_and_paired"],
+        v = np.divide(d["reads_mapped"],
                       d["sequences"])
         v = np.round(v*100, DECIMALS)
     except KeyError:
