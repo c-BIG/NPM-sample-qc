@@ -49,7 +49,7 @@ def calculate_metrics(mqc):
         "pct_reads_mapped", "pct_reads_properly_paired",
         # coverage
         "mean_autosome_coverage", "mad_autosome_coverage",
-        "pct_autosomes_15x",
+        "pct_autosomes_15x", "pct_acmg_15x",
         # insert size
         "mean_insert_size",
         # cross-individual contamination rate

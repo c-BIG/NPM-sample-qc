@@ -121,6 +121,25 @@ def pct_autosomes_15x(mqc):
     return k, v
 
 
+def pct_acmg_15x(mqc):
+    """
+    The percentage of bases with at least 15X coverage in acmg genes, after coverage filters are applied (see mean_autosome_coverage for details).
+
+    Source: run_mosdepth.sh (acmg_15x_bases * 100 / total_acmg_genes_bases)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        v = np.divide(np.float64(d["acmg_15x_bases"]),
+                      np.float64(d["total_acmg_genes_bases"]))
+        v = np.round(v*100, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
 def mean_insert_size(mqc):
     """
     The mean insert size over the "core" of the distribution.

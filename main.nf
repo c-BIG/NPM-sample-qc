@@ -153,6 +153,7 @@ process mosdepth_datamash {
 
     input:
     path autosomes_non_gap_regions
+    path acmg_genes
     path mosdepth 
 
     output:
@@ -163,6 +164,8 @@ process mosdepth_datamash {
     # filter mosdepth outputs to write the bins that are overlap with autosomes non gap and N bases
 
     zcat ${mosdepth} | bedtools intersect -a stdin -b ${autosomes_non_gap_regions} | gzip -9c > "${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz"
+    zcat ${mosdepth} | bedtools intersect -a stdin -b ${acmg_genes} | gzip -9c > "${biosample_id}.regions.acmg_genes.bed.gz"
+
 
     # calculate metrics
     BED="${biosample_id}.regions.autosomes_non_gap_n_bases.bed.gz";
@@ -177,9 +180,13 @@ process mosdepth_datamash {
     ge_30x_bases=\$(zcat \$BED | awk '\$4>=30' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=\$3-\$2 }END{print SUM}');
     ge_40x_bases=\$(zcat \$BED | awk '\$4>=40' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=\$3-\$2 }END{print SUM}');
 
+    ACMG_BED="${biosample_id}.regions.acmg_genes.bed.gz";
+    total_acmg_genes_bases=\$(zcat \$ACMG_BED | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=\$3-\$2 }END{print SUM}');
+    acmg_15x_bases=\$(zcat \$ACMG_BED | awk '\$4>=15' | awk -F '\t' 'BEGIN{SUM=0}{ SUM+=\$3-\$2 }END{print SUM}');
+
     # save output
-    header="mean_autosome_coverage,sd_autosome_coverage,median_autosome_coverage,mad_autosome_coverage,total_autosome_bases,ge_1x_autosome_bases,ge_10x_autosome_bases,ge_15x_autosome_bases,ge_30x_autosome_bases,ge_40x_autosome_bases";
-    row="\$mean_coverage,\$sd_coverage,\$median_coverage,\$mad_coverage,\$total_bases,\$ge_1x_bases,\$ge_10x_bases,\$ge_15x_bases,\$ge_30x_bases,\$ge_40x_bases";
+    header="mean_autosome_coverage,sd_autosome_coverage,median_autosome_coverage,mad_autosome_coverage,total_autosome_bases,ge_1x_autosome_bases,ge_10x_autosome_bases,ge_15x_autosome_bases,ge_30x_autosome_bases,ge_40x_autosome_bases,total_acmg_genes_bases,acmg_15x_bases";
+    row="\$mean_coverage,\$sd_coverage,\$median_coverage,\$mad_coverage,\$total_bases,\$ge_1x_bases,\$ge_10x_bases,\$ge_15x_bases,\$ge_30x_bases,\$ge_40x_bases, \$total_acmg_genes_bases,\$acmg_15x_bases";
     echo "\$header" > "${biosample_id}.mosdepth.csv";
     echo \$row >> "${biosample_id}.mosdepth.csv"
     """
@@ -333,6 +340,7 @@ else if (aln_file_type == "cram") {
 reference = channel.fromPath(params.reference, checkIfExists: true)
 reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
+acmg_genes = channel.fromPath(params.acmg_genes, checkIfExists: true)
 vbi2_ud = channel.fromPath(params.vbi2_ud, checkIfExists: true)
 vbi2_bed = channel.fromPath(params.vbi2_bed, checkIfExists: true)
 vbi2_mean = channel.fromPath(params.vbi2_mean, checkIfExists: true)
@@ -344,7 +352,7 @@ workflow {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
-        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
+        mosdepth_datamash( autosomes_non_gap_regions, acmg_genes, mosdepth_bam.out )
         verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
@@ -352,7 +360,7 @@ workflow {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
         mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
-        mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
+        mosdepth_datamash( autosomes_non_gap_regions, acmg_genes, mosdepth_cram.out )
         verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
         multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)

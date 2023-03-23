@@ -9,6 +9,8 @@
         "ge_10x_autosome_bases": "2.65398e+09",
         "ge_15x_autosome_bases": "2.64389e+09",
         "ge_30x_autosome_bases": "2069651713",
-        "ge_40x_autosome_bases": "81389558"
+        "ge_40x_autosome_bases": "81389558",
+        "total_acmg_genes_bases": " 39853891",
+        "acmg_15x_bases": "39525434"
     }
 }
