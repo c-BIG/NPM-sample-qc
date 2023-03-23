@@ -2,16 +2,16 @@
     "report_data_sources": {
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.quality_yield_metrics.txt",
-                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.quality_yield_metrics.txt",
+                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873/NA12878-chr14-AKT1.stats"
+                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.stats"
             }
         }
     },
@@ -4754,12 +4754,12 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/2023/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/45/e1eabb33a2af7f99fc04aea2d09873"
+        "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2023-01-18, 07:20 UTC",
+    "config_creation_date": "2023-03-20, 04:13 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,
