@@ -1,0 +1,10 @@
+{
+    "NA12878": {
+        "pct_q30_bases_read1": 97.6,
+        "total_bases_read1": 55498286710,
+        "q30_bases_read1": 56860140300,
+        "pct_q30_bases_read2": 95.97,
+        "total_bases_read2": 54568607367,
+        "q30_bases_read2": 56860140300
+    }
+}
