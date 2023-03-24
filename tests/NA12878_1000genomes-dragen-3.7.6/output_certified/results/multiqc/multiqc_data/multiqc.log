@@ -1,27 +1,27 @@
-[2023-03-23 13:55:04,257] multiqc                                            [DEBUG  ]  This is MultiQC v1.14
-[2023-03-23 13:55:04,257] multiqc                                            [INFO   ]  Expanded search patterns with the following: multiqc_npm/picard_quality_yield_metrics, multiqc_npm/samtools_stats_bq, multiqc_npm/mosdepth
-[2023-03-23 13:55:04,258] multiqc                                            [DEBUG  ]  Command used: /usr/local/conda/bin/multiqc . --data-format json --enable-npm-plugin
-[2023-03-23 13:55:05,846] multiqc                                            [DEBUG  ]  Latest MultiQC version is v1.14
-[2023-03-23 13:55:05,846] multiqc                                            [DEBUG  ]  Working dir : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/33/8a87007f894b9a000174016d57d147
-[2023-03-23 13:55:05,846] multiqc                                            [DEBUG  ]  Template    : default
-[2023-03-23 13:55:05,847] multiqc                                            [DEBUG  ]  Running Python 3.10.9 (main, Jan 11 2023, 15:21:40) [GCC 11.2.0]
-[2023-03-23 13:55:05,847] multiqc                                            [DEBUG  ]  Analysing modules: multiqc_npm, custom_content, ccs, ngsderive, purple, conpair, lima, peddy, somalier, methylQA, mosdepth, phantompeakqualtools, qualimap, preseq, hifiasm, quast, qorts, rna_seqc, rockhopper, rsem, rseqc, busco, bustools, goleft_indexcov, gffcompare, disambiguate, supernova, deeptools, sargasso, verifybamid, mirtrace, happy, mirtop, sambamba, gopeaks, homer, hops, macs2, theta2, snpeff, gatk, htseq, bcftools, featureCounts, fgbio, dragen, dragen_fastqc, dedup, pbmarkdup, damageprofiler, biobambam2, jcvi, mtnucratio, picard, vep, sentieon, prokka, qc3C, nanostat, samblaster, samtools, sexdeterrmine, eigenstratdatabasetools, bamtools, jellyfish, vcftools, longranger, stacks, varscan2, snippy, umitools, bbmap, bismark, biscuit, diamond, hicexplorer, hicup, hicpro, salmon, kallisto, slamdunk, star, hisat2, tophat, bowtie2, bowtie1, cellranger, snpsplit, odgi, pangolin, nextclade, humid, kat, leehom, adapterRemoval, bbduk, clipandmerge, cutadapt, flexbar, kaiju, kraken, malt, motus, trimmomatic, sickle, skewer, sortmerna, biobloomtools, fastq_screen, afterqc, fastp, fastqc, filtlong, prinseqplusplus, pychopper, porechop, pycoqc, minionqc, anglerfish, multivcfanalyzer, clusterflow, checkqc, bcl2fastq, bclconvert, interop, ivar, flash, seqyclean, optitype, whatshap
-[2023-03-23 13:55:05,847] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmp0p5kt8j4
-[2023-03-23 13:55:05,852] multiqc                                            [INFO   ]  Search path : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/33/8a87007f894b9a000174016d57d147
-[2023-03-23 13:55:06,037] multiqc                                            [DEBUG  ]  Summary of files that were skipped by the search: [skipped_module_specific_max_filesize: 16] // [skipped_no_match: 9] // [skipped_filesize_limit: 1]
-[2023-03-23 13:55:07,140] multiqc                                            [INFO   ]  Running with MultiQC NPM plugin
-[2023-03-23 13:55:07,141] multiqc                                            [INFO   ]  Found 1 npm_picard_QualityYieldMetrics reports
-[2023-03-23 13:55:07,158] multiqc                                            [INFO   ]  Found 1 npm_samtools_stats_bq reports
-[2023-03-23 13:55:07,159] multiqc                                            [INFO   ]  Found 1 npm_mosdepth reports
-[2023-03-23 13:55:08,262] multiqc.plots.bargraph                             [DEBUG  ]  Using matplotlib version 3.7.1
-[2023-03-23 13:55:08,266] multiqc.plots.linegraph                            [DEBUG  ]  Using matplotlib version 3.7.1
-[2023-03-23 13:55:08,267] multiqc                                            [DEBUG  ]  No samples found: custom_content
-[2023-03-23 13:55:08,274] multiqc.modules.verifybamid.verifybamid            [INFO   ]  Found 1 reports
-[2023-03-23 13:55:08,320] multiqc.modules.picard.picard                      [INFO   ]  Found 1 InsertSizeMetrics reports
-[2023-03-23 13:55:08,321] multiqc.modules.picard.picard                      [INFO   ]  Found 1 QualityYieldMetrics reports
-[2023-03-23 13:55:08,336] multiqc.modules.samtools.samtools                  [INFO   ]  Found 1 stats reports
-[2023-03-23 13:55:08,339] multiqc                                            [INFO   ]  Compressing plot data
-[2023-03-23 13:55:08,375] multiqc                                            [INFO   ]  Report      : multiqc_report.html
-[2023-03-23 13:55:08,375] multiqc                                            [INFO   ]  Data        : multiqc_data
-[2023-03-23 13:55:08,375] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmp0p5kt8j4/multiqc_data' to '/home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/33/8a87007f894b9a000174016d57d147/multiqc_data'
-[2023-03-23 13:55:08,461] multiqc                                            [INFO   ]  MultiQC complete
+[2023-03-24 05:14:20,262] multiqc                                            [DEBUG  ]  This is MultiQC v1.14
+[2023-03-24 05:14:20,262] multiqc                                            [INFO   ]  Expanded search patterns with the following: multiqc_npm/picard_quality_yield_metrics, multiqc_npm/samtools_stats_bq, multiqc_npm/mosdepth
+[2023-03-24 05:14:20,262] multiqc                                            [DEBUG  ]  Command used: /usr/local/conda/bin/multiqc . --data-format json --enable-npm-plugin
+[2023-03-24 05:14:21,618] multiqc                                            [DEBUG  ]  Latest MultiQC version is v1.14
+[2023-03-24 05:14:21,618] multiqc                                            [DEBUG  ]  Working dir : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8f/ada32fca565a03b6653ad3beb64da8
+[2023-03-24 05:14:21,618] multiqc                                            [DEBUG  ]  Template    : default
+[2023-03-24 05:14:21,618] multiqc                                            [DEBUG  ]  Running Python 3.10.9 (main, Jan 11 2023, 15:21:40) [GCC 11.2.0]
+[2023-03-24 05:14:21,619] multiqc                                            [DEBUG  ]  Analysing modules: multiqc_npm, custom_content, ccs, ngsderive, purple, conpair, lima, peddy, somalier, methylQA, mosdepth, phantompeakqualtools, qualimap, preseq, hifiasm, quast, qorts, rna_seqc, rockhopper, rsem, rseqc, busco, bustools, goleft_indexcov, gffcompare, disambiguate, supernova, deeptools, sargasso, verifybamid, mirtrace, happy, mirtop, sambamba, gopeaks, homer, hops, macs2, theta2, snpeff, gatk, htseq, bcftools, featureCounts, fgbio, dragen, dragen_fastqc, dedup, pbmarkdup, damageprofiler, biobambam2, jcvi, mtnucratio, picard, vep, sentieon, prokka, qc3C, nanostat, samblaster, samtools, sexdeterrmine, eigenstratdatabasetools, bamtools, jellyfish, vcftools, longranger, stacks, varscan2, snippy, umitools, bbmap, bismark, biscuit, diamond, hicexplorer, hicup, hicpro, salmon, kallisto, slamdunk, star, hisat2, tophat, bowtie2, bowtie1, cellranger, snpsplit, odgi, pangolin, nextclade, humid, kat, leehom, adapterRemoval, bbduk, clipandmerge, cutadapt, flexbar, kaiju, kraken, malt, motus, trimmomatic, sickle, skewer, sortmerna, biobloomtools, fastq_screen, afterqc, fastp, fastqc, filtlong, prinseqplusplus, pychopper, porechop, pycoqc, minionqc, anglerfish, multivcfanalyzer, clusterflow, checkqc, bcl2fastq, bclconvert, interop, ivar, flash, seqyclean, optitype, whatshap
+[2023-03-24 05:14:21,619] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmpmj_v0_0t
+[2023-03-24 05:14:21,623] multiqc                                            [INFO   ]  Search path : /home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8f/ada32fca565a03b6653ad3beb64da8
+[2023-03-24 05:14:21,808] multiqc                                            [DEBUG  ]  Summary of files that were skipped by the search: [skipped_module_specific_max_filesize: 16] // [skipped_no_match: 9] // [skipped_filesize_limit: 1]
+[2023-03-24 05:14:22,947] multiqc                                            [INFO   ]  Running with MultiQC NPM plugin
+[2023-03-24 05:14:22,948] multiqc                                            [INFO   ]  Found 1 npm_picard_QualityYieldMetrics reports
+[2023-03-24 05:14:22,977] multiqc                                            [INFO   ]  Found 1 npm_samtools_stats_bq reports
+[2023-03-24 05:14:22,977] multiqc                                            [INFO   ]  Found 1 npm_mosdepth reports
+[2023-03-24 05:14:24,069] multiqc.plots.bargraph                             [DEBUG  ]  Using matplotlib version 3.7.1
+[2023-03-24 05:14:24,073] multiqc.plots.linegraph                            [DEBUG  ]  Using matplotlib version 3.7.1
+[2023-03-24 05:14:24,075] multiqc                                            [DEBUG  ]  No samples found: custom_content
+[2023-03-24 05:14:24,081] multiqc.modules.verifybamid.verifybamid            [INFO   ]  Found 1 reports
+[2023-03-24 05:14:24,127] multiqc.modules.picard.picard                      [INFO   ]  Found 1 InsertSizeMetrics reports
+[2023-03-24 05:14:24,128] multiqc.modules.picard.picard                      [INFO   ]  Found 1 QualityYieldMetrics reports
+[2023-03-24 05:14:24,143] multiqc.modules.samtools.samtools                  [INFO   ]  Found 1 stats reports
+[2023-03-24 05:14:24,146] multiqc                                            [INFO   ]  Compressing plot data
+[2023-03-24 05:14:24,182] multiqc                                            [INFO   ]  Report      : multiqc_report.html
+[2023-03-24 05:14:24,182] multiqc                                            [INFO   ]  Data        : multiqc_data
+[2023-03-24 05:14:24,182] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpmj_v0_0t/multiqc_data' to '/home/ubuntu/2023/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8f/ada32fca565a03b6653ad3beb64da8/multiqc_data'
+[2023-03-24 05:14:24,266] multiqc                                            [INFO   ]  MultiQC complete

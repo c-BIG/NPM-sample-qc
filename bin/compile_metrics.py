@@ -53,7 +53,7 @@ def calculate_metrics(mqc):
         # insert size
         "mean_insert_size",
         # cross-individual contamination rate
-        "pct_contamination"
+        "cross_contamination_rate"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))

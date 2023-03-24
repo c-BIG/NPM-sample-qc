@@ -162,9 +162,9 @@ def mean_insert_size(mqc):
     return k, v
 
 
-def pct_contamination(mqc):
+def cross_contamination_rate(mqc):
     """
-    The percentage of cross-individual contamination.
+    Estimation of cross-individual contamination rate.
     Source: VerifyBamID2 (FREEMIX)
     """
     k = inspect.currentframe().f_code.co_name

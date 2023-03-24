@@ -3,12 +3,12 @@
         "id": "NA12878"
     },
     "wgs_qc_metrics": {
+        "cross_contamination_rate": 0.00018,
         "mad_autosome_coverage": 2.41,
         "mean_autosome_coverage": 31.5975,
         "mean_insert_size": 442.63154,
         "pct_acmg_15x": 99.17585,
         "pct_autosomes_15x": 95.91997,
-        "pct_contamination": 0.00018,
         "pct_reads_mapped": 99.76052,
         "pct_reads_properly_paired": 98.09972,
         "yield_bp_q30": 110066894077
