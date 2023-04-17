@@ -27,7 +27,7 @@ def yield_bp_q30(mqc):
 
 def pct_reads_mapped(mqc):
     """
-    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment. 
+    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment.
 
     Source: samtools stats (reads_mapped / sequences)
     """
@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -95,7 +95,7 @@ def mad_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mad_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -112,8 +112,8 @@ def pct_autosomes_15x(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
-        v = np.divide(np.float(d["ge_15x_autosome_bases"]),
-                      np.float(d["total_autosome_bases"]))
+        v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
+                      np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -137,6 +137,23 @@ def mean_insert_size(mqc):
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEAN_INSERT_SIZE"]
         v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def cross_contamination_rate(mqc):
+    """
+    Estimation of cross-individual contamination rate.
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
+        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
