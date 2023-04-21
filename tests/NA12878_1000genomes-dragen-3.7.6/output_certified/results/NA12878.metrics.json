@@ -3,9 +3,10 @@
         "id": "NA12878"
     },
     "wgs_qc_metrics": {
+        "insert_size_std_deviation": 98.7,
         "mad_autosome_coverage": 2.41,
         "mean_autosome_coverage": 31.5975,
-        "mean_insert_size": 442.63154,
+        "mean_insert_size": "NA",
         "pct_autosomes_15x": 95.91997,
         "pct_reads_mapped": 99.76052,
         "pct_reads_properly_paired": 98.09972,

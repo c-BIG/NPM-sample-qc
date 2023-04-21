@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -95,7 +95,7 @@ def mad_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mad_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -112,8 +112,8 @@ def pct_autosomes_15x(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
-        v = np.divide(np.float(d["ge_15x_autosome_bases"]),
-                      np.float(d["total_autosome_bases"]))
+        v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
+                      np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
@@ -136,6 +136,23 @@ def mean_insert_size(mqc):
     try:
         d = next(iter(mqc["multiqc_picard_insertSize"].values()))
         v = d["MEAN_INSERT_SIZE"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+def insert_size_std_deviation(mqc):
+    """
+    The standard deviation for the average template length distribution.
+
+    Source: samtools stats (insert_size_standard_deviation)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_standard_deviation"]
         v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
