@@ -250,6 +250,7 @@ process picard_collect_multiple_metrics_cram {
 process verifybamid2 {
     tag "${biosample_id}"
     publishDir "${params.publishdir}/verifybamid2", mode: "copy"
+    errorStrategy 'ignore'
 
     input:
     path cbam
