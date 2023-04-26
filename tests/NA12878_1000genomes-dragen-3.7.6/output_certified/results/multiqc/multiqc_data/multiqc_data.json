@@ -2,21 +2,21 @@
     "report_data_sources": {
         "VerifyBAMID": {
             "all_sections": {
-                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a/result.selfSM"
+                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91/result.selfSM"
             }
         },
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a/NA12878.insert_size_metrics.txt"
+                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91/NA12878.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878.insert_size_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a/NA12878.insert_size_metrics.txt",
-                "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a/NA12878.quality_yield_metrics.txt"
+                "NA12878.insert_size_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91/NA12878.insert_size_metrics.txt",
+                "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91/NA12878.quality_yield_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a/NA12878.stats"
+                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91/NA12878.stats"
             }
         }
     },
@@ -4827,12 +4827,12 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1c/1fc0be88e14bbbe1600c58005c421a"
+        "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/1d/10f733a8246d7ee9b13fbc5247bf91"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2023-04-17, 05:05 UTC",
+    "config_creation_date": "2023-04-26, 04:51 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,
