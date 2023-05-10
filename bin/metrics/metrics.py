@@ -153,7 +153,6 @@ def cross_contamination_rate(mqc):
     try:
         d = next(iter(mqc["multiqc_verifybamid"].values()))
         v = d["FREEMIX"]
-        v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"
 
