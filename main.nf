@@ -82,6 +82,7 @@ PROCESSES
 ---------------------------------------------------------------------
 */
 
+include { bcftools_stats } from './modules/bcftools'
 include { mosdepth as mosdepth_bam } from './modules/mosdepth'
 include { mosdepth as mosdepth_cram } from './modules/mosdepth'
 include { multiqc } from './modules/multiqc'
@@ -118,6 +119,16 @@ workflow {
         }
         .set { aln_inputs }
 
+    Channel
+        .fromList( params.samples )
+        .map { rec ->
+            def vcf_file = file( rec.vcf )
+            def vcf_idx = file( "${rec.vcf}.tbi" )
+
+            tuple( rec.id, vcf_file, vcf_idx )
+        }
+        .set { vcf_inputs }
+
 
     Channel
         .fromList( params.samples )
@@ -143,6 +154,7 @@ workflow {
     samtools_stats_bam( aln_inputs.bam, [] )
     samtools_stats_cram( aln_inputs.cram, ref_fasta )
 
+    bcftools_stats( vcf_inputs )
 
     Channel
         .empty()
