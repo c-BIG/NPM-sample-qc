@@ -48,8 +48,8 @@ def minimalInformationMessage() {
     log.info "Project Dir  : " + workflow.projectDir
     log.info "Launch Dir   : " + workflow.launchDir
     log.info "Work Dir     : " + workflow.workDir
-    log.info "Results Dir  : " + params.publishdir
-    log.info "Info Dir     : " + params.infodir
+    log.info "Results Dir  : " + params.publish_dir
+    log.info "Info Dir     : " + params.info_dir
     log.info "Profile      : " + workflow.profile
 }
 
@@ -82,43 +82,84 @@ PROCESSES
 ---------------------------------------------------------------------
 */
 
-process samtools_stats {
-    tag "${biosample_id}"
-    publishDir "${params.publishdir}/samtools", mode: "copy"
-
-    input:
-    tuple val(biosample_id) path(bam_cram)
-    
-    output:
-    path "${biosample_id}.stats"
-
-    script:
-    """
-    # get the percentage of reads that have been aligned as pairs
-    # get the percentage of reads that have been aligned as proper pairs
-
-      samtools stats ${bam_cram} > ${biosample_id}.stats
-    """
-}
+include { mosdepth as mosdepth_bam } from './modules/mosdepth'
+include { mosdepth as mosdepth_cram } from './modules/mosdepth'
+include { multiqc } from './modules/multiqc'
+include { compile_metrics } from './modules/compile_metrics'
+include { samtools_stats as samtools_stats_bam } from './modules/samtools'
+include { samtools_stats as samtools_stats_cram } from './modules/samtools'
 
 /*
 ----------------------------------------------------------------------
 WORKFLOW
 ---------------------------------------------------------------------
+*/
 
 // main
 
-sample_keys = params.samples
-println "List of samples: " +  sample_keys
-channel
-    .from(sample_keys)
-    .map{ row -> tuple(row.biosample_id, file(row.bam_cram))}
-    .set{samples}
-
 workflow {
-        samtools_stats( biosample_id, bam_cram )
-}
 
+    ref_fasta = file( params.reference )
+
+    Channel
+        .fromList( params.samples )
+        .branch { rec ->
+            def aln_file = file( rec.bam )
+
+            bam: aln_file.extension == 'bam'
+                def bam_idx = file( "${rec.bam}.bai" )
+
+                return tuple( rec.id, aln_file, bam_idx )
+
+            cram: aln_file.extension == 'cram'
+                def cram_idx = file( "${rec.bam}.crai" )
+
+                return tuple( rec.id, aln_file, cram_idx )
+        }
+        .set { aln_inputs }
+
+
+    Channel
+        .fromList( params.samples )
+        .branch { rec ->
+            def aln_file = file( rec.bam )
+
+            bam: aln_file.extension == 'bam'
+                def bam_idx = file( "${rec.bam}.bai" )
+
+                return tuple( rec.id, aln_file, bam_idx )
+
+            cram: aln_file.extension == 'cram'
+                def cram_idx = file( "${rec.bam}.crai" )
+
+                return tuple( rec.id, aln_file, cram_idx )
+        }
+        .set { compile_metrics_inputs }
+
+
+    mosdepth_bam( aln_inputs.bam, [] )
+    mosdepth_cram( aln_inputs.cram, ref_fasta )
+
+    samtools_stats_bam( aln_inputs.bam, [] )
+    samtools_stats_cram( aln_inputs.cram, ref_fasta )
+
+
+    Channel
+        .empty()
+        .mix( mosdepth_bam.out.dists )
+        .mix( mosdepth_bam.out.summary )
+        .mix( mosdepth_cram.out.dists )
+        .mix( mosdepth_cram.out.summary )
+        .mix( samtools_stats_bam.out )
+        .mix( samtools_stats_cram.out )
+        .map { sample, files -> files }
+        .collect()
+        .set { log_files }
+
+    multiqc( log_files )
+
+   compile_metrics ( compile_metrics_inputs.mix(multiqc.out).collect() )    
+}
 
 /*
 ----------------------------------------------------------------------
@@ -130,7 +171,7 @@ workflow.onComplete {
     log.info "Completed   : " + workflow.complete
     log.info "Duration    : " + workflow.duration
     log.info "Status      : " + workflow.success
-    log.info "Publish dir : " + params.publishdir
+    log.info "Publish dir : " + params.publish_dir
 }
 
 workflow.onError {
