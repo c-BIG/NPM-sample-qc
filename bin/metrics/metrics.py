@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -95,7 +95,7 @@ def mad_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mad_autosome_coverage"]
-        v = np.round(np.float(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -112,8 +112,8 @@ def pct_autosomes_15x(mqc):
 
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
-        v = np.divide(np.float(d["ge_15x_autosome_bases"]),
-                      np.float(d["total_autosome_bases"]))
+        v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
+                      np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"

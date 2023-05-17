@@ -82,13 +82,18 @@ PROCESSES
 ---------------------------------------------------------------------
 */
 
-include { bcftools_stats } from './modules/bcftools'
-include { mosdepth as mosdepth_bam } from './modules/mosdepth'
-include { mosdepth as mosdepth_cram } from './modules/mosdepth'
-include { multiqc } from './modules/multiqc'
-include { compile_metrics } from './modules/compile_metrics'
 include { samtools_stats as samtools_stats_bam } from './modules/samtools'
 include { samtools_stats as samtools_stats_cram } from './modules/samtools'
+include { mosdepth as mosdepth_bam } from './modules/mosdepth'
+include { mosdepth as mosdepth_cram } from './modules/mosdepth'
+include { mosdepth_datamash } from './modules/mosdepth_datamash'
+include { verifybamid2 as verifybamid2_bam } from './modules/verifybamid2'
+include { verifybamid2 as verifybamid2_cram } from './modules/verifybamid2'
+include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam } from './modules/CollectMultipleMetrics'
+include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
+include { bcftools_stats } from './modules/bcftools'
+include { multiqc } from './modules/multiqc'
+include { compile_metrics } from './modules/compile_metrics'
 
 /*
 ----------------------------------------------------------------------
@@ -101,6 +106,11 @@ WORKFLOW
 workflow {
 
     ref_fasta = file( params.reference )
+    ref_fasta_idx = file( params.reference + ".fai" )
+    autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
+    vbi2_ud = file( params.vbi2_ud )
+    vbi2_bed = file( params.vbi2_bed )
+    vbi2_mean = file( params.vbi2_mean )
 
     Channel
         .fromList( params.samples )
@@ -110,51 +120,37 @@ workflow {
             bam: aln_file.extension == 'bam'
                 def bam_idx = file( "${rec.bam}.bai" )
 
-                return tuple( rec.id, aln_file, bam_idx )
+                return tuple( rec.biosample_id, aln_file, bam_idx )
 
             cram: aln_file.extension == 'cram'
                 def cram_idx = file( "${rec.bam}.crai" )
 
-                return tuple( rec.id, aln_file, cram_idx )
+                return tuple( rec.biosample_id, aln_file, cram_idx )
         }
         .set { aln_inputs }
 
-    Channel
-        .fromList( params.samples )
-        .map { rec ->
-            def vcf_file = file( rec.vcf )
-            def vcf_idx = file( "${rec.vcf}.tbi" )
-
-            tuple( rec.id, vcf_file, vcf_idx )
-        }
-        .set { vcf_inputs }
-
-
-    Channel
-        .fromList( params.samples )
-        .branch { rec ->
-            def aln_file = file( rec.bam )
-
-            bam: aln_file.extension == 'bam'
-                def bam_idx = file( "${rec.bam}.bai" )
-
-                return tuple( rec.id, aln_file, bam_idx )
-
-            cram: aln_file.extension == 'cram'
-                def cram_idx = file( "${rec.bam}.crai" )
-
-                return tuple( rec.id, aln_file, cram_idx )
-        }
-        .set { compile_metrics_inputs }
-
-
-    mosdepth_bam( aln_inputs.bam, [] )
-    mosdepth_cram( aln_inputs.cram, ref_fasta )
 
     samtools_stats_bam( aln_inputs.bam, [] )
     samtools_stats_cram( aln_inputs.cram, ref_fasta )
 
-    bcftools_stats( vcf_inputs )
+    mosdepth_bam( aln_inputs.bam, [] )
+    mosdepth_cram( aln_inputs.cram, ref_fasta )
+
+
+    Channel
+        .empty()
+        .mix( mosdepth_bam.out.regions )
+        .mix( mosdepth_cram.out.regions )
+        .set { mosdepth_regions }
+
+    mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
+//    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
+
+    verifybamid2_bam( aln_inputs.bam, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
+    verifybamid2_cram( aln_inputs.cram, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
+
+    picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
+    picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
     Channel
         .empty()
@@ -162,6 +158,15 @@ workflow {
         .mix( mosdepth_bam.out.summary )
         .mix( mosdepth_cram.out.dists )
         .mix( mosdepth_cram.out.summary )
+        .mix( mosdepth_datamash.out.coverage )
+        .mix( verifybamid2_bam.out.freemix )
+        .mix( verifybamid2_cram.out.freemix )
+        .mix( verifybamid2_bam.out.ancestry )
+        .mix( verifybamid2_cram.out.ancestry )
+        .mix( picard_collect_multiple_metrics_bam.out.insert_size )
+        .mix( picard_collect_multiple_metrics_cram.out.insert_size )
+        .mix( picard_collect_multiple_metrics_bam.out.quality )
+        .mix( picard_collect_multiple_metrics_cram.out.quality )
         .mix( samtools_stats_bam.out )
         .mix( samtools_stats_cram.out )
         .map { sample, files -> files }
@@ -170,7 +175,13 @@ workflow {
 
     multiqc( log_files )
 
-   compile_metrics ( compile_metrics_inputs.mix(multiqc.out).collect() )    
+
+    Channel
+        .fromList( params.samples )
+        .map { it.biosample_id }
+        .set { sample_ids }
+
+    compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*

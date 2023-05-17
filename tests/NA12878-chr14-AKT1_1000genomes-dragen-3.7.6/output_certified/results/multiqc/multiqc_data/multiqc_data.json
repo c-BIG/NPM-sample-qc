@@ -1,23 +1,56 @@
 {
     "report_data_sources": {
+        "mosdepth": {
+            "genome_results": {
+                "NA12878-chr14-AKT1": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT1.mosdepth.region.dist.txt",
+                "NA12878-chr14-AKT2": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT2.mosdepth.region.dist.txt"
+            }
+        },
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT2": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT2.insert_size_metrics.txt",
+                "NA12878-chr14-AKT1": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT1.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.quality_yield_metrics.txt",
-                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT2.insert_size_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT2.insert_size_metrics.txt",
+                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT1.quality_yield_metrics.txt",
+                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT1.insert_size_metrics.txt",
+                "NA12878-chr14-AKT2.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT2.quality_yield_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.stats"
+                "NA12878-chr14-AKT1": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT1.stats",
+                "NA12878-chr14-AKT2": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8/data/NA12878-chr14-AKT2.stats"
             }
         }
     },
     "report_general_stats_data": [
         {
             "NA12878-chr14-AKT1": {
+                "mean_coverage": "0.02",
+                "median_coverage": 0
+            },
+            "NA12878-chr14-AKT2": {
+                "mean_coverage": "0.02",
+                "median_coverage": 0
+            }
+        },
+        {
+            "NA12878-chr14-AKT1": {
+                "TOTAL_READS": 13810,
+                "PF_READS": 13810,
+                "READ_LENGTH": 150,
+                "TOTAL_BASES": 2071500,
+                "PF_BASES": 2071500,
+                "Q20_BASES": 2020718,
+                "PF_Q20_BASES": 2020718,
+                "Q30_BASES": 1996315,
+                "PF_Q30_BASES": 1996315,
+                "Q20_EQUIVALENT_YIELD": 3042758,
+                "PF_Q20_EQUIVALENT_YIELD": 3042758
+            },
+            "NA12878-chr14-AKT2": {
                 "TOTAL_READS": 13810,
                 "PF_READS": 13810,
                 "READ_LENGTH": 150,
@@ -32,6 +65,13 @@
             }
         },
         {
+            "NA12878-chr14-AKT2": {
+                "total_count": 6007,
+                "meansum": 2714199.2427330003,
+                "total_pairs": 6039.0,
+                "summed_mean": 449.4451470000001,
+                "summed_median": 440
+            },
             "NA12878-chr14-AKT1": {
                 "total_count": 6007,
                 "meansum": 2714199.2427330003,
@@ -89,10 +129,103 @@
                 "reads_duplicated_percent": 11.136857349746561,
                 "reads_MQ0_percent": 0.11585807385952207,
                 "reads_QC_failed_percent": 0.0
+            },
+            "NA12878-chr14-AKT2": {
+                "raw_total_sequences": 13810.0,
+                "filtered_sequences": 0.0,
+                "sequences": 13810.0,
+                "is_sorted": 1.0,
+                "1st_fragments": 6928.0,
+                "last_fragments": 6882.0,
+                "reads_mapped": 13759.0,
+                "reads_mapped_and_paired": 13708.0,
+                "reads_unmapped": 51.0,
+                "reads_properly_paired": 13517.0,
+                "reads_paired": 13810.0,
+                "reads_duplicated": 1538.0,
+                "reads_MQ0": 16.0,
+                "reads_QC_failed": 0.0,
+                "non-primary_alignments": 0.0,
+                "supplementary_alignments": 21.0,
+                "total_length": 2071500.0,
+                "total_first_fragment_length": 1039200.0,
+                "total_last_fragment_length": 1032300.0,
+                "bases_mapped": 2063850.0,
+                "bases_mapped_(cigar)": 2042081.0,
+                "bases_trimmed": 0.0,
+                "bases_duplicated": 230584.0,
+                "mismatches": 8144.0,
+                "error_rate": 0.003988089,
+                "average_length": 150.0,
+                "average_first_fragment_length": 150.0,
+                "average_last_fragment_length": 150.0,
+                "maximum_length": 150.0,
+                "maximum_first_fragment_length": 150.0,
+                "maximum_last_fragment_length": 150.0,
+                "average_quality": 29.4,
+                "insert_size_average": 447.3,
+                "insert_size_standard_deviation": 98.2,
+                "inward_oriented_pairs": 6765.0,
+                "outward_oriented_pairs": 2.0,
+                "pairs_with_other_orientation": 0.0,
+                "pairs_on_different_chromosomes": 59.0,
+                "percentage_of_properly_paired_reads_(%)": 97.9,
+                "reads_mapped_percent": 99.63070238957278,
+                "reads_mapped_and_paired_percent": 99.26140477914555,
+                "reads_unmapped_percent": 0.36929761042722664,
+                "reads_properly_paired_percent": 97.8783490224475,
+                "reads_paired_percent": 100.0,
+                "reads_duplicated_percent": 11.136857349746561,
+                "reads_MQ0_percent": 0.11585807385952207,
+                "reads_QC_failed_percent": 0.0
             }
         }
     ],
     "report_general_stats_headers": [
+        {
+            "median_coverage": {
+                "title": "Median",
+                "description": "Median coverage",
+                "min": 0,
+                "suffix": "X",
+                "scale": "BuPu",
+                "namespace": "mosdepth",
+                "rid": "mqc-generalstats-mosdepth-median_coverage",
+                "format": "{:,.1f}",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 0,
+                "dmin": 0.0
+            },
+            "mean_coverage": {
+                "title": "Mean Cov.",
+                "description": "Mean coverage",
+                "min": 0,
+                "suffix": "X",
+                "scale": "BuPu",
+                "namespace": "mosdepth",
+                "rid": "mqc-generalstats-mosdepth-mean_coverage",
+                "format": "{:,.1f}",
+                "colour": "55,126,184",
+                "hidden": null,
+                "max": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 0.02,
+                "dmin": 0.0
+            }
+        },
         {
             "TOTAL_READS": {
                 "title": "M Reads",
@@ -104,7 +237,7 @@
                 "rid": "mqc-generalstats-picard-TOTAL_READS",
                 "min": 0,
                 "format": "{:,.1f}",
-                "colour": "55,126,184",
+                "colour": "77,175,74",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -125,7 +258,7 @@
                 "scale": "GnBu",
                 "namespace": "Picard",
                 "rid": "mqc-generalstats-picard-summed_median",
-                "colour": "77,175,74",
+                "colour": "152,78,163",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -147,7 +280,7 @@
                 "hidden": true,
                 "namespace": "Picard",
                 "rid": "mqc-generalstats-picard-summed_mean",
-                "colour": "77,175,74",
+                "colour": "152,78,163",
                 "max": null,
                 "ceiling": null,
                 "floor": null,
@@ -171,7 +304,7 @@
                 "modify": 100.0,
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-error_rate",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "hidden": null,
                 "ceiling": null,
                 "floor": null,
@@ -191,7 +324,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-non_primary_alignments",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -211,7 +344,7 @@
                 "rid": "mqc-generalstats-samtools-reads_mapped",
                 "scale": "GnBu",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -231,7 +364,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_mapped_percent",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "hidden": null,
                 "ceiling": null,
                 "floor": null,
@@ -253,7 +386,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_properly_paired_percent",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "ceiling": null,
                 "floor": null,
                 "minRange": null,
@@ -274,7 +407,7 @@
                 "namespace": "Samtools",
                 "rid": "mqc-generalstats-samtools-reads_MQ0_percent",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "ceiling": null,
                 "floor": null,
                 "minRange": null,
@@ -294,7 +427,7 @@
                 "rid": "mqc-generalstats-samtools-raw_total_sequences",
                 "scale": "GnBu",
                 "format": "{:,.1f}",
-                "colour": "152,78,163",
+                "colour": "255,127,0",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -306,14 +439,2089 @@
             }
         }
     ],
-    "report_multiqc_command": "/usr/local/conda/bin/multiqc . --data-format json --enable-npm-plugin",
+    "report_multiqc_command": "/usr/local/conda/bin/multiqc --data-format json --enable-npm-plugin .",
     "report_plot_data": {
+        "mosdepth-cumcoverage-dist-id": {
+            "plot_type": "xy_line",
+            "datasets": [
+                [
+                    {
+                        "name": "NA12878-chr14-AKT1",
+                        "data": [
+                            [
+                                0,
+                                100.0
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "NA12878-chr14-AKT2",
+                        "data": [
+                            [
+                                0,
+                                100.0
+                            ]
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "mosdepth-cumcoverage-dist-id",
+                "title": "Mosdepth: Cumulative coverage distribution",
+                "xlab": "Cumulative Coverage (X)",
+                "ylab": "% bases in genome/regions covered by at least X reads",
+                "ymax": 100,
+                "xmax": 0,
+                "tt_label": "<b>{point.x}X</b>: {point.y:.2f}%",
+                "smooth_points": 500
+            }
+        },
+        "mosdepth-coverage-dist-id": {
+            "plot_type": "xy_line",
+            "datasets": [
+                [
+                    {
+                        "name": "NA12878-chr14-AKT1",
+                        "data": [
+                            [
+                                0,
+                                100.0
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "NA12878-chr14-AKT2",
+                        "data": [
+                            [
+                                0,
+                                100.0
+                            ]
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "mosdepth-coverage-dist-id",
+                "title": "Mosdepth: Coverage distribution",
+                "xlab": "Coverage (X)",
+                "ylab": "% bases in genome/regions covered by X reads",
+                "ymax": 100,
+                "xmax": 0,
+                "tt_label": "<b>{point.x}X</b>: {point.y:.2f}%",
+                "smooth_points": 500
+            }
+        },
         "picard_insert_size": {
             "plot_type": "xy_line",
             "datasets": [
                 [
                     {
                         "name": "NA12878-chr14-AKT1",
+                        "data": [
+                            [
+                                58,
+                                1
+                            ],
+                            [
+                                64,
+                                1
+                            ],
+                            [
+                                70,
+                                1
+                            ],
+                            [
+                                76,
+                                1
+                            ],
+                            [
+                                101,
+                                1
+                            ],
+                            [
+                                147,
+                                1
+                            ],
+                            [
+                                154,
+                                1
+                            ],
+                            [
+                                161,
+                                1
+                            ],
+                            [
+                                162,
+                                1
+                            ],
+                            [
+                                178,
+                                1
+                            ],
+                            [
+                                179,
+                                1
+                            ],
+                            [
+                                182,
+                                1
+                            ],
+                            [
+                                184,
+                                1
+                            ],
+                            [
+                                188,
+                                2
+                            ],
+                            [
+                                195,
+                                1
+                            ],
+                            [
+                                198,
+                                1
+                            ],
+                            [
+                                200,
+                                1
+                            ],
+                            [
+                                202,
+                                1
+                            ],
+                            [
+                                207,
+                                1
+                            ],
+                            [
+                                208,
+                                1
+                            ],
+                            [
+                                212,
+                                1
+                            ],
+                            [
+                                213,
+                                1
+                            ],
+                            [
+                                214,
+                                1
+                            ],
+                            [
+                                216,
+                                3
+                            ],
+                            [
+                                218,
+                                1
+                            ],
+                            [
+                                223,
+                                3
+                            ],
+                            [
+                                225,
+                                1
+                            ],
+                            [
+                                229,
+                                1
+                            ],
+                            [
+                                230,
+                                1
+                            ],
+                            [
+                                231,
+                                2
+                            ],
+                            [
+                                235,
+                                2
+                            ],
+                            [
+                                236,
+                                1
+                            ],
+                            [
+                                237,
+                                2
+                            ],
+                            [
+                                238,
+                                4
+                            ],
+                            [
+                                239,
+                                1
+                            ],
+                            [
+                                241,
+                                1
+                            ],
+                            [
+                                242,
+                                4
+                            ],
+                            [
+                                243,
+                                3
+                            ],
+                            [
+                                244,
+                                6
+                            ],
+                            [
+                                245,
+                                1
+                            ],
+                            [
+                                246,
+                                2
+                            ],
+                            [
+                                247,
+                                1
+                            ],
+                            [
+                                248,
+                                2
+                            ],
+                            [
+                                249,
+                                2
+                            ],
+                            [
+                                250,
+                                3
+                            ],
+                            [
+                                252,
+                                2
+                            ],
+                            [
+                                253,
+                                4
+                            ],
+                            [
+                                255,
+                                1
+                            ],
+                            [
+                                256,
+                                3
+                            ],
+                            [
+                                258,
+                                6
+                            ],
+                            [
+                                259,
+                                3
+                            ],
+                            [
+                                260,
+                                2
+                            ],
+                            [
+                                261,
+                                2
+                            ],
+                            [
+                                262,
+                                6
+                            ],
+                            [
+                                263,
+                                8
+                            ],
+                            [
+                                265,
+                                4
+                            ],
+                            [
+                                266,
+                                3
+                            ],
+                            [
+                                267,
+                                6
+                            ],
+                            [
+                                268,
+                                3
+                            ],
+                            [
+                                269,
+                                5
+                            ],
+                            [
+                                270,
+                                8
+                            ],
+                            [
+                                271,
+                                5
+                            ],
+                            [
+                                272,
+                                4
+                            ],
+                            [
+                                273,
+                                6
+                            ],
+                            [
+                                274,
+                                6
+                            ],
+                            [
+                                276,
+                                1
+                            ],
+                            [
+                                277,
+                                3
+                            ],
+                            [
+                                278,
+                                5
+                            ],
+                            [
+                                279,
+                                4
+                            ],
+                            [
+                                280,
+                                4
+                            ],
+                            [
+                                281,
+                                6
+                            ],
+                            [
+                                282,
+                                6
+                            ],
+                            [
+                                283,
+                                3
+                            ],
+                            [
+                                284,
+                                5
+                            ],
+                            [
+                                285,
+                                3
+                            ],
+                            [
+                                287,
+                                6
+                            ],
+                            [
+                                288,
+                                8
+                            ],
+                            [
+                                289,
+                                7
+                            ],
+                            [
+                                290,
+                                7
+                            ],
+                            [
+                                291,
+                                1
+                            ],
+                            [
+                                292,
+                                6
+                            ],
+                            [
+                                293,
+                                3
+                            ],
+                            [
+                                294,
+                                12
+                            ],
+                            [
+                                295,
+                                6
+                            ],
+                            [
+                                296,
+                                4
+                            ],
+                            [
+                                298,
+                                7
+                            ],
+                            [
+                                299,
+                                7
+                            ],
+                            [
+                                300,
+                                7
+                            ],
+                            [
+                                301,
+                                10
+                            ],
+                            [
+                                302,
+                                10
+                            ],
+                            [
+                                303,
+                                10
+                            ],
+                            [
+                                304,
+                                10
+                            ],
+                            [
+                                305,
+                                11
+                            ],
+                            [
+                                306,
+                                14
+                            ],
+                            [
+                                307,
+                                12
+                            ],
+                            [
+                                309,
+                                7
+                            ],
+                            [
+                                310,
+                                5
+                            ],
+                            [
+                                311,
+                                8
+                            ],
+                            [
+                                312,
+                                11
+                            ],
+                            [
+                                313,
+                                10
+                            ],
+                            [
+                                314,
+                                9
+                            ],
+                            [
+                                315,
+                                7
+                            ],
+                            [
+                                316,
+                                8
+                            ],
+                            [
+                                317,
+                                13
+                            ],
+                            [
+                                318,
+                                9
+                            ],
+                            [
+                                320,
+                                6
+                            ],
+                            [
+                                321,
+                                10
+                            ],
+                            [
+                                322,
+                                13
+                            ],
+                            [
+                                323,
+                                18
+                            ],
+                            [
+                                324,
+                                12
+                            ],
+                            [
+                                325,
+                                9
+                            ],
+                            [
+                                326,
+                                12
+                            ],
+                            [
+                                327,
+                                8
+                            ],
+                            [
+                                328,
+                                14
+                            ],
+                            [
+                                329,
+                                7
+                            ],
+                            [
+                                331,
+                                16
+                            ],
+                            [
+                                332,
+                                16
+                            ],
+                            [
+                                333,
+                                13
+                            ],
+                            [
+                                334,
+                                19
+                            ],
+                            [
+                                335,
+                                8
+                            ],
+                            [
+                                336,
+                                13
+                            ],
+                            [
+                                337,
+                                12
+                            ],
+                            [
+                                338,
+                                15
+                            ],
+                            [
+                                339,
+                                12
+                            ],
+                            [
+                                340,
+                                10
+                            ],
+                            [
+                                342,
+                                13
+                            ],
+                            [
+                                343,
+                                21
+                            ],
+                            [
+                                344,
+                                25
+                            ],
+                            [
+                                345,
+                                21
+                            ],
+                            [
+                                346,
+                                15
+                            ],
+                            [
+                                347,
+                                20
+                            ],
+                            [
+                                348,
+                                9
+                            ],
+                            [
+                                349,
+                                19
+                            ],
+                            [
+                                350,
+                                15
+                            ],
+                            [
+                                351,
+                                18
+                            ],
+                            [
+                                353,
+                                17
+                            ],
+                            [
+                                354,
+                                14
+                            ],
+                            [
+                                355,
+                                19
+                            ],
+                            [
+                                356,
+                                22
+                            ],
+                            [
+                                357,
+                                24
+                            ],
+                            [
+                                358,
+                                15
+                            ],
+                            [
+                                359,
+                                18
+                            ],
+                            [
+                                360,
+                                22
+                            ],
+                            [
+                                361,
+                                20
+                            ],
+                            [
+                                362,
+                                10
+                            ],
+                            [
+                                364,
+                                19
+                            ],
+                            [
+                                365,
+                                29
+                            ],
+                            [
+                                366,
+                                25
+                            ],
+                            [
+                                367,
+                                22
+                            ],
+                            [
+                                368,
+                                24
+                            ],
+                            [
+                                369,
+                                26
+                            ],
+                            [
+                                370,
+                                17
+                            ],
+                            [
+                                371,
+                                20
+                            ],
+                            [
+                                372,
+                                28
+                            ],
+                            [
+                                373,
+                                22
+                            ],
+                            [
+                                375,
+                                23
+                            ],
+                            [
+                                376,
+                                26
+                            ],
+                            [
+                                377,
+                                23
+                            ],
+                            [
+                                378,
+                                19
+                            ],
+                            [
+                                379,
+                                29
+                            ],
+                            [
+                                380,
+                                17
+                            ],
+                            [
+                                381,
+                                25
+                            ],
+                            [
+                                382,
+                                18
+                            ],
+                            [
+                                383,
+                                10
+                            ],
+                            [
+                                384,
+                                21
+                            ],
+                            [
+                                386,
+                                20
+                            ],
+                            [
+                                387,
+                                18
+                            ],
+                            [
+                                388,
+                                18
+                            ],
+                            [
+                                389,
+                                30
+                            ],
+                            [
+                                390,
+                                23
+                            ],
+                            [
+                                391,
+                                23
+                            ],
+                            [
+                                392,
+                                30
+                            ],
+                            [
+                                393,
+                                22
+                            ],
+                            [
+                                394,
+                                31
+                            ],
+                            [
+                                395,
+                                23
+                            ],
+                            [
+                                397,
+                                33
+                            ],
+                            [
+                                398,
+                                29
+                            ],
+                            [
+                                399,
+                                18
+                            ],
+                            [
+                                400,
+                                29
+                            ],
+                            [
+                                401,
+                                24
+                            ],
+                            [
+                                402,
+                                26
+                            ],
+                            [
+                                403,
+                                20
+                            ],
+                            [
+                                404,
+                                24
+                            ],
+                            [
+                                405,
+                                28
+                            ],
+                            [
+                                406,
+                                34
+                            ],
+                            [
+                                408,
+                                36
+                            ],
+                            [
+                                409,
+                                28
+                            ],
+                            [
+                                410,
+                                21
+                            ],
+                            [
+                                411,
+                                24
+                            ],
+                            [
+                                412,
+                                22
+                            ],
+                            [
+                                413,
+                                18
+                            ],
+                            [
+                                414,
+                                27
+                            ],
+                            [
+                                415,
+                                25
+                            ],
+                            [
+                                416,
+                                20
+                            ],
+                            [
+                                417,
+                                21
+                            ],
+                            [
+                                419,
+                                29
+                            ],
+                            [
+                                420,
+                                15
+                            ],
+                            [
+                                421,
+                                22
+                            ],
+                            [
+                                422,
+                                25
+                            ],
+                            [
+                                423,
+                                19
+                            ],
+                            [
+                                424,
+                                29
+                            ],
+                            [
+                                425,
+                                24
+                            ],
+                            [
+                                426,
+                                19
+                            ],
+                            [
+                                427,
+                                21
+                            ],
+                            [
+                                428,
+                                24
+                            ],
+                            [
+                                430,
+                                27
+                            ],
+                            [
+                                431,
+                                22
+                            ],
+                            [
+                                432,
+                                27
+                            ],
+                            [
+                                433,
+                                32
+                            ],
+                            [
+                                434,
+                                29
+                            ],
+                            [
+                                435,
+                                28
+                            ],
+                            [
+                                436,
+                                21
+                            ],
+                            [
+                                437,
+                                19
+                            ],
+                            [
+                                438,
+                                22
+                            ],
+                            [
+                                439,
+                                25
+                            ],
+                            [
+                                441,
+                                25
+                            ],
+                            [
+                                442,
+                                24
+                            ],
+                            [
+                                443,
+                                25
+                            ],
+                            [
+                                444,
+                                25
+                            ],
+                            [
+                                445,
+                                21
+                            ],
+                            [
+                                446,
+                                18
+                            ],
+                            [
+                                447,
+                                31
+                            ],
+                            [
+                                448,
+                                18
+                            ],
+                            [
+                                449,
+                                20
+                            ],
+                            [
+                                450,
+                                25
+                            ],
+                            [
+                                452,
+                                26
+                            ],
+                            [
+                                453,
+                                25
+                            ],
+                            [
+                                454,
+                                17
+                            ],
+                            [
+                                455,
+                                20
+                            ],
+                            [
+                                456,
+                                22
+                            ],
+                            [
+                                457,
+                                27
+                            ],
+                            [
+                                458,
+                                32
+                            ],
+                            [
+                                459,
+                                17
+                            ],
+                            [
+                                460,
+                                24
+                            ],
+                            [
+                                461,
+                                22
+                            ],
+                            [
+                                463,
+                                20
+                            ],
+                            [
+                                464,
+                                24
+                            ],
+                            [
+                                465,
+                                26
+                            ],
+                            [
+                                466,
+                                28
+                            ],
+                            [
+                                467,
+                                17
+                            ],
+                            [
+                                468,
+                                17
+                            ],
+                            [
+                                469,
+                                27
+                            ],
+                            [
+                                470,
+                                16
+                            ],
+                            [
+                                471,
+                                13
+                            ],
+                            [
+                                472,
+                                22
+                            ],
+                            [
+                                474,
+                                27
+                            ],
+                            [
+                                475,
+                                27
+                            ],
+                            [
+                                476,
+                                23
+                            ],
+                            [
+                                477,
+                                20
+                            ],
+                            [
+                                478,
+                                19
+                            ],
+                            [
+                                479,
+                                20
+                            ],
+                            [
+                                480,
+                                13
+                            ],
+                            [
+                                481,
+                                20
+                            ],
+                            [
+                                482,
+                                17
+                            ],
+                            [
+                                483,
+                                14
+                            ],
+                            [
+                                485,
+                                24
+                            ],
+                            [
+                                486,
+                                19
+                            ],
+                            [
+                                487,
+                                23
+                            ],
+                            [
+                                488,
+                                21
+                            ],
+                            [
+                                489,
+                                18
+                            ],
+                            [
+                                490,
+                                16
+                            ],
+                            [
+                                491,
+                                18
+                            ],
+                            [
+                                492,
+                                16
+                            ],
+                            [
+                                493,
+                                21
+                            ],
+                            [
+                                494,
+                                14
+                            ],
+                            [
+                                496,
+                                24
+                            ],
+                            [
+                                497,
+                                11
+                            ],
+                            [
+                                498,
+                                18
+                            ],
+                            [
+                                499,
+                                17
+                            ],
+                            [
+                                500,
+                                15
+                            ],
+                            [
+                                501,
+                                18
+                            ],
+                            [
+                                502,
+                                23
+                            ],
+                            [
+                                503,
+                                21
+                            ],
+                            [
+                                504,
+                                17
+                            ],
+                            [
+                                505,
+                                15
+                            ],
+                            [
+                                507,
+                                21
+                            ],
+                            [
+                                508,
+                                17
+                            ],
+                            [
+                                509,
+                                25
+                            ],
+                            [
+                                510,
+                                23
+                            ],
+                            [
+                                511,
+                                22
+                            ],
+                            [
+                                512,
+                                23
+                            ],
+                            [
+                                513,
+                                16
+                            ],
+                            [
+                                514,
+                                18
+                            ],
+                            [
+                                515,
+                                10
+                            ],
+                            [
+                                516,
+                                12
+                            ],
+                            [
+                                518,
+                                24
+                            ],
+                            [
+                                519,
+                                9
+                            ],
+                            [
+                                520,
+                                13
+                            ],
+                            [
+                                521,
+                                9
+                            ],
+                            [
+                                522,
+                                14
+                            ],
+                            [
+                                523,
+                                15
+                            ],
+                            [
+                                524,
+                                14
+                            ],
+                            [
+                                525,
+                                15
+                            ],
+                            [
+                                526,
+                                15
+                            ],
+                            [
+                                527,
+                                15
+                            ],
+                            [
+                                529,
+                                16
+                            ],
+                            [
+                                530,
+                                16
+                            ],
+                            [
+                                531,
+                                10
+                            ],
+                            [
+                                532,
+                                17
+                            ],
+                            [
+                                533,
+                                17
+                            ],
+                            [
+                                534,
+                                9
+                            ],
+                            [
+                                535,
+                                16
+                            ],
+                            [
+                                536,
+                                16
+                            ],
+                            [
+                                537,
+                                14
+                            ],
+                            [
+                                538,
+                                26
+                            ],
+                            [
+                                540,
+                                8
+                            ],
+                            [
+                                541,
+                                17
+                            ],
+                            [
+                                542,
+                                5
+                            ],
+                            [
+                                543,
+                                10
+                            ],
+                            [
+                                544,
+                                15
+                            ],
+                            [
+                                545,
+                                17
+                            ],
+                            [
+                                546,
+                                19
+                            ],
+                            [
+                                547,
+                                12
+                            ],
+                            [
+                                548,
+                                11
+                            ],
+                            [
+                                549,
+                                16
+                            ],
+                            [
+                                551,
+                                16
+                            ],
+                            [
+                                552,
+                                7
+                            ],
+                            [
+                                553,
+                                12
+                            ],
+                            [
+                                554,
+                                10
+                            ],
+                            [
+                                555,
+                                13
+                            ],
+                            [
+                                556,
+                                7
+                            ],
+                            [
+                                557,
+                                12
+                            ],
+                            [
+                                558,
+                                12
+                            ],
+                            [
+                                559,
+                                10
+                            ],
+                            [
+                                560,
+                                15
+                            ],
+                            [
+                                562,
+                                12
+                            ],
+                            [
+                                563,
+                                11
+                            ],
+                            [
+                                564,
+                                10
+                            ],
+                            [
+                                565,
+                                11
+                            ],
+                            [
+                                566,
+                                9
+                            ],
+                            [
+                                567,
+                                7
+                            ],
+                            [
+                                568,
+                                11
+                            ],
+                            [
+                                569,
+                                7
+                            ],
+                            [
+                                570,
+                                15
+                            ],
+                            [
+                                571,
+                                11
+                            ],
+                            [
+                                573,
+                                10
+                            ],
+                            [
+                                574,
+                                14
+                            ],
+                            [
+                                575,
+                                12
+                            ],
+                            [
+                                576,
+                                5
+                            ],
+                            [
+                                577,
+                                12
+                            ],
+                            [
+                                578,
+                                9
+                            ],
+                            [
+                                579,
+                                8
+                            ],
+                            [
+                                580,
+                                14
+                            ],
+                            [
+                                581,
+                                4
+                            ],
+                            [
+                                582,
+                                12
+                            ],
+                            [
+                                584,
+                                7
+                            ],
+                            [
+                                585,
+                                5
+                            ],
+                            [
+                                586,
+                                11
+                            ],
+                            [
+                                587,
+                                9
+                            ],
+                            [
+                                588,
+                                9
+                            ],
+                            [
+                                589,
+                                11
+                            ],
+                            [
+                                590,
+                                12
+                            ],
+                            [
+                                591,
+                                8
+                            ],
+                            [
+                                592,
+                                9
+                            ],
+                            [
+                                593,
+                                5
+                            ],
+                            [
+                                595,
+                                2
+                            ],
+                            [
+                                596,
+                                7
+                            ],
+                            [
+                                597,
+                                6
+                            ],
+                            [
+                                598,
+                                10
+                            ],
+                            [
+                                599,
+                                2
+                            ],
+                            [
+                                600,
+                                6
+                            ],
+                            [
+                                601,
+                                6
+                            ],
+                            [
+                                602,
+                                5
+                            ],
+                            [
+                                603,
+                                6
+                            ],
+                            [
+                                604,
+                                6
+                            ],
+                            [
+                                606,
+                                13
+                            ],
+                            [
+                                607,
+                                9
+                            ],
+                            [
+                                608,
+                                5
+                            ],
+                            [
+                                609,
+                                10
+                            ],
+                            [
+                                610,
+                                2
+                            ],
+                            [
+                                611,
+                                6
+                            ],
+                            [
+                                612,
+                                7
+                            ],
+                            [
+                                613,
+                                3
+                            ],
+                            [
+                                614,
+                                8
+                            ],
+                            [
+                                615,
+                                11
+                            ],
+                            [
+                                617,
+                                1
+                            ],
+                            [
+                                618,
+                                8
+                            ],
+                            [
+                                619,
+                                9
+                            ],
+                            [
+                                620,
+                                5
+                            ],
+                            [
+                                621,
+                                7
+                            ],
+                            [
+                                622,
+                                5
+                            ],
+                            [
+                                623,
+                                3
+                            ],
+                            [
+                                624,
+                                1
+                            ],
+                            [
+                                625,
+                                7
+                            ],
+                            [
+                                626,
+                                6
+                            ],
+                            [
+                                628,
+                                4
+                            ],
+                            [
+                                629,
+                                3
+                            ],
+                            [
+                                630,
+                                6
+                            ],
+                            [
+                                631,
+                                6
+                            ],
+                            [
+                                632,
+                                4
+                            ],
+                            [
+                                633,
+                                8
+                            ],
+                            [
+                                634,
+                                2
+                            ],
+                            [
+                                635,
+                                4
+                            ],
+                            [
+                                636,
+                                1
+                            ],
+                            [
+                                637,
+                                4
+                            ],
+                            [
+                                639,
+                                4
+                            ],
+                            [
+                                640,
+                                4
+                            ],
+                            [
+                                641,
+                                4
+                            ],
+                            [
+                                642,
+                                10
+                            ],
+                            [
+                                643,
+                                3
+                            ],
+                            [
+                                644,
+                                4
+                            ],
+                            [
+                                645,
+                                1
+                            ],
+                            [
+                                646,
+                                6
+                            ],
+                            [
+                                647,
+                                4
+                            ],
+                            [
+                                648,
+                                2
+                            ],
+                            [
+                                650,
+                                7
+                            ],
+                            [
+                                651,
+                                5
+                            ],
+                            [
+                                652,
+                                4
+                            ],
+                            [
+                                653,
+                                4
+                            ],
+                            [
+                                654,
+                                3
+                            ],
+                            [
+                                655,
+                                3
+                            ],
+                            [
+                                657,
+                                2
+                            ],
+                            [
+                                658,
+                                5
+                            ],
+                            [
+                                659,
+                                3
+                            ],
+                            [
+                                660,
+                                5
+                            ],
+                            [
+                                662,
+                                7
+                            ],
+                            [
+                                663,
+                                3
+                            ],
+                            [
+                                664,
+                                2
+                            ],
+                            [
+                                665,
+                                2
+                            ],
+                            [
+                                667,
+                                4
+                            ],
+                            [
+                                668,
+                                4
+                            ],
+                            [
+                                669,
+                                2
+                            ],
+                            [
+                                670,
+                                3
+                            ],
+                            [
+                                671,
+                                1
+                            ],
+                            [
+                                672,
+                                1
+                            ],
+                            [
+                                674,
+                                4
+                            ],
+                            [
+                                675,
+                                1
+                            ],
+                            [
+                                677,
+                                2
+                            ],
+                            [
+                                678,
+                                5
+                            ],
+                            [
+                                679,
+                                4
+                            ],
+                            [
+                                680,
+                                1
+                            ],
+                            [
+                                681,
+                                2
+                            ],
+                            [
+                                682,
+                                5
+                            ],
+                            [
+                                683,
+                                3
+                            ],
+                            [
+                                684,
+                                1
+                            ],
+                            [
+                                686,
+                                4
+                            ],
+                            [
+                                688,
+                                3
+                            ],
+                            [
+                                689,
+                                4
+                            ],
+                            [
+                                691,
+                                3
+                            ],
+                            [
+                                692,
+                                1
+                            ],
+                            [
+                                693,
+                                3
+                            ],
+                            [
+                                695,
+                                3
+                            ],
+                            [
+                                696,
+                                1
+                            ],
+                            [
+                                697,
+                                2
+                            ],
+                            [
+                                698,
+                                2
+                            ],
+                            [
+                                704,
+                                1
+                            ],
+                            [
+                                707,
+                                2
+                            ],
+                            [
+                                708,
+                                1
+                            ],
+                            [
+                                709,
+                                1
+                            ],
+                            [
+                                710,
+                                2
+                            ],
+                            [
+                                711,
+                                1
+                            ],
+                            [
+                                713,
+                                3
+                            ],
+                            [
+                                714,
+                                1
+                            ],
+                            [
+                                715,
+                                1
+                            ],
+                            [
+                                716,
+                                2
+                            ],
+                            [
+                                719,
+                                2
+                            ],
+                            [
+                                720,
+                                2
+                            ],
+                            [
+                                721,
+                                1
+                            ],
+                            [
+                                724,
+                                1
+                            ],
+                            [
+                                725,
+                                1
+                            ],
+                            [
+                                727,
+                                1
+                            ],
+                            [
+                                728,
+                                1
+                            ],
+                            [
+                                729,
+                                2
+                            ],
+                            [
+                                731,
+                                1
+                            ],
+                            [
+                                733,
+                                1
+                            ],
+                            [
+                                735,
+                                2
+                            ],
+                            [
+                                736,
+                                1
+                            ],
+                            [
+                                738,
+                                1
+                            ],
+                            [
+                                739,
+                                3
+                            ],
+                            [
+                                741,
+                                2
+                            ],
+                            [
+                                743,
+                                1
+                            ],
+                            [
+                                747,
+                                2
+                            ],
+                            [
+                                749,
+                                2
+                            ],
+                            [
+                                750,
+                                1
+                            ],
+                            [
+                                752,
+                                1
+                            ],
+                            [
+                                756,
+                                1
+                            ],
+                            [
+                                757,
+                                1
+                            ],
+                            [
+                                759,
+                                1
+                            ],
+                            [
+                                762,
+                                2
+                            ],
+                            [
+                                763,
+                                1
+                            ],
+                            [
+                                765,
+                                1
+                            ],
+                            [
+                                772,
+                                1
+                            ],
+                            [
+                                775,
+                                1
+                            ],
+                            [
+                                777,
+                                3
+                            ],
+                            [
+                                779,
+                                2
+                            ],
+                            [
+                                783,
+                                1
+                            ],
+                            [
+                                786,
+                                1
+                            ],
+                            [
+                                789,
+                                1
+                            ],
+                            [
+                                790,
+                                1
+                            ],
+                            [
+                                791,
+                                1
+                            ],
+                            [
+                                795,
+                                1
+                            ],
+                            [
+                                806,
+                                1
+                            ],
+                            [
+                                816,
+                                1
+                            ],
+                            [
+                                817,
+                                1
+                            ],
+                            [
+                                823,
+                                1
+                            ],
+                            [
+                                840,
+                                1
+                            ],
+                            [
+                                841,
+                                1
+                            ],
+                            [
+                                849,
+                                1
+                            ],
+                            [
+                                884,
+                                1
+                            ],
+                            [
+                                1049,
+                                1
+                            ]
+                        ]
+                    },
+                    {
+                        "name": "NA12878-chr14-AKT2",
                         "data": [
                             [
                                 58,
@@ -4323,6 +6531,2011 @@
                                 0.0166472448809722
                             ]
                         ]
+                    },
+                    {
+                        "name": "NA12878-chr14-AKT2",
+                        "data": [
+                            [
+                                58,
+                                0.0166472448809722
+                            ],
+                            [
+                                64,
+                                0.0166472448809722
+                            ],
+                            [
+                                70,
+                                0.0166472448809722
+                            ],
+                            [
+                                76,
+                                0.0166472448809722
+                            ],
+                            [
+                                101,
+                                0.0166472448809722
+                            ],
+                            [
+                                147,
+                                0.0166472448809722
+                            ],
+                            [
+                                154,
+                                0.0166472448809722
+                            ],
+                            [
+                                161,
+                                0.0166472448809722
+                            ],
+                            [
+                                162,
+                                0.0166472448809722
+                            ],
+                            [
+                                178,
+                                0.0166472448809722
+                            ],
+                            [
+                                179,
+                                0.0166472448809722
+                            ],
+                            [
+                                182,
+                                0.0166472448809722
+                            ],
+                            [
+                                184,
+                                0.0166472448809722
+                            ],
+                            [
+                                188,
+                                0.0332944897619444
+                            ],
+                            [
+                                195,
+                                0.0166472448809722
+                            ],
+                            [
+                                198,
+                                0.0166472448809722
+                            ],
+                            [
+                                200,
+                                0.0166472448809722
+                            ],
+                            [
+                                202,
+                                0.0166472448809722
+                            ],
+                            [
+                                207,
+                                0.0166472448809722
+                            ],
+                            [
+                                208,
+                                0.0166472448809722
+                            ],
+                            [
+                                212,
+                                0.0166472448809722
+                            ],
+                            [
+                                213,
+                                0.0166472448809722
+                            ],
+                            [
+                                214,
+                                0.0166472448809722
+                            ],
+                            [
+                                216,
+                                0.049941734642916596
+                            ],
+                            [
+                                218,
+                                0.0166472448809722
+                            ],
+                            [
+                                223,
+                                0.049941734642916596
+                            ],
+                            [
+                                225,
+                                0.0166472448809722
+                            ],
+                            [
+                                229,
+                                0.0166472448809722
+                            ],
+                            [
+                                230,
+                                0.0166472448809722
+                            ],
+                            [
+                                231,
+                                0.0332944897619444
+                            ],
+                            [
+                                235,
+                                0.0332944897619444
+                            ],
+                            [
+                                236,
+                                0.0166472448809722
+                            ],
+                            [
+                                237,
+                                0.0332944897619444
+                            ],
+                            [
+                                238,
+                                0.0665889795238888
+                            ],
+                            [
+                                239,
+                                0.0166472448809722
+                            ],
+                            [
+                                241,
+                                0.0166472448809722
+                            ],
+                            [
+                                242,
+                                0.0665889795238888
+                            ],
+                            [
+                                243,
+                                0.049941734642916596
+                            ],
+                            [
+                                244,
+                                0.09988346928583319
+                            ],
+                            [
+                                245,
+                                0.0166472448809722
+                            ],
+                            [
+                                246,
+                                0.0332944897619444
+                            ],
+                            [
+                                247,
+                                0.0166472448809722
+                            ],
+                            [
+                                248,
+                                0.0332944897619444
+                            ],
+                            [
+                                249,
+                                0.0332944897619444
+                            ],
+                            [
+                                250,
+                                0.049941734642916596
+                            ],
+                            [
+                                252,
+                                0.0332944897619444
+                            ],
+                            [
+                                253,
+                                0.0665889795238888
+                            ],
+                            [
+                                255,
+                                0.0166472448809722
+                            ],
+                            [
+                                256,
+                                0.049941734642916596
+                            ],
+                            [
+                                258,
+                                0.09988346928583319
+                            ],
+                            [
+                                259,
+                                0.049941734642916596
+                            ],
+                            [
+                                260,
+                                0.0332944897619444
+                            ],
+                            [
+                                261,
+                                0.0332944897619444
+                            ],
+                            [
+                                262,
+                                0.09988346928583319
+                            ],
+                            [
+                                263,
+                                0.1331779590477776
+                            ],
+                            [
+                                265,
+                                0.0665889795238888
+                            ],
+                            [
+                                266,
+                                0.049941734642916596
+                            ],
+                            [
+                                267,
+                                0.09988346928583319
+                            ],
+                            [
+                                268,
+                                0.049941734642916596
+                            ],
+                            [
+                                269,
+                                0.083236224404861
+                            ],
+                            [
+                                270,
+                                0.1331779590477776
+                            ],
+                            [
+                                271,
+                                0.083236224404861
+                            ],
+                            [
+                                272,
+                                0.0665889795238888
+                            ],
+                            [
+                                273,
+                                0.09988346928583319
+                            ],
+                            [
+                                274,
+                                0.09988346928583319
+                            ],
+                            [
+                                276,
+                                0.0166472448809722
+                            ],
+                            [
+                                277,
+                                0.049941734642916596
+                            ],
+                            [
+                                278,
+                                0.083236224404861
+                            ],
+                            [
+                                279,
+                                0.0665889795238888
+                            ],
+                            [
+                                280,
+                                0.0665889795238888
+                            ],
+                            [
+                                281,
+                                0.09988346928583319
+                            ],
+                            [
+                                282,
+                                0.09988346928583319
+                            ],
+                            [
+                                283,
+                                0.049941734642916596
+                            ],
+                            [
+                                284,
+                                0.083236224404861
+                            ],
+                            [
+                                285,
+                                0.049941734642916596
+                            ],
+                            [
+                                287,
+                                0.09988346928583319
+                            ],
+                            [
+                                288,
+                                0.1331779590477776
+                            ],
+                            [
+                                289,
+                                0.1165307141668054
+                            ],
+                            [
+                                290,
+                                0.1165307141668054
+                            ],
+                            [
+                                291,
+                                0.0166472448809722
+                            ],
+                            [
+                                292,
+                                0.09988346928583319
+                            ],
+                            [
+                                293,
+                                0.049941734642916596
+                            ],
+                            [
+                                294,
+                                0.19976693857166639
+                            ],
+                            [
+                                295,
+                                0.09988346928583319
+                            ],
+                            [
+                                296,
+                                0.0665889795238888
+                            ],
+                            [
+                                298,
+                                0.1165307141668054
+                            ],
+                            [
+                                299,
+                                0.1165307141668054
+                            ],
+                            [
+                                300,
+                                0.1165307141668054
+                            ],
+                            [
+                                301,
+                                0.166472448809722
+                            ],
+                            [
+                                302,
+                                0.166472448809722
+                            ],
+                            [
+                                303,
+                                0.166472448809722
+                            ],
+                            [
+                                304,
+                                0.166472448809722
+                            ],
+                            [
+                                305,
+                                0.1831196936906942
+                            ],
+                            [
+                                306,
+                                0.2330614283336108
+                            ],
+                            [
+                                307,
+                                0.19976693857166639
+                            ],
+                            [
+                                309,
+                                0.1165307141668054
+                            ],
+                            [
+                                310,
+                                0.083236224404861
+                            ],
+                            [
+                                311,
+                                0.1331779590477776
+                            ],
+                            [
+                                312,
+                                0.1831196936906942
+                            ],
+                            [
+                                313,
+                                0.166472448809722
+                            ],
+                            [
+                                314,
+                                0.1498252039287498
+                            ],
+                            [
+                                315,
+                                0.1165307141668054
+                            ],
+                            [
+                                316,
+                                0.1331779590477776
+                            ],
+                            [
+                                317,
+                                0.2164141834526386
+                            ],
+                            [
+                                318,
+                                0.1498252039287498
+                            ],
+                            [
+                                320,
+                                0.09988346928583319
+                            ],
+                            [
+                                321,
+                                0.166472448809722
+                            ],
+                            [
+                                322,
+                                0.2164141834526386
+                            ],
+                            [
+                                323,
+                                0.2996504078574996
+                            ],
+                            [
+                                324,
+                                0.19976693857166639
+                            ],
+                            [
+                                325,
+                                0.1498252039287498
+                            ],
+                            [
+                                326,
+                                0.19976693857166639
+                            ],
+                            [
+                                327,
+                                0.1331779590477776
+                            ],
+                            [
+                                328,
+                                0.2330614283336108
+                            ],
+                            [
+                                329,
+                                0.1165307141668054
+                            ],
+                            [
+                                331,
+                                0.2663559180955552
+                            ],
+                            [
+                                332,
+                                0.2663559180955552
+                            ],
+                            [
+                                333,
+                                0.2164141834526386
+                            ],
+                            [
+                                334,
+                                0.3162976527384718
+                            ],
+                            [
+                                335,
+                                0.1331779590477776
+                            ],
+                            [
+                                336,
+                                0.2164141834526386
+                            ],
+                            [
+                                337,
+                                0.19976693857166639
+                            ],
+                            [
+                                338,
+                                0.249708673214583
+                            ],
+                            [
+                                339,
+                                0.19976693857166639
+                            ],
+                            [
+                                340,
+                                0.166472448809722
+                            ],
+                            [
+                                342,
+                                0.2164141834526386
+                            ],
+                            [
+                                343,
+                                0.3495921425004162
+                            ],
+                            [
+                                344,
+                                0.416181122024305
+                            ],
+                            [
+                                345,
+                                0.3495921425004162
+                            ],
+                            [
+                                346,
+                                0.249708673214583
+                            ],
+                            [
+                                347,
+                                0.332944897619444
+                            ],
+                            [
+                                348,
+                                0.1498252039287498
+                            ],
+                            [
+                                349,
+                                0.3162976527384718
+                            ],
+                            [
+                                350,
+                                0.249708673214583
+                            ],
+                            [
+                                351,
+                                0.2996504078574996
+                            ],
+                            [
+                                353,
+                                0.2830031629765274
+                            ],
+                            [
+                                354,
+                                0.2330614283336108
+                            ],
+                            [
+                                355,
+                                0.3162976527384718
+                            ],
+                            [
+                                356,
+                                0.3662393873813884
+                            ],
+                            [
+                                357,
+                                0.39953387714333277
+                            ],
+                            [
+                                358,
+                                0.249708673214583
+                            ],
+                            [
+                                359,
+                                0.2996504078574996
+                            ],
+                            [
+                                360,
+                                0.3662393873813884
+                            ],
+                            [
+                                361,
+                                0.332944897619444
+                            ],
+                            [
+                                362,
+                                0.166472448809722
+                            ],
+                            [
+                                364,
+                                0.3162976527384718
+                            ],
+                            [
+                                365,
+                                0.4827701015481938
+                            ],
+                            [
+                                366,
+                                0.416181122024305
+                            ],
+                            [
+                                367,
+                                0.3662393873813884
+                            ],
+                            [
+                                368,
+                                0.39953387714333277
+                            ],
+                            [
+                                369,
+                                0.4328283669052772
+                            ],
+                            [
+                                370,
+                                0.2830031629765274
+                            ],
+                            [
+                                371,
+                                0.332944897619444
+                            ],
+                            [
+                                372,
+                                0.4661228566672216
+                            ],
+                            [
+                                373,
+                                0.3662393873813884
+                            ],
+                            [
+                                375,
+                                0.3828866322623606
+                            ],
+                            [
+                                376,
+                                0.4328283669052772
+                            ],
+                            [
+                                377,
+                                0.3828866322623606
+                            ],
+                            [
+                                378,
+                                0.3162976527384718
+                            ],
+                            [
+                                379,
+                                0.4827701015481938
+                            ],
+                            [
+                                380,
+                                0.2830031629765274
+                            ],
+                            [
+                                381,
+                                0.416181122024305
+                            ],
+                            [
+                                382,
+                                0.2996504078574996
+                            ],
+                            [
+                                383,
+                                0.166472448809722
+                            ],
+                            [
+                                384,
+                                0.3495921425004162
+                            ],
+                            [
+                                386,
+                                0.332944897619444
+                            ],
+                            [
+                                387,
+                                0.2996504078574996
+                            ],
+                            [
+                                388,
+                                0.2996504078574996
+                            ],
+                            [
+                                389,
+                                0.499417346429166
+                            ],
+                            [
+                                390,
+                                0.3828866322623606
+                            ],
+                            [
+                                391,
+                                0.3828866322623606
+                            ],
+                            [
+                                392,
+                                0.499417346429166
+                            ],
+                            [
+                                393,
+                                0.3662393873813884
+                            ],
+                            [
+                                394,
+                                0.5160645913101382
+                            ],
+                            [
+                                395,
+                                0.3828866322623606
+                            ],
+                            [
+                                397,
+                                0.5493590810720826
+                            ],
+                            [
+                                398,
+                                0.4827701015481938
+                            ],
+                            [
+                                399,
+                                0.2996504078574996
+                            ],
+                            [
+                                400,
+                                0.4827701015481938
+                            ],
+                            [
+                                401,
+                                0.39953387714333277
+                            ],
+                            [
+                                402,
+                                0.4328283669052772
+                            ],
+                            [
+                                403,
+                                0.332944897619444
+                            ],
+                            [
+                                404,
+                                0.39953387714333277
+                            ],
+                            [
+                                405,
+                                0.4661228566672216
+                            ],
+                            [
+                                406,
+                                0.5660063259530548
+                            ],
+                            [
+                                408,
+                                0.5993008157149992
+                            ],
+                            [
+                                409,
+                                0.4661228566672216
+                            ],
+                            [
+                                410,
+                                0.3495921425004162
+                            ],
+                            [
+                                411,
+                                0.39953387714333277
+                            ],
+                            [
+                                412,
+                                0.3662393873813884
+                            ],
+                            [
+                                413,
+                                0.2996504078574996
+                            ],
+                            [
+                                414,
+                                0.4494756117862494
+                            ],
+                            [
+                                415,
+                                0.416181122024305
+                            ],
+                            [
+                                416,
+                                0.332944897619444
+                            ],
+                            [
+                                417,
+                                0.3495921425004162
+                            ],
+                            [
+                                419,
+                                0.4827701015481938
+                            ],
+                            [
+                                420,
+                                0.249708673214583
+                            ],
+                            [
+                                421,
+                                0.3662393873813884
+                            ],
+                            [
+                                422,
+                                0.416181122024305
+                            ],
+                            [
+                                423,
+                                0.3162976527384718
+                            ],
+                            [
+                                424,
+                                0.4827701015481938
+                            ],
+                            [
+                                425,
+                                0.39953387714333277
+                            ],
+                            [
+                                426,
+                                0.3162976527384718
+                            ],
+                            [
+                                427,
+                                0.3495921425004162
+                            ],
+                            [
+                                428,
+                                0.39953387714333277
+                            ],
+                            [
+                                430,
+                                0.4494756117862494
+                            ],
+                            [
+                                431,
+                                0.3662393873813884
+                            ],
+                            [
+                                432,
+                                0.4494756117862494
+                            ],
+                            [
+                                433,
+                                0.5327118361911104
+                            ],
+                            [
+                                434,
+                                0.4827701015481938
+                            ],
+                            [
+                                435,
+                                0.4661228566672216
+                            ],
+                            [
+                                436,
+                                0.3495921425004162
+                            ],
+                            [
+                                437,
+                                0.3162976527384718
+                            ],
+                            [
+                                438,
+                                0.3662393873813884
+                            ],
+                            [
+                                439,
+                                0.416181122024305
+                            ],
+                            [
+                                441,
+                                0.416181122024305
+                            ],
+                            [
+                                442,
+                                0.39953387714333277
+                            ],
+                            [
+                                443,
+                                0.416181122024305
+                            ],
+                            [
+                                444,
+                                0.416181122024305
+                            ],
+                            [
+                                445,
+                                0.3495921425004162
+                            ],
+                            [
+                                446,
+                                0.2996504078574996
+                            ],
+                            [
+                                447,
+                                0.5160645913101382
+                            ],
+                            [
+                                448,
+                                0.2996504078574996
+                            ],
+                            [
+                                449,
+                                0.332944897619444
+                            ],
+                            [
+                                450,
+                                0.416181122024305
+                            ],
+                            [
+                                452,
+                                0.4328283669052772
+                            ],
+                            [
+                                453,
+                                0.416181122024305
+                            ],
+                            [
+                                454,
+                                0.2830031629765274
+                            ],
+                            [
+                                455,
+                                0.332944897619444
+                            ],
+                            [
+                                456,
+                                0.3662393873813884
+                            ],
+                            [
+                                457,
+                                0.4494756117862494
+                            ],
+                            [
+                                458,
+                                0.5327118361911104
+                            ],
+                            [
+                                459,
+                                0.2830031629765274
+                            ],
+                            [
+                                460,
+                                0.39953387714333277
+                            ],
+                            [
+                                461,
+                                0.3662393873813884
+                            ],
+                            [
+                                463,
+                                0.332944897619444
+                            ],
+                            [
+                                464,
+                                0.39953387714333277
+                            ],
+                            [
+                                465,
+                                0.4328283669052772
+                            ],
+                            [
+                                466,
+                                0.4661228566672216
+                            ],
+                            [
+                                467,
+                                0.2830031629765274
+                            ],
+                            [
+                                468,
+                                0.2830031629765274
+                            ],
+                            [
+                                469,
+                                0.4494756117862494
+                            ],
+                            [
+                                470,
+                                0.2663559180955552
+                            ],
+                            [
+                                471,
+                                0.2164141834526386
+                            ],
+                            [
+                                472,
+                                0.3662393873813884
+                            ],
+                            [
+                                474,
+                                0.4494756117862494
+                            ],
+                            [
+                                475,
+                                0.4494756117862494
+                            ],
+                            [
+                                476,
+                                0.3828866322623606
+                            ],
+                            [
+                                477,
+                                0.332944897619444
+                            ],
+                            [
+                                478,
+                                0.3162976527384718
+                            ],
+                            [
+                                479,
+                                0.332944897619444
+                            ],
+                            [
+                                480,
+                                0.2164141834526386
+                            ],
+                            [
+                                481,
+                                0.332944897619444
+                            ],
+                            [
+                                482,
+                                0.2830031629765274
+                            ],
+                            [
+                                483,
+                                0.2330614283336108
+                            ],
+                            [
+                                485,
+                                0.39953387714333277
+                            ],
+                            [
+                                486,
+                                0.3162976527384718
+                            ],
+                            [
+                                487,
+                                0.3828866322623606
+                            ],
+                            [
+                                488,
+                                0.3495921425004162
+                            ],
+                            [
+                                489,
+                                0.2996504078574996
+                            ],
+                            [
+                                490,
+                                0.2663559180955552
+                            ],
+                            [
+                                491,
+                                0.2996504078574996
+                            ],
+                            [
+                                492,
+                                0.2663559180955552
+                            ],
+                            [
+                                493,
+                                0.3495921425004162
+                            ],
+                            [
+                                494,
+                                0.2330614283336108
+                            ],
+                            [
+                                496,
+                                0.39953387714333277
+                            ],
+                            [
+                                497,
+                                0.1831196936906942
+                            ],
+                            [
+                                498,
+                                0.2996504078574996
+                            ],
+                            [
+                                499,
+                                0.2830031629765274
+                            ],
+                            [
+                                500,
+                                0.249708673214583
+                            ],
+                            [
+                                501,
+                                0.2996504078574996
+                            ],
+                            [
+                                502,
+                                0.3828866322623606
+                            ],
+                            [
+                                503,
+                                0.3495921425004162
+                            ],
+                            [
+                                504,
+                                0.2830031629765274
+                            ],
+                            [
+                                505,
+                                0.249708673214583
+                            ],
+                            [
+                                507,
+                                0.3495921425004162
+                            ],
+                            [
+                                508,
+                                0.2830031629765274
+                            ],
+                            [
+                                509,
+                                0.416181122024305
+                            ],
+                            [
+                                510,
+                                0.3828866322623606
+                            ],
+                            [
+                                511,
+                                0.3662393873813884
+                            ],
+                            [
+                                512,
+                                0.3828866322623606
+                            ],
+                            [
+                                513,
+                                0.2663559180955552
+                            ],
+                            [
+                                514,
+                                0.2996504078574996
+                            ],
+                            [
+                                515,
+                                0.166472448809722
+                            ],
+                            [
+                                516,
+                                0.19976693857166639
+                            ],
+                            [
+                                518,
+                                0.39953387714333277
+                            ],
+                            [
+                                519,
+                                0.1498252039287498
+                            ],
+                            [
+                                520,
+                                0.2164141834526386
+                            ],
+                            [
+                                521,
+                                0.1498252039287498
+                            ],
+                            [
+                                522,
+                                0.2330614283336108
+                            ],
+                            [
+                                523,
+                                0.249708673214583
+                            ],
+                            [
+                                524,
+                                0.2330614283336108
+                            ],
+                            [
+                                525,
+                                0.249708673214583
+                            ],
+                            [
+                                526,
+                                0.249708673214583
+                            ],
+                            [
+                                527,
+                                0.249708673214583
+                            ],
+                            [
+                                529,
+                                0.2663559180955552
+                            ],
+                            [
+                                530,
+                                0.2663559180955552
+                            ],
+                            [
+                                531,
+                                0.166472448809722
+                            ],
+                            [
+                                532,
+                                0.2830031629765274
+                            ],
+                            [
+                                533,
+                                0.2830031629765274
+                            ],
+                            [
+                                534,
+                                0.1498252039287498
+                            ],
+                            [
+                                535,
+                                0.2663559180955552
+                            ],
+                            [
+                                536,
+                                0.2663559180955552
+                            ],
+                            [
+                                537,
+                                0.2330614283336108
+                            ],
+                            [
+                                538,
+                                0.4328283669052772
+                            ],
+                            [
+                                540,
+                                0.1331779590477776
+                            ],
+                            [
+                                541,
+                                0.2830031629765274
+                            ],
+                            [
+                                542,
+                                0.083236224404861
+                            ],
+                            [
+                                543,
+                                0.166472448809722
+                            ],
+                            [
+                                544,
+                                0.249708673214583
+                            ],
+                            [
+                                545,
+                                0.2830031629765274
+                            ],
+                            [
+                                546,
+                                0.3162976527384718
+                            ],
+                            [
+                                547,
+                                0.19976693857166639
+                            ],
+                            [
+                                548,
+                                0.1831196936906942
+                            ],
+                            [
+                                549,
+                                0.2663559180955552
+                            ],
+                            [
+                                551,
+                                0.2663559180955552
+                            ],
+                            [
+                                552,
+                                0.1165307141668054
+                            ],
+                            [
+                                553,
+                                0.19976693857166639
+                            ],
+                            [
+                                554,
+                                0.166472448809722
+                            ],
+                            [
+                                555,
+                                0.2164141834526386
+                            ],
+                            [
+                                556,
+                                0.1165307141668054
+                            ],
+                            [
+                                557,
+                                0.19976693857166639
+                            ],
+                            [
+                                558,
+                                0.19976693857166639
+                            ],
+                            [
+                                559,
+                                0.166472448809722
+                            ],
+                            [
+                                560,
+                                0.249708673214583
+                            ],
+                            [
+                                562,
+                                0.19976693857166639
+                            ],
+                            [
+                                563,
+                                0.1831196936906942
+                            ],
+                            [
+                                564,
+                                0.166472448809722
+                            ],
+                            [
+                                565,
+                                0.1831196936906942
+                            ],
+                            [
+                                566,
+                                0.1498252039287498
+                            ],
+                            [
+                                567,
+                                0.1165307141668054
+                            ],
+                            [
+                                568,
+                                0.1831196936906942
+                            ],
+                            [
+                                569,
+                                0.1165307141668054
+                            ],
+                            [
+                                570,
+                                0.249708673214583
+                            ],
+                            [
+                                571,
+                                0.1831196936906942
+                            ],
+                            [
+                                573,
+                                0.166472448809722
+                            ],
+                            [
+                                574,
+                                0.2330614283336108
+                            ],
+                            [
+                                575,
+                                0.19976693857166639
+                            ],
+                            [
+                                576,
+                                0.083236224404861
+                            ],
+                            [
+                                577,
+                                0.19976693857166639
+                            ],
+                            [
+                                578,
+                                0.1498252039287498
+                            ],
+                            [
+                                579,
+                                0.1331779590477776
+                            ],
+                            [
+                                580,
+                                0.2330614283336108
+                            ],
+                            [
+                                581,
+                                0.0665889795238888
+                            ],
+                            [
+                                582,
+                                0.19976693857166639
+                            ],
+                            [
+                                584,
+                                0.1165307141668054
+                            ],
+                            [
+                                585,
+                                0.083236224404861
+                            ],
+                            [
+                                586,
+                                0.1831196936906942
+                            ],
+                            [
+                                587,
+                                0.1498252039287498
+                            ],
+                            [
+                                588,
+                                0.1498252039287498
+                            ],
+                            [
+                                589,
+                                0.1831196936906942
+                            ],
+                            [
+                                590,
+                                0.19976693857166639
+                            ],
+                            [
+                                591,
+                                0.1331779590477776
+                            ],
+                            [
+                                592,
+                                0.1498252039287498
+                            ],
+                            [
+                                593,
+                                0.083236224404861
+                            ],
+                            [
+                                595,
+                                0.0332944897619444
+                            ],
+                            [
+                                596,
+                                0.1165307141668054
+                            ],
+                            [
+                                597,
+                                0.09988346928583319
+                            ],
+                            [
+                                598,
+                                0.166472448809722
+                            ],
+                            [
+                                599,
+                                0.0332944897619444
+                            ],
+                            [
+                                600,
+                                0.09988346928583319
+                            ],
+                            [
+                                601,
+                                0.09988346928583319
+                            ],
+                            [
+                                602,
+                                0.083236224404861
+                            ],
+                            [
+                                603,
+                                0.09988346928583319
+                            ],
+                            [
+                                604,
+                                0.09988346928583319
+                            ],
+                            [
+                                606,
+                                0.2164141834526386
+                            ],
+                            [
+                                607,
+                                0.1498252039287498
+                            ],
+                            [
+                                608,
+                                0.083236224404861
+                            ],
+                            [
+                                609,
+                                0.166472448809722
+                            ],
+                            [
+                                610,
+                                0.0332944897619444
+                            ],
+                            [
+                                611,
+                                0.09988346928583319
+                            ],
+                            [
+                                612,
+                                0.1165307141668054
+                            ],
+                            [
+                                613,
+                                0.049941734642916596
+                            ],
+                            [
+                                614,
+                                0.1331779590477776
+                            ],
+                            [
+                                615,
+                                0.1831196936906942
+                            ],
+                            [
+                                617,
+                                0.0166472448809722
+                            ],
+                            [
+                                618,
+                                0.1331779590477776
+                            ],
+                            [
+                                619,
+                                0.1498252039287498
+                            ],
+                            [
+                                620,
+                                0.083236224404861
+                            ],
+                            [
+                                621,
+                                0.1165307141668054
+                            ],
+                            [
+                                622,
+                                0.083236224404861
+                            ],
+                            [
+                                623,
+                                0.049941734642916596
+                            ],
+                            [
+                                624,
+                                0.0166472448809722
+                            ],
+                            [
+                                625,
+                                0.1165307141668054
+                            ],
+                            [
+                                626,
+                                0.09988346928583319
+                            ],
+                            [
+                                628,
+                                0.0665889795238888
+                            ],
+                            [
+                                629,
+                                0.049941734642916596
+                            ],
+                            [
+                                630,
+                                0.09988346928583319
+                            ],
+                            [
+                                631,
+                                0.09988346928583319
+                            ],
+                            [
+                                632,
+                                0.0665889795238888
+                            ],
+                            [
+                                633,
+                                0.1331779590477776
+                            ],
+                            [
+                                634,
+                                0.0332944897619444
+                            ],
+                            [
+                                635,
+                                0.0665889795238888
+                            ],
+                            [
+                                636,
+                                0.0166472448809722
+                            ],
+                            [
+                                637,
+                                0.0665889795238888
+                            ],
+                            [
+                                639,
+                                0.0665889795238888
+                            ],
+                            [
+                                640,
+                                0.0665889795238888
+                            ],
+                            [
+                                641,
+                                0.0665889795238888
+                            ],
+                            [
+                                642,
+                                0.166472448809722
+                            ],
+                            [
+                                643,
+                                0.049941734642916596
+                            ],
+                            [
+                                644,
+                                0.0665889795238888
+                            ],
+                            [
+                                645,
+                                0.0166472448809722
+                            ],
+                            [
+                                646,
+                                0.09988346928583319
+                            ],
+                            [
+                                647,
+                                0.0665889795238888
+                            ],
+                            [
+                                648,
+                                0.0332944897619444
+                            ],
+                            [
+                                650,
+                                0.1165307141668054
+                            ],
+                            [
+                                651,
+                                0.083236224404861
+                            ],
+                            [
+                                652,
+                                0.0665889795238888
+                            ],
+                            [
+                                653,
+                                0.0665889795238888
+                            ],
+                            [
+                                654,
+                                0.049941734642916596
+                            ],
+                            [
+                                655,
+                                0.049941734642916596
+                            ],
+                            [
+                                657,
+                                0.0332944897619444
+                            ],
+                            [
+                                658,
+                                0.083236224404861
+                            ],
+                            [
+                                659,
+                                0.049941734642916596
+                            ],
+                            [
+                                660,
+                                0.083236224404861
+                            ],
+                            [
+                                662,
+                                0.1165307141668054
+                            ],
+                            [
+                                663,
+                                0.049941734642916596
+                            ],
+                            [
+                                664,
+                                0.0332944897619444
+                            ],
+                            [
+                                665,
+                                0.0332944897619444
+                            ],
+                            [
+                                667,
+                                0.0665889795238888
+                            ],
+                            [
+                                668,
+                                0.0665889795238888
+                            ],
+                            [
+                                669,
+                                0.0332944897619444
+                            ],
+                            [
+                                670,
+                                0.049941734642916596
+                            ],
+                            [
+                                671,
+                                0.0166472448809722
+                            ],
+                            [
+                                672,
+                                0.0166472448809722
+                            ],
+                            [
+                                674,
+                                0.0665889795238888
+                            ],
+                            [
+                                675,
+                                0.0166472448809722
+                            ],
+                            [
+                                677,
+                                0.0332944897619444
+                            ],
+                            [
+                                678,
+                                0.083236224404861
+                            ],
+                            [
+                                679,
+                                0.0665889795238888
+                            ],
+                            [
+                                680,
+                                0.0166472448809722
+                            ],
+                            [
+                                681,
+                                0.0332944897619444
+                            ],
+                            [
+                                682,
+                                0.083236224404861
+                            ],
+                            [
+                                683,
+                                0.049941734642916596
+                            ],
+                            [
+                                684,
+                                0.0166472448809722
+                            ],
+                            [
+                                686,
+                                0.0665889795238888
+                            ],
+                            [
+                                688,
+                                0.049941734642916596
+                            ],
+                            [
+                                689,
+                                0.0665889795238888
+                            ],
+                            [
+                                691,
+                                0.049941734642916596
+                            ],
+                            [
+                                692,
+                                0.0166472448809722
+                            ],
+                            [
+                                693,
+                                0.049941734642916596
+                            ],
+                            [
+                                695,
+                                0.049941734642916596
+                            ],
+                            [
+                                696,
+                                0.0166472448809722
+                            ],
+                            [
+                                697,
+                                0.0332944897619444
+                            ],
+                            [
+                                698,
+                                0.0332944897619444
+                            ],
+                            [
+                                704,
+                                0.0166472448809722
+                            ],
+                            [
+                                707,
+                                0.0332944897619444
+                            ],
+                            [
+                                708,
+                                0.0166472448809722
+                            ],
+                            [
+                                709,
+                                0.0166472448809722
+                            ],
+                            [
+                                710,
+                                0.0332944897619444
+                            ],
+                            [
+                                711,
+                                0.0166472448809722
+                            ],
+                            [
+                                713,
+                                0.049941734642916596
+                            ],
+                            [
+                                714,
+                                0.0166472448809722
+                            ],
+                            [
+                                715,
+                                0.0166472448809722
+                            ],
+                            [
+                                716,
+                                0.0332944897619444
+                            ],
+                            [
+                                719,
+                                0.0332944897619444
+                            ],
+                            [
+                                720,
+                                0.0332944897619444
+                            ],
+                            [
+                                721,
+                                0.0166472448809722
+                            ],
+                            [
+                                724,
+                                0.0166472448809722
+                            ],
+                            [
+                                725,
+                                0.0166472448809722
+                            ],
+                            [
+                                727,
+                                0.0166472448809722
+                            ],
+                            [
+                                728,
+                                0.0166472448809722
+                            ],
+                            [
+                                729,
+                                0.0332944897619444
+                            ],
+                            [
+                                731,
+                                0.0166472448809722
+                            ],
+                            [
+                                733,
+                                0.0166472448809722
+                            ],
+                            [
+                                735,
+                                0.0332944897619444
+                            ],
+                            [
+                                736,
+                                0.0166472448809722
+                            ],
+                            [
+                                738,
+                                0.0166472448809722
+                            ],
+                            [
+                                739,
+                                0.049941734642916596
+                            ],
+                            [
+                                741,
+                                0.0332944897619444
+                            ],
+                            [
+                                743,
+                                0.0166472448809722
+                            ],
+                            [
+                                747,
+                                0.0332944897619444
+                            ],
+                            [
+                                749,
+                                0.0332944897619444
+                            ],
+                            [
+                                750,
+                                0.0166472448809722
+                            ],
+                            [
+                                752,
+                                0.0166472448809722
+                            ],
+                            [
+                                756,
+                                0.0166472448809722
+                            ],
+                            [
+                                757,
+                                0.0166472448809722
+                            ],
+                            [
+                                759,
+                                0.0166472448809722
+                            ],
+                            [
+                                762,
+                                0.0332944897619444
+                            ],
+                            [
+                                763,
+                                0.0166472448809722
+                            ],
+                            [
+                                765,
+                                0.0166472448809722
+                            ],
+                            [
+                                772,
+                                0.0166472448809722
+                            ],
+                            [
+                                775,
+                                0.0166472448809722
+                            ],
+                            [
+                                777,
+                                0.049941734642916596
+                            ],
+                            [
+                                779,
+                                0.0332944897619444
+                            ],
+                            [
+                                783,
+                                0.0166472448809722
+                            ],
+                            [
+                                786,
+                                0.0166472448809722
+                            ],
+                            [
+                                789,
+                                0.0166472448809722
+                            ],
+                            [
+                                790,
+                                0.0166472448809722
+                            ],
+                            [
+                                791,
+                                0.0166472448809722
+                            ],
+                            [
+                                795,
+                                0.0166472448809722
+                            ],
+                            [
+                                806,
+                                0.0166472448809722
+                            ],
+                            [
+                                816,
+                                0.0166472448809722
+                            ],
+                            [
+                                817,
+                                0.0166472448809722
+                            ],
+                            [
+                                823,
+                                0.0166472448809722
+                            ],
+                            [
+                                840,
+                                0.0166472448809722
+                            ],
+                            [
+                                841,
+                                0.0166472448809722
+                            ],
+                            [
+                                849,
+                                0.0166472448809722
+                            ],
+                            [
+                                884,
+                                0.0166472448809722
+                            ],
+                            [
+                                1049,
+                                0.0166472448809722
+                            ]
+                        ]
                     }
                 ]
             ],
@@ -4355,7 +8568,8 @@
             "plot_type": "bar_graph",
             "samples": [
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ]
             ],
             "datasets": [
@@ -4363,6 +8577,7 @@
                     {
                         "name": "Mapped",
                         "data": [
+                            13759.0,
                             13759.0
                         ],
                         "color": "#437bb1"
@@ -4370,6 +8585,7 @@
                     {
                         "name": "Unmapped",
                         "data": [
+                            51.0,
                             51.0
                         ],
                         "color": "#b1084c"
@@ -4387,83 +8603,109 @@
             "plot_type": "beeswarm",
             "samples": [
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ],
                 [
-                    "NA12878-chr14-AKT1"
+                    "NA12878-chr14-AKT1",
+                    "NA12878-chr14-AKT2"
                 ]
             ],
             "datasets": [
                 [
+                    0.01381,
                     0.01381
                 ],
                 [
+                    0.013708,
                     0.013708
                 ],
                 [
+                    0.013517,
                     0.013517
                 ],
                 [
+                    0.001538,
                     0.001538
                 ],
                 [
+                    0.0,
                     0.0
                 ],
                 [
+                    1.6e-05,
                     1.6e-05
                 ],
                 [
+                    2.042081,
                     2.042081
                 ],
                 [
+                    0.0,
                     0.0
                 ],
                 [
+                    0.230584,
                     0.230584
                 ],
                 [
+                    5.9e-05,
                     5.9e-05
                 ],
                 [
+                    0.0,
                     0.0
                 ],
                 [
+                    0.006765,
                     0.006765
                 ],
                 [
+                    2e-06,
                     2e-06
                 ]
             ],
@@ -4615,10 +8857,31 @@
                 "PF_Q30_BASES": 1996315.0,
                 "Q20_EQUIVALENT_YIELD": 3042758.0,
                 "PF_Q20_EQUIVALENT_YIELD": 3042758.0
+            },
+            "NA12878-chr14-AKT2": {
+                "TOTAL_READS": 13810.0,
+                "PF_READS": 13810.0,
+                "READ_LENGTH": 150.0,
+                "TOTAL_BASES": 2071500.0,
+                "PF_BASES": 2071500.0,
+                "Q20_BASES": 2020718.0,
+                "PF_Q20_BASES": 2020718.0,
+                "Q30_BASES": 1996315.0,
+                "PF_Q30_BASES": 1996315.0,
+                "Q20_EQUIVALENT_YIELD": 3042758.0,
+                "PF_Q20_EQUIVALENT_YIELD": 3042758.0
             }
         },
         "multiqc_npm_samtools_stats_bq": {
             "NA12878-chr14-AKT1": {
+                "pct_q30_bases_read1": 97.31,
+                "total_bases_read1": 1011252,
+                "q30_bases_read1": 1039200,
+                "pct_q30_bases_read2": 95.42,
+                "total_bases_read2": 985063,
+                "q30_bases_read2": 1032300
+            },
+            "NA12878-chr14-AKT2": {
                 "pct_q30_bases_read1": 97.31,
                 "total_bases_read1": 1011252,
                 "q30_bases_read1": 1039200,
@@ -4639,9 +8902,71 @@
                 "ge_15x_autosome_bases": "45000",
                 "ge_30x_autosome_bases": "43000",
                 "ge_40x_autosome_bases": "23000"
+            },
+            "NA12878-chr14-AKT2": {
+                "mean_autosome_coverage": "0.000654",
+                "sd_autosome_coverage": "0.163015",
+                "median_autosome_coverage": "0.000000",
+                "mad_autosome_coverage": "0.000000",
+                "total_autosome_bases": "2.75635e+09",
+                "ge_1x_autosome_bases": "47000",
+                "ge_10x_autosome_bases": "45000",
+                "ge_15x_autosome_bases": "45000",
+                "ge_30x_autosome_bases": "43000",
+                "ge_40x_autosome_bases": "23000"
+            }
+        },
+        "mosdepth_cumcov_dist": {
+            "NA12878-chr14-AKT1": {
+                "0": 100.0
+            },
+            "NA12878-chr14-AKT2": {
+                "0": 100.0
+            }
+        },
+        "mosdepth_cov_dist": {
+            "NA12878-chr14-AKT1": {
+                "0": 100.0
+            },
+            "NA12878-chr14-AKT2": {
+                "0": 100.0
+            }
+        },
+        "mosdepth_perchrom": {
+            "NA12878-chr14-AKT1": {
+                "chr14": 0.0
+            },
+            "NA12878-chr14-AKT2": {
+                "chr14": 0.0
             }
         },
         "multiqc_picard_insertSize": {
+            "NA12878-chr14-AKT2_FR": {
+                "SAMPLE_NAME": "NA12878-chr14-AKT2",
+                "MEDIAN_INSERT_SIZE": 441.0,
+                "MODE_INSERT_SIZE": 408.0,
+                "MEDIAN_ABSOLUTE_DEVIATION": 67.0,
+                "MIN_INSERT_SIZE": 58.0,
+                "MAX_INSERT_SIZE": 1571.0,
+                "MEAN_INSERT_SIZE": 449.445147,
+                "STANDARD_DEVIATION": 101.734645,
+                "READ_PAIRS": 6039.0,
+                "PAIR_ORIENTATION": "FR",
+                "WIDTH_OF_10_PERCENT": 25.0,
+                "WIDTH_OF_20_PERCENT": 51.0,
+                "WIDTH_OF_30_PERCENT": 77.0,
+                "WIDTH_OF_40_PERCENT": 105.0,
+                "WIDTH_OF_50_PERCENT": 135.0,
+                "WIDTH_OF_60_PERCENT": 167.0,
+                "WIDTH_OF_70_PERCENT": 207.0,
+                "WIDTH_OF_80_PERCENT": 257.0,
+                "WIDTH_OF_90_PERCENT": 337.0,
+                "WIDTH_OF_95_PERCENT": 411.0,
+                "WIDTH_OF_99_PERCENT": 663.0,
+                "SAMPLE": "",
+                "LIBRARY": "",
+                "READ_GROUP": ""
+            },
             "NA12878-chr14-AKT1_FR": {
                 "SAMPLE_NAME": "NA12878-chr14-AKT1",
                 "MEDIAN_INSERT_SIZE": 441.0,
@@ -4673,6 +8998,19 @@
         "picard_histogram_1": {},
         "multiqc_picard_QualityYieldMetrics": {
             "NA12878-chr14-AKT1": {
+                "TOTAL_READS": 13810,
+                "PF_READS": 13810,
+                "READ_LENGTH": 150,
+                "TOTAL_BASES": 2071500,
+                "PF_BASES": 2071500,
+                "Q20_BASES": 2020718,
+                "PF_Q20_BASES": 2020718,
+                "Q30_BASES": 1996315,
+                "PF_Q30_BASES": 1996315,
+                "Q20_EQUIVALENT_YIELD": 3042758,
+                "PF_Q20_EQUIVALENT_YIELD": 3042758
+            },
+            "NA12878-chr14-AKT2": {
                 "TOTAL_READS": 13810,
                 "PF_READS": 13810,
                 "READ_LENGTH": 150,
@@ -4736,10 +9074,75 @@
                 "reads_duplicated_percent": 11.136857349746561,
                 "reads_MQ0_percent": 0.11585807385952207,
                 "reads_QC_failed_percent": 0.0
+            },
+            "NA12878-chr14-AKT2": {
+                "raw_total_sequences": 13810.0,
+                "filtered_sequences": 0.0,
+                "sequences": 13810.0,
+                "is_sorted": 1.0,
+                "1st_fragments": 6928.0,
+                "last_fragments": 6882.0,
+                "reads_mapped": 13759.0,
+                "reads_mapped_and_paired": 13708.0,
+                "reads_unmapped": 51.0,
+                "reads_properly_paired": 13517.0,
+                "reads_paired": 13810.0,
+                "reads_duplicated": 1538.0,
+                "reads_MQ0": 16.0,
+                "reads_QC_failed": 0.0,
+                "non-primary_alignments": 0.0,
+                "supplementary_alignments": 21.0,
+                "total_length": 2071500.0,
+                "total_first_fragment_length": 1039200.0,
+                "total_last_fragment_length": 1032300.0,
+                "bases_mapped": 2063850.0,
+                "bases_mapped_(cigar)": 2042081.0,
+                "bases_trimmed": 0.0,
+                "bases_duplicated": 230584.0,
+                "mismatches": 8144.0,
+                "error_rate": 0.003988089,
+                "average_length": 150.0,
+                "average_first_fragment_length": 150.0,
+                "average_last_fragment_length": 150.0,
+                "maximum_length": 150.0,
+                "maximum_first_fragment_length": 150.0,
+                "maximum_last_fragment_length": 150.0,
+                "average_quality": 29.4,
+                "insert_size_average": 447.3,
+                "insert_size_standard_deviation": 98.2,
+                "inward_oriented_pairs": 6765.0,
+                "outward_oriented_pairs": 2.0,
+                "pairs_with_other_orientation": 0.0,
+                "pairs_on_different_chromosomes": 59.0,
+                "percentage_of_properly_paired_reads_(%)": 97.9,
+                "reads_mapped_percent": 99.63070238957278,
+                "reads_mapped_and_paired_percent": 99.26140477914555,
+                "reads_unmapped_percent": 0.36929761042722664,
+                "reads_properly_paired_percent": 97.8783490224475,
+                "reads_paired_percent": 100.0,
+                "reads_duplicated_percent": 11.136857349746561,
+                "reads_MQ0_percent": 0.11585807385952207,
+                "reads_QC_failed_percent": 0.0
             }
         },
         "multiqc_general_stats": {
             "NA12878-chr14-AKT1": {
+                "mosdepth_mqc-generalstats-mosdepth-mean_coverage": "0.02",
+                "mosdepth_mqc-generalstats-mosdepth-median_coverage": 0,
+                "Picard_mqc-generalstats-picard-TOTAL_READS": 13810,
+                "Picard_mqc-generalstats-picard-summed_median": 440,
+                "Picard_mqc-generalstats-picard-summed_mean": 449.4451470000001,
+                "Samtools_mqc-generalstats-samtools-error_rate": 0.003988089,
+                "Samtools_mqc-generalstats-samtools-non_primary_alignments": 0.0,
+                "Samtools_mqc-generalstats-samtools-reads_mapped": 13759.0,
+                "Samtools_mqc-generalstats-samtools-reads_mapped_percent": 99.63070238957278,
+                "Samtools_mqc-generalstats-samtools-reads_properly_paired_percent": 97.8783490224475,
+                "Samtools_mqc-generalstats-samtools-reads_MQ0_percent": 0.11585807385952207,
+                "Samtools_mqc-generalstats-samtools-raw_total_sequences": 13810.0
+            },
+            "NA12878-chr14-AKT2": {
+                "mosdepth_mqc-generalstats-mosdepth-mean_coverage": "0.02",
+                "mosdepth_mqc-generalstats-mosdepth-median_coverage": 0,
                 "Picard_mqc-generalstats-picard-TOTAL_READS": 13810,
                 "Picard_mqc-generalstats-picard-summed_median": 440,
                 "Picard_mqc-generalstats-picard-summed_mean": 449.4451470000001,
@@ -4754,19 +9157,19 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b"
+        "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/fe/5d7011a99c760b82d9e983e9bb5aa8"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2023-03-20, 04:13 UTC",
+    "config_creation_date": "2023-05-17, 02:10 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,
     "config_report_header_info": null,
-    "config_script_path": "/usr/local/conda/lib/python3.9/site-packages/multiqc-1.13-py3.9.egg/multiqc/utils",
-    "config_short_version": "1.13",
+    "config_script_path": "/usr/local/conda/lib/python3.10/site-packages/multiqc-1.14-py3.10.egg/multiqc/utils",
+    "config_short_version": "1.14",
     "config_subtitle": null,
     "config_title": null,
-    "config_version": "1.13"
+    "config_version": "1.14"
 }

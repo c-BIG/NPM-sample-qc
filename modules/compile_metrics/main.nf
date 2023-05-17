@@ -1,13 +1,13 @@
 process compile_metrics {
 
-    tag { sample }
+    tag { sample_ids }
 
     input:
-    tuple val(sample), path(bam), path(bai)
-    path multiqc
+    val(sample_ids)
+    path "multiqc_data.json"
 
     output:
-    tuple val(sample), path("${sample}.metrics.json"), emit: compile_metrics_out
+    tuple val(sample_ids), path("${sample_ids}.metrics.json"), emit: compile_metrics_out
 
     script:
     """
@@ -15,7 +15,7 @@ process compile_metrics {
 
     compile_metrics.py \
         --multiqc_json multiqc_data.json \
-        --output_json "${sample}.metrics.json" \\
-        --biosample_id "${sample}" \\
+        --output_json "${sample_ids}.metrics.json" \\
+        --biosample_id "${sample_ids}" \\
     """
 }

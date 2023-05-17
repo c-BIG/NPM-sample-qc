@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  ~ Copyright 2013-2019, Centre for Genomic Regulation (CRG)
+  ~ Copyright 2013-2023, Seqera Labs
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -205,16 +205,23 @@ $(function() {
 
   // Nextflow report data
   window.data = {
-    "elapsed": "56.3s",
-    "beginningMillis": 1679285565782,
-    "endingMillis": 1679285622099,
+    "elapsed": "2m 6s",
+    "beginningMillis": 1684288722838,
+    "endingMillis": 1684288848829,
     "processes": [
-        {"label": "mosdepth_bam (NA12878-chr14-AKT1)", "cached": false, "index": 0, "times": [{"starting_time": 1679285567227, "ending_time": 1679285567242}, {"starting_time": 1679285567242, "ending_time": 1679285573815, "label": "9.8s \/ 847.7 MB"}, {"starting_time": 1679285573815, "ending_time": 1679285577008}]},
-        {"label": "picard_collect_multiple_metrics_bam (NA12878-chr14-AKT1)", "cached": false, "index": 1, "times": [{"starting_time": 1679285567249, "ending_time": 1679285567341}, {"starting_time": 1679285567341, "ending_time": 1679285570173, "label": "6.1s \/ 121.3 MB"}, {"starting_time": 1679285570173, "ending_time": 1679285573337}]},
-        {"label": "samtools_stats (NA12878-chr14-AKT1)", "cached": false, "index": 2, "times": [{"starting_time": 1679285567259, "ending_time": 1679285567344}, {"starting_time": 1679285567344, "ending_time": 1679285567438, "label": "3.2s \/ 7.3 MB"}, {"starting_time": 1679285567438, "ending_time": 1679285570439}]},
-        {"label": "mosdepth_datamash (NA12878-chr14-AKT1)", "cached": false, "index": 3, "times": [{"starting_time": 1679285577022, "ending_time": 1679285577108}, {"starting_time": 1679285577108, "ending_time": 1679285610426, "label": "34.1s \/ 48.2 MB"}, {"starting_time": 1679285610426, "ending_time": 1679285611112}]},
-        {"label": "multiqc", "cached": false, "index": 4, "times": [{"starting_time": 1679285611132, "ending_time": 1679285611212}, {"starting_time": 1679285611212, "ending_time": 1679285619445, "label": "8.9s \/ 121.8 MB"}, {"starting_time": 1679285619445, "ending_time": 1679285620073}]},
-        {"label": "compile_metrics", "cached": false, "index": 5, "times": [{"starting_time": 1679285620113, "ending_time": 1679285620173}, {"starting_time": 1679285620173, "ending_time": 1679285620714, "label": "1.3s \/ 11.5 MB"}, {"starting_time": 1679285620714, "ending_time": 1679285621376}]}
+        {"label": "samtools_stats_bam (NA12878-chr14-AKT2)", "cached": false, "index": 0, "times": [{"starting_time": 1684288726435, "ending_time": 1684288726518}, {"starting_time": 1684288726518, "ending_time": 1684288726603, "label": "1.1s \/ 7.3 MB"}, {"starting_time": 1684288726603, "ending_time": 1684288727563}]},
+        {"label": "picard_collect_multiple_metrics_bam (NA12878-chr14-AKT1)", "cached": false, "index": 1, "times": [{"starting_time": 1684288726444, "ending_time": 1684288726522}, {"starting_time": 1684288726522, "ending_time": 1684288728391, "label": "2.9s \/ 120.5 MB"}, {"starting_time": 1684288728391, "ending_time": 1684288729391}]},
+        {"label": "mosdepth_bam (NA12878-chr14-AKT1)", "cached": false, "index": 2, "times": [{"starting_time": 1684288726449, "ending_time": 1684288726523}, {"starting_time": 1684288726523, "ending_time": 1684288733595, "label": "8.6s \/ 846.8 MB"}, {"starting_time": 1684288733595, "ending_time": 1684288735015}]},
+        {"label": "mosdepth_bam (NA12878-chr14-AKT2)", "cached": false, "index": 2, "times": [{"starting_time": 1684288726456, "ending_time": 1684288726524}, {"starting_time": 1684288726524, "ending_time": 1684288733646, "label": "8.6s \/ 846.8 MB"}, {"starting_time": 1684288733646, "ending_time": 1684288735028}]},
+        {"label": "picard_collect_multiple_metrics_bam (NA12878-chr14-AKT2)", "cached": false, "index": 1, "times": [{"starting_time": 1684288727573, "ending_time": 1684288727662}, {"starting_time": 1684288727662, "ending_time": 1684288729485, "label": "2.7s \/ 131.2 MB"}, {"starting_time": 1684288729485, "ending_time": 1684288730239}]},
+        {"label": "samtools_stats_bam (NA12878-chr14-AKT1)", "cached": false, "index": 0, "times": [{"starting_time": 1684288729397, "ending_time": 1684288729491}, {"starting_time": 1684288729491, "ending_time": 1684288729540, "label": "920ms \/ 7.4 MB"}, {"starting_time": 1684288729540, "ending_time": 1684288730317}]},
+        {"label": "mosdepth_datamash (NA12878-chr14-AKT1)", "cached": false, "index": 3, "times": [{"starting_time": 1684288735037, "ending_time": 1684288735114}, {"starting_time": 1684288735114, "ending_time": 1684288758363, "label": "30s \/ 11 MB"}, {"starting_time": 1684288758363, "ending_time": 1684288765052}]},
+        {"label": "mosdepth_datamash (NA12878-chr14-AKT2)", "cached": false, "index": 3, "times": [{"starting_time": 1684288735046, "ending_time": 1684288735115}, {"starting_time": 1684288735115, "ending_time": 1684288758280, "label": "30s \/ 11.3 MB"}, {"starting_time": 1684288758280, "ending_time": 1684288765055}]},
+        {"label": "verifybamid2_bam (NA12878-chr14-AKT1)", "cached": false, "index": 4, "times": [{"starting_time": 1684288836349, "ending_time": 1684288836378}, {"starting_time": 1684288836378, "ending_time": 1684288841369, "label": "5s \/ -"}]},
+        {"label": "verifybamid2_bam (NA12878-chr14-AKT2)", "cached": false, "index": 4, "times": [{"starting_time": 1684288836356, "ending_time": 1684288836379}, {"starting_time": 1684288836379, "ending_time": 1684288841415, "label": "5.1s \/ -"}]},
+        {"label": "multiqc", "cached": false, "index": 5, "times": [{"starting_time": 1684288841428, "ending_time": 1684288841514}, {"starting_time": 1684288841514, "ending_time": 1684288846203, "label": "5.4s \/ 128.2 MB"}, {"starting_time": 1684288846203, "ending_time": 1684288846832}]},
+        {"label": "compile_metrics (NA12878-chr14-AKT2)", "cached": false, "index": 6, "times": [{"starting_time": 1684288846842, "ending_time": 1684288846932}, {"starting_time": 1684288846932, "ending_time": 1684288847323, "label": "1.3s \/ 10.7 MB"}, {"starting_time": 1684288847323, "ending_time": 1684288848137}]},
+        {"label": "compile_metrics (NA12878-chr14-AKT1)", "cached": false, "index": 6, "times": [{"starting_time": 1684288846845, "ending_time": 1684288846933}, {"starting_time": 1684288846933, "ending_time": 1684288847341, "label": "1.3s \/ 13.6 MB"}, {"starting_time": 1684288847341, "ending_time": 1684288848189}]}
     ]
 }
 ;

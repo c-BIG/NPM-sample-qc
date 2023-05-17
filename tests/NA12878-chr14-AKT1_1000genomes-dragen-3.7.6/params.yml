@@ -1,7 +1,7 @@
 samples:
 -
- id: NA12878-chr14-AKT1
+ biosample_id: NA12878-chr14-AKT1
  bam: s3://npm-grids/gnanakkan/npm-sample-qc/data/NA12878-chr14-AKT1.bam
 -
- id: NA12878-chr14-AKT2
+ biosample_id: NA12878-chr14-AKT2
  bam: s3://npm-grids/gnanakkan/npm-sample-qc/data/NA12878-chr14-AKT2.bam
