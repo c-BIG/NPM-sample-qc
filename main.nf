@@ -105,6 +105,7 @@ WORKFLOW
 
 workflow {
 
+    params.samples = null
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
@@ -114,15 +115,16 @@ workflow {
 
     Channel
         .fromList( params.samples )
+        .ifEmpty { ['biosample_id': params.biosample_id, 'bam': params.bam] }
         .branch { rec ->
-            def aln_file = file( rec.bam )
+            def aln_file = rec.bam ? file( rec.bam ) : null
 
-            bam: aln_file.extension == 'bam'
+            bam: rec.biosample_id && aln_file?.extension == 'bam'
                 def bam_idx = file( "${rec.bam}.bai" )
 
                 return tuple( rec.biosample_id, aln_file, bam_idx )
 
-            cram: aln_file.extension == 'cram'
+            cram: rec.biosample_id && aln_file?.extension == 'cram'
                 def cram_idx = file( "${rec.bam}.crai" )
 
                 return tuple( rec.biosample_id, aln_file, cram_idx )
@@ -178,6 +180,7 @@ workflow {
 
     Channel
         .fromList( params.samples )
+        .ifEmpty { ['biosample_id': params.biosample_id] }
         .map { it.biosample_id }
         .set { sample_ids }
 

@@ -1,7 +1,0 @@
-samples:
--
- id: NA12878-chr14-AKT1
- bam: NA12878-chr14-AKT1.bam
--
- id: NA12878-chr14-AKT2
- bam: NA12878-chr14-AKT2.bam
