@@ -138,6 +138,23 @@ def mean_insert_size(mqc):
 
     return k, v
 
+def insert_size_std_deviation(mqc):
+    """
+    The standard deviation for the average template length distribution.
+
+    Source: samtools stats (insert_size_standard_deviation)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_standard_deviation"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
 
 def cross_contamination_rate(mqc):
     """
