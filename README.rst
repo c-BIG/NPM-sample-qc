@@ -93,9 +93,9 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
           report.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
-          <sample_id>.metrics.json    
+          metrics/<sample_id>.metrics.json    
           samtools/
-          picard/
+          picard_collect_multiple_metrics//
           mosdepth/
           multiqc/
 
