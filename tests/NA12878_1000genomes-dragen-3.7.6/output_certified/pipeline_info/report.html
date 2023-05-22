@@ -147,12 +147,10 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
 
       <h1 class="display-3">Nextflow workflow report</h1>
       <h2 class="text-muted mb-4"><samp>[nice_volta]</samp> </h2>
-
       
           <div class="alert alert-success mb-4">
               Workflow execution completed successfully!
           </div>
-      
 
       <dl>
         <dt>Run times</dt>
@@ -171,7 +169,7 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
         </dl>
 
         <dt>Nextflow command</dt>
-        <dd><pre class="nfcommand"><code>nextflow run ../../main.nf -config ../../nextflow.config -params-file params.yml -work-dir ./work --outdir ./output</code></pre></dd>
+        <dd><pre class="nfcommand"><code>nextflow run ../../main.nf -config ../../nextflow.config -params-file params.yml -work-dir ./work --outdir ./output -resume</code></pre></dd>
       </dl>
 
       <dl class="row small">
@@ -199,8 +197,6 @@ table.DTCR_clonedTable.dataTable{position:absolute !important;background-color:r
 
         <dt class="col-sm-3">Workflow session</dt>
         <dd class="col-sm-9"><code>8690b3cd-e073-4d69-977b-2e64f952e176</code></dd>
-
-        
 
         <dt class="col-sm-3">Workflow profile</dt>
         <dd class="col-sm-9">standard</dd>

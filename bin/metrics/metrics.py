@@ -123,19 +123,15 @@ def pct_autosomes_15x(mqc):
 
 def mean_insert_size(mqc):
     """
-    The mean insert size over the "core" of the distribution.
+    The average absolute template length for paired and mapped reads.
 
-    Note: Artefactual outliers in the distribution often cause calculation of nonsensical mean and
-    stdev values. To avoid this the distribution is first trimmed to a "core" distribution of +/- N
-    median absolute deviations around the median insert size.
-
-    Source: picard InsertSizeMetrics (MEAN_INSERT_SIZE)
+    Source: samtools stats (insert_size_average)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-        v = d["MEAN_INSERT_SIZE"]
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_average"]
         v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"

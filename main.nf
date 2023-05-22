@@ -194,12 +194,10 @@ process picard_collect_multiple_metrics_bam {
 
     output:
     path "${biosample_id}.quality_yield_metrics.txt"
-    path "${biosample_id}.insert_size_metrics.txt"
 
     script:
     """
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
-    # program CollectInsertSizeMetrics to get mean insert size
 
     picard CollectMultipleMetrics  \
         I=${cbam} \
@@ -208,7 +206,6 @@ process picard_collect_multiple_metrics_bam {
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
         PROGRAM=CollectQualityYieldMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS
     """
@@ -226,12 +223,10 @@ process picard_collect_multiple_metrics_cram {
 
     output:
     path "${biosample_id}.quality_yield_metrics.txt"
-    path "${biosample_id}.insert_size_metrics.txt"
 
     script:
     """
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
-    # program CollectInsertSizeMetrics to get mean insert size
 
     picard CollectMultipleMetrics  \
         I=${cbam} \
@@ -240,7 +235,6 @@ process picard_collect_multiple_metrics_cram {
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
         PROGRAM=CollectQualityYieldMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
         R=${reference}
