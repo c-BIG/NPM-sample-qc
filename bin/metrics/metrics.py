@@ -141,3 +141,18 @@ def mean_insert_size(mqc):
         v = "NA"
 
     return k, v
+
+def cross_contamination_rate(mqc):
+    """
+    Estimation of cross-individual contamination rate.
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
+    except KeyError:
+        v = "NA"
+
+    return k, v
