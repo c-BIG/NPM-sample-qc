@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float6464(v), DECIMALS)
+        v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
 
