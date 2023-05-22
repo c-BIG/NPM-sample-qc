@@ -1,12 +1,17 @@
 {
+    "VerifyBAMID": {
+        "all_sections": {
+            "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/3d/036d86cd506de3283e5cbe5348f6f4/result.selfSM"
+        }
+    },
     "Picard": {
         "QualityYieldMetrics": {
-            "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8a/421b957224c5885ee354df4829b19e/NA12878.quality_yield_metrics.txt"
+            "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/c4/02f49da04d3be7df43e28bdf31dde3/NA12878.quality_yield_metrics.txt"
         }
     },
     "Samtools": {
         "stats": {
-            "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8a/421b957224c5885ee354df4829b19e/NA12878.stats"
+            "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/c4/02f49da04d3be7df43e28bdf31dde3/NA12878.stats"
         }
     }
 }

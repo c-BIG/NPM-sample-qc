@@ -11,4 +11,3 @@ nextflow run ../../main.nf \
 	-params-file params.yml \
 	-work-dir ./work \
 	--outdir ./output
-

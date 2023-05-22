@@ -4,6 +4,7 @@
     },
     "wgs_qc_metrics": {
         "insert_size_std_deviation": 98.7,
+        "cross_contamination_rate": 1.8379e-06,
         "mad_autosome_coverage": 2.41,
         "mean_autosome_coverage": 31.5975,
         "mean_insert_size": "NA",

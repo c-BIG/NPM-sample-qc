@@ -1,17 +1,44 @@
 {
     "report_data_sources": {
+        "VerifyBAMID": {
+            "all_sections": {
+                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/3d/036d86cd506de3283e5cbe5348f6f4/result.selfSM"
+            }
+        },
         "Picard": {
             "QualityYieldMetrics": {
-                "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8a/421b957224c5885ee354df4829b19e/NA12878.quality_yield_metrics.txt"
+                "NA12878.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/c4/02f49da04d3be7df43e28bdf31dde3/NA12878.quality_yield_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/8a/421b957224c5885ee354df4829b19e/NA12878.stats"
+                "NA12878": "/home/ubuntu/NPM-sample-qc/tests/NA12878_1000genomes-dragen-3.7.6/work/c4/02f49da04d3be7df43e28bdf31dde3/NA12878.stats"
             }
         }
     },
     "report_general_stats_data": [
+        {
+            "NA12878": {
+                "RG": "NA",
+                "CHIP_ID": "NA",
+                "#SNPS": 100000.0,
+                "#READS": 3225114.0,
+                "AVG_DP": 32.2592,
+                "FREEMIX": 1.8379e-06,
+                "FREELK1": -823605.0,
+                "FREELK0": -1242460.0,
+                "FREE_RH": "NA",
+                "FREE_RA": "NA",
+                "CHIPMIX": "NA",
+                "CHIPLK1": "NA",
+                "CHIPLK0": "NA",
+                "CHIP_RH": "NA",
+                "CHIP_RA": "NA",
+                "DPREF": "NA",
+                "RDPHET": "NA",
+                "RDPALT": "NA"
+            }
+        },
         {
             "NA12878": {
                 "TOTAL_READS": 758135204,
@@ -81,6 +108,29 @@
     ],
     "report_general_stats_headers": [
         {
+            "FREEMIX": {
+                "max": 100,
+                "min": 0,
+                "suffix": "%",
+                "format": "{:,.3f}",
+                "modify": 100.0,
+                "scale": "OrRd",
+                "title": "Contamination (S)",
+                "description": "VerifyBamID: FREEMIX -   Sequence-only estimate of contamination.",
+                "namespace": "VerifyBAMID",
+                "rid": "mqc-generalstats-verifybamid-FREEMIX",
+                "colour": "55,126,184",
+                "hidden": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "placement": 1000.0,
+                "dmax": 100.0,
+                "dmin": 0.0
+            }
+        },
+        {
             "TOTAL_READS": {
                 "title": "M Reads",
                 "description": "The total number of reads in the input file (millions)",
@@ -91,7 +141,7 @@
                 "rid": "mqc-generalstats-picard-TOTAL_READS",
                 "min": 0,
                 "format": "{:,.1f}",
-                "colour": "55,126,184",
+                "colour": "77,175,74",
                 "hidden": null,
                 "max": null,
                 "ceiling": null,
@@ -612,6 +662,7 @@
         },
         "multiqc_general_stats": {
             "NA12878": {
+                "VerifyBAMID_mqc-generalstats-verifybamid-FREEMIX": 1.8379e-06,
                 "Picard_mqc-generalstats-picard-TOTAL_READS": 758135204,
                 "Samtools_mqc-generalstats-samtools-error_rate": 0.004679882,
                 "Samtools_mqc-generalstats-samtools-non_primary_alignments": 0.0,
@@ -629,7 +680,7 @@
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2023-04-21, 04:01 UTC",
+    "config_creation_date": "2023-04-18, 07:49 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,

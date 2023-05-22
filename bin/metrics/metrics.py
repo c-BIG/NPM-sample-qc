@@ -27,7 +27,7 @@ def yield_bp_q30(mqc):
 
 def pct_reads_mapped(mqc):
     """
-    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment. 
+    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment.
 
     Source: samtools stats (reads_mapped / sequences)
     """
@@ -77,7 +77,7 @@ def mean_autosome_coverage(mqc):
     try:
         d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
         v = d["mean_autosome_coverage"]
-        v = np.round(np.float64(v), DECIMALS)
+        v = np.round(np.float6464(v), DECIMALS)
     except KeyError:
         v = "NA"
 
@@ -123,19 +123,15 @@ def pct_autosomes_15x(mqc):
 
 def mean_insert_size(mqc):
     """
-    The mean insert size over the "core" of the distribution.
+    The average absolute template length for paired and mapped reads.
 
-    Note: Artefactual outliers in the distribution often cause calculation of nonsensical mean and
-    stdev values. To avoid this the distribution is first trimmed to a "core" distribution of +/- N
-    median absolute deviations around the median insert size.
-
-    Source: picard InsertSizeMetrics (MEAN_INSERT_SIZE)
+    Source: samtools stats (insert_size_average)
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-        v = d["MEAN_INSERT_SIZE"]
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_average"]
         v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
@@ -154,6 +150,22 @@ def insert_size_std_deviation(mqc):
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = d["insert_size_standard_deviation"]
         v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def cross_contamination_rate(mqc):
+    """
+    Estimation of cross-individual contamination rate.
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
     except KeyError:
         v = "NA"
 
