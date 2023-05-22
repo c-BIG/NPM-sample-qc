@@ -27,7 +27,7 @@ def yield_bp_q30(mqc):
 
 def pct_reads_mapped(mqc):
     """
-    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment. 
+    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment.
 
     Source: samtools stats (reads_mapped / sequences)
     """
@@ -133,6 +133,22 @@ def mean_insert_size(mqc):
         d = next(iter(mqc["multiqc_samtools_stats"].values()))
         v = d["insert_size_average"]
         v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def cross_contamination_rate(mqc):
+    """
+    Estimation of cross-individual contamination rate.
+    Source: VerifyBamID2 (FREEMIX)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        v = d["FREEMIX"]
     except KeyError:
         v = "NA"
 

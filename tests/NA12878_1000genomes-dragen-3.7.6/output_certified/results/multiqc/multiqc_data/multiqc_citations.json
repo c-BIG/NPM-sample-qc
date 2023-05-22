@@ -2,6 +2,9 @@
     "MultiQC": [
         "10.1093/bioinformatics/btw354"
     ],
+    "verifybamid": [
+        "10.1016/j.ajhg.2012.09.004"
+    ],
     "Samtools": [
         "10.1093/bioinformatics/btp352"
     ]

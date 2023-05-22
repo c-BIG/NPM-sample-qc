@@ -1,5 +1,6 @@
 {
     "NA12878": {
+        "VerifyBAMID_mqc-generalstats-verifybamid-FREEMIX": 1.8379e-06,
         "Picard_mqc-generalstats-picard-TOTAL_READS": 758135204,
         "Samtools_mqc-generalstats-samtools-error_rate": 0.004679882,
         "Samtools_mqc-generalstats-samtools-non_primary_alignments": 0.0,

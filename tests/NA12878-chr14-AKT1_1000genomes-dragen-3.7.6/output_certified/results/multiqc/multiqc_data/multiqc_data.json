@@ -2,16 +2,16 @@
     "report_data_sources": {
         "Picard": {
             "InsertSizeMetrics": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/7b/04b0c167faf6a2023a914806c57983/NA12878-chr14-AKT1.insert_size_metrics.txt"
             },
             "QualityYieldMetrics": {
-                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.quality_yield_metrics.txt",
-                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.insert_size_metrics.txt"
+                "NA12878-chr14-AKT1.quality_yield_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/7b/04b0c167faf6a2023a914806c57983/NA12878-chr14-AKT1.quality_yield_metrics.txt",
+                "NA12878-chr14-AKT1.insert_size_metrics": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/7b/04b0c167faf6a2023a914806c57983/NA12878-chr14-AKT1.insert_size_metrics.txt"
             }
         },
         "Samtools": {
             "stats": {
-                "NA12878-chr14-AKT1": "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b/NA12878-chr14-AKT1.stats"
+                "NA12878-chr14-AKT1": "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/7b/04b0c167faf6a2023a914806c57983/NA12878-chr14-AKT1.stats"
             }
         }
     },
@@ -4754,19 +4754,19 @@
         }
     },
     "config_analysis_dir_abs": [
-        "/home/ubuntu/2023/reads_mapped/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/e5/1c7a6f5b55f96b2a43d4272222053b"
+        "/home/ubuntu/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/7b/04b0c167faf6a2023a914806c57983"
     ],
     "config_analysis_dir": [
         "."
     ],
-    "config_creation_date": "2023-03-20, 04:13 UTC",
+    "config_creation_date": "2023-04-26, 04:14 UTC",
     "config_git_hash": null,
     "config_intro_text": null,
     "config_report_comment": null,
     "config_report_header_info": null,
-    "config_script_path": "/usr/local/conda/lib/python3.9/site-packages/multiqc-1.13-py3.9.egg/multiqc/utils",
-    "config_short_version": "1.13",
+    "config_script_path": "/usr/local/conda/lib/python3.10/site-packages/multiqc-1.14-py3.10.egg/multiqc/utils",
+    "config_short_version": "1.14",
     "config_subtitle": null,
     "config_title": null,
-    "config_version": "1.13"
+    "config_version": "1.14"
 }
