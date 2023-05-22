@@ -51,7 +51,9 @@ def calculate_metrics(mqc):
         "mean_autosome_coverage", "mad_autosome_coverage",
         "pct_autosomes_15x",
         # insert size
-        "mean_insert_size"
+        "mean_insert_size",
+        # cross-individual contamination rate
+        "cross_contamination_rate"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))

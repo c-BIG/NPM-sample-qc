@@ -1,0 +1,22 @@
+{
+    "NA12878": {
+        "RG": "NA",
+        "CHIP_ID": "NA",
+        "#SNPS": 100000.0,
+        "#READS": 3225114.0,
+        "AVG_DP": 32.2592,
+        "FREEMIX": 1.8379e-06,
+        "FREELK1": -823605.0,
+        "FREELK0": -1242460.0,
+        "FREE_RH": "NA",
+        "FREE_RA": "NA",
+        "CHIPMIX": "NA",
+        "CHIPLK1": "NA",
+        "CHIPLK0": "NA",
+        "CHIP_RH": "NA",
+        "CHIP_RA": "NA",
+        "DPREF": "NA",
+        "RDPHET": "NA",
+        "RDPALT": "NA"
+    }
+}
