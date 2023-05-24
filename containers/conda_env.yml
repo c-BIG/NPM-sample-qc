@@ -10,3 +10,4 @@ dependencies:
     - picard=2.27.0
     - bedtools=2.29.2
     - mosdepth=0.3.3
+    - verifybamid2=2.0.1
