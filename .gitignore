@@ -11,11 +11,12 @@ tests/*/work
 tests/*/output
 tests/*/.nextflow*
 
-tests/NA12878*/output_certified/pipeline_info
-tests/NA12878*/output_certified/results/multiqc
-tests/NA12878*/output_certified/results/mosdepth
-tests/NA12878*/output_certified/results/samtools
-tests/NA12878*/output_certified/results/picard
+tests/*/output_certified/pipeline_info
+tests/*/output_certified/results/multiqc
+tests/*/output_certified/results/mosdepth
+tests/*/output_certified/results/samtools
+tests/*/output_certified/results/picard
+tests/*/output_certified/results/verifybamid2
 
 # MacOS
 **/.DS*
