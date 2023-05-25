@@ -184,7 +184,7 @@ workflow {
         .map { it.biosample_id }
         .set { sample_ids }
 
-    compile_metrics ( sample_ids, multiqc.out.json_data )    
+//    compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*
