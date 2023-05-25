@@ -1,6 +1,5 @@
 process verifybamid2 {
     tag { sample }
-    errorStrategy 'ignore'
 
     input:
     tuple val(sample), path(bam), path(bai)
@@ -14,7 +13,7 @@ process verifybamid2 {
     tuple val(sample), path("result.Ancestry"), emit: ancestry
 
     script:
-    def reference = ref_fasta ? /--reference "${ref_fasta}"/ : ''
+    def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''
     """
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
