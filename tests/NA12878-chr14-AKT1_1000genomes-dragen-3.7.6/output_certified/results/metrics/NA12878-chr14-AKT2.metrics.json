@@ -3,6 +3,7 @@
         "id": "NA12878-chr14-AKT2"
     },
     "wgs_qc_metrics": {
+        "cross_contamination_rate": "NA",
         "mad_autosome_coverage": 0.0,
         "mean_autosome_coverage": 0.00065,
         "mean_insert_size": 449.44515,

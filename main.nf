@@ -105,7 +105,7 @@ WORKFLOW
 
 workflow {
 
-    params.samples = null
+//    params.samples = null
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
@@ -113,10 +113,14 @@ workflow {
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
 
+
     Channel
         .fromList( params.samples )
         .ifEmpty { ['biosample_id': params.biosample_id, 'bam': params.bam] }
-        .branch { rec ->
+        .set { samples }
+
+    Channel
+        samples.branch { rec ->
             def aln_file = rec.bam ? file( rec.bam ) : null
 
             bam: rec.biosample_id && aln_file?.extension == 'bam'
@@ -135,9 +139,14 @@ workflow {
     samtools_stats_bam( aln_inputs.bam, [] )
     samtools_stats_cram( aln_inputs.cram, ref_fasta )
 
+    verifybamid2_bam( aln_inputs.bam, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
+    verifybamid2_cram( aln_inputs.cram, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
+
+    picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
+    picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
+
     mosdepth_bam( aln_inputs.bam, [] )
     mosdepth_cram( aln_inputs.cram, ref_fasta )
-
 
     Channel
         .empty()
@@ -148,11 +157,6 @@ workflow {
     mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
 //    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
 
-    verifybamid2_bam( aln_inputs.bam, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
-    verifybamid2_cram( aln_inputs.cram, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
-
-    picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
-    picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
     Channel
         .empty()
@@ -179,12 +183,10 @@ workflow {
 
 
     Channel
-        .fromList( params.samples )
-        .ifEmpty { ['biosample_id': params.biosample_id] }
-        .map { it.biosample_id }
+        samples.map { it.biosample_id }
         .set { sample_ids }
 
-//    compile_metrics ( sample_ids, multiqc.out.json_data )    
+    compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*
