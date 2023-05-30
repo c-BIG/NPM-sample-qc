@@ -33,7 +33,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 
 This creates `output` directory with the results that can be compared to the content of `output_certified` ::
 
-  diff output_certified/results/NA12878-chr14-AKT1.metrics.json output/results/NA12878-chr14-AKT1.metrics.json
+  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/metrics/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -79,7 +79,7 @@ See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an exam
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
-See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example. 
+See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
 
 Outputs
 -------
