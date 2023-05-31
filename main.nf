@@ -105,7 +105,6 @@ WORKFLOW
 
 workflow {
 
-//    params.samples = null
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
