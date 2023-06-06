@@ -1,0 +1,6 @@
+cross_contamination_rate
+========================
+
+.. currentmodule:: metrics
+
+.. autofunction:: cross_contamination_rate
