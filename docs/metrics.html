@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mad_autosome_coverage" href="api/metrics.mad_autosome_coverage.html" />
+    <link rel="next" title="cross_contamination_rate" href="api/metrics.cross_contamination_rate.html" />
     <link rel="prev" title="NPM-sample-qc" href="index.html" /> 
 </head>
 
@@ -42,11 +42,13 @@
               <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/metrics.cross_contamination_rate.html">cross_contamination_rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/metrics.insert_size_std_deviation.html">insert_size_std_deviation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mad_autosome_coverage.html">mad_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.mean_insert_size.html">mean_insert_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html">pct_reads_aligned_in_pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_mapped.html">pct_reads_mapped</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/metrics.yield_bp_q30.html">yield_bp_q30</a></li>
 </ul>
@@ -85,6 +87,12 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.cross_contamination_rate.html#metrics.cross_contamination_rate" title="metrics.cross_contamination_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_contamination_rate</span></code></a>(mqc)</p></td>
+<td><p>Estimation of cross-individual contamination rate.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/metrics.insert_size_std_deviation.html#metrics.insert_size_std_deviation" title="metrics.insert_size_std_deviation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_size_std_deviation</span></code></a>(mqc)</p></td>
+<td><p>The standard deviation for the average template length distribution.</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mad_autosome_coverage.html#metrics.mad_autosome_coverage" title="metrics.mad_autosome_coverage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mad_autosome_coverage</span></code></a>(mqc)</p></td>
 <td><p>The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
 </tr>
@@ -92,13 +100,13 @@
 <td><p>The mean coverage in autosomes (as defined in genome_territory).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.mean_insert_size.html#metrics.mean_insert_size" title="metrics.mean_insert_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_insert_size</span></code></a>(mqc)</p></td>
-<td><p>The mean insert size over the &quot;core&quot; of the distribution.</p></td>
+<td><p>The average absolute template length for paired and mapped reads.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_autosomes_15x.html#metrics.pct_autosomes_15x" title="metrics.pct_autosomes_15x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_autosomes_15x</span></code></a>(mqc)</p></td>
 <td><p>The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_aligned_in_pairs.html#metrics.pct_reads_aligned_in_pairs" title="metrics.pct_reads_aligned_in_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_aligned_in_pairs</span></code></a>(mqc)</p></td>
-<td><p>The percentage of reads that have been aligned as pairs.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/metrics.pct_reads_mapped.html#metrics.pct_reads_mapped" title="metrics.pct_reads_mapped"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_mapped</span></code></a>(mqc)</p></td>
+<td><p>The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ &gt; 0 after alignment.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/metrics.pct_reads_properly_paired.html#metrics.pct_reads_properly_paired" title="metrics.pct_reads_properly_paired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pct_reads_properly_paired</span></code></a>(mqc)</p></td>
 <td><p>The percentage of reads that have been aligned as proper pairs.</p></td>
@@ -115,7 +123,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="NPM-sample-qc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api/metrics.mad_autosome_coverage.html" class="btn btn-neutral float-right" title="mad_autosome_coverage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api/metrics.cross_contamination_rate.html" class="btn btn-neutral float-right" title="cross_contamination_rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

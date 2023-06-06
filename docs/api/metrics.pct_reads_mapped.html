@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pct_reads_aligned_in_pairs &mdash; NPM-sample-qc  documentation</title>
+  <title>pct_reads_mapped &mdash; NPM-sample-qc  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -42,11 +42,13 @@
               <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../metrics.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="metrics.cross_contamination_rate.html">cross_contamination_rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.insert_size_std_deviation.html">insert_size_std_deviation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mad_autosome_coverage.html">mad_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mean_insert_size.html">mean_insert_size</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pct_reads_aligned_in_pairs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pct_reads_mapped</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.yield_bp_q30.html">yield_bp_q30</a></li>
 </ul>
@@ -68,9 +70,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../metrics.html">Functions</a> &raquo;</li>
-      <li>pct_reads_aligned_in_pairs</li>
+      <li>pct_reads_mapped</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/metrics.pct_reads_aligned_in_pairs.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/metrics.pct_reads_mapped.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -78,13 +80,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pct-reads-aligned-in-pairs">
-<h1>pct_reads_aligned_in_pairs<a class="headerlink" href="#pct-reads-aligned-in-pairs" title="Permalink to this heading"></a></h1>
+  <section id="pct-reads-mapped">
+<h1>pct_reads_mapped<a class="headerlink" href="#pct-reads-mapped" title="Permalink to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="metrics.pct_reads_aligned_in_pairs">
-<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_aligned_in_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_reads_aligned_in_pairs" title="Permalink to this definition"></a></dt>
-<dd><p>The percentage of reads that have been aligned as pairs.</p>
-<p>Source: samtools stats (reads_mapped_and_paired / sequences)</p>
+<dt class="sig sig-object py" id="metrics.pct_reads_mapped">
+<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_mapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_reads_mapped" title="Permalink to this definition"></a></dt>
+<dd><p>The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ &gt; 0 after alignment.</p>
+<p>Source: samtools stats (reads_mapped / sequences)</p>
 </dd></dl>
 
 </section>
