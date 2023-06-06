@@ -85,8 +85,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.cross_contamination_rate">
 <span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">cross_contamination_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.cross_contamination_rate" title="Permalink to this definition"></a></dt>
-<dd><p>Estimation of cross-individual contamination rate.
-Source: VerifyBamID2 (FREEMIX)</p>
+<dd><p>Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
+<p>Implementation details: The estimation of inter-sample DNA contamination of short paired-end sequencing high quality, aligned sequence reads (BAM/CRAM) mapped on GRCh38 assembly with pre-calculated reference panel of 1000 Genome Project dataset from the VerifyBamID resource using VerifyBamID2 with NumPC “4” (# of Principal Components used in estimation), the key information “FREEMIX” in “.selfSM” in the results indicates the estimated contamination level.</p>
 </dd></dl>
 
 </section>

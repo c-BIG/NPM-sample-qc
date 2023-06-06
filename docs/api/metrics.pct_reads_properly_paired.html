@@ -85,8 +85,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.pct_reads_properly_paired">
 <span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
-<dd><p>The percentage of reads that have been aligned as proper pairs.</p>
-<p>Source: samtools stats (reads_properly_paired_percent)</p>
+<dd><p>Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of properly paired reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>
 
 </section>

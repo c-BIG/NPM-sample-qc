@@ -85,8 +85,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.mad_autosome_coverage">
 <span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">mad_autosome_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.mad_autosome_coverage" title="Permalink to this definition"></a></dt>
-<dd><p>The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).</p>
-<p>Source: run_mosdepth.sh (mad_autosome_coverage)</p>
+<dd><p>Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of non duplicated reads, non clipped bases, non overlapping bases, primary alignments, achieving a mapping quality of 20 or greater is derived from mosdepth v0.3.2. It is further narrowed down to the non gap regions of GRCh38 assembly, autosomes only using bedtools intersect. The median absolute deviation of the coverage is then calculated using datamash.</p>
 </dd></dl>
 
 </section>
