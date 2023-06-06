@@ -2,9 +2,11 @@
 NPM-sample-qc
 =============
 
-NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.
+NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM). In collaboration with ..GA4GH_, the WGS_Quality_Control_Standards_ was formed with this workflow as first reference implementation of the standards.
 
 .. _Nextflow: https://www.nextflow.io/
+.. _GA4GH: https://www.ga4gh.org/
+.. _WGS_Quality_Control_Standards: https://www.ga4gh.org/product/wgs-quality-control-standards/
 
 Requirements
 ============
