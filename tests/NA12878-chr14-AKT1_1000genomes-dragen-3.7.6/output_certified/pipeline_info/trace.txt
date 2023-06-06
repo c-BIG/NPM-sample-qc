@@ -1,7 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	83/a8805a	762811	samtools_stats (NA12878-chr14-AKT1)	COMPLETED	0	2023-01-18 07:19:31.173	980ms	51ms	90.9%	7.5 MB	12.7 MB	743.8 KB	67.9 KB
-2	6c/ce6bbf	762801	picard_collect_multiple_metrics_bam (NA12878-chr14-AKT1)	COMPLETED	0	2023-01-18 07:19:31.166	2.6s	1.7s	257.2%	121.6 MB	5.1 GB	21.6 MB	736.7 KB
-3	2c/05bcd2	762773	mosdepth_bam (NA12878-chr14-AKT1)	COMPLETED	0	2023-01-18 07:19:31.147	7.4s	6.5s	100.5%	847.5 MB	872.1 MB	931.6 KB	16.3 MB
-4	13/34615d	764138	mosdepth_datamash (NA12878-chr14-AKT1)	COMPLETED	0	2023-01-18 07:19:38.587	33.8s	33s	95.4%	52.1 MB	101.2 MB	1 GB	937.5 MB
-5	45/e1eabb	766042	multiqc	COMPLETED	0	2023-01-18 07:20:12.353	6.4s	5.7s	73.6%	128.4 MB	857.7 MB	40.8 MB	2.4 MB
-6	94/32a883	766648	compile_metrics	COMPLETED	0	2023-01-18 07:20:18.756	1.1s	482ms	85.5%	11.5 MB	15.2 MB	4.2 MB	760 B

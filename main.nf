@@ -194,12 +194,10 @@ process picard_collect_multiple_metrics_bam {
 
     output:
     path "${biosample_id}.quality_yield_metrics.txt"
-    path "${biosample_id}.insert_size_metrics.txt"
 
     script:
     """
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
-    # program CollectInsertSizeMetrics to get mean insert size
 
     picard CollectMultipleMetrics  \
         I=${cbam} \
@@ -208,7 +206,6 @@ process picard_collect_multiple_metrics_bam {
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
         PROGRAM=CollectQualityYieldMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS
     """
@@ -226,12 +223,10 @@ process picard_collect_multiple_metrics_cram {
 
     output:
     path "${biosample_id}.quality_yield_metrics.txt"
-    path "${biosample_id}.insert_size_metrics.txt"
 
     script:
     """
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
-    # program CollectInsertSizeMetrics to get mean insert size
 
     picard CollectMultipleMetrics  \
         I=${cbam} \
@@ -240,10 +235,35 @@ process picard_collect_multiple_metrics_cram {
         FILE_EXTENSION=".txt" \
         PROGRAM=null \
         PROGRAM=CollectQualityYieldMetrics \
-        PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS \
         R=${reference}
+    """
+}
+
+process verifybamid2 {
+    tag "${biosample_id}"
+    publishDir "${params.publishdir}/verifybamid2", mode: "copy"
+    errorStrategy 'ignore'
+
+    input:
+    path cbam
+    path cbam_idx
+    path reference
+    path vbi2_ud
+    path vbi2_bed
+    path vbi2_mean
+
+    output:
+    path "result*"
+
+    script:
+    """
+   # run verifybamid2
+   # get the percentage of cross-individual contamination rate 
+    
+    verifybamid2 --NumPC 4 --SVDPrefix ${params.vbi2_svdprefix} --Reference ${reference} --BamFile ${cbam}
+
     """
 }
 
@@ -303,11 +323,15 @@ if (aln_file_type == "bam") {
 else if (aln_file_type == "cram") {
     cbam = channel.fromPath(params.bam_cram, checkIfExists: true)
     cbam_idx = channel.fromPath(params.bam_cram + ".crai", checkIfExists: true)
-    reference = channel.fromPath(params.reference, checkIfExists: true)
-    reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 }
 
+reference = channel.fromPath(params.reference, checkIfExists: true)
+reference_idx = channel.fromPath(params.reference + ".fai", checkIfExists: true)
 autosomes_non_gap_regions = channel.fromPath(params.autosomes_non_gap_regions, checkIfExists: true)
+vbi2_ud = channel.fromPath(params.vbi2_ud, checkIfExists: true)
+vbi2_bed = channel.fromPath(params.vbi2_bed, checkIfExists: true)
+vbi2_mean = channel.fromPath(params.vbi2_mean, checkIfExists: true)
+
 
 // main
 workflow {
@@ -316,14 +340,16 @@ workflow {
         picard_collect_multiple_metrics_bam( cbam )
         mosdepth_bam( cbam, cbam_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out )
-        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out ).collect() )
+        verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_bam.out, mosdepth_bam.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     } else if (aln_file_type == "cram") {
         samtools_stats( cbam )
         picard_collect_multiple_metrics_cram( cbam, cbam_idx, reference, reference_idx)
         mosdepth_cram( cbam, cbam_idx, reference, reference_idx )
         mosdepth_datamash( autosomes_non_gap_regions, mosdepth_cram.out )
-        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out ).collect() )
+        verifybamid2( cbam, cbam_idx, reference, vbi2_ud, vbi2_bed, vbi2_mean )
+        multiqc( samtools_stats.out.mix( picard_collect_multiple_metrics_cram.out, mosdepth_cram.out, mosdepth_datamash.out, verifybamid2.out ).collect() )
         compile_metrics(multiqc.out)
     }
 }

@@ -3,11 +3,13 @@
         "id": "NA12878-chr14-AKT1"
     },
     "wgs_qc_metrics": {
+        "cross_contamination_rate": "NA",
+        "insert_size_std_deviation": 98.2,
         "mad_autosome_coverage": 0.0,
         "mean_autosome_coverage": 0.00065,
-        "mean_insert_size": 449.44515,
+        "mean_insert_size": 447.3,
         "pct_autosomes_15x": 0.00163,
-        "pct_reads_aligned_in_pairs": 99.2614,
+        "pct_reads_mapped": 99.6307,
         "pct_reads_properly_paired": 97.87835,
         "yield_bp_q30": 1996315
     }

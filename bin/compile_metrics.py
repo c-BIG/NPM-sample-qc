@@ -46,12 +46,14 @@ def calculate_metrics(mqc):
         # primary metrics
         "yield_bp_q30",
         # alignment
-        "pct_reads_aligned_in_pairs", "pct_reads_properly_paired",
+        "pct_reads_mapped", "pct_reads_properly_paired",
         # coverage
         "mean_autosome_coverage", "mad_autosome_coverage",
         "pct_autosomes_15x",
         # insert size
-        "mean_insert_size"
+        "mean_insert_size",
+        "insert_size_std_deviation",
+        "cross_contamination_rate"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))

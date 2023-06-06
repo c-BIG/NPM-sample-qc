@@ -1,0 +1,6 @@
+insert_size_std_deviation
+=========================
+
+.. currentmodule:: metrics
+
+.. autofunction:: insert_size_std_deviation
