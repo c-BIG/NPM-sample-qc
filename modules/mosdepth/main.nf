@@ -15,6 +15,10 @@ process mosdepth {
     def fasta = ref_fasta ? /--fasta "${ref_fasta}"/ : ''
 
     """
+   # run mosdepth    
+   # do not output per-base depth and apply 1000bp window-sizes
+   # use the reads with mapping quality 20 and above
+
     mosdepth \\
         --no-per-base \\
         --by 1000 \\

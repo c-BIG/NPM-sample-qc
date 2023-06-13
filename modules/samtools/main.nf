@@ -13,6 +13,9 @@ process samtools_stats {
     def reference = ref_fasta ? /--reference "${ref_fasta}"/ : ''
 
     """
+    # get the percentage of reads that have been aligned
+    # get the percentage of reads that have been aligned as proper pairs
+
     samtools stats \\
         ${reference} \\
         "${bam}" \\
