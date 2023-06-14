@@ -52,7 +52,7 @@ def calculate_metrics(mqc):
         "pct_autosomes_15x",
         # insert size
         "mean_insert_size",
-        # cross-individual contamination rate
+        "insert_size_std_deviation",
         "cross_contamination_rate"
     ]
     result = dict()

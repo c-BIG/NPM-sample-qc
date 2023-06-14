@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pct_autosomes_15x &mdash; NPM-sample-qc  documentation</title>
+  <title>cross_contamination_rate &mdash; NPM-sample-qc  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pct_reads_mapped" href="metrics.pct_reads_mapped.html" />
-    <link rel="prev" title="mean_insert_size" href="metrics.mean_insert_size.html" /> 
+    <link rel="next" title="insert_size_std_deviation" href="metrics.insert_size_std_deviation.html" />
+    <link rel="prev" title="Functions" href="../metrics.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,12 +42,12 @@
               <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../metrics.html">Functions</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="metrics.cross_contamination_rate.html">cross_contamination_rate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cross_contamination_rate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.insert_size_std_deviation.html">insert_size_std_deviation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mad_autosome_coverage.html">mad_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.mean_insert_size.html">mean_insert_size</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pct_autosomes_15x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_mapped.html">pct_reads_mapped</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.yield_bp_q30.html">yield_bp_q30</a></li>
@@ -70,9 +70,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../metrics.html">Functions</a> &raquo;</li>
-      <li>pct_autosomes_15x</li>
+      <li>cross_contamination_rate</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/metrics.pct_autosomes_15x.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/metrics.cross_contamination_rate.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -80,13 +80,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pct-autosomes-15x">
-<h1>pct_autosomes_15x<a class="headerlink" href="#pct-autosomes-15x" title="Permalink to this heading"></a></h1>
+  <section id="cross-contamination-rate">
+<h1>cross_contamination_rate<a class="headerlink" href="#cross-contamination-rate" title="Permalink to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="metrics.pct_autosomes_15x">
-<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_autosomes_15x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_autosomes_15x" title="Permalink to this definition"></a></dt>
-<dd><p>Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
-<p>Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of non duplicated reads, non clipped bases, non overlapping bases, primary alignments, achieving a mapping quality of 20 or greater is derived from mosdepth v0.3.2. It is further narrowed down to the non gap regions of GRCh38 assembly, autosomes only using bedtools intersect. The percentage of bases attaining at least 15X coverage is then calculated using datamash.</p>
+<dt class="sig sig-object py" id="metrics.cross_contamination_rate">
+<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">cross_contamination_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.cross_contamination_rate" title="Permalink to this definition"></a></dt>
+<dd><p>Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
+<p>Implementation details: The estimation of inter-sample DNA contamination of short paired-end sequencing high quality, aligned sequence reads (BAM/CRAM) mapped on GRCh38 assembly with pre-calculated reference panel of 1000 Genome Project dataset from the VerifyBamID resource using VerifyBamID2 with NumPC “4” (# of Principal Components used in estimation), the key information “FREEMIX” in “.selfSM” in the results indicates the estimated contamination level.</p>
 </dd></dl>
 
 </section>
@@ -95,8 +95,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="metrics.mean_insert_size.html" class="btn btn-neutral float-left" title="mean_insert_size" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="metrics.pct_reads_mapped.html" class="btn btn-neutral float-right" title="pct_reads_mapped" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../metrics.html" class="btn btn-neutral float-left" title="Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="metrics.insert_size_std_deviation.html" class="btn btn-neutral float-right" title="insert_size_std_deviation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

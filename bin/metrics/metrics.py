@@ -3,15 +3,13 @@
 import numpy as np
 import inspect
 
-
 DECIMALS = 5
-
 
 def yield_bp_q30(mqc):
     """
-    The number of bases that pass filter (PF) and with base quality ≥ 30 (BQ).
+    Description: The number of bases in short paired-end sequencing high quality reads, primary alignments, achieving a base quality score of 30 or greater (Phred scale). Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
 
-    Source: picard QualityYieldMetrics (PF_Q30_BASES)
+    Implementation details: In the NPM-sample-QC reference implementation it is computed using GATK Picard CollectQualityYieldMetrics, reporting the PF_Q30_BASES field. Only high quality bases from primary alignments are considered. No filter on duplicated reads, clipped bases or mapping qualiy is applied.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -24,12 +22,11 @@ def yield_bp_q30(mqc):
 
     return k, v
 
-
 def pct_reads_mapped(mqc):
     """
-    The percentage of primary reads, paired or single, that are mappable to the REF sequence with MAPQ > 0 after alignment. 
-
-    Source: samtools stats (reads_mapped / sequences)
+    Description: The percentage of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
+    
+    Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -43,12 +40,11 @@ def pct_reads_mapped(mqc):
 
     return k, v
 
-
 def pct_reads_properly_paired(mqc):
     """
-    The percentage of reads that have been aligned as proper pairs.
-
-    Source: samtools stats (reads_properly_paired_percent)
+    Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.
+    
+    Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of properly paired reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -61,16 +57,11 @@ def pct_reads_properly_paired(mqc):
 
     return k, v
 
-
 def mean_autosome_coverage(mqc):
     """
-    The mean coverage in autosomes (as defined in genome_territory). Excludes:
-
-    - bases in reads with low mapping quality (mapq < 20)
-    - bases in reads marked as duplicates
-    - overlapping bases in read pairs
-
-    Source: run_mosdepth.sh (mean_autosome_coverage)
+    Description: The mean sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
+    
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of non duplicated reads, non clipped bases, non overlapping bases, primary alignments, achieving a mapping quality of 20 or greater is derived from mosdepth v0.3.2. It is further narrowed down to the non gap regions of GRCh38 assembly, autosomes only using bedtools intersect. The mean coverage is then computed on 1,000bp windows and averaged for the selected region using datamash.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -83,12 +74,11 @@ def mean_autosome_coverage(mqc):
 
     return k, v
 
-
 def mad_autosome_coverage(mqc):
     """
-    The median absolute deviation of coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
-
-    Source: run_mosdepth.sh (mad_autosome_coverage)
+    Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
+    
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of non duplicated reads, non clipped bases, non overlapping bases, primary alignments, achieving a mapping quality of 20 or greater is derived from mosdepth v0.3.2. It is further narrowed down to the non gap regions of GRCh38 assembly, autosomes only using bedtools intersect. The median absolute deviation of the coverage is then calculated using datamash.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -101,12 +91,11 @@ def mad_autosome_coverage(mqc):
 
     return k, v
 
-
 def pct_autosomes_15x(mqc):
     """
-    The percentage of bases with at least 15X coverage in autosomes, after coverage filters are applied (see mean_autosome_coverage for details).
-
-    Source: run_mosdepth.sh (ge_15x_autosome_bases * 100 / total_autosome_bases)
+    Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
+    
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of non duplicated reads, non clipped bases, non overlapping bases, primary alignments, achieving a mapping quality of 20 or greater is derived from mosdepth v0.3.2. It is further narrowed down to the non gap regions of GRCh38 assembly, autosomes only using bedtools intersect. The percentage of bases attaining at least 15X coverage is then calculated using datamash.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -120,22 +109,34 @@ def pct_autosomes_15x(mqc):
 
     return k, v
 
-
 def mean_insert_size(mqc):
     """
-    The mean insert size over the "core" of the distribution.
-
-    Note: Artefactual outliers in the distribution often cause calculation of nonsensical mean and
-    stdev values. To avoid this the distribution is first trimmed to a "core" distribution of +/- N
-    median absolute deviations around the median insert size.
-
-    Source: picard InsertSizeMetrics (MEAN_INSERT_SIZE)
+    Description: The mean insert size of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
+    
+    Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the insert_size_average field. Duplicated reads are included. No mapping qualiy is applied.
     """
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_picard_insertSize"].values()))
-        v = d["MEAN_INSERT_SIZE"]
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_average"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+def insert_size_std_deviation(mqc):
+    """
+    Description: The insert size standard deviation of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
+    
+    Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the insert_size_standard_deviation field. Duplicated reads are included. No mapping qualiy is applied.
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        v = d["insert_size_standard_deviation"]
         v = np.round(v, DECIMALS)
     except KeyError:
         v = "NA"
@@ -144,8 +145,9 @@ def mean_insert_size(mqc):
 
 def cross_contamination_rate(mqc):
     """
-    Estimation of cross-individual contamination rate.
-    Source: VerifyBamID2 (FREEMIX)
+    Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
+    
+    Implementation details: The estimation of inter-sample DNA contamination of short paired-end sequencing high quality, aligned sequence reads (BAM/CRAM) mapped on GRCh38 assembly with pre-calculated reference panel of 1000 Genome Project dataset from the VerifyBamID resource using VerifyBamID2 with NumPC “4” (# of Principal Components used in estimation), the key information “FREEMIX” in “.selfSM” in the results indicates the estimated contamination level.
     """
     k = inspect.currentframe().f_code.co_name
 
