@@ -69,11 +69,11 @@
              
   <section id="npm-sample-qc">
 <h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this heading"></a></h1>
-<p>NPM-sample-qc is a <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM), a local initiative that intends to sequence the genomes of 100K individuals (SG100K), but can be easily extended to other large-scale sequencing projects.</p>
+<p>NPM-sample-qc is a <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM). In collaboration with <a class="reference external" href="https://www.ga4gh.org/">GA4GH</a> , the <a class="reference external" href="https://www.ga4gh.org/product/wgs-quality-control-standards/">WGS_Quality_Control_Standards</a> was formed with this workflow as first reference implementation of the standards.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
+<li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a> v23.04 or higher</p></li>
 <li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Install Docker</a></p></li>
 <li><p>Install and configure <a class="reference external" href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI</a></p></li>
 </ul>
@@ -92,7 +92,7 @@
 </pre></div>
 </div>
 <p>This creates <cite>output</cite> directory with the results that can be compared to the content of <cite>output_certified</cite></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 <p>Please refer to the workflow help for more information on its usage and access to additional options:</p>
@@ -142,7 +142,7 @@ See <code class="docutils literal notranslate"><span class="pre">nextflow.config
 See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
 <p>If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential,
 append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_request:</span> <span class="pre">true</span></code> to your parameter list (<code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> or commandline argument).
-See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
+See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
 </section>
 <section id="outputs">
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
@@ -150,15 +150,15 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-c
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outdir</span><span class="o">/</span>
     <span class="n">pipeline_info</span><span class="o">/</span>    <span class="c1"># dag, timeline and trace files</span>
         <span class="n">dag</span><span class="o">.</span><span class="n">pdf</span>
-        <span class="n">timeline</span><span class="o">.</span><span class="n">html</span>
         <span class="n">report</span><span class="o">.</span><span class="n">html</span>
+        <span class="n">timeline</span><span class="o">.</span><span class="n">html</span>
         <span class="n">trace</span><span class="o">.</span><span class="n">txt</span>
     <span class="n">results</span><span class="o">/</span>          <span class="c1"># final metrics.json and intermediate outputs</span>
-        <span class="o">&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
-        <span class="n">samtools</span><span class="o">/</span>
-        <span class="n">picard</span><span class="o">/</span>
+        <span class="n">metrics</span><span class="o">/&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
         <span class="n">mosdepth</span><span class="o">/</span>
         <span class="n">multiqc</span><span class="o">/</span>
+        <span class="n">picard_collect_multiple_metrics</span><span class="o">/</span>
+        <span class="n">samtools</span><span class="o">/</span>
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">keep_workdir</span></code> has been specified, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
