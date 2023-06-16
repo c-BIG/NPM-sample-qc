@@ -11,7 +11,7 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Requirements
 ============
 
-* `Install Nextflow`_
+* `Install Nextflow`_ v23.04 or higher
 * `Install Docker`_
 * Install and configure `AWS CLI`_
 
@@ -91,15 +91,15 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
   /path/to/outdir/
       pipeline_info/    # dag, timeline and trace files
           dag.pdf
-          timeline.html
           report.html
+          timeline.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
-          metrics/<sample_id>.metrics.json    
-          samtools/
-          picard_collect_multiple_metrics//
+          metrics/<sample_id>.metrics.json
           mosdepth/
           multiqc/
+          picard_collect_multiple_metrics/
+          samtools/
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
