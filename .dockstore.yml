@@ -20,4 +20,9 @@ workflows:
         orcid: 0000-0001-5691-861X  
       - name: Nicolas Bertin
         email: Nicolas_Bertin@gis.a-star.edu.sg
-        orcid: 0000-0002-9835-9606 
+        orcid: 0000-0002-9835-9606
+    filters:
+      branches: 
+        - main
+        - master
+        - develop
