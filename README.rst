@@ -11,7 +11,7 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Requirements
 ============
 
-* `Install Nextflow`_
+* `Install Nextflow`_ v23.04 or higher
 * `Install Docker`_
 * Install and configure `AWS CLI`_
 
@@ -35,7 +35,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 
 This creates `output` directory with the results that can be compared to the content of `output_certified` ::
 
-  diff output_certified/results/NA12878-chr14-AKT1.metrics.json output/results/NA12878-chr14-AKT1.metrics.json
+  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/metrics/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -81,7 +81,7 @@ See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an exam
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
-See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example. 
+See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
 
 Outputs
 -------
@@ -91,15 +91,15 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
   /path/to/outdir/
       pipeline_info/    # dag, timeline and trace files
           dag.pdf
-          timeline.html
           report.html
+          timeline.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
-          <sample_id>.metrics.json    
-          samtools/
-          picard/
+          metrics/<sample_id>.metrics.json
           mosdepth/
           multiqc/
+          picard_collect_multiple_metrics/
+          samtools/
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
