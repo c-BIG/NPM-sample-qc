@@ -10,4 +10,4 @@ nextflow run ../../main.nf \
 	-config ../../nextflow.config \
 	-params-file params.yml \
 	-work-dir ./work \
-	--outdir ./output
+	--publish_dir ./output
