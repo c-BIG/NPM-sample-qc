@@ -11,7 +11,6 @@ process samtools_stats {
 
     script:
     def reference = ref_fasta ? /--reference "${ref_fasta}"/ : ''
-    def threads = "${task.cpus}" ? /--threads "${task.cpus}"/ : ''
 
     """
     # get the percentage of reads that have been aligned
@@ -20,7 +19,7 @@ process samtools_stats {
     samtools stats \\
         ${reference} \\
         "${bam}" \\
-        ${threads} \\
+        --threads ${task.cpus} \\
         > "${sample}.stats"
     """
 }
