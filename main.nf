@@ -91,6 +91,7 @@ include { verifybamid2 as verifybamid2_bam } from './modules/verifybamid2'
 include { verifybamid2 as verifybamid2_cram } from './modules/verifybamid2'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam } from './modules/CollectMultipleMetrics'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
+include { bcftools_stats } from './modules/bcftools'
 include { multiqc } from './modules/multiqc'
 include { compile_metrics } from './modules/compile_metrics'
 
@@ -110,7 +111,7 @@ workflow {
     vbi2_ud = file( params.vbi2_ud )
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
-
+    ref_dbsnp = file( params.dbsnp_vcf )
 
     Channel
         .fromList( params.samples )
@@ -157,6 +158,22 @@ workflow {
 
 
     Channel
+        samples.branch { rec ->
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
+
+            output: rec.biosample_id && vcf_file
+                def vcf_idx = file( "${rec.vcf}.tbi" )
+
+                return tuple( rec.biosample_id, vcf_file, vcf_idx )
+        }
+        .set { vcf_inputs }
+
+    bcftools_stats( vcf_inputs )
+    picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
+    count_variants ( vcf_inputs )
+
+
+    Channel
         .empty()
         .mix( mosdepth_bam.out.dists )
         .mix( mosdepth_bam.out.summary )
@@ -173,6 +190,9 @@ workflow {
         .mix( picard_collect_multiple_metrics_cram.out.quality )
         .mix( samtools_stats_bam.out )
         .mix( samtools_stats_cram.out )
+        .mix( bcftools_stats.out )
+        .mix( picard_collect_variant_calling_metrics_vcf.out )
+        .mix( count_variants.out )
         .map { sample, files -> files }
         .collect()
         .set { log_files }

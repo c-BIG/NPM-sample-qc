@@ -53,7 +53,18 @@ def calculate_metrics(mqc):
         # insert size
         "mean_insert_size",
         "insert_size_std_deviation",
-        "cross_contamination_rate"
+        "cross_contamination_rate",
+        # variant calling
+        "all_snps", "all_het_snps", "all_homalt_snps", "all_snp_het_hom",
+        "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
+        "all_indels", "all_het_indels", "all_homalt_indels", "all_indel_het_hom",
+        "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
+        "all_del", "all_ins", "pass_del", "pass_ins",
+        "all_mnps", "pass_mnps",
+        "all_complex_indels", "all_complex_ins", "all_complex_del",
+        "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
+        "all_multiallelic_sites", "pass_multiallelic_sites",
+        "all_snp_ts_tv", "pass_snp_ts_tv"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))
