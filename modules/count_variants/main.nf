@@ -1,18 +1,18 @@
 process count_variants {
 
-    publishDir "${params.publishdir}/count_variants", mode: "copy"
+    tag { sample }
 
     input:
-    file vcf from vcf_ch_count_variants
+    tuple val(sample), path(vcf), path(tbi) 
 
     output:
-    file "*" into count_variants_ch
+    tuple val(sample), path("${sample}.variant_counts.json")
 
     script:
     """
     count_variants.py \
         --input_vcf ${vcf} \
-        --output_json ${params.sample_id}.variant_counts.json \
+        --output_json ${sample}.variant_counts.json \
         --loglevel DEBUG
     """
 
