@@ -11,8 +11,8 @@ process verifybamid2 {
     path vbi2_mean
 
     output:
-    tuple val(sample), path("result.selfSM"), emit: freemix
-    tuple val(sample), path("result.Ancestry"), emit: ancestry
+    tuple val(sample), path("${sample}.selfSM"), emit: freemix
+    tuple val(sample), path("${sample}.Ancestry"), emit: ancestry
 
     script:
     def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''
@@ -20,7 +20,7 @@ process verifybamid2 {
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
     
-    verifybamid2 --NumPC 4 --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam}
+    verifybamid2 --NumPC 4 --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
     """
 }
