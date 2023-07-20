@@ -5,7 +5,7 @@ import inspect
 
 DECIMALS = 5
 
-def yield_bp_q30(mqc):
+def yield_bp_q30(mqc, biosample_id):
     """
     Description: The number of bases in short paired-end sequencing high quality reads, primary alignments, achieving a base quality score of 30 or greater (Phred scale). Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
 
@@ -14,7 +14,7 @@ def yield_bp_q30(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_picard_QualityYieldMetrics"].values()))
+        d = mqc["multiqc_npm_picard_QualityYieldMetrics"][biosample_id].values()
         v = d["PF_Q30_BASES"]
         v = int(v)
     except KeyError:
@@ -22,7 +22,7 @@ def yield_bp_q30(mqc):
 
     return k, v
 
-def pct_reads_mapped(mqc):
+def pct_reads_mapped(mqc, biosample_id):
     """
     Description: The percentage of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
     
@@ -31,7 +31,7 @@ def pct_reads_mapped(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        d = mqc["multiqc_samtools_stats"][biosample_id].values()
         v = np.divide(d["reads_mapped"],
                       d["sequences"])
         v = np.round(v*100, DECIMALS)
@@ -40,7 +40,7 @@ def pct_reads_mapped(mqc):
 
     return k, v
 
-def pct_reads_properly_paired(mqc):
+def pct_reads_properly_paired(mqc, biosample_id):
     """
     Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.
     
@@ -49,7 +49,7 @@ def pct_reads_properly_paired(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        d = mqc["multiqc_samtools_stats"][biosample_id].values()
         v = d["reads_properly_paired_percent"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -57,7 +57,7 @@ def pct_reads_properly_paired(mqc):
 
     return k, v
 
-def mean_autosome_coverage(mqc):
+def mean_autosome_coverage(mqc, biosample_id):
     """
     Description: The mean sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
     
@@ -66,7 +66,7 @@ def mean_autosome_coverage(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
         v = d["mean_autosome_coverage"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
@@ -74,7 +74,7 @@ def mean_autosome_coverage(mqc):
 
     return k, v
 
-def mad_autosome_coverage(mqc):
+def mad_autosome_coverage(mqc, biosample_id):
     """
     Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
     
@@ -83,7 +83,7 @@ def mad_autosome_coverage(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
         v = d["mad_autosome_coverage"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
@@ -91,7 +91,7 @@ def mad_autosome_coverage(mqc):
 
     return k, v
 
-def pct_autosomes_15x(mqc):
+def pct_autosomes_15x(mqc, biosample_id):
     """
     Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Clipped bases are excluded. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
     
@@ -100,7 +100,7 @@ def pct_autosomes_15x(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_mosdepth"].values()))
+        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
         v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
                       np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
@@ -109,7 +109,7 @@ def pct_autosomes_15x(mqc):
 
     return k, v
 
-def mean_insert_size(mqc):
+def mean_insert_size(mqc, biosample_id):
     """
     Description: The mean insert size of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
     
@@ -118,7 +118,7 @@ def mean_insert_size(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        d = mqc["multiqc_samtools_stats"][biosample_id].values()
         v = d["insert_size_average"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -126,7 +126,7 @@ def mean_insert_size(mqc):
 
     return k, v
 
-def insert_size_std_deviation(mqc):
+def insert_size_std_deviation(mqc, biosample_id):
     """
     Description: The insert size standard deviation of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.
     
@@ -135,7 +135,7 @@ def insert_size_std_deviation(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_samtools_stats"].values()))
+        d = mqc["multiqc_samtools_stats"][biosample_id].values()
         v = d["insert_size_standard_deviation"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -143,7 +143,7 @@ def insert_size_std_deviation(mqc):
 
     return k, v
 
-def cross_contamination_rate(mqc):
+def cross_contamination_rate(mqc, biosample_id):
     """
     Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.
     
@@ -152,7 +152,7 @@ def cross_contamination_rate(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_verifybamid"].values()))
+        d = mqc["multiqc_verifybamid"][biosample_id].values()
         v = d["FREEMIX"]
     except KeyError:
         v = "NA"
