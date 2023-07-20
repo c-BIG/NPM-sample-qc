@@ -14,7 +14,7 @@ def yield_bp_q30(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_picard_QualityYieldMetrics"][biosample_id].values()
+        d = mqc["multiqc_npm_picard_QualityYieldMetrics"][biosample_id]
         v = d["PF_Q30_BASES"]
         v = int(v)
     except KeyError:
@@ -31,7 +31,7 @@ def pct_reads_mapped(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_samtools_stats"][biosample_id].values()
+        d = mqc["multiqc_samtools_stats"][biosample_id]
         v = np.divide(d["reads_mapped"],
                       d["sequences"])
         v = np.round(v*100, DECIMALS)
@@ -49,7 +49,7 @@ def pct_reads_properly_paired(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_samtools_stats"][biosample_id].values()
+        d = mqc["multiqc_samtools_stats"][biosample_id]
         v = d["reads_properly_paired_percent"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -66,7 +66,7 @@ def mean_autosome_coverage(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
+        d = mqc["multiqc_npm_mosdepth"][biosample_id]
         v = d["mean_autosome_coverage"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
@@ -83,7 +83,7 @@ def mad_autosome_coverage(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
+        d = mqc["multiqc_npm_mosdepth"][biosample_id]
         v = d["mad_autosome_coverage"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
@@ -100,7 +100,7 @@ def pct_autosomes_15x(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id].values()
+        d = mqc["multiqc_npm_mosdepth"][biosample_id]
         v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
                       np.float64(d["total_autosome_bases"]))
         v = np.round(v*100, DECIMALS)
@@ -118,7 +118,7 @@ def mean_insert_size(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_samtools_stats"][biosample_id].values()
+        d = mqc["multiqc_samtools_stats"][biosample_id]
         v = d["insert_size_average"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -135,7 +135,7 @@ def insert_size_std_deviation(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_samtools_stats"][biosample_id].values()
+        d = mqc["multiqc_samtools_stats"][biosample_id]
         v = d["insert_size_standard_deviation"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -152,7 +152,7 @@ def cross_contamination_rate(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_verifybamid"][biosample_id].values()
+        d = mqc["multiqc_verifybamid"][biosample_id]
         v = d["FREEMIX"]
     except KeyError:
         v = "NA"
