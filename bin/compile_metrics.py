@@ -58,7 +58,7 @@ def calculate_metrics(mqc):
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))
     for m in metrics_list:
-        k, v = eval("metrics." + m + "(mqc)")
+        k, v = eval("metrics." + m + "(mqc, args.biosample_id)")
         result[k] = v
 
     return result
