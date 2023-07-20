@@ -1,0 +1,17 @@
+def yield_bp_q30(mqc, biosample_id):
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = mqc["multiqc_npm_picard_QualityYieldMetrics"][biosample_id].values()
+        v = d["PF_Q30_BASES"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+
+
+        k, v = eval("metrics." + m + "(mqc, args.biosample_id)")
