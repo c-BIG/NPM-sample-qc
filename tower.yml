@@ -1,0 +1,5 @@
+reports:
+  multiqc_report.html:
+    display: "MultiQC HTML report"
+  "**/metrics/*.metrics.json":
+    display: "Samples metric report"
