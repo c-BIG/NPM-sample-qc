@@ -84,7 +84,7 @@
 <h1>pct_reads_properly_paired<a class="headerlink" href="#pct-reads-properly-paired" title="Permalink to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.pct_reads_properly_paired">
-<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
 <dd><p>Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of properly paired reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>

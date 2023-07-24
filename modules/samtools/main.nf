@@ -19,6 +19,7 @@ process samtools_stats {
     samtools stats \\
         ${reference} \\
         "${bam}" \\
+        --threads ${task.cpus} \\
         > "${sample}.stats"
     """
 }
