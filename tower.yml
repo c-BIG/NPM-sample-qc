@@ -1,0 +1,3 @@
+reports:
+  "**/metrics/*.metrics.json":
+    display: "Sample metrics report"
