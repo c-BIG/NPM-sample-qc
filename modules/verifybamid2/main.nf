@@ -2,6 +2,7 @@ process verifybamid2 {
 
     tag { sample }
     // errorStrategy 'ignore'
+    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'ignore' }
 
     input:
     tuple val(sample), path(bam), path(bai)
