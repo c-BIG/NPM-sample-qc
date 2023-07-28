@@ -1,7 +1,7 @@
 process verifybamid2 {
 
     tag { sample }
-    # errorStrategy 'ignore'
+    // errorStrategy 'ignore'
 
     input:
     tuple val(sample), path(bam), path(bai)
