@@ -120,10 +120,7 @@
 <li><p>Gaps in the GRCh38 (hg38) genome assembly were downloaded from <a class="reference external" href="http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz">http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz</a> (<code class="docutils literal notranslate"><span class="pre">2019-03-11</span> <span class="pre">09:51,</span> <span class="pre">12K</span></code>).</p></li>
 </ul>
 </li>
-<li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools.</p></li>
-</ul>
-<p>This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p>
-<ul class="simple">
+<li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p></li>
 <li><p><em>FASTA file index</em>. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai</span></code> and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.</p></li>
 </ul>
 </section>
@@ -131,15 +128,9 @@
 <h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
-<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g.</p></li>
+<li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
+<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p></li>
 </ul>
-<p>Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources.
-See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p>
-<ul class="simple">
-<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM.</p></li>
-</ul>
-<p>The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location.
-See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
 <p>If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential,
 append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_request:</span> <span class="pre">true</span></code> to your parameter list (<code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> or commandline argument).
 See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
