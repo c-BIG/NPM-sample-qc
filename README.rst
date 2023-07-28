@@ -61,8 +61,7 @@ The workflow requires the following resources given in the ``conf/resources.conf
 
   - Gaps in the GRCh38 (hg38) genome assembly were downloaded from http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/gap.txt.gz (``2019-03-11 09:51, 12K``).         
 
-- *Human Reference Genome FASTA file*, used as an input for multiple tools. 
-This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
+- *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
 
 - *FASTA file index*. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
 
@@ -71,13 +70,9 @@ Inputs
 
 Input requirements can be split into two categories:
 
-- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. 
-Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. 
-See ``nextflow.config`` for additional details.
+- **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. 
-The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. 
-See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example.
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
