@@ -1,6 +1,7 @@
 process picard_collect_multiple_metrics {
 
     tag { sample }
+    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'retry' }
 
     input:
     tuple val(sample), path(bam), path(bai)
@@ -17,7 +18,7 @@ process picard_collect_multiple_metrics {
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
     # program CollectInsertSizeMetrics to get mean insert size
 
-    java -Xmx2g -jar picard.jar CollectMultipleMetrics  \
+    picard CollectMultipleMetrics  \
         I=${bam} \
         O=${sample} \
         ${reference} \
