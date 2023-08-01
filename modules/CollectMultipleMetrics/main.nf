@@ -17,7 +17,7 @@ process picard_collect_multiple_metrics {
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
     # program CollectInsertSizeMetrics to get mean insert size
 
-    picard CollectMultipleMetrics  \
+    java -Xmx2g -jar picard.jar CollectMultipleMetrics  \
         I=${bam} \
         O=${sample} \
         ${reference} \
