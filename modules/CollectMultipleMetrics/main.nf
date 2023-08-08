@@ -1,7 +1,6 @@
 process picard_collect_multiple_metrics {
 
     tag { sample }
-    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'retry' }
 
     input:
     tuple val(sample), path(bam), path(bai)

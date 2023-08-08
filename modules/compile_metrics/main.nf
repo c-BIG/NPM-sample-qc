@@ -1,7 +1,6 @@
 process compile_metrics {
 
     tag { sample_ids }
-    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'retry' }
 
     input:
     val(sample_ids)
