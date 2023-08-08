@@ -15,11 +15,13 @@ process verifybamid2 {
 
     script:
     def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''
+
+    vf_threads = (int) Math.ceil(task.cpus*2)
     """
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
     
-    verifybamid2 --NumPC 4 --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
+    verifybamid2 --NumPC 4 --NumThread ${vf_threads} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
     """
 }
