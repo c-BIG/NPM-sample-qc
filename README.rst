@@ -100,6 +100,7 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
           multiqc/
           picard_collect_multiple_metrics/
           samtools/
+          verifybamid2/
 
 If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
