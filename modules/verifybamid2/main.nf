@@ -16,7 +16,6 @@ process verifybamid2 {
     script:
     def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''
 
-    // vf_threads = (int) Math.ceil(task.cpus*2)
     """
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
