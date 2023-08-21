@@ -21,7 +21,7 @@ process verifybamid2 {
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
     
-    verifybamid2 --NumPC 4 --NumThread ${vf_threads} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
+    verifybamid2 --NumPC 4 --NumThread ${task.cpus*2} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
     """
 }
