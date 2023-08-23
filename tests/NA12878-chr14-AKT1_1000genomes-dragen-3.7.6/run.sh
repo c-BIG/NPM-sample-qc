@@ -7,7 +7,7 @@ export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
 
 nextflow run ../../main.nf \
-	-config ../../nextflow.config \
+	-config ../../nextflow.config -config ./NA12878-chr14-AKT1.config \
 	-params-file params.yml \
 	-work-dir ./work \
 	--publish_dir ./output
