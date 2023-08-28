@@ -8,6 +8,6 @@ NXF_ANSI_LOG=false
 
 nextflow run ../../main.nf \
 	-config ../../nextflow.config -config ./NA12878-chr14-AKT1.config \
-	-params-file params.yml \
+	-params-file params-cram.yml \
 	-work-dir ./work \
 	--publish_dir ./output
