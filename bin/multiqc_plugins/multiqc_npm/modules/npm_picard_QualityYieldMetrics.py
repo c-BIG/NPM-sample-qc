@@ -32,6 +32,8 @@ def parse_reports(self):
                 if fn_search:
                     s_name = os.path.basename(fn_search.group(1).strip('[]'))
                     s_name = self.clean_s_name(s_name, f['root'])
+                    s_name = os.system(basename "s_name" | cut -d. -f1)
+
 
             # Parse metric names and values
             if s_name is not None:
