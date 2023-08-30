@@ -27,7 +27,7 @@ def parse_reports(self):
         for l in f['f']:
 
             # Pull sample name from input
-            if '# CollectMultipleMetrics' in l and 'INPUT' in l:
+            if 'QualityYieldMetrics' in l and 'INPUT' in l:
                 fn_search = re.search(r"INPUT(?:=|\s+)(\[?[^\s]+\]?)", l, flags=re.IGNORECASE)
                 if fn_search:
                     s_name = os.path.basename(fn_search.group(1).strip('[]'))
