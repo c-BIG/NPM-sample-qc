@@ -33,12 +33,8 @@ def parse_reports(self):
                     s_name = os.path.basename(fn_search.group(1).strip('[]'))
                     s_name = self.clean_s_name(s_name, f['root'])
                     print (s_name)
-                    # To get sample name with '.crma' extension
+                    # To get sample name with '.cram' extension
                     s_name = os.path.splitext(s_name)[0]
-                    # s_name = os.path.basename(s_name).split('.')[0]
-                    # index = s_name.rfind(".")
-                    # s_name = s_name[:index]
-                    # s_name = os.system(basename "s_name" | cut -d. -f1)
                     print(s_name, "clean file name with extension such .cram")
 
 
