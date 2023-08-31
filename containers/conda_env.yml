@@ -2,8 +2,7 @@ name: npm-sample-qc
 channels:
     - bioconda
     - conda-forge
-    - defaults
-channel_priority: strict  
+    - defaults 
 dependencies:
     - python=3.7
     - samtools=1.15

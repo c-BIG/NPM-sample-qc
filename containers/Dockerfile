@@ -29,21 +29,21 @@ RUN export DEBIAN_FRONTEND="noninteractive" && \
       vim \
       && rm -rf /var/lib/apt/lists/*
 
-    # install conda
+# install conda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local/conda
 RUN PATH="/usr/local/conda/bin:${PATH}"
 RUN rm Miniconda3-latest-Linux-x86_64.sh
 RUN conda update -n base -c defaults conda
 
+# install AWS CLI
 RUN conda install -c conda-forge -y awscli
 
-    # create conda environment from template
+# create conda environment from template
 RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
-    # install MultiQC and MultiQC_NPM plugin
-RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
+# install MultiQC and MultiQC_NPM plugin
+RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
-RUN git checkout feature/cram-format-multiqc-fix
 RUN python3 setup.py install
