@@ -32,6 +32,10 @@ def parse_reports(self):
                 if fn_search:
                     s_name = os.path.basename(fn_search.group(1).strip('[]'))
                     s_name = self.clean_s_name(s_name, f['root'])
+                    # Remove file extension
+                    s_name = os.path.splitext(s_name)[0]
+                    print(s_name, "clean file name without extension")
+
 
             # Parse metric names and values
             if s_name is not None:

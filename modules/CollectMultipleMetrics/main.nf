@@ -12,7 +12,7 @@ process picard_collect_multiple_metrics {
     tuple val(sample), path("${sample}.insert_size_metrics.txt"), emit: insert_size
 
     script:
-    def reference = ref_fasta ? /REFERENCE_SEQUENCE="${ref_fasta}"/ : ''
+    def reference = ref_fasta ? /R="${ref_fasta}"/ : ''
     """
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
     # program CollectInsertSizeMetrics to get mean insert size
