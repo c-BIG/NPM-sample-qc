@@ -105,7 +105,7 @@ Docker image
 By default the workflow pull the docker image from dockerhub. However you can also build docker image locally ::
 
   # Move to containers
-  cd NPM-sample-qc/containers
+  cd containers
   # Build docker image locally
   sh build_npm-sample-qc_docker_image.sh
 
