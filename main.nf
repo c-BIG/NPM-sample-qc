@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+import groovy.yaml.YamlSlurper
+
 nextflow.enable.dsl=2
 
 /*
@@ -102,6 +104,8 @@ WORKFLOW
 
 // main
 
+// params.inputs_list = "inputs.yaml"
+
 workflow {
 
     ref_fasta = file( params.reference )
@@ -111,9 +115,10 @@ workflow {
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
 
+    inputs = new YamlSlurper().parse(params.inputs_list as File)
 
     Channel
-        .fromList( params.samples )
+        .fromList(inputs['samples'])
         .ifEmpty { ['biosample_id': params.biosample_id, 'bam': params.bam] }
         .set { samples }
 
