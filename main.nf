@@ -119,7 +119,7 @@ workflow {
 
     Channel
         .fromList(inputs['samples'])
-        .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.bam] }
+        .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.aln] }
         .set { samples }
 
     Channel
