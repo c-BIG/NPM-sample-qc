@@ -115,7 +115,7 @@ workflow {
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
 
-    inputs = new YamlSlurper().parse(params.inputs_list as File)
+    inputs = new YamlSlurper().parse(file(params.inputs_list))
 
     Channel
         .fromList(inputs['samples'])
