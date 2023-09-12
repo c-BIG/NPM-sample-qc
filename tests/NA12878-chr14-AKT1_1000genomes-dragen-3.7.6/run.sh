@@ -10,5 +10,4 @@ nextflow run ../../main.nf \
 	-config ../../nextflow.config -config ./NA12878-chr14-AKT1.config \
         --inputs_list inputs.yaml \
 	-work-dir ./work \
-	--publish_dir ./output \
-        -resume
+	--publish_dir ./output
