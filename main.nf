@@ -104,8 +104,6 @@ WORKFLOW
 
 // main
 
-// params.inputs_list = "inputs.yaml"
-
 workflow {
 
     ref_fasta = file( params.reference )

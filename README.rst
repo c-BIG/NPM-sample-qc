@@ -11,7 +11,16 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Requirements
 ============
 
-* `Install Nextflow`_ v23.04 or higher
+* `Install Nextflow`_ v23.08.1-edge or higher 
+
+::
+  # Download the executable package
+  wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.08.1-edge/nextflow-23.08.1-edge-all | bash
+  # Make the binary executable on your system
+  chmod -x nextflow
+  # Optionally, move the nextflow file to a directory accessible by your $PATH variable
+  mv nextflow /usr/local/bin
+
 * `Install Docker`_
 * Install and configure `AWS CLI`_
 
