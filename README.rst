@@ -14,6 +14,7 @@ Requirements
 * `Install Nextflow`_ 
 
 v23.08.1-edge or higher ::
+  
   # Download the executable package
   wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.08.1-edge/nextflow-23.08.1-edge-all | bash
   # Make the binary executable on your system
