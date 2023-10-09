@@ -8,6 +8,6 @@ NXF_ANSI_LOG=false
 
 nextflow run ../../main.nf \
 	-config ../../nextflow.config \
-	-params-file params.yml \
+	--inputs_list params.yaml \
 	-work-dir ./work \
 	--publish_dir ./output

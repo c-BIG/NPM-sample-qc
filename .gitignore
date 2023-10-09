@@ -10,6 +10,7 @@ docsrc/api/
 tests/*/work
 tests/*/output
 tests/*/.nextflow*
+tests/*/*.bak
 
 tests/*/output_certified/pipeline_info
 tests/*/output_certified/results/multiqc
