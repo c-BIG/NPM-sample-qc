@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+import groovy.yaml.YamlSlurper
+
 nextflow.enable.dsl=2
 
 /*
@@ -111,23 +113,24 @@ workflow {
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
 
+    inputs = new YamlSlurper().parse(file(params.inputs_list))
 
     Channel
-        .fromList( params.samples )
-        .ifEmpty { ['biosample_id': params.biosample_id, 'bam': params.bam] }
+        .fromList(inputs['samples'])
+        .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.aln] }
         .set { samples }
 
     Channel
         samples.branch { rec ->
-            def aln_file = rec.bam ? file( rec.bam ) : null
+            def aln_file = rec.aln ? file( rec.aln ) : null
 
             bam: rec.biosample_id && aln_file?.extension == 'bam'
-                def bam_idx = file( "${rec.bam}.bai" )
+                def bam_idx = file( "${rec.aln}.bai" )
 
                 return tuple( rec.biosample_id, aln_file, bam_idx )
 
             cram: rec.biosample_id && aln_file?.extension == 'cram'
-                def cram_idx = file( "${rec.bam}.crai" )
+                def cram_idx = file( "${rec.aln}.crai" )
 
                 return tuple( rec.biosample_id, aln_file, cram_idx )
         }

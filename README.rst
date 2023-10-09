@@ -11,7 +11,17 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Requirements
 ============
 
-* `Install Nextflow`_ v23.04 or higher
+* `Install Nextflow`_ 
+
+v23.08.1-edge or higher ::
+  
+  # Download the executable package
+  wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.08.1-edge/nextflow-23.08.1-edge-all | bash
+  # Make the binary executable on your system
+  chmod -x nextflow
+  # Optionally, move the nextflow file to a directory accessible by your $PATH variable
+  mv nextflow /usr/local/bin
+
 * `Install Docker`_
 * Install and configure `AWS CLI`_
 
@@ -72,11 +82,11 @@ Input requirements can be split into two categories:
 
 - **Generic workflow settings** specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See ``nextflow.config`` for additional details.
 
-- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml`` for an example.
+- **Sample-specific settings** contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See ``tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yaml`` for an example.
 
 If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential, 
 append ``aws_no_sign_request: true`` to your parameter list (``params.yaml`` or commandline argument).
-See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yml`` for an example. 
+See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yaml`` for an example. 
 
 Outputs
 -------
