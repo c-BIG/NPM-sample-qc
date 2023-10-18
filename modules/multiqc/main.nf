@@ -1,12 +1,15 @@
 process multiqc {
 
+    tag { sample }
+
     input:
-    path 'data/*'
+    tuple val(sample), path('*')
 
     output:
-    path "multiqc_report.html", emit: report
-    // path "multiqc_data", emit: data
-    path "multiqc_data/multiqc_data.json", emit: json_data
+    
+    tuple val(sample), path("multiqc_report.html"), emit: report
+    tuple val(sample), path("multiqc_data"), emit: data
+    tuple val(sample), path("${sample}/multiqc_data/multiqc_data.json"), emit: json_data
 
     """
     multiqc \\

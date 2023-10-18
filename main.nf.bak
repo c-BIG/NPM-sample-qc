@@ -163,12 +163,38 @@ workflow {
 
     Channel
         samples.map { it.biosample_id }
+        // .empty()
+        .mix( mosdepth_bam.out.dists )
+        .mix( mosdepth_bam.out.summary )
+        .mix( mosdepth_cram.out.dists )
+        .mix( mosdepth_cram.out.summary )
+        .mix( mosdepth_datamash.out.coverage )
+        .mix( verifybamid2_bam.out.freemix )
+        .mix( verifybamid2_cram.out.freemix )
+        .mix( verifybamid2_bam.out.ancestry )
+        .mix( verifybamid2_cram.out.ancestry )
+        .mix( picard_collect_multiple_metrics_bam.out.insert_size )
+        .mix( picard_collect_multiple_metrics_cram.out.insert_size )
+        .mix( picard_collect_multiple_metrics_bam.out.quality )
+        .mix( picard_collect_multiple_metrics_cram.out.quality )
+        .mix( samtools_stats_bam.out.stats )
+        .mix( samtools_stats_cram.out.stats )
+        // .map { sample, files -> files }
+        // .map { it.biosample_id  }
+        .collect()
+        .set { log_files }
+
+    multiqc( samples, log_files )
+
+
+    Channel
+        samples.map { it.biosample_id }
         .set { sample_ids }
 
 
-    multiqc( mosdepth_datamash.out.coverage.mix( samtools_stats_bam.out.stats, samtools_stats_cram.out.stats, mosdepth_bam.out.dists, mosdepth_bam.out.summary, mosdepth_cram.out.dists, mosdepth_cram.out.summary, verifybamid2_bam.out.freemix, verifybamid2_cram.out.freemix, verifybamid2_bam.out.ancestry, verifybamid2_cram.out.ancestry, picard_collect_multiple_metrics_bam.out.insert_size,  picard_collect_multiple_metrics_cram.out.insert_size, picard_collect_multiple_metrics_bam.out.quality, picard_collect_multiple_metrics_cram.out.quality ).collect() )
+    // multiqc( sample_ids, samtools_stats_bam.out.stats.mix( samtools_stats_cram.out.stats, mosdepth_bam.out.dists, mosdepth_bam.out.summary, mosdepth_cram.out.dists, mosdepth_cram.out.summary, mosdepth_datamash.out.coverage, verifybamid2_bam.out.freemix, verifybamid2_cram.out.freemix, verifybamid2_bam.out.ancestry, verifybamid2_cram.out.ancestry ).collect() )
 
-    // compile_metrics ( sample_ids, multiqc.out.json_data )    
+    compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*
