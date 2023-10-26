@@ -94,7 +94,7 @@ include { verifybamid2 as verifybamid2_cram } from './modules/verifybamid2'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam } from './modules/CollectMultipleMetrics'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
 include { multiqc } from './modules/multiqc'
-include { compile_metrics } from './modules/compile_metrics'
+// include { compile_metrics } from './modules/compile_metrics'
 
 /*
 ----------------------------------------------------------------------
