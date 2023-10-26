@@ -10,8 +10,9 @@ process verifybamid2 {
     path vbi2_mean
 
     output:
-    tuple val(sample), path("${sample}.selfSM"), emit: freemix
-    tuple val(sample), path("${sample}.Ancestry"), emit: ancestry
+    tuple val(sample), path("${sample}.selfSM"), path("${sample}.Ancestry"), emit: verifybamid_bam_out
+    // tuple val(sample), path("${sample}.selfSM"), emit: freemix
+    // tuple val(sample), path("${sample}.Ancestry"), emit: ancestry
 
     script:
     def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''

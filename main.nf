@@ -160,15 +160,27 @@ workflow {
     mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
 //    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
 
-
     Channel
-        samples.map { it.biosample_id }
-        .set { sample_ids }
+        .empty()
+        samtools_stats_bam.out.stats
+        .mix( samtools_stats_cram.out.stats )
+        .join( mosdepth_bam.out.dists )
+        .mix( mosdepth_cram.out.dists )
+        .join( mosdepth_bam.out.summary )
+        .mix( mosdepth_cram.out.summary )
+        .join( mosdepth_datamash.out.coverage )
+        .join( picard_collect_multiple_metrics_bam.out.insert_size )
+        .mix( picard_collect_multiple_metrics_cram.out.insert_size )
+        .join( picard_collect_multiple_metrics_bam.out.quality )
+        .mix( picard_collect_multiple_metrics_cram.out.quality )
+        // .join( verifybamid2_bam.out.verifybamid_bam_out.ifEmpty([]) )
+        // .mix( verifybamid2_cram.out.verifybamid_bam_out.ifEmpty([]) )
+        // .join( verifybamid2_bam.out.verifybamid_bam_out )
+        // .mix( verifybamid2_cram.out.verifybamid_bam_out )
+        .set { multiqc_in }
 
+    multiqc( multiqc_in )
 
-    multiqc( mosdepth_datamash.out.coverage.mix( samtools_stats_bam.out.stats, samtools_stats_cram.out.stats, mosdepth_bam.out.dists, mosdepth_bam.out.summary, mosdepth_cram.out.dists, mosdepth_cram.out.summary, verifybamid2_bam.out.freemix, verifybamid2_cram.out.freemix, verifybamid2_bam.out.ancestry, verifybamid2_cram.out.ancestry, picard_collect_multiple_metrics_bam.out.insert_size,  picard_collect_multiple_metrics_cram.out.insert_size, picard_collect_multiple_metrics_bam.out.quality, picard_collect_multiple_metrics_cram.out.quality ).collect() )
-
-    // compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*
