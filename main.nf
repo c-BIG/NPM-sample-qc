@@ -108,8 +108,8 @@ WORKFLOW
 
 workflow {
 
-    params.dummy_file = "${baseDir}/assets/NO_FILE"
-    dummy_file = file(params.dummy_file)
+    // params.dummy_file = "${baseDir}/assets/NO_FILE"
+    // dummy_file = file(params.dummy_file)
 
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
@@ -182,9 +182,7 @@ workflow {
         .mix( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
         .mix( picard_collect_multiple_metrics_cram.out.quality )
-        .join( verifybamid2_freemix, remainder: true )
-        // .join( verifybamid2_bam.out.verifybamid_bam_out )
-        // .mix( verifybamid2_cram.out.verifybamid_bam_out )
+        .join( verifybamid2_freemix, remainder: true ) |map { sample, freemix, null -> [sample, freemix [] ] }
         .set { multiqc_in }
 
     multiqc( multiqc_in )
