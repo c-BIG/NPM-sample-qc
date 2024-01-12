@@ -182,9 +182,10 @@ workflow {
         .mix( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
         .mix( picard_collect_multiple_metrics_cram.out.quality )
-        // .join( verifybamid2_freemix, remainder: true ) |map { sample, freemix, null -> [sample, freemix [] ] }
+        // .join( verifybamid2_freemix, remainder: true )
         .join( verifybamid2_freemix )
-        .set { multiqc_in }
+        .map { null -> [] }
+        // .set { multiqc_in }
 
     multiqc( multiqc_in )
 
