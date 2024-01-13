@@ -156,12 +156,6 @@ workflow {
 
     Channel
         .empty()
-        .mix( verifybamid2_bam.out.freemix )
-        .mix( verifybamid2_cram.out.freemix )
-        .set { verifybamid2_freemix }
-
-    Channel
-        .empty()
         .mix( mosdepth_bam.out.regions )
         .mix( mosdepth_cram.out.regions )
         .set { mosdepth_regions }
@@ -169,23 +163,34 @@ workflow {
     mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
 //    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
 
+// channel for samplelist input file type bam processed outputs
     Channel
         .empty()
         samtools_stats_bam.out.stats
-        .mix( samtools_stats_cram.out.stats )
         .join( mosdepth_bam.out.dists )
-        .mix( mosdepth_cram.out.dists )
         .join( mosdepth_bam.out.summary )
-        .mix( mosdepth_cram.out.summary )
         .join( mosdepth_datamash.out.coverage )
         .join( picard_collect_multiple_metrics_bam.out.insert_size )
-        .mix( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
-        .mix( picard_collect_multiple_metrics_cram.out.quality )
-        // .join( verifybamid2_freemix, remainder: true )
-        .join( verifybamid2_freemix )
-        .map { null -> [] }
-        // .set { multiqc_in }
+        .join( verifybamid2_bam.out.freemix, remainder: true )
+        .set { ch_bam }
+
+// channel for samplelist input file type cram processed outputs
+    Channel
+        .empty()
+        samtools_stats_cram.out.stats
+        .join( mosdepth_cram.out.dists )
+        .join( mosdepth_cram.out.summary )
+        .join( mosdepth_datamash.out.coverage )
+        .join( picard_collect_multiple_metrics_cram.out.insert_size )
+        .join( picard_collect_multiple_metrics_cram.out.quality )
+        .join( verifybamid2_cram.out.freemix, remainder: true )
+        .set { ch_cram }
+
+// channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
+    ch_bam.mix(ch_cram)
+        .map { sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, freemix -> [ sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, freemix ?: [] ] }
+        .set { multiqc_in }
 
     multiqc( multiqc_in )
 
