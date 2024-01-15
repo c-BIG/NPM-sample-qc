@@ -93,6 +93,8 @@ include { verifybamid2 as verifybamid2_bam } from './modules/verifybamid2'
 include { verifybamid2 as verifybamid2_cram } from './modules/verifybamid2'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam } from './modules/CollectMultipleMetrics'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
+include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_bam } from './modules/CollectWGSMetrics'
+include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from './modules/CollectWGSMetrics'
 include { multiqc } from './modules/multiqc'
 // include { compile_metrics } from './modules/compile_metrics'
 
@@ -151,6 +153,9 @@ workflow {
     picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
     picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
+    picard_collect_wgs_metrics_bam( aln_inputs.bam, [], [] )
+    picard_collect_wgs_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
+
     mosdepth_bam( aln_inputs.bam, [] )
     mosdepth_cram( aln_inputs.cram, ref_fasta )
 
@@ -172,6 +177,7 @@ workflow {
         .join( mosdepth_datamash.out.coverage )
         .join( picard_collect_multiple_metrics_bam.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
+        .join( picard_collect_wgs_metrics_bam.out.insert_size )
         .join( verifybamid2_bam.out.freemix, remainder: true )
         .set { ch_bam }
 
@@ -184,6 +190,7 @@ workflow {
         .join( mosdepth_datamash.out.coverage )
         .join( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_cram.out.quality )
+        .join( picard_collect_wgs_metrics_cram.out.insert_size )
         .join( verifybamid2_cram.out.freemix, remainder: true )
         .set { ch_cram }
 
