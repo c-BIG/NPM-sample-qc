@@ -196,7 +196,7 @@ workflow {
 
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
     ch_bam.mix(ch_cram)
-        .map { sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, freemix -> [ sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, freemix ?: [] ] }
+        .map { sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, wgs_coverage, freemix -> [ sample, stats, mosdepthdist, mosdepthsummary, mosdepthcov, insertsize, quality, wgs_coverage, freemix ?: [] ] }
         .set { multiqc_in }
 
     multiqc( multiqc_in )

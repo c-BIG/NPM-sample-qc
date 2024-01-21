@@ -12,7 +12,7 @@ process picard_collect_wgs_metrics {
     tuple val(sample), path("${sample}_wgs_metrics.txt"), emit: wgs_coverage
 
     """
-    # program CollectWgsMetrics to get mean_autosome_coverage, pct_autosomes_15x and mad_autosome_coverage
+    # program CollectWgsMetrics to get mean_autosome_coverage, mad_autosome_coverage and pct_autosomes_15x
 
     picard CollectWgsMetrics  \
         I=${bam} \
