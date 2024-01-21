@@ -59,9 +59,9 @@ def pct_reads_properly_paired(mqc, biosample_id):
 
 def mean_autosome_coverage(mqc, biosample_id):
     """
-    Description: The mean sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
+    Description: The mean sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
     
-    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing mean coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard 2.27.0.
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing mean coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -76,9 +76,9 @@ def mean_autosome_coverage(mqc, biosample_id):
 
 def mad_autosome_coverage(mqc, biosample_id):
     """
-    Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
+    Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
     
-    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing median absolute deviation coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard 2.27.0.
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing median absolute deviation coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -93,9 +93,9 @@ def mad_autosome_coverage(mqc, biosample_id):
 
 def pct_autosomes_15x(mqc, biosample_id):
     """
-    Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
+    Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.
     
-    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage of the non gap regions of GRCh38 assembly, autosomes only, percentage of bases attaining at least 15X coverage, non duplicated reads, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard 2.27.0.
+    Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage percentage of bases attaining at least 15X of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.
     """
     k = inspect.currentframe().f_code.co_name
 
