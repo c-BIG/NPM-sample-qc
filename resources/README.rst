@@ -18,3 +18,10 @@ The white-listed region file 'autosomes_non_gap_regions.bed' derived from the fo
 ``zcat gap.txt.gz |cut -f2-4 -| egrep -w '^chr[1-9]|chr[1-2][0-9]' |sort -k1,1V -k2,2n > gap_regions.bed``
  
 ``bedtools subtract -a autosomes.bed -b gap_regions.bed >autosomes_non_gap_regions.bed``
+
+* Create a sequence dictionry of the reference genome (hg38.fa -> hg38.fa.dict)
+
+``picard CreateSequenceDictionary R=hg38.fa O=hg38.fa.dict``
+
+* Create a interval_list of the regions
+``picard BedToIntervalList I=autosomes_non_gap_regions.bed O=list.interval_list SD=hg38.fa.dict``

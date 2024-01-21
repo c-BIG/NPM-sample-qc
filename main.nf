@@ -153,7 +153,7 @@ workflow {
     picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
     picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
-    picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, [], [] )
+    picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
     picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
     mosdepth_bam( aln_inputs.bam, [] )
