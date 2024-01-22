@@ -24,4 +24,4 @@ The white-listed region file 'autosomes_non_gap_regions.bed' derived from the fo
 ``picard CreateSequenceDictionary R=hg38.fa O=hg38.fa.dict``
 
 * Create a interval_list of the regions
-``picard BedToIntervalList I=autosomes_non_gap_regions.bed O=list.interval_list SD=hg38.fa.dict``
+``picard BedToIntervalList I=autosomes_non_gap_regions.bed O=autosomes_non_gap_regions.interval_list SD=hg38.fa.dict``
