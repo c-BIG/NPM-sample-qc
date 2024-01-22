@@ -3,7 +3,7 @@ process multiqc {
     tag { sample }
 
     input:
-    tuple val(sample), path(stats), path(mosdepth_dists), path(mosdepth_summary), path(mosdepth_datamash_coverage), path(picard_insert_size), path(picard_quality), path(verifybamid_freemix)
+    tuple val(sample), path(stats), path(mosdepth_dists), path(mosdepth_summary), path(mosdepth_datamash_coverage), path(picard_insert_size), path(picard_quality), path(picard_wgs_coverage), path(verifybamid_freemix)
 
     output:
     
