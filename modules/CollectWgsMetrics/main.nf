@@ -20,6 +20,6 @@ process picard_collect_wgs_metrics {
         O=${sample}_wgs_metrics.txt \
         R=${ref_fasta} \
         INTERVALS=${autosomes_non_gap_regions} \
-        VALIDATION_STRINGENCY=LENIENT
+        VALIDATION_STRINGENCY=SILENT
     """
 }
