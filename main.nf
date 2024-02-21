@@ -108,9 +108,6 @@ WORKFLOW
 
 workflow {
 
-    // params.dummy_file = "${baseDir}/assets/NO_FILE"
-    // dummy_file = file(params.dummy_file)
-
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
@@ -161,7 +158,6 @@ workflow {
         .set { mosdepth_regions }
 
     mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
-//    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
 
 // channel for samplelist input file type bam processed outputs
     Channel

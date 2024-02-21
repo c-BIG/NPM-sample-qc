@@ -6,7 +6,6 @@ process multiqc {
     tuple val(sample), path(stats), path(mosdepth_dists), path(mosdepth_summary), path(mosdepth_datamash_coverage), path(picard_insert_size), path(picard_quality), path(verifybamid_freemix)
 
     output:
-    
     tuple val(sample), path("${sample}/multiqc_report.html"), emit: report
     tuple val(sample), path("${sample}/multiqc_data"), emit: data
     tuple val(sample), path("${sample}/multiqc_data/multiqc_data.json"), emit: json_data
