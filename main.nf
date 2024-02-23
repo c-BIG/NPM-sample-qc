@@ -147,7 +147,6 @@ workflow {
     picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
     picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
-
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
