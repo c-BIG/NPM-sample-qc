@@ -173,8 +173,6 @@ workflow {
         .mix( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
         .mix( picard_collect_multiple_metrics_cram.out.quality )
-        // .join( verifybamid2_bam.out.verifybamid_bam_out.ifEmpty([]) )
-        // .mix( verifybamid2_cram.out.verifybamid_bam_out.ifEmpty([]) )
         .join( verifybamid2_bam.out.verifybamid_bam_out )
         .mix( verifybamid2_cram.out.verifybamid_bam_out )
         .set { multiqc_in }
