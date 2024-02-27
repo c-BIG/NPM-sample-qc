@@ -11,7 +11,17 @@ NPM-sample-qc is a Nextflow_ workflow to obtain QC metrics from single-sample WG
 Requirements
 ============
 
-* `Install Nextflow`_ v23.04 or higher
+* `Install Nextflow`_ 
+
+v23.08.1-edge or higher ::
+  
+  # Download the executable package
+  wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.08.1-edge/nextflow-23.08.1-edge-all | bash
+  # Make the binary executable on your system
+  chmod -x nextflow
+  # Optionally, move the nextflow file to a directory accessible by your $PATH variable
+  mv nextflow /usr/local/bin
+
 * `Install Docker`_
 * Install and configure `AWS CLI`_
 
@@ -35,7 +45,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 
 This creates `output` directory with the results that can be compared to the content of `output_certified` ::
 
-  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/metrics/NA12878-chr14-AKT1.metrics.json
+  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/multiqc/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -85,14 +95,14 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
 
   /path/to/outdir/
       pipeline_info/    # dag, timeline and trace files
-          dag.pdf
+          dag.dot
           report.html
           timeline.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
-          metrics/<sample_id>.metrics.json
           mosdepth/
           multiqc/
+            <sample_id>.metrics.json
           picard_collect_multiple_metrics/
           samtools/
           verifybamid2/

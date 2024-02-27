@@ -66,8 +66,8 @@ def mean_autosome_coverage(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id]
-        v = d["mean_autosome_coverage"]
+        d = mqc["multiqc_picard_wgsmetrics"][biosample_id]
+        v = d["MEAN_COVERAGE"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
@@ -83,8 +83,8 @@ def mad_autosome_coverage(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id]
-        v = d["mad_autosome_coverage"]
+        d = mqc["multiqc_picard_wgsmetrics"][biosample_id]
+        v = d["MAD_COVERAGE"]
         v = np.round(np.float64(v), DECIMALS)
     except KeyError:
         v = "NA"
@@ -100,9 +100,8 @@ def pct_autosomes_15x(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_mosdepth"][biosample_id]
-        v = np.divide(np.float64(d["ge_15x_autosome_bases"]),
-                      np.float64(d["total_autosome_bases"]))
+        d = mqc["multiqc_picard_wgsmetrics"][biosample_id]
+        v = d["PCT_15X"]
         v = np.round(v*100, DECIMALS)
     except KeyError:
         v = "NA"

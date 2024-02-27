@@ -73,7 +73,18 @@
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a> v23.04 or higher</p></li>
+<li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
+</ul>
+<p>v23.08.1-edge or higher</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download the executable package</span>
+<span class="n">wget</span> <span class="o">-</span><span class="n">qO</span><span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="n">io</span><span class="o">/</span><span class="n">nextflow</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v23</span><span class="mf">.08.1</span><span class="o">-</span><span class="n">edge</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="mf">23.08.1</span><span class="o">-</span><span class="n">edge</span><span class="o">-</span><span class="nb">all</span> <span class="o">|</span> <span class="n">bash</span>
+<span class="c1"># Make the binary executable on your system</span>
+<span class="n">chmod</span> <span class="o">-</span><span class="n">x</span> <span class="n">nextflow</span>
+<span class="c1"># Optionally, move the nextflow file to a directory accessible by your $PATH variable</span>
+<span class="n">mv</span> <span class="n">nextflow</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/get-docker/">Install Docker</a></p></li>
 <li><p>Install and configure <a class="reference external" href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI</a></p></li>
 </ul>
@@ -129,11 +140,11 @@
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
 <li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
-<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p></li>
+<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yaml</span></code> for an example.</p></li>
 </ul>
 <p>If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential,
 append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_request:</span> <span class="pre">true</span></code> to your parameter list (<code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> or commandline argument).
-See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/params.yml</span></code> for an example.</p>
+See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/params.yaml</span></code> for an example.</p>
 </section>
 <section id="outputs">
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
