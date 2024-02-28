@@ -103,7 +103,7 @@
 </pre></div>
 </div>
 <p>This creates <cite>output</cite> directory with the results that can be compared to the content of <cite>output_certified</cite></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">multiqc</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 <p>Please refer to the workflow help for more information on its usage and access to additional options:</p>
@@ -151,14 +151,14 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 <p>Upon completion, the workflow will create the following files in the <code class="docutils literal notranslate"><span class="pre">outdir</span></code> directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outdir</span><span class="o">/</span>
     <span class="n">pipeline_info</span><span class="o">/</span>    <span class="c1"># dag, timeline and trace files</span>
-        <span class="n">dag</span><span class="o">.</span><span class="n">pdf</span>
+        <span class="n">dag</span><span class="o">.</span><span class="n">dot</span>
         <span class="n">report</span><span class="o">.</span><span class="n">html</span>
         <span class="n">timeline</span><span class="o">.</span><span class="n">html</span>
         <span class="n">trace</span><span class="o">.</span><span class="n">txt</span>
     <span class="n">results</span><span class="o">/</span>          <span class="c1"># final metrics.json and intermediate outputs</span>
-        <span class="n">metrics</span><span class="o">/&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
         <span class="n">mosdepth</span><span class="o">/</span>
         <span class="n">multiqc</span><span class="o">/</span>
+          <span class="o">&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
         <span class="n">picard_collect_multiple_metrics</span><span class="o">/</span>
         <span class="n">samtools</span><span class="o">/</span>
         <span class="n">verifybamid2</span><span class="o">/</span>
