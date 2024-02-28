@@ -86,15 +86,13 @@ PROCESSES
 
 include { samtools_stats as samtools_stats_bam } from './modules/samtools'
 include { samtools_stats as samtools_stats_cram } from './modules/samtools'
-include { mosdepth as mosdepth_bam } from './modules/mosdepth'
-include { mosdepth as mosdepth_cram } from './modules/mosdepth'
-include { mosdepth_datamash } from './modules/mosdepth_datamash'
 include { verifybamid2 as verifybamid2_bam } from './modules/verifybamid2'
 include { verifybamid2 as verifybamid2_cram } from './modules/verifybamid2'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam } from './modules/CollectMultipleMetrics'
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
+include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_bam } from './modules/CollectWgsMetrics'
+include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from './modules/CollectWgsMetrics'
 include { multiqc } from './modules/multiqc'
-include { compile_metrics } from './modules/compile_metrics'
 
 /*
 ----------------------------------------------------------------------
@@ -146,48 +144,36 @@ workflow {
     picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
     picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
-    mosdepth_bam( aln_inputs.bam, [] )
-    mosdepth_cram( aln_inputs.cram, ref_fasta )
+    picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
+    picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
+// channel for samplelist input file type bam processed outputs
     Channel
         .empty()
-        .mix( mosdepth_bam.out.regions )
-        .mix( mosdepth_cram.out.regions )
-        .set { mosdepth_regions }
+        samtools_stats_bam.out.stats
+        .join( picard_collect_multiple_metrics_bam.out.insert_size )
+        .join( picard_collect_multiple_metrics_bam.out.quality )
+        .join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
+        .join( verifybamid2_bam.out.freemix, remainder: true )
+        .set { ch_bam }
 
-    mosdepth_datamash( mosdepth_regions, autosomes_non_gap_regions )
-//    mosdepth_datamash( autosomes_non_gap_regions, mosdepth_bam.out.regions.mix( mosdepth_cram.out.regions ) )
-
-
+// channel for samplelist input file type cram processed outputs
     Channel
         .empty()
-        .mix( mosdepth_bam.out.dists )
-        .mix( mosdepth_bam.out.summary )
-        .mix( mosdepth_cram.out.dists )
-        .mix( mosdepth_cram.out.summary )
-        .mix( mosdepth_datamash.out.coverage )
-        .mix( verifybamid2_bam.out.freemix )
-        .mix( verifybamid2_cram.out.freemix )
-        .mix( verifybamid2_bam.out.ancestry )
-        .mix( verifybamid2_cram.out.ancestry )
-        .mix( picard_collect_multiple_metrics_bam.out.insert_size )
-        .mix( picard_collect_multiple_metrics_cram.out.insert_size )
-        .mix( picard_collect_multiple_metrics_bam.out.quality )
-        .mix( picard_collect_multiple_metrics_cram.out.quality )
-        .mix( samtools_stats_bam.out )
-        .mix( samtools_stats_cram.out )
-        .map { sample, files -> files }
-        .collect()
-        .set { log_files }
+        samtools_stats_cram.out.stats
+        .join( picard_collect_multiple_metrics_cram.out.insert_size )
+        .join( picard_collect_multiple_metrics_cram.out.quality )
+        .join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
+        .join( verifybamid2_cram.out.freemix, remainder: true )
+        .set { ch_cram }
 
-    multiqc( log_files )
+// channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
+    ch_bam.mix(ch_cram)
+        .map { sample, stats, insertsize, quality, wgs_coverage, freemix -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [] ] }
+        .set { multiqc_in }
 
+    multiqc( multiqc_in )
 
-    Channel
-        samples.map { it.biosample_id }
-        .set { sample_ids }
-
-    compile_metrics ( sample_ids, multiqc.out.json_data )    
 }
 
 /*
