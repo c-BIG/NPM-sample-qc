@@ -17,7 +17,7 @@ process picard_collect_multiple_metrics {
     # program CollectQualityYieldMetrics to get numbers of bases that pass a base quality score 30 threshold
     # program CollectInsertSizeMetrics to get mean insert size
 
-    picard CollectMultipleMetrics  \
+    java -XX:ParallelGCThreads=${task.cpus} -Xmx8g -jar /usr/local/conda/envs/npm-sample-qc/share/picard-2.27.0-0/picard.jar CollectMultipleMetrics  \
         I=${bam} \
         O=${sample} \
         ${reference} \
