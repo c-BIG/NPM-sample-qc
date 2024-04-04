@@ -147,6 +147,22 @@ workflow {
     picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
     picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
+
+    Channel
+        samples.branch { rec ->
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
+
+            output: rec.biosample_id && vcf_file
+                def vcf_idx = file( "${rec.vcf}.tbi" )
+
+                return tuple( rec.biosample_id, vcf_file, vcf_idx )
+        }
+        .set { vcf_inputs }
+
+    bcftools_stats( vcf_inputs )
+    picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
+    count_variants ( vcf_inputs )
+
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
