@@ -113,6 +113,7 @@ workflow {
     vbi2_ud = file( params.vbi2_ud )
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
+    //ref_dbsnp = file( params.ref_dbsnp )
 
     inputs = new YamlSlurper().parse(file(params.inputs_list))
 
