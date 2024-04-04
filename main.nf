@@ -92,6 +92,9 @@ include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_bam } from './modules/CollectWgsMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from './modules/CollectWgsMetrics'
+include { picard_collect_variant_calling_metrics_vcf } from './modules/CollectVariantCallingMetrics'
+include { bcftools_stats } from './modules/bcftools'
+include { count_variants } from './modules/count_variants'
 include { multiqc } from './modules/multiqc'
 
 /*
@@ -144,8 +147,8 @@ workflow {
     picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
     picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
-    picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
-    picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
+    //picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
+    //picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
 
     Channel
@@ -162,8 +165,10 @@ workflow {
 
     //bcftools_stats( vcf_inputs )
     //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
-    //count_variants ( vcf_inputs )
+    count_variants ( vcf_inputs )
 
+
+/*
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
@@ -191,6 +196,7 @@ workflow {
 
     multiqc( multiqc_in )
 
+*/
 }
 
 /*
