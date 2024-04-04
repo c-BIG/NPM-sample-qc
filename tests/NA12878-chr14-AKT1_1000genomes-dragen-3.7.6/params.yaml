@@ -2,4 +2,3 @@ samples:
 -
  biosample_id: NA12878-chr14-AKT1
  aln: NA12878-chr14-AKT1.bam
- vcf: NA12878-chr14-AKT1.vcf
