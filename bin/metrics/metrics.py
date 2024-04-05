@@ -192,7 +192,6 @@ def pass_het_snps(mqc, biosample_id):
 
     return k, v
 
-
 def pass_homalt_snps(mqc, biosample_id):
     """
     The number of PASS hom alt SNPs.
@@ -210,7 +209,6 @@ def pass_homalt_snps(mqc, biosample_id):
 
     return k, v
 
-
 def pass_snp_het_hom(mqc, biosample_id):
     """
     The het/hom ratio for PASS SNPs.
@@ -227,7 +225,6 @@ def pass_snp_het_hom(mqc, biosample_id):
         v = "NA"
 
     return k, v
-
 
 def pass_del(mqc, biosample_id):
     """
