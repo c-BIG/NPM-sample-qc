@@ -110,6 +110,7 @@ workflow {
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
+    autosomes_non_gap_regions_bed = file( params.autosomes_non_gap_regions_bed )
     vbi2_ud = file( params.vbi2_ud )
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
@@ -164,9 +165,9 @@ workflow {
         .view()
         .set { vcf_inputs }
 
-    //bcftools_stats( vcf_inputs )
+    bcftools_stats( vcf_inputs )
     //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
-    count_variants ( vcf_inputs )
+    count_variants ( vcf_inputs, autosomes_non_gap_regions_bed )
 
 
 /*
