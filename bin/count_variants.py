@@ -16,6 +16,9 @@ def parse_args():
     parser.add_argument("--input_vcf", dest="input_vcf", required=True,
                         default=None,
                         help="Path to input VCF/gVCF.")
+    parser.add_argument("--regions", dest="regions", required=True,
+                        default=None,
+                        help="Path to input autosomes_non_gap_regions_bed.")
     parser.add_argument("--output_json", dest="output_json", required=False,
                         default="./variant_counts.json",
                         help="Path to output file for variant metrics. Default: ./variant_counts.json")
