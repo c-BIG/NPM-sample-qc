@@ -157,3 +157,125 @@ def cross_contamination_rate(mqc, biosample_id):
         v = "NA"
 
     return k, v
+
+def pass_snps(mqc):
+    """
+    The number of PASS SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+def pass_het_snps(mqc):
+    """
+    The number of PASS het SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_het_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_homalt_snps(mqc):
+    """
+    The number of PASS hom alt SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_homalt_snps"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_snp_het_hom(mqc):
+    """
+    The het/hom ratio for PASS SNPs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snp_het_hom"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def pass_del(mqc):
+    """
+    The number of PASS deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_del"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+def pass_ins(mqc):
+    """
+    The number of PASS insertions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_ins"]
+        v = int(v)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+def pass_snp_ts_tv(mqc):
+    """
+    The transition to transversion ratio of passing bi-allelic SNPs.
+
+    Source: count_variants.py (bcftools stats - tstv)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        v = d["pass_snp_ts_tv"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
