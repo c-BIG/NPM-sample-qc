@@ -158,7 +158,7 @@ def cross_contamination_rate(mqc, biosample_id):
 
     return k, v
 
-def pass_snps(mqc):
+def pass_snps(mqc, biosample_id):
     """
     The number of PASS SNPs.
 
@@ -167,7 +167,7 @@ def pass_snps(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_snps"]
         v = int(v)
     except KeyError:
@@ -175,7 +175,7 @@ def pass_snps(mqc):
 
     return k, v
 
-def pass_het_snps(mqc):
+def pass_het_snps(mqc, biosample_id):
     """
     The number of PASS het SNPs.
 
@@ -184,7 +184,7 @@ def pass_het_snps(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_het_snps"]
         v = int(v)
     except KeyError:
@@ -193,7 +193,7 @@ def pass_het_snps(mqc):
     return k, v
 
 
-def pass_homalt_snps(mqc):
+def pass_homalt_snps(mqc, biosample_id):
     """
     The number of PASS hom alt SNPs.
 
@@ -202,7 +202,7 @@ def pass_homalt_snps(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_homalt_snps"]
         v = int(v)
     except KeyError:
@@ -211,7 +211,7 @@ def pass_homalt_snps(mqc):
     return k, v
 
 
-def pass_snp_het_hom(mqc):
+def pass_snp_het_hom(mqc, biosample_id):
     """
     The het/hom ratio for PASS SNPs.
 
@@ -220,7 +220,7 @@ def pass_snp_het_hom(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_snp_het_hom"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -229,7 +229,7 @@ def pass_snp_het_hom(mqc):
     return k, v
 
 
-def pass_del(mqc):
+def pass_del(mqc, biosample_id):
     """
     The number of PASS deletions.
 
@@ -238,7 +238,7 @@ def pass_del(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_del"]
         v = int(v)
     except KeyError:
@@ -246,7 +246,7 @@ def pass_del(mqc):
 
     return k, v
 
-def pass_ins(mqc):
+def pass_ins(mqc, biosample_id):
     """
     The number of PASS insertions.
 
@@ -255,7 +255,7 @@ def pass_ins(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_ins"]
         v = int(v)
     except KeyError:
@@ -263,7 +263,7 @@ def pass_ins(mqc):
 
     return k, v
 
-def pass_snp_ts_tv(mqc):
+def pass_snp_ts_tv(mqc, biosample_id):
     """
     The transition to transversion ratio of passing bi-allelic SNPs.
 
@@ -272,7 +272,7 @@ def pass_snp_ts_tv(mqc):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = next(iter(mqc["multiqc_npm_count_variants"].values()))
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
         v = d["pass_snp_ts_tv"]
         v = np.round(v, DECIMALS)
     except KeyError:
