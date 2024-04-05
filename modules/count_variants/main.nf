@@ -3,18 +3,19 @@ process count_variants {
     tag { sample }
 
     input:
-    tuple val(sample), path(vcf), path(tbi) 
+    tuple val(sample), path(vcf), path(tbi), path(autosomes_non_gap_regions) 
 
     output:
     tuple val(sample), path("${sample}.variant_counts.json")
 
     script:
     """
-    echo "test vcf module" ${vcf} ${tbi} >${sample}.variant_counts.json
-    # count_variants.py \
-    #    --input_vcf ${vcf} \
-    #    --output_json ${sample}.variant_counts.json \
-    #    --loglevel DEBUG
+    # echo "test vcf module" ${vcf} ${tbi} >${sample}.variant_counts.json
+    count_variants.py \
+       --input_vcf ${vcf} \
+       --regions ${autosomes_non_gap_regions} \
+       --output_json ${sample}.variant_counts.json \
+       --loglevel DEBUG
     """
 
 }
