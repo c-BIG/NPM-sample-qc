@@ -10,4 +10,5 @@ NXF_ANSI_LOG=false
 	-config ../../nextflow.config \
 	--inputs_list params.yaml \
 	-work-dir ./work \
+    -resume \
 	--publish_dir ./output
