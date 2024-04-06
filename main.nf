@@ -162,13 +162,15 @@ workflow {
 
                 return tuple( rec.biosample_id, vcf_file, vcf_idx )
         }
-        .view()
         .set { vcf_inputs }
 
     bcftools_stats( vcf_inputs )
     //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
     count_variants ( vcf_inputs, autosomes_non_gap_regions_bed )
 
+    Channel
+        samples.map { it.biosample_id }
+        .set { sample_ids }
 
 /*
 // channel for samplelist input file type bam processed outputs
