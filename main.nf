@@ -140,14 +140,14 @@ workflow {
         .set { aln_inputs }
 
 
-    samtools_stats_bam( aln_inputs.bam, [] )
-    samtools_stats_cram( aln_inputs.cram, ref_fasta )
+    //samtools_stats_bam( aln_inputs.bam, [] )
+    //samtools_stats_cram( aln_inputs.cram, ref_fasta )
 
     verifybamid2_bam( aln_inputs.bam, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
     verifybamid2_cram( aln_inputs.cram, ref_fasta, vbi2_ud, vbi2_bed, vbi2_mean )
 
-    picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
-    picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
+    //picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
+    //picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
     //picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
     //picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
