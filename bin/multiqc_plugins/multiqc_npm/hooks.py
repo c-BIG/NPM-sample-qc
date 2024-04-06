@@ -19,7 +19,8 @@ log = logging.getLogger('multiqc')
 def before_config():
     my_search_patterns = {
         'multiqc_npm/picard_quality_yield_metrics': {'fn': '*.quality_yield_metrics.txt', 'shared': 'true'},
-        'multiqc_npm/samtools_stats_bq': {'fn': '*.stats', 'contents': 'This file was produced by samtools stats', 'shared': 'true'}
+        'multiqc_npm/samtools_stats_bq': {'fn': '*.stats', 'contents': 'This file was produced by samtools stats', 'shared': 'true'},
+        'multiqc_npm/count_variants': {'fn': '*.variant_counts.json'}
     }
     config.update_dict(config.sp, my_search_patterns)
     log.info("Expanded search patterns with the following: %s", ", ".join(my_search_patterns.keys()))
