@@ -56,6 +56,7 @@ def calculate_metrics(mqc):
         "cross_contamination_rate"
         # variant calling
         "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
+        "pass_indel_het_hom",
         "pass_del", "pass_ins",
         "pass_snp_ts_tv"
     ]

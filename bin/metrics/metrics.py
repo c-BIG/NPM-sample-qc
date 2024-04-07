@@ -226,6 +226,23 @@ def pass_snp_het_hom(mqc, biosample_id):
 
     return k, v
 
+def pass_indel_het_hom(mqc, biosample_id):
+    """
+    The het/hom ratio for PASS INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        v = d["pass_indel_het_hom"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
 def pass_del(mqc, biosample_id):
     """
     The number of PASS deletions.
