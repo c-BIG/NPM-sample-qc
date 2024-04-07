@@ -11,7 +11,6 @@ process count_variants {
 
     script:
     """
-    # echo "test vcf module" ${vcf} ${tbi} >${sample}.variant_counts.json
     count_variants.py \
        --input_vcf ${vcf} \
        --regions ${autosomes_non_gap_regions} \
