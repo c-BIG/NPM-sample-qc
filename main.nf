@@ -149,8 +149,8 @@ workflow {
     picard_collect_multiple_metrics_bam( aln_inputs.bam, [], [] )
     picard_collect_multiple_metrics_cram( aln_inputs.cram, ref_fasta, ref_fasta_idx )
 
-    picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
-    picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
+    //picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
+    //picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
 
     Channel
@@ -172,13 +172,23 @@ workflow {
         samples.map { it.biosample_id }
         .set { sample_ids }
 
+// channel for samplelist vcf input file processed outputs
+    Channel
+        .empty()
+        //sample_ids
+        //.join( count_variants.out )
+        count_variants.out
+        .join( bcftools_stats.out )
+        .view()
+        .set { vcf_qc }
+
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
         samtools_stats_bam.out.stats
         .join( picard_collect_multiple_metrics_bam.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
-        .join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
+        //.join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
         .join( verifybamid2_bam.out.freemix, remainder: true )
         .set { ch_bam }
 
@@ -188,18 +198,22 @@ workflow {
         samtools_stats_cram.out.stats
         .join( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_cram.out.quality )
-        .join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
+        //.join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
         .join( verifybamid2_cram.out.freemix, remainder: true )
         .set { ch_cram }
 
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
     ch_bam.mix(ch_cram)
-        .map { sample, stats, insertsize, quality, wgs_coverage, freemix -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [] ] }
+        .combine(vcf_qc,by:0)
+        .map { sample, stats, insertsize, quality, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, freemix ?: [], count_variants, bcftools_stats ] }
+        .view()
         .set { multiqc_in }
 
     multiqc( multiqc_in )
 
 }
+
+//         .map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [], count_variants, bcftools_stats ] }
 
 /*
 ----------------------------------------------------------------------

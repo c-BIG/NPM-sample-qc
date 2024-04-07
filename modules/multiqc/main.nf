@@ -3,7 +3,8 @@ process multiqc {
     tag { sample }
 
     input:
-    tuple val(sample), path(stats), path(picard_insert_size), path(picard_quality), path(picard_wgs_coverage), path(verifybamid_freemix)
+    // tuple val(sample), path(stats), path(picard_insert_size), path(picard_quality), path(picard_wgs_coverage), path(verifybamid_freemix), path(count_variants), path(bcftools_stats)
+    tuple val(sample), path(stats), path(picard_insert_size), path(picard_quality), path(verifybamid_freemix), path(count_variants), path(bcftools_stats)
 
     output:
     tuple val(sample), path("${sample}/multiqc_report.html"), emit: report
