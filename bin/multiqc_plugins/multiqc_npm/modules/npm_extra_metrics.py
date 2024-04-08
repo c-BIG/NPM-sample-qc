@@ -13,7 +13,6 @@ from multiqc.modules.base_module import BaseMultiqcModule
 from . import npm_picard_QualityYieldMetrics
 from . import npm_samtools_stats_bq
 from . import npm_count_variants
-from . import npm_mosdepth
 
 log = logging.getLogger('multiqc')
 
@@ -50,10 +49,6 @@ class NPMExtraMetrics(BaseMultiqcModule):
         n['npm_count_variants'] = npm_count_variants.parse_reports(self)
         if n['npm_count_variants'] > 0:
             log.info("Found %d npm_count_variants reports" % n['npm_count_variants'])
-
-        n['npm_mosdepth'] = npm_mosdepth.parse_reports(self)
-        if n['npm_mosdepth'] > 0:
-            log.info("Found %d npm_mosdepth reports" % n['npm_mosdepth'])
 
         # Exit if we didn't find anything
         if sum(n.values()) == 0:
