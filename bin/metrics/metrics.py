@@ -167,7 +167,7 @@ def pass_snps(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_snps"]
         v = int(v)
     except KeyError:
@@ -184,7 +184,7 @@ def pass_het_snps(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_het_snps"]
         v = int(v)
     except KeyError:
@@ -201,7 +201,7 @@ def pass_homalt_snps(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_homalt_snps"]
         v = int(v)
     except KeyError:
@@ -218,7 +218,7 @@ def pass_snp_het_hom(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_snp_het_hom"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -235,7 +235,7 @@ def pass_indel_het_hom(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_indel_het_hom"]
         v = np.round(v, DECIMALS)
     except KeyError:
@@ -252,7 +252,7 @@ def pass_del(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_del"]
         v = int(v)
     except KeyError:
@@ -269,7 +269,7 @@ def pass_ins(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_ins"]
         v = int(v)
     except KeyError:
@@ -286,7 +286,7 @@ def pass_snp_ts_tv(mqc, biosample_id):
     k = inspect.currentframe().f_code.co_name
 
     try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id]
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
         v = d["pass_snp_ts_tv"]
         v = np.round(v, DECIMALS)
     except KeyError:

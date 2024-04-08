@@ -44,12 +44,13 @@ RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
 # install MultiQC and MultiQC_NPM plugin
-RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
+# RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
 
 #RUN git clone -b feature/vcf-qc-implementation --single-branch https://github.com/c-BIG/NPM-sample-qc.git
-
+RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
 
 RUN git checkout feature/vcf-qc-implementation
 RUN python3 setup.py install
 # RUN python -m pip install .
+# RUN pip3 install numpy scipy argparse matplotlib

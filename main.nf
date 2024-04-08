@@ -188,7 +188,7 @@ workflow {
         samtools_stats_bam.out.stats
         .join( picard_collect_multiple_metrics_bam.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
-        //.join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
+        .join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
         .join( verifybamid2_bam.out.freemix, remainder: true )
         .set { ch_bam }
 
@@ -198,14 +198,14 @@ workflow {
         samtools_stats_cram.out.stats
         .join( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_cram.out.quality )
-        //.join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
+        .join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
         .join( verifybamid2_cram.out.freemix, remainder: true )
         .set { ch_cram }
 
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
     ch_bam.mix(ch_cram)
         .combine(vcf_qc,by:0)
-        .map { sample, stats, insertsize, quality, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, freemix ?: [], count_variants, bcftools_stats ] }
+        .map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [], count_variants, bcftools_stats ] }
         .view()
         .set { multiqc_in }
 
