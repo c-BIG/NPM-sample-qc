@@ -175,17 +175,18 @@ workflow {
 // channel for samplelist vcf input file processed outputs
     Channel
         .empty()
-        //sample_ids
-        //.join( count_variants.out )
-        count_variants.out
+        sample_ids
+        .join( count_variants.out )
+        //count_variants.out
         .join( bcftools_stats.out )
-        .view()
+        //.view()
         .set { vcf_qc }
 
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
-        samtools_stats_bam.out.stats
+        sample_ids
+        .join( samtools_stats_bam.out.stats )
         .join( picard_collect_multiple_metrics_bam.out.insert_size )
         .join( picard_collect_multiple_metrics_bam.out.quality )
         .join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
@@ -195,19 +196,59 @@ workflow {
 // channel for samplelist input file type cram processed outputs
     Channel
         .empty()
-        samtools_stats_cram.out.stats
+        sample_ids
+        .join( samtools_stats_cram.out.stats )
         .join( picard_collect_multiple_metrics_cram.out.insert_size )
         .join( picard_collect_multiple_metrics_cram.out.quality )
         .join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
         .join( verifybamid2_cram.out.freemix, remainder: true )
         .set { ch_cram }
 
+/*
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
     ch_bam.mix(ch_cram)
         .combine(vcf_qc,by:0)
+        //.view()
         .map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [], count_variants, bcftools_stats ] }
+        //.view()
+        .set { multiqc_in }
+*/
+// channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
+    ch_bam.mix(ch_cram) // .ifEmpty([])
+        //.combine(vcf_qc,by:0)
+        .join(vcf_qc, remainder: true)
+        //.map { it.minus(null) }
+        .map { files -> files - null }
+        //.flatten()
+        //.map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats ?: [], insertsize ?: [], quality ?: [], wgs_coverage ?: [], freemix ?: [], count_variants ?: [], bcftools_stats ?: [] ] }
         .view()
         .set { multiqc_in }
+
+
+/*
+// channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
+    Channel
+        .empty()
+        sample_ids
+        //.combine(vcf_qc,by:0).ifEmpty([])
+        //ch_bam.mix(ch_cram).ifEmpty([])
+        .join(count_variants.out)
+        .join(bcftools_stats.out)
+        .map { sample, count_variants, bcftools_stats -> sample, count_variants, bcftools_stats }
+        .mix(ch_bam,ch_cram)
+        //.combine(vcf_qc,by:0).ifEmpty([])
+        //.join(vcf_qc)
+        //.view()
+        //.mix(vcf_qc).ifEmpty([])
+        //.join(vcf_qc).ifEmpty([])
+        //.combine(vcf_qc,by:0).ifEmpty([])
+        //.flatten()
+        //.toList()
+        .view()
+        //.map { sample, count_variants, bcftools_stats, sample1, stats, insertsize, quality, wgs_coverage, freemix -> [ sample ?: [], count_variants ?: [], bcftools_stats ?: [], sample1 ?: [], stats ?: [], insertsize ?: [], quality ?: [], wgs_coverage ?: [], freemix ?: [] ] }
+        //.view()
+        .set { multiqc_in }
+*/
 
     multiqc( multiqc_in )
 
