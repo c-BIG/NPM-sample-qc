@@ -158,7 +158,7 @@ def cross_contamination_rate(mqc, biosample_id):
 
     return k, v
 
-def pass_snps(mqc, biosample_id):
+def count_snvs(mqc, biosample_id):
     """
     The number of PASS SNPs.
 
@@ -209,7 +209,7 @@ def pass_homalt_snps(mqc, biosample_id):
 
     return k, v
 
-def pass_snp_het_hom(mqc, biosample_id):
+def ratio_heterozygous_homzygous_snv(mqc, biosample_id):
     """
     The het/hom ratio for PASS SNPs.
 
@@ -226,7 +226,7 @@ def pass_snp_het_hom(mqc, biosample_id):
 
     return k, v
 
-def pass_indel_het_hom(mqc, biosample_id):
+def ratio_heterozygous_homzygous_indel(mqc, biosample_id):
     """
     The het/hom ratio for PASS INDELs.
 
@@ -243,7 +243,7 @@ def pass_indel_het_hom(mqc, biosample_id):
 
     return k, v
 
-def pass_del(mqc, biosample_id):
+def count_deletions(mqc, biosample_id):
     """
     The number of PASS deletions.
 
@@ -260,7 +260,7 @@ def pass_del(mqc, biosample_id):
 
     return k, v
 
-def pass_ins(mqc, biosample_id):
+def count_insertions(mqc, biosample_id):
     """
     The number of PASS insertions.
 
@@ -277,7 +277,25 @@ def pass_ins(mqc, biosample_id):
 
     return k, v
 
-def pass_snp_ts_tv(mqc, biosample_id):
+def ratio_insertion_deletion(mqc, biosample_id):
+    """
+    The ins/del ratio for PASS INDELs.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
+        v = d["pass_ins_del"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
+
+def ratio_transitions_transversions(mqc, biosample_id):
     """
     The transition to transversion ratio of passing bi-allelic SNPs.
 

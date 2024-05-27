@@ -66,16 +66,15 @@ def count_variants(input_vcf, scratch_dir):
     # initialise results dict
     r = dict()
     metrics_list = [
-        "all_snps", "all_het_snps", "all_homalt_snps", "all_snp_het_hom",
+        "all_snps",
         "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
-        "all_indels", "all_het_indels", "all_homalt_indels", "all_indel_het_hom",
+        "all_indels",
         "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
-        "all_del", "all_ins", "pass_del", "pass_ins",
+        "pass_del", "pass_ins", "pass_ins_del",
         "all_mnps", "pass_mnps",
-        "all_complex_indels", "all_complex_ins", "all_complex_del",
         "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
-        "all_multiallelic_sites", "all_multiallelic_sites",
-        "all_snp_ts_tv", "pass_snp_ts_tv"
+        "pass_multiallelic_sites",
+        "pass_snp_ts_tv"
     ]
     for m in metrics_list:
         r[m] = 0
@@ -97,22 +96,6 @@ def count_variants(input_vcf, scratch_dir):
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["all_snps"] = int(p.stdout.read())
-
-    logging.info("Counting all_het_snps...")
-    cmd = "bcftools view -H -v snps -g het %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_het_snps"] = int(p.stdout.read())
-
-    logging.info("Counting all_homalt_snps...")
-    cmd = "bcftools view -H -v snps -g hom %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_homalt_snps"] = int(p.stdout.read())
-
-    logging.info("Calculating all_snp_het_hom...")
-    snp_het_hom = np.divide(r["all_het_snps"], r["all_homalt_snps"])
-    r["all_snp_het_hom"] = np.round(snp_het_hom, 2)
 
     logging.info("Counting pass_snps...")
     cmd = "bcftools view -H -v snps -f PASS %s | wc -l" % input_vcf
@@ -142,22 +125,6 @@ def count_variants(input_vcf, scratch_dir):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["all_indels"] = int(p.stdout.read())
 
-    logging.info("Counting all_het_indels...")
-    cmd = "bcftools view -H -v indels -g het %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_het_indels"] = int(p.stdout.read())
-
-    logging.info("Counting all_homalt_indels...")
-    cmd = "bcftools view -H -v indels -g hom %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_homalt_indels"] = int(p.stdout.read())
-
-    logging.info("Calculating all_indel_het_hom...")
-    indel_het_hom = np.divide(r["all_het_indels"], r["all_homalt_indels"])
-    r["all_indel_het_hom"] = np.round(indel_het_hom, 2)
-
     logging.info("Counting pass_indels...")
     cmd = "bcftools view -H -v indels -f PASS %s | wc -l" % input_vcf
     logging.debug("CMD: %s" % cmd)
@@ -180,28 +147,6 @@ def count_variants(input_vcf, scratch_dir):
     indel_het_hom = np.divide(r["pass_het_indels"], r["pass_homalt_indels"])
     r["pass_indel_het_hom"] = np.round(indel_het_hom, 2)
 
-    logging.info("Counting all_del, all_ins...")
-    cmd = "bcftools view -H -v indels %s" % input_vcf
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF), label as INS
-    cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS\" }"
-    # if length(ALT) < length(REF), label as DEL
-    cmd += " else if ( length($5) < length($4) ) { print \"DEL\" }"
-    # label everything else as UNK and report its location
-    cmd += " else { print \"UNK\" } }'"
-    # count by label
-    cmd += " | sort | uniq -c"
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "all_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
 
     logging.info("Counting pass_del, pass_ins...")
     cmd = "bcftools view -H -v indels -f PASS %s" % input_vcf
@@ -226,6 +171,10 @@ def count_variants(input_vcf, scratch_dir):
         v = int(l[0])
         r[k] = v
 
+    logging.info("Calculating pass_ins_del...")
+    ins_del = np.divide(r["pass_ins"], r["pass_del"])
+    r["pass_ins_del"] = np.round(ins_del, 2)
+
     logging.info("Counting all_mnps...")
     cmd = "bcftools view -H -v mnps %s | wc -l" % input_vcf
     logging.debug("CMD: %s" % cmd)
@@ -238,26 +187,6 @@ def count_variants(input_vcf, scratch_dir):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_mnps"] = int(p.stdout.read())
 
-    logging.info("Counting all_complex_indels...")
-    cmd = "bcftools view -H -v indels %s" % input_vcf
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF) and length(REF) > 1, label as COMPLEX_INS
-    cmd += " | awk '{ if( length($5) > length($4) && length($4) > 1 ) { print \"COMPLEX_INS\" }"
-    # if length(ALT) < length(REF) and length(ALT) > 1, label as COMPLEX_DEL
-    cmd += " else if ( length($5) < length($4) && length($5) > 1 ) { print \"COMPLEX_DEL\" } }'"
-    cmd += " | sort | uniq -c"
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "all_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
-    r["all_complex_indels"] = r["all_complex_ins"] + r["all_complex_del"]
 
     logging.info("Counting pass_complex_indels...")
     cmd = "bcftools view -H -v indels -f PASS %s" % input_vcf
@@ -291,13 +220,6 @@ def count_variants(input_vcf, scratch_dir):
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_multiallelic_sites"] = int(p.stdout.read())
-
-    logging.info("Calculating all_snp_ts_tv...")
-    cmd = "cat %s/all.bcftools_stats | grep '^TSTV'" % scratch_dir
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    l = p.stdout.read().decode("utf-8").strip().split("\t")
-    r["all_snp_ts_tv"] = np.round(float(l[4]), 2)
 
     logging.info("Calculating pass_snp_ts_tv...")
     cmd = "cat %s/pass.bcftools_stats | grep '^TSTV'" % scratch_dir

@@ -55,10 +55,10 @@ def calculate_metrics(mqc):
         "insert_size_std_deviation",
         "cross_contamination_rate",
         # variant calling
-        "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
-        "pass_indel_het_hom",
-        "pass_del", "pass_ins",
-        "pass_snp_ts_tv"
+        "count_snvs", "ratio_heterozygous_homzygous_snv",
+        "ratio_heterozygous_homzygous_indel",
+        "count_deletions", "count_insertions", "ratio_insertion_deletion",
+        "ratio_transitions_transversions"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))
