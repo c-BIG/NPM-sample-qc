@@ -61,7 +61,7 @@ def setup(input_vcf, scratch_dir):
     return variants_vcf
 
 
-def count_variants(input_vcf, scratch_dir):
+def count_variants(input_vcf, scratch_dir, regions):
 
     # initialise results dict
     r = dict()
@@ -71,9 +71,6 @@ def count_variants(input_vcf, scratch_dir):
         "all_indels",
         "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
         "pass_del", "pass_ins", "pass_ins_del",
-        "all_mnps", "pass_mnps",
-        "pass_complex_indels", "pass_complex_ins", "pass_complex_del",
-        "pass_multiallelic_sites",
         "pass_snp_ts_tv"
     ]
     for m in metrics_list:
@@ -81,36 +78,39 @@ def count_variants(input_vcf, scratch_dir):
 
     # run bcftools stats - used to obtain ts/tv and sanity checks
     logging.info("Running bcftools stats for all variants...")
-    cmd = "bcftools stats %s > %s/all.bcftools_stats" % (input_vcf, scratch_dir)
+    cmd = "tabix -p vcf %s" % input_vcf
+    cmd1 = "bcftools stats -R %s %s > %s/all.bcftools_stats" % (regions, input_vcf, scratch_dir)
     logging.debug("CMD: %s" % cmd)
+    logging.debug("CMD: %s" % cmd1)
     p = subprocess.run(cmd, shell=True)
+    p = subprocess.run(cmd1, shell=True)
 
     logging.info("Running bcftools stats for PASS variants...")
-    cmd = "bcftools stats -f PASS %s > %s/pass.bcftools_stats" % (input_vcf, scratch_dir)
+    cmd = "bcftools stats -f PASS -R %s %s > %s/pass.bcftools_stats" % (regions, input_vcf, scratch_dir)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.run(cmd, shell=True)
 
     # calculate metrics
     logging.info("Counting all_snps...")
-    cmd = "bcftools view -H -v snps %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v snps -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["all_snps"] = int(p.stdout.read())
 
     logging.info("Counting pass_snps...")
-    cmd = "bcftools view -H -v snps -f PASS %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v snps -f PASS -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_snps"] = int(p.stdout.read())
 
     logging.info("Counting pass_het_snps...")
-    cmd = "bcftools view -H -v snps -f PASS -g het %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v snps -f PASS -g het -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_het_snps"] = int(p.stdout.read())
 
     logging.info("Counting pass_homalt_snps...")
-    cmd = "bcftools view -H -v snps -f PASS -g hom %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v snps -f PASS -g hom -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_homalt_snps"] = int(p.stdout.read())
@@ -120,25 +120,25 @@ def count_variants(input_vcf, scratch_dir):
     r["pass_snp_het_hom"] = np.round(snp_het_hom, 2)
 
     logging.info("Counting all_indels...")
-    cmd = "bcftools view -H -v indels %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v indels -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["all_indels"] = int(p.stdout.read())
 
     logging.info("Counting pass_indels...")
-    cmd = "bcftools view -H -v indels -f PASS %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v indels -f PASS -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_indels"] = int(p.stdout.read())
 
     logging.info("Counting pass_het_indels...")
-    cmd = "bcftools view -H -v indels -f PASS -g het %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v indels -f PASS -g het -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_het_indels"] = int(p.stdout.read())
 
     logging.info("Counting pass_homalt_indels...")
-    cmd = "bcftools view -H -v indels -f PASS -g hom %s | wc -l" % input_vcf
+    cmd = "bcftools view -H -v indels -f PASS -g hom -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     r["pass_homalt_indels"] = int(p.stdout.read())
@@ -149,7 +149,7 @@ def count_variants(input_vcf, scratch_dir):
 
 
     logging.info("Counting pass_del, pass_ins...")
-    cmd = "bcftools view -H -v indels -f PASS %s" % input_vcf
+    cmd = "bcftools view -H -v indels -f PASS -R %s %s" % (regions, input_vcf)
     # filter dragen annotation of variant records
     cmd += " | sed 's/,<NON_REF>//g'"
     # exclude multi-allelic sites
@@ -175,52 +175,6 @@ def count_variants(input_vcf, scratch_dir):
     ins_del = np.divide(r["pass_ins"], r["pass_del"])
     r["pass_ins_del"] = np.round(ins_del, 2)
 
-    logging.info("Counting all_mnps...")
-    cmd = "bcftools view -H -v mnps %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_mnps"] = int(p.stdout.read())
-
-    logging.info("Counting pass_mnps...")
-    cmd = "bcftools view -H -v mnps -f PASS %s | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_mnps"] = int(p.stdout.read())
-
-
-    logging.info("Counting pass_complex_indels...")
-    cmd = "bcftools view -H -v indels -f PASS %s" % input_vcf
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF) and length(REF) > 1, label as COMPLEX_INS
-    cmd += " | awk '{ if( length($5) > length($4) && length($4) > 1 ) { print \"COMPLEX_INS\" }"
-    # if length(ALT) < length(REF) and length(ALT) > 1, label as COMPLEX_DEL
-    cmd += " else if ( length($5) < length($4) && length($5) > 1 ) { print \"COMPLEX_DEL\" } }'"
-    cmd += " | sort | uniq -c"
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "pass_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
-    r["pass_complex_indels"] = r["pass_complex_ins"] + r["pass_complex_del"]
-
-    logging.info("Calculating all_multiallelic_sites...")
-    cmd = "bcftools view -H %s | sed 's/,<NON_REF>//g' | awk '$5 ~ /,/' | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_multiallelic_sites"] = int(p.stdout.read())
-
-    logging.info("Calculating pass_multiallelic_sites...")
-    cmd = "bcftools view -H -f PASS %s | sed 's/,<NON_REF>//g' | awk '$5 ~ /,/' | wc -l" % input_vcf
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_multiallelic_sites"] = int(p.stdout.read())
-
     logging.info("Calculating pass_snp_ts_tv...")
     cmd = "cat %s/pass.bcftools_stats | grep '^TSTV'" % scratch_dir
     logging.debug("CMD: %s" % cmd)
@@ -245,9 +199,6 @@ def count_variants(input_vcf, scratch_dir):
         elif "indels" in k and v != r["all_indels"]:
             logging.error("Mismatch in INDEL counts: bcftools stats=%d, count_variants=%d" % (v, r["all_indels"]))
             error_count += 1
-        elif "mnps" in k and v != r["all_mnps"]:
-            logging.error("Mismatch in MNP counts: bcftools stats=%d, count_variants=%d" % (v, r["all_mnps"]))
-            error_count += 1
 
     if error_count > 0:
         sys.exit("Sanity checks failed, aborting execution")
@@ -266,6 +217,7 @@ def done(scratch_dir):
         # clean up
         logging.info("Cleaning up...")
         os.remove("%s/variants.vcf.gz" % scratch_dir)
+        os.remove("%s/variants.vcf.gz.tbi" % scratch_dir)
         os.remove("%s/all.bcftools_stats" % scratch_dir)
         os.remove("%s/pass.bcftools_stats" % scratch_dir)
         if len(os.listdir(scratch_dir)) == 0:
@@ -281,7 +233,7 @@ if __name__ == "__main__":
 
     variants_vcf = setup(args.input_vcf, args.scratch_dir)
 
-    vcf_metrics = count_variants(variants_vcf, args.scratch_dir)
+    vcf_metrics = count_variants(variants_vcf, args.scratch_dir, args.regions)
     save_output(vcf_metrics, args.output_json)
 
     done(args.scratch_dir)
