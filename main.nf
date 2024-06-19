@@ -218,9 +218,9 @@ workflow {
         //.combine(vcf_qc,by:0)
         .join(vcf_qc, remainder: true)
         //.map { it.minus(null) }
-        .map { files -> files - null }
+        //.map { files -> files - null }
         //.flatten()
-        //.map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats ?: [], insertsize ?: [], quality ?: [], wgs_coverage ?: [], freemix ?: [], count_variants ?: [], bcftools_stats ?: [] ] }
+        .map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats ?: [], insertsize ?: [], quality ?: [], wgs_coverage ?: [], freemix ?: [], count_variants ?: [], bcftools_stats ?: [] ] }
         .view()
         .set { multiqc_in }
 
