@@ -3,14 +3,21 @@
         "id": "NA12878-chr14-AKT1"
     },
     "wgs_qc_metrics": {
+        "count_deletions": 848,
+        "count_insertions": 850,
+        "count_snvs": 8489,
         "cross_contamination_rate": "NA",
         "insert_size_std_deviation": 98.2,
         "mad_autosome_coverage": 0.0,
-        "mean_autosome_coverage": 0.00065,
+        "mean_autosome_coverage": 0.00064,
         "mean_insert_size": 447.3,
-        "pct_autosomes_15x": 0.00163,
+        "pct_autosomes_15x": 0.0016,
         "pct_reads_mapped": 99.6307,
         "pct_reads_properly_paired": 97.87835,
+        "ratio_heterozygous_homzygous_indel": 1.49,
+        "ratio_heterozygous_homzygous_snv": 1.05,
+        "ratio_insertion_deletion": 1.0,
+        "ratio_transitions_transversions": 2.13,
         "yield_bp_q30": 1996315
     }
 }
