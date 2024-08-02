@@ -58,7 +58,7 @@ def calculate_metrics(mqc):
         "count_snvs", "ratio_heterozygous_homzygous_snv",
         "ratio_heterozygous_homzygous_indel",
         "count_deletions", "count_insertions", "ratio_insertion_deletion",
-        "ratio_transitions_transversions"
+        "ratio_heterozygous_homzygous_insertion_deletion", "ratio_transitions_transversions"
     ]
     result = dict()
     logging.info("Calculating %d metrics..." % len(metrics_list))

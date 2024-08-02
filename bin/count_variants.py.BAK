@@ -148,52 +148,6 @@ def count_variants(input_vcf, scratch_dir, regions):
     r["pass_indel_het_hom"] = np.round(indel_het_hom, 2)
 
 
-    logging.info("Counting pass_del_het, pass_ins_het...")
-    cmd = "bcftools view -H -v indels -f PASS -g het -R %s %s" % (regions, input_vcf)
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF), label as INS_HET
-    cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS_HET\" }"
-    # if length(ALT) < length(REF), label as DEL_HET
-    cmd += " else if ( length($5) < length($4) ) { print \"DEL_HET\" }"
-    # label everything else as UNK and report its location
-    cmd += " else { print \"UNK\" } }'"
-    # count by label
-    cmd += " | sort | uniq -c"
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "pass_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
-
-    logging.info("Counting pass_del_hom, pass_ins_hom...")
-    cmd = "bcftools view -H -v indels -f PASS -g hom -R %s %s" % (regions, input_vcf)
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF), label as INS_HOM
-    cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS_HOM\" }"
-    # if length(ALT) < length(REF), label as DEL_HOM
-    cmd += " else if ( length($5) < length($4) ) { print \"DEL_HOM\" }"
-    # label everything else as UNK and report its location
-    cmd += " else { print \"UNK\" } }'"
-    # count by label
-    cmd += " | sort | uniq -c"
-    logging.debug("CMD: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "pass_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
-
     logging.info("Counting pass_del, pass_ins...")
     cmd = "bcftools view -H -v indels -f PASS -R %s %s" % (regions, input_vcf)
     # filter dragen annotation of variant records
