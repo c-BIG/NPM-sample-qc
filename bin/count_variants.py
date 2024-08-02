@@ -217,6 +217,10 @@ def count_variants(input_vcf, scratch_dir, regions):
         v = int(l[0])
         r[k] = v
 
+    logging.info("Calculating pass_ins_del_het_hom...")
+    ins_del_het_hom = np.divide(np.sum(r["pass_ins_het"], r["pass_del_het"]), np.sum(r["pass_ins_hom"], r["pass_del_hom"]))
+    r["pass_ins_del_het_hom"] = np.round(ins_del_het_hom, 2)
+
     logging.info("Calculating pass_ins_del...")
     ins_del = np.divide(r["pass_ins"], r["pass_del"])
     r["pass_ins_del"] = np.round(ins_del, 2)
