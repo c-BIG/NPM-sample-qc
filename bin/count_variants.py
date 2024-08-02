@@ -70,7 +70,7 @@ def count_variants(input_vcf, scratch_dir, regions):
         "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
         "all_indels",
         "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
-        "pass_del", "pass_ins", "pass_ins_del",
+        "pass_ins_del_het_hom", "pass_del", "pass_ins", "pass_ins_del",
         "pass_snp_ts_tv"
     ]
     for m in metrics_list:
