@@ -243,6 +243,23 @@ def ratio_heterozygous_homzygous_indel(mqc, biosample_id):
 
     return k, v
 
+def ratio_heterozygous_homzygous_insertion_deletion(mqc, biosample_id):
+    """
+    The het/hom ratio for PASS insertions and deletions.
+
+    Source: count_variants.py (bcftools view)
+    """
+    k = inspect.currentframe().f_code.co_name
+
+    try:
+        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
+        v = d["pass_ins_del_het_hom"]
+        v = np.round(v, DECIMALS)
+    except KeyError:
+        v = "NA"
+
+    return k, v
+
 def count_deletions(mqc, biosample_id):
     """
     The number of PASS deletions.
