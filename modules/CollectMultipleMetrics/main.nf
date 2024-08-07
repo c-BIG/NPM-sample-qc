@@ -10,6 +10,7 @@ process picard_collect_multiple_metrics {
     output:
     tuple val(sample), path("${sample}.quality_yield_metrics.txt"), emit: quality
     tuple val(sample), path("${sample}.insert_size_metrics.txt"), emit: insert_size
+    tuple val(sample), path("${sample}.quality_yield_metrics.metrics"), emit: metrics
 
     script:
     def reference = ref_fasta ? /R="${ref_fasta}"/ : ''
@@ -28,5 +29,7 @@ process picard_collect_multiple_metrics {
         PROGRAM=CollectInsertSizeMetrics \
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS 
+
+    cut -f9 "${sample}.quality_yield_metrics.txt"  | grep "PF_Q30_BASES" -A 1 | grep -v "PF_Q30_BASES" | awk '{print "{yield_bp_q30: ", \$1,"}"}' > "${sample}.quality_yield_metrics.metrics"
     """
 }
