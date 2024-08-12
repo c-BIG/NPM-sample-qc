@@ -8,7 +8,7 @@ process samtools_stats {
 
     output:
     tuple val(sample), path("${sample}.stats"), emit: stats
-    tuple val(sample), path("${sample}.samtools.metrics")
+    tuple val(sample), path("${sample}.samtools.metrics"), emit: metrics
 
     script:
     def reference = ref_fasta ? /--reference "${ref_fasta}"/ : ''

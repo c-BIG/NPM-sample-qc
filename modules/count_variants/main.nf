@@ -7,14 +7,14 @@ process count_variants {
     path(autosomes_non_gap_regions) 
 
     output:
-    tuple val(sample), path("${sample}.variant_counts.json")
+    tuple val(sample), path("${sample}.variant.metrics.json")
 
     script:
     """
     count_variants.py \
        --input_vcf ${vcf} \
        --regions ${autosomes_non_gap_regions} \
-       --output_json ${sample}.variant_counts.json \
+       --output_json ${sample}.variant.metrics.json \
        --loglevel DEBUG
     """
 
