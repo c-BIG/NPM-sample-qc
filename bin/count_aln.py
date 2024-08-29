@@ -31,15 +31,6 @@ def parse_args():
 
     return args
 
-
-#def raw_data(input_metrics):
-#    #d = dict()
-#    d = {}
-#    with open(input_metrics) as f:
-#        rows = ( line.split('\t') for line in f )
-#        d = { row[0]:row[1] for row in rows }
-#    return d
-
 def raw_data(input_metrics):
     d = {}
     with open(input_metrics) as f:
