@@ -22,6 +22,9 @@ def parse_args():
     parser.add_argument("--output_json", dest="output_json", required=False,
                         default="./variant_counts.json",
                         help="Path to output file for variant metrics. Default: ./variant_counts.json")
+    parser.add_argument("--biosample_id", dest="biosample_id", required=True,
+                        default=None,
+                        help="Sample ID.")
     parser.add_argument("--scratch_dir", dest="scratch_dir", required=False,
                         default="./",
                         help="Path to scratch dir. Default: ./")
@@ -66,10 +69,8 @@ def count_variants(input_vcf, scratch_dir, regions):
     # initialise results dict
     r = dict()
     metrics_list = [
-        "all_snps",
-        "pass_snps", "pass_het_snps", "pass_homalt_snps", "pass_snp_het_hom",
-        "all_indels",
-        "pass_indels", "pass_het_indels", "pass_homalt_indels", "pass_indel_het_hom",
+        "pass_snps", "pass_snp_het_hom",
+        "pass_indel_het_hom",
         "pass_del", "pass_ins", "pass_ins_del",
         "pass_snp_ts_tv"
     ]
@@ -95,7 +96,8 @@ def count_variants(input_vcf, scratch_dir, regions):
     cmd = "bcftools view -H -v snps -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_snps"] = int(p.stdout.read())
+    # r["all_snps"] = int(p.stdout.read())
+    all_snps = int(p.stdout.read())
 
     logging.info("Counting pass_snps...")
     cmd = "bcftools view -H -v snps -f PASS -R %s %s | wc -l" % (regions, input_vcf)
@@ -107,44 +109,53 @@ def count_variants(input_vcf, scratch_dir, regions):
     cmd = "bcftools view -H -v snps -f PASS -g het -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_het_snps"] = int(p.stdout.read())
+    # r["pass_het_snps"] = int(p.stdout.read())
+    pass_het_snps = int(p.stdout.read())
 
     logging.info("Counting pass_homalt_snps...")
     cmd = "bcftools view -H -v snps -f PASS -g hom -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_homalt_snps"] = int(p.stdout.read())
+    # r["pass_homalt_snps"] = int(p.stdout.read())
+    pass_homalt_snps = int(p.stdout.read())
+
 
     logging.info("Calculating pass_snp_het_hom...")
-    snp_het_hom = np.divide(r["pass_het_snps"], r["pass_homalt_snps"])
+    # snp_het_hom = np.divide(r["pass_het_snps"], r["pass_homalt_snps"])
+    snp_het_hom = np.divide(pass_het_snps, pass_homalt_snps)
     r["pass_snp_het_hom"] = np.round(snp_het_hom, 2)
 
     logging.info("Counting all_indels...")
     cmd = "bcftools view -H -v indels -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["all_indels"] = int(p.stdout.read())
+    # r["all_indels"] = int(p.stdout.read())
+    all_indels = int(p.stdout.read())
 
     logging.info("Counting pass_indels...")
     cmd = "bcftools view -H -v indels -f PASS -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_indels"] = int(p.stdout.read())
+    # r["pass_indels"] = int(p.stdout.read())
+    pass_indels = int(p.stdout.read())
 
     logging.info("Counting pass_het_indels...")
     cmd = "bcftools view -H -v indels -f PASS -g het -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_het_indels"] = int(p.stdout.read())
+    # r["pass_het_indels"] = int(p.stdout.read())
+    pass_het_indels = int(p.stdout.read())
 
     logging.info("Counting pass_homalt_indels...")
     cmd = "bcftools view -H -v indels -f PASS -g hom -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_homalt_indels"] = int(p.stdout.read())
+    # r["pass_homalt_indels"] = int(p.stdout.read())
+    pass_homalt_indels = int(p.stdout.read())
 
     logging.info("Calculating pass_indel_het_hom...")
-    indel_het_hom = np.divide(r["pass_het_indels"], r["pass_homalt_indels"])
+    # indel_het_hom = np.divide(r["pass_het_indels"], r["pass_homalt_indels"])
+    indel_het_hom = np.divide(pass_het_indels, pass_homalt_indels)
     r["pass_indel_het_hom"] = np.round(indel_het_hom, 2)
 
 
@@ -193,11 +204,15 @@ def count_variants(input_vcf, scratch_dir, regions):
         l = l.decode("utf-8").strip().split("\t")
         k = str(l[2]).lower()
         v = int(l[3])
-        if "snps" in k and v != r["all_snps"]:
-            logging.error("Mismatch in SNP counts: bcftools stats=%d, count_variants=%d" % (v, r["all_snps"]))
+        if "snps" in k and v != all_snps:
+        #if "snps" in k and v != r["all_snps"]:
+            # logging.error("Mismatch in SNP counts: bcftools stats=%d, count_variants=%d" % (v, r["all_snps"]))
+            logging.error("Mismatch in SNP counts: bcftools stats=%d, count_variants=%d" % (v, all_snps))
             error_count += 1
-        elif "indels" in k and v != r["all_indels"]:
-            logging.error("Mismatch in INDEL counts: bcftools stats=%d, count_variants=%d" % (v, r["all_indels"]))
+        # elif "indels" in k and v != r["all_indels"]:    
+        elif "indels" in k and v != all_indels:
+            # logging.error("Mismatch in INDEL counts: bcftools stats=%d, count_variants=%d" % (v, r["all_indels"]))
+            logging.error("Mismatch in INDEL counts: bcftools stats=%d, count_variants=%d" % (v, all_indels))
             error_count += 1
 
     if error_count > 0:
@@ -206,9 +221,11 @@ def count_variants(input_vcf, scratch_dir, regions):
     return r
 
 
-def save_output(d, outfile):
+def save_output(data_metrics, outfile):
     with open(outfile, "w") as f:
-        json.dump(d, f, sort_keys=True, indent=4)
+        # json.dump(data_metrics, f, sort_keys=True, indent=4)
+        data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : data_metrics}
+        json.dump(data_metrics, f, sort_keys=True, indent=4)
         f.write("\n")
 
 

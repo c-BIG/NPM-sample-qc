@@ -23,16 +23,13 @@ process samtools_stats {
         --threads ${task.cpus} \\
         > "${sample}.stats"
 
-    grep "insert size average:" "${sample}.stats" |cut -f3| awk '{print "{mean_insert_size: ", \$1,"}"}' >"${sample}.samtools.metrics"
-    grep "insert size standard deviation:" "${sample}.stats" |cut -f3| awk '{print "{insert_size_std_deviation: ", \$1,"}"}' >>"${sample}.samtools.metrics"
+    grep "insert size average:" "${sample}.stats" |cut -f3| awk '{print "mean_insert_size", \$1}' >"${sample}.samtools.metrics"
+    grep "insert size standard deviation:" "${sample}.stats" |cut -f3| awk '{print "insert_size_std_deviation\t", \$1}' >>"${sample}.samtools.metrics"
     grep "percentage of properly paired reads" "${sample}.stats" |cut -f3| awk '{print "pct_reads_properly_paired\t", \$1}' >>"${sample}.samtools.metrics"
-    #grep "percentage of properly paired reads" "${sample}.stats" |cut -f3| awk '{print "{pct_reads_properly_paired: ", \$1,"}"}' >>"${sample}.samtools.metrics"
+    # grep "percentage of properly paired reads" "${sample}.stats" |cut -f3| awk '{print "{pct_reads_properly_paired: ", \$1,"}"}' >>"${sample}.samtools.metrics"
     seq=\$(grep "	sequences:" "${sample}.stats" |cut -f3)
     mapped_reads=\$(grep "	reads mapped:" "${sample}.stats" |cut -f3)
-    #echo \$mapped_reads \$seq >>"${sample}.samtools.metrics"
-    awk -v num=\$mapped_reads -v denom=\$seq 'BEGIN { printf ("pct_reads_mapped\t %.2f", 100 * num / denom) }' >>"${sample}.samtools.metrics"
-    #awk "BEGIN { printf  100 * \$mapped_reads / \$seq }" >>"${sample}.samtools.metrics"
-    #div=\$((mapped_reads*100 / seq ))
-    #echo \$div >>"${sample}.samtools.metrics"
+    div=\$(awk -v num=\$mapped_reads -v denom=\$seq 'BEGIN { printf ("pct_reads_mapped\t %.2f", 100 * num / denom) }')
+    echo \$div >>"${sample}.samtools.metrics"
     """
 }

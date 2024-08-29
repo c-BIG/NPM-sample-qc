@@ -15,6 +15,7 @@ process count_variants {
        --input_vcf ${vcf} \
        --regions ${autosomes_non_gap_regions} \
        --output_json ${sample}.variant.metrics.json \
+       --biosample_id ${sample} \
        --loglevel DEBUG
     """
 

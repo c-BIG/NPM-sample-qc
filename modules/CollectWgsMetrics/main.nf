@@ -23,8 +23,9 @@ process picard_collect_wgs_metrics {
         INTERVALS=${autosomes_non_gap_regions} \
         VALIDATION_STRINGENCY=SILENT
 
-    cut -f2 "${sample}_wgs_metrics.txt"  | grep "MEAN_COVERAGE" -A 1 | grep -v "MEAN_COVERAGE" | awk '{print "{mean_autosome_coverage: ", \$1,"}"}' > "${sample}_wgs_metrics.metrics"
-    cut -f17 "${sample}_wgs_metrics.txt" | grep "PCT_15X"       -A 1 | grep -v "PCT_15X"      | awk '{print "{pct_autosomes_15x: ", \$1,"}"}'      >> "${sample}_wgs_metrics.metrics"
-    cut -f5 "${sample}_wgs_metrics.txt"  | grep "MAD_COVERAGE"  -A 1 | grep -v "MAD_COVERAGE"  | awk '{print "{mad_autosome_coverage: ", \$1,"}"}'  >> "${sample}_wgs_metrics.metrics"
+    cut -f2 "${sample}_wgs_metrics.txt"  | grep "MEAN_COVERAGE" -A 1 | grep -v "MEAN_COVERAGE" | awk '{print "mean_autosome_coverage", \$1}' > "${sample}_wgs_metrics.metrics"
+    cut -f17 "${sample}_wgs_metrics.txt" | grep "PCT_15X"       -A 1 | grep -v "PCT_15X"      | awk '{print "pct_autosomes_15x", \$1}'      >> "${sample}_wgs_metrics.metrics"
+    cut -f5 "${sample}_wgs_metrics.txt"  | grep "MAD_COVERAGE"  -A 1 | grep -v "MAD_COVERAGE"  | awk '{print "mad_autosome_coverage", \$1}'  >> "${sample}_wgs_metrics.metrics"
+    # cut -f5 "${sample}_wgs_metrics.txt"  | grep "MAD_COVERAGE"  -A 1 | grep -v "MAD_COVERAGE"  | awk '{print "{mad_autosome_coverage: ", \$1,"}"}'  >> "${sample}_wgs_metrics.metrics"
     """
 }
