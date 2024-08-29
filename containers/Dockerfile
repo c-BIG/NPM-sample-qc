@@ -46,7 +46,7 @@ RUN conda clean -a
 # install MultiQC and MultiQC_NPM plugin
 # RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
 
-RUN git clone -b feature/vcf-qc-implementation https://github.com/c-BIG/NPM-sample-qc.git
+RUN git clone -b feature/rework-aln-variant-metrics-json https://github.com/c-BIG/NPM-sample-qc.git
 # RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
 
