@@ -50,7 +50,7 @@ RUN conda clean -a
 RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
 
-RUN git checkout feature/vcf-qc-implementation
+RUN git checkout feature/rework-aln-variant-metrics-json
 RUN python3 setup.py install
 # RUN python -m pip install .
 # RUN pip3 install numpy scipy argparse matplotlib
