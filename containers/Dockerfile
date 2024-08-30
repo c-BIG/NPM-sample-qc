@@ -27,6 +27,7 @@ RUN export DEBIAN_FRONTEND="noninteractive" && \
       datamash \
       graphviz \
       vim \
+      jq \
       && rm -rf /var/lib/apt/lists/*
 
 # install conda
