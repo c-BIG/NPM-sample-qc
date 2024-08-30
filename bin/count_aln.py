@@ -31,6 +31,22 @@ def parse_args():
 
     return args
 
+#def raw_data(input_metrics):
+#    d = {}
+#    with open(input_metrics) as f:
+#        for line in f:
+#            if not line.strip():
+#                continue
+#            row = line.split('\t')
+#            key = row[0]
+#            value_str = row[1]
+#            try:
+#                value = float(value_str.strip())
+#            except ValueError:
+#                value = value_str.strip()
+#            d[key] = value
+#    return d
+
 def raw_data(input_metrics):
     d = {}
     with open(input_metrics) as f:
@@ -40,11 +56,7 @@ def raw_data(input_metrics):
             row = line.split('\t')
             key = row[0]
             value_str = row[1]
-            try:
-                value = float(value_str.strip())
-            except ValueError:
-                value = value_str.strip()
-            d[key] = value
+            d[key] = value_str.replace("\n", "")
     return d
 
 
