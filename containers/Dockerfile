@@ -51,7 +51,9 @@ RUN git clone -b feature/rework-aln-variant-metrics-json https://github.com/c-BI
 # RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
 WORKDIR /NPM-sample-qc/bin/multiqc_plugins
 
-# RUN git checkout feature/rework-aln-variant-metrics-json
-RUN python3 setup.py install
+RUN git checkout feature/rework-aln-variant-metrics-json
+
+## RUN python3 setup.py install
+
 # RUN python -m pip install .
-# RUN pip3 install numpy scipy argparse matplotlib
+RUN pip3 install numpy scipy argparse matplotlib
