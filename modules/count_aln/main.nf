@@ -10,6 +10,7 @@ process count_aln {
 
     """
     cat ${stats} ${picard_quality} ${picard_wgs_coverage} ${verifybamid_freemix} > "${sample}.aln.list.txt"
+    sed -i 's/ //' "${sample}.aln.list.txt"
 
     count_aln.py \
        --input_metrics "${sample}.aln.list.txt" \
