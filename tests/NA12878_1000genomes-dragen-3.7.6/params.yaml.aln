@@ -1,0 +1,4 @@
+samples:
+-
+ biosample_id: NA12878 
+ aln: /data/NA12878.bam

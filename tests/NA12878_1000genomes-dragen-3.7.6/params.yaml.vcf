@@ -1,0 +1,4 @@
+samples:
+-
+ biosample_id: NA12878 
+ vcf: /data/NA12878.hard-filtered.vcf.gz

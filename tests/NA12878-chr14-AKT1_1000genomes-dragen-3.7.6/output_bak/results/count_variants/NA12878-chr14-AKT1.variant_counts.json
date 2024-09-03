@@ -1,0 +1,16 @@
+{
+    "all_indels": 1860,
+    "all_snps": 8512,
+    "pass_del": 848,
+    "pass_het_indels": 1103,
+    "pass_het_snps": 4341,
+    "pass_homalt_indels": 740,
+    "pass_homalt_snps": 4148,
+    "pass_indel_het_hom": 1.49,
+    "pass_indels": 1843,
+    "pass_ins": 850,
+    "pass_ins_del": 1.0,
+    "pass_snp_het_hom": 1.05,
+    "pass_snp_ts_tv": 2.13,
+    "pass_snps": 8489
+}
