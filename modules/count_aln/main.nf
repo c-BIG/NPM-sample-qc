@@ -15,6 +15,6 @@ process count_aln {
     count_aln.py \
        --input_metrics "${sample}.aln.list.txt" \
        --sample_id ${sample} \
-       --output_json ${sample}.aln_metrics.json
+       --output_json ${sample}.aln.metrics.json
     """
 }

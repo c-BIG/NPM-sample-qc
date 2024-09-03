@@ -30,6 +30,6 @@ process picard_collect_multiple_metrics {
         METRIC_ACCUMULATION_LEVEL=null \
         METRIC_ACCUMULATION_LEVEL=ALL_READS 
 
-    cut -f9 "${sample}.quality_yield_metrics.txt"  | grep "PF_Q30_BASES" -A 1 | grep -v "PF_Q30_BASES" | awk '{print "yield_bp_q30","\t",\$1}' > "${sample}.quality_yield_metrics.metrics"
+    cut -f9 "${sample}.quality_yield_metrics.txt"  | grep "PF_Q30_BASES" -A 1 | grep -v "PF_Q30_BASES" | awk '{print "yield_bp_q30\t"\$1}' > "${sample}.quality_yield_metrics.metrics"
     """
 }
