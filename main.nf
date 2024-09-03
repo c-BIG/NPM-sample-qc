@@ -96,7 +96,7 @@ include { picard_collect_variant_calling_metrics_vcf } from './modules/CollectVa
 include { bcftools_stats } from './modules/bcftools'
 include { count_variants } from './modules/count_variants'
 include { count_aln } from './modules/count_aln'
-include { count_aln_vcf } from './modules/count_aln_vcf'
+include { compile_aln_vcf } from './modules/compile_aln_vcf'
 // include { multiqc } from './modules/multiqc'
 
 /*
@@ -192,9 +192,7 @@ workflow {
         .empty()
         sample_ids
         .join( count_variants.out )
-        //count_variants.out
         .join( bcftools_stats.out )
-        //.view()
         .set { vcf_qc }
 
 // channel for samplelist input file type bam processed outputs
@@ -226,7 +224,7 @@ workflow {
     count_aln ( aln_count_in )
 
 
-// channel for samplelist input file type bam processed outputs
+// channel for samplelist input file type aln and vcf processed outputs
     Channel
         .empty()
         sample_ids
@@ -236,7 +234,7 @@ workflow {
         .view()
         .set { ch_count }
 
-    count_aln_vcf ( ch_count )
+    compile_aln_vcf ( ch_count )
 
 /*
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
@@ -296,11 +294,7 @@ workflow {
     }
 */
 
-//    multiqc( multiqc_in )
-
 }
-
-//         .map { sample, stats, insertsize, quality, wgs_coverage, freemix, count_variants, bcftools_stats -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [], count_variants, bcftools_stats ] }
 
 /*
 ----------------------------------------------------------------------

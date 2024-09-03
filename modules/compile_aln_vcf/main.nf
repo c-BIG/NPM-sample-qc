@@ -1,4 +1,4 @@
-process count_aln_vcf {
+process compile_aln_vcf {
 
     tag { sample }
 
