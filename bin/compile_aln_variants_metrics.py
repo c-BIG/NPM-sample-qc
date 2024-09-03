@@ -34,16 +34,6 @@ def parse_args():
     return args
 
 
-#with open("variant_counts.json", 'r') as f1:
-#    data1 = json.load(f1)
-
-#with open("NA12878-chr14-AKT1.variant.metrics.json", 'r') as f2:
-#    data2 = json.load(f2)
-
-#with open("merged_output_json", "w") as f:
-#    json.dump({"biosample": data1["biosample"], "wgs_qc_metrics": {**data1["wgs_qc_metrics"], **data2["wgs_qc_metrics"]}}, f, sort_keys=True, indent=4)
-#    f.write("\n")
-
 def data1(input_aln_metrics):
     aln_input = {}
     with open(input_aln_metrics, 'r') as f1:
