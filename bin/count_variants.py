@@ -69,10 +69,10 @@ def count_variants(input_vcf, scratch_dir, regions):
     # initialise results dict
     r = dict()
     metrics_list = [
-        "pass_snps", "pass_snp_het_hom",
-        "pass_indel_het_hom",
-        "pass_del", "pass_ins", "pass_ins_del",
-        "pass_snp_ts_tv"
+        "count_snvs", "ratio_heterozygous_homzygous_snv",
+        "ratio_heterozygous_homzygous_indel",
+        "count_deletions", "count_insertions", "ratio_insertion_deletion",
+        "ratio_transitions_transversions_snv"
     ]
     for m in metrics_list:
         r[m] = 0
@@ -99,11 +99,11 @@ def count_variants(input_vcf, scratch_dir, regions):
     # r["all_snps"] = int(p.stdout.read())
     all_snps = int(p.stdout.read())
 
-    logging.info("Counting pass_snps...")
+    logging.info("Counting count_snvs...")
     cmd = "bcftools view -H -v snps -f PASS -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    r["pass_snps"] = int(p.stdout.read())
+    r["count_snvs"] = int(p.stdout.read())
 
     logging.info("Counting pass_het_snps...")
     cmd = "bcftools view -H -v snps -f PASS -g het -R %s %s | wc -l" % (regions, input_vcf)
@@ -120,10 +120,10 @@ def count_variants(input_vcf, scratch_dir, regions):
     pass_homalt_snps = int(p.stdout.read())
 
 
-    logging.info("Calculating pass_snp_het_hom...")
+    logging.info("Calculating ratio_heterozygous_homzygous_snv...")
     # snp_het_hom = np.divide(r["pass_het_snps"], r["pass_homalt_snps"])
     snp_het_hom = np.divide(pass_het_snps, pass_homalt_snps)
-    r["pass_snp_het_hom"] = np.round(snp_het_hom, 2)
+    r["ratio_heterozygous_homzygous_snv"] = np.round(snp_het_hom, 2)
 
     logging.info("Counting all_indels...")
     cmd = "bcftools view -H -v indels -R %s %s | wc -l" % (regions, input_vcf)
@@ -153,13 +153,13 @@ def count_variants(input_vcf, scratch_dir, regions):
     # r["pass_homalt_indels"] = int(p.stdout.read())
     pass_homalt_indels = int(p.stdout.read())
 
-    logging.info("Calculating pass_indel_het_hom...")
+    logging.info("Calculating ratio_heterozygous_homzygous_indel...")
     # indel_het_hom = np.divide(r["pass_het_indels"], r["pass_homalt_indels"])
     indel_het_hom = np.divide(pass_het_indels, pass_homalt_indels)
-    r["pass_indel_het_hom"] = np.round(indel_het_hom, 2)
+    r["ratio_heterozygous_homzygous_indel"] = np.round(indel_het_hom, 2)
 
 
-    logging.info("Counting pass_del, pass_ins...")
+    logging.info("Counting count_deletions, count_insertions...")
     cmd = "bcftools view -H -v indels -f PASS -R %s %s" % (regions, input_vcf)
     # filter dragen annotation of variant records
     cmd += " | sed 's/,<NON_REF>//g'"
@@ -182,16 +182,16 @@ def count_variants(input_vcf, scratch_dir, regions):
         v = int(l[0])
         r[k] = v
 
-    logging.info("Calculating pass_ins_del...")
-    ins_del = np.divide(r["pass_ins"], r["pass_del"])
-    r["pass_ins_del"] = np.round(ins_del, 2)
+    logging.info("Calculating ratio_insertion_deletion...")
+    ins_del = np.divide(r["count_insertions"], r["count_deletions"])
+    r["ratio_insertion_deletion"] = np.round(ins_del, 2)
 
     logging.info("Calculating pass_snp_ts_tv...")
     cmd = "cat %s/pass.bcftools_stats | grep '^TSTV'" % scratch_dir
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     l = p.stdout.read().decode("utf-8").strip().split("\t")
-    r["pass_snp_ts_tv"] = np.round(float(l[4]), 2)
+    r["ratio_transitions_transversions_snv"] = np.round(float(l[4]), 2)
 
     # sanity checks
     logging.info("Running sanity checks for variant counts...")
