@@ -166,9 +166,11 @@ def count_variants(input_vcf, scratch_dir, regions):
     # exclude multi-allelic sites
     cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
     # if length(ALT) > length(REF), label as INS
-    cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS\" }"
+    #cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS\" }"
+    cmd += " | awk '{ if( length($5) > length($4) ) { print \"insertions\" }"
     # if length(ALT) < length(REF), label as DEL
-    cmd += " else if ( length($5) < length($4) ) { print \"DEL\" }"
+    #cmd += " else if ( length($5) < length($4) ) { print \"DEL\" }"
+    cmd += " else if ( length($5) < length($4) ) { print \"deletions\" }"
     # label everything else as UNK and report its location
     cmd += " else { print \"UNK\" } }'"
     # count by label
@@ -178,7 +180,7 @@ def count_variants(input_vcf, scratch_dir, regions):
     x = p.stdout.read()
     for l in x.splitlines():
         l = l.decode("utf-8").strip().split(" ")
-        k = "pass_%s" % l[1].lower()
+        k = "count_%s" % l[1].lower()
         v = int(l[0])
         r[k] = v
 
