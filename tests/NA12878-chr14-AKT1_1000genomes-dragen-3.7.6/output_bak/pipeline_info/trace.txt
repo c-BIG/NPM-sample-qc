@@ -1,4 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-2	b6/e2ba69	885662	bcftools_stats (NA12878-chr14-AKT1)	COMPLETED	0	2024-05-29 09:35:34.815	3.3s	53ms	1178.9%	3.4 MB	4.7 MB	678.8 KB	38.8 KB
-1	d7/181748	885992	count_variants (NA12878-chr14-AKT1)	COMPLETED	0	2024-05-29 09:35:38.138	2.1s	1.4s	1108.0%	49.8 MB	698.4 MB	22.9 MB	10.5 MB
-3	d4/01e073	886629	multiqc (NA12878-chr14-AKT1)	COMPLETED	0	2024-05-29 09:35:40.222	5s	4.3s	148.3%	117.6 MB	866.8 MB	49.6 MB	17.7 MB

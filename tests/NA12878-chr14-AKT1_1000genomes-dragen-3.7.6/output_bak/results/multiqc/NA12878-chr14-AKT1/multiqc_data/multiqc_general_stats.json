@@ -1,9 +1,0 @@
-{
-    "NA12878-chr14-AKT1": {
-        "Bcftools: Stats_mqc-generalstats-bcftools_stats-number_of_records": 10321,
-        "Bcftools: Stats_mqc-generalstats-bcftools_stats-number_of_SNPs": 8489,
-        "Bcftools: Stats_mqc-generalstats-bcftools_stats-number_of_indels": 1843,
-        "Bcftools: Stats_mqc-generalstats-bcftools_stats-tstv": 2.13,
-        "Bcftools: Stats_mqc-generalstats-bcftools_stats-number_of_MNPs": 0
-    }
-}
