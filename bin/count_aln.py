@@ -51,7 +51,7 @@ def raw_data(input_metrics):
 
 def save_output(data_metrics, outfile):
     with open(outfile, "w") as f:
-        data_metrics = {"sample" : {"id" : args.sample_id}, "wgs_metrics" : data_metrics}
+        data_metrics = {"biosample" : {"id" : args.sample_id}, "wgs_qc_metrics" : data_metrics}
         json.dump(data_metrics, f, sort_keys=True, indent=4)
         f.write("\n")
 
