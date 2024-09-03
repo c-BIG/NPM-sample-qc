@@ -97,7 +97,7 @@ include { bcftools_stats } from './modules/bcftools'
 include { count_variants } from './modules/count_variants'
 include { count_aln } from './modules/count_aln'
 include { count_aln_vcf } from './modules/count_aln_vcf'
-include { multiqc } from './modules/multiqc'
+// include { multiqc } from './modules/multiqc'
 
 /*
 ----------------------------------------------------------------------
