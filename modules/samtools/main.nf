@@ -31,7 +31,7 @@ process samtools_stats {
 
     seq=\$(grep "	sequences:" "${sample}.stats" |cut -f3)
     mapped_reads=\$(grep "	reads mapped:" "${sample}.stats" |cut -f3)
-    div=\$(awk -v num=\$mapped_reads -v denom=\$seq 'BEGIN { printf ("%s\t %.2f", "pct_reads_mapped",100 * num / denom) }')
-    #echo \$div >>"${sample}.samtools.metrics"
+    div=\$(awk -v num=\$mapped_reads -v denom=\$seq 'BEGIN { printf ("%.2f", 100 * num / denom) }')
+    echo "pct_reads_mapped\t"\$div >>"${sample}.samtools.metrics"
     """
 }
