@@ -160,9 +160,9 @@ def cross_contamination_rate(mqc, biosample_id):
 
 def count_snvs(mqc, biosample_id):
     """
-    The number of PASS SNPs.
+    Description: The number of variant type SNVs in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view. (bcftools view -H -v snps -f PASS)
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -175,45 +175,11 @@ def count_snvs(mqc, biosample_id):
 
     return k, v
 
-def pass_het_snps(mqc, biosample_id):
-    """
-    The number of PASS het SNPs.
-
-    Source: count_variants.py (bcftools view)
-    """
-    k = inspect.currentframe().f_code.co_name
-
-    try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
-        v = d["pass_het_snps"]
-        v = int(v)
-    except KeyError:
-        v = "NA"
-
-    return k, v
-
-def pass_homalt_snps(mqc, biosample_id):
-    """
-    The number of PASS hom alt SNPs.
-
-    Source: count_variants.py (bcftools view)
-    """
-    k = inspect.currentframe().f_code.co_name
-
-    try:
-        d = mqc["multiqc_npm_count_variants"][biosample_id + ".variant"]
-        v = d["pass_homalt_snps"]
-        v = int(v)
-    except KeyError:
-        v = "NA"
-
-    return k, v
-
 def ratio_heterozygous_homzygous_snv(mqc, biosample_id):
     """
-    The het/hom ratio for PASS SNPs.
+    Description: The ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v snps -f PASS -g het / bcftools view -H -v snps -f PASS -g hom).
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -228,9 +194,9 @@ def ratio_heterozygous_homzygous_snv(mqc, biosample_id):
 
 def ratio_heterozygous_homzygous_indel(mqc, biosample_id):
     """
-    The het/hom ratio for PASS INDELs.
+    Description: The ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS -g het / bcftools view -H -v indels -f PASS -g hom).
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -245,9 +211,9 @@ def ratio_heterozygous_homzygous_indel(mqc, biosample_id):
 
 def count_deletions(mqc, biosample_id):
     """
-    The number of PASS deletions.
+    Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS....INS/bcftools view -H -v indels -f PASS....DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -262,9 +228,9 @@ def count_deletions(mqc, biosample_id):
 
 def count_insertions(mqc, biosample_id):
     """
-    The number of PASS insertions.
+    Description: The number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS....INS). Insertions are only considered in this metric short, less than 50bp, insertions as commonly identified by most short reads variant callers. Structural variations which include insertions larger than 50bp and which are typically identified using dedicated SV callers are not considered.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -279,9 +245,9 @@ def count_insertions(mqc, biosample_id):
 
 def ratio_insertion_deletion(mqc, biosample_id):
     """
-    The ins/del ratio for PASS INDELs.
+    Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools view)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS....INS/bcftools view -H -v indels -f PASS....DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.
     """
     k = inspect.currentframe().f_code.co_name
 
@@ -297,9 +263,9 @@ def ratio_insertion_deletion(mqc, biosample_id):
 
 def ratio_transitions_transversions(mqc, biosample_id):
     """
-    The transition to transversion ratio of passing bi-allelic SNPs.
+    Description: The ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality variants.
 
-    Source: count_variants.py (bcftools stats - tstv)
+    Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality-variants by bcftools stats, (bcftools stats -f PASS ... TSTV).
     """
     k = inspect.currentframe().f_code.co_name
 
