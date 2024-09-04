@@ -6,7 +6,7 @@
 export CAPSULE_LOG=none
 NXF_ANSI_LOG=false
 
-/home/ubuntu/bin/nf23.09.1-edge-all/nextflow run ../../main.nf \
+/home/ubuntu/bin/nf24.04.2/nextflow run ../../main.nf \
 	-config ../../nextflow.config \
 	--inputs_list params.yaml \
 	-work-dir ./work \
