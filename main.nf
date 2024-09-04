@@ -92,12 +92,11 @@ include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_bam } from './modules/CollectWgsMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from './modules/CollectWgsMetrics'
-include { picard_collect_variant_calling_metrics_vcf } from './modules/CollectVariantCallingMetrics'
+// include { picard_collect_variant_calling_metrics_vcf } from './modules/CollectVariantCallingMetrics'
 include { bcftools_stats } from './modules/bcftools'
 include { count_variants } from './modules/count_variants'
 include { count_aln } from './modules/count_aln'
 include { compile_aln_vcf } from './modules/compile_aln_vcf'
-// include { multiqc } from './modules/multiqc'
 
 /*
 ----------------------------------------------------------------------
@@ -125,6 +124,7 @@ workflow {
         .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.aln] }
         .set { samples }
 
+// Create channel branches for bam and cram input type
     Channel
         samples.branch { rec ->
             def aln_file = rec.aln ? file( rec.aln ) : null
@@ -141,7 +141,7 @@ workflow {
         }
         .set { aln_inputs }
 
-
+// Conditional input option to compile metrics if both input aln and vcf given
     Channel
         samples.branch { rec ->
             def aln_file = rec.aln ? file( rec.aln ) : null
@@ -183,6 +183,7 @@ workflow {
     //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
     count_variants ( vcf_inputs, autosomes_non_gap_regions_bed )
 
+// Channel to get sample id mapping
     Channel
         samples.map { it.biosample_id }
         .set { sample_ids }
