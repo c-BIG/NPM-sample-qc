@@ -188,6 +188,7 @@ workflow {
         samples.map { it.biosample_id }
         .set { sample_ids }
 
+/*
 // channel for samplelist vcf input file processed outputs
     Channel
         .empty()
@@ -195,6 +196,7 @@ workflow {
         .join( count_variants.out )
         .join( bcftools_stats.out )
         .set { vcf_qc }
+*/
 
 // channel for samplelist input file type bam processed outputs
     Channel
