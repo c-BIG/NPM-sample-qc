@@ -3,12 +3,14 @@
         "id": "NA12878-chr14-AKT1"
     },
     "wgs_qc_metrics": {
-        "count_deletions": 848,
-        "count_insertions": 850,
-        "count_snvs": 8489,
-        "ratio_heterozygous_homzygous_indel": 1.49,
-        "ratio_heterozygous_homzygous_snv": 1.05,
-        "ratio_insertion_deletion": 1.0,
-        "ratio_transitions_transversions_snv": 2.13
+        "variant_metrics": {
+            "count_deletions": 848,
+            "count_insertions": 850,
+            "count_snvs": 8489,
+            "ratio_heterozygous_homzygous_indel": 1.49,
+            "ratio_heterozygous_homzygous_snv": 1.05,
+            "ratio_insertion_deletion": 1.0,
+            "ratio_transitions_transversions_snv": 2.13
+        }
     }
 }
