@@ -227,7 +227,8 @@ def save_output(data_metrics, outfile):
     with open(outfile, "w") as f:
         # json.dump(data_metrics, f, sort_keys=True, indent=4)
         #data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : data_metrics}
-        data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : {"variant_metrics" : data_metrics}}
+        #data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : {"aln_metrics" : {}, "variant_metrics" : data_metrics}}
+        data_metrics = {"biosample" : {"id" : args.biosample_id}, "wgs_qc_metrics" : {"variant_metrics" : data_metrics, "aln_metrics" : {}}}
         json.dump(data_metrics, f, sort_keys=True, indent=4)
         f.write("\n")
 

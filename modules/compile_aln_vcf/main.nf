@@ -16,5 +16,7 @@ process compile_aln_vcf {
        --input_variants_metrics ${count_variants} \
        --sample_id ${sample} \
        --output_json ${sample}.metrics.json
+
+    rm -rf ${count_aln} ${count_variants}
     """
 }
