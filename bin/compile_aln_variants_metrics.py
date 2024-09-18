@@ -46,10 +46,13 @@ def data2(input_variants_metrics):
         variants_input = json.load(f2)
     return variants_input
 
+
 def save_output(data1, data2, outfile):
     with open(outfile, "w") as f:
-       json.dump({"biosample": data1["biosample"], "wgs_qc_metrics": {**data1["wgs_qc_metrics"], **data2["wgs_qc_metrics"]}}, f, sort_keys=True, indent=4)
-       #json.dump({"biosample": data1["biosample"], aln_input['wgs_qc_metrics']['variant_metric'].update(variants_input['wgs_qc_metrics']['variant_metric'])}, f, sort_keys=True, indent=4)
+        data1['wgs_qc_metrics']['variant_metrics'].update(data2['wgs_qc_metrics']['variant_metrics'])
+        print(data1)
+        json.dump(data1, f, sort_keys=True, indent=4)
+        #json.dump({"biosample": data1["biosample"], "wgs_qc_metrics": {**data1["wgs_qc_metrics"], **data2["wgs_qc_metrics"]}}, f, sort_keys=True, indent=4)
         f.write("\n")
 
 if __name__ == "__main__":
