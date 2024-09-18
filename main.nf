@@ -151,7 +151,7 @@ workflow {
 
                 return tuple( rec.biosample_id )
         }
-        .view()
+        //.view()
         .set { inputs_cond }
 
 
@@ -234,7 +234,7 @@ workflow {
         .join( inputs_cond )
         .join( count_aln.out.metrics )
         .join( count_variants.out )
-        .view()
+        //.view()
         .set { ch_count }
 
     compile_aln_vcf ( ch_count )
