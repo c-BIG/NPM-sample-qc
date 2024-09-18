@@ -50,6 +50,7 @@ def data2(input_variants_metrics):
 def save_output(data1, data2, outfile):
     with open(outfile, "w") as f:
         data1['wgs_qc_metrics']['variant_metrics'].update(data2['wgs_qc_metrics']['variant_metrics'])
+        #data1['wgs_qc_metrics']['variant_metrics'] = data2['wgs_qc_metrics']['variant_metrics']
         print(data1)
         json.dump(data1, f, sort_keys=True, indent=4)
         #json.dump({"biosample": data1["biosample"], "wgs_qc_metrics": {**data1["wgs_qc_metrics"], **data2["wgs_qc_metrics"]}}, f, sort_keys=True, indent=4)
