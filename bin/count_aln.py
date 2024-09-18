@@ -40,12 +40,14 @@ def raw_data(input_metrics):
             row = line.split('\t')
             key = row[0]
             value_str = row[1]
-            d[key] = value_str.replace("\n", "")
-            #try:
-            #    value = float(value_str.strip())
-            #except ValueError:
-            #    value = value_str.strip()
-            #d[key] = value
+            #d[key] = value_str.replace("\n", "")
+            try:
+                #value = float(value_str.strip())
+                value = int(value_str)
+            except ValueError:
+                #value = value_str.strip()
+                value = float(value_str.strip())
+            d[key] = value
     return d
 
 
