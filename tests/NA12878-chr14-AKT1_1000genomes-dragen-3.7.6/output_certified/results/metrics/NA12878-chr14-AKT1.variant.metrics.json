@@ -3,6 +3,7 @@
         "id": "NA12878-chr14-AKT1"
     },
     "wgs_qc_metrics": {
+        "aln_metrics": {},
         "variant_metrics": {
             "count_deletions": 848,
             "count_insertions": 850,
