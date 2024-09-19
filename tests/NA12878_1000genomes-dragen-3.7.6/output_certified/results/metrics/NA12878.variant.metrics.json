@@ -3,12 +3,15 @@
         "id": "NA12878"
     },
     "wgs_qc_metrics": {
-        "count_deletions": 433328,
-        "count_insertions": 419222,
-        "count_snvs": 3904186,
-        "ratio_heterozygous_homzygous_indel": 1.96,
-        "ratio_heterozygous_homzygous_snv": 1.57,
-        "ratio_insertion_deletion": 0.97,
-        "ratio_transitions_transversions_snv": 1.96
+        "aln_metrics": {},
+        "variant_metrics": {
+            "count_deletions": 433328,
+            "count_insertions": 419222,
+            "count_snvs": 3904186,
+            "ratio_heterozygous_homzygous_indel": 1.96,
+            "ratio_heterozygous_homzygous_snv": 1.57,
+            "ratio_insertion_deletion": 0.97,
+            "ratio_transitions_transversions_snv": 1.96
+        }
     }
 }
