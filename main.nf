@@ -230,8 +230,9 @@ workflow {
 // channel for samplelist input file type aln and vcf processed outputs
     Channel
         .empty()
-        sample_ids
-        .join( inputs_cond )
+        //sample_ids
+        //.join( inputs_cond )
+        inputs_cond
         .join( count_aln.out.metrics )
         .join( count_variants.out.metrics )
         //.view()
