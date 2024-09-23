@@ -233,7 +233,7 @@ workflow {
         sample_ids
         .join( inputs_cond )
         .join( count_aln.out.metrics )
-        .join( count_variants.out )
+        .join( count_variants.out.metrics )
         //.view()
         .set { ch_count }
 

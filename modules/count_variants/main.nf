@@ -7,7 +7,7 @@ process count_variants {
     path(autosomes_non_gap_regions) 
 
     output:
-    tuple val(sample), path("${sample}.variant.metrics.json")
+    tuple val(sample), path("${sample}.variant.metrics.json"), emit: metrics
 
     script:
     """
