@@ -96,6 +96,8 @@ include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from '
 include { bcftools_stats } from './modules/bcftools'
 include { count_variants } from './modules/count_variants'
 include { count_aln } from './modules/count_aln'
+include { metric_aln } from './modules/metric_aln'
+include { metric_variants } from './modules/metric_variants'
 include { compile_aln_vcf } from './modules/compile_aln_vcf'
 
 /*
@@ -124,6 +126,11 @@ workflow {
         .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.aln] }
         .set { samples }
 
+// Channel to get sample id mapping
+    Channel
+        samples.map { it.biosample_id }
+        .set { sample_ids }
+
 // Create channel branches for bam and cram input type
     Channel
         samples.branch { rec ->
@@ -140,20 +147,6 @@ workflow {
                 return tuple( rec.biosample_id, aln_file, cram_idx )
         }
         .set { aln_inputs }
-
-// Conditional input option to compile metrics if both input aln and vcf given
-    Channel
-        samples.branch { rec ->
-            def aln_file = rec.aln ? file( rec.aln ) : null
-            def vcf_file = rec.vcf ? file( rec.vcf ) : null
-
-            count: rec.biosample_id && aln_file && vcf_file
-
-                return tuple( rec.biosample_id )
-        }
-        //.view()
-        .set { inputs_cond }
-
 
     samtools_stats_bam( aln_inputs.bam, [] )
     samtools_stats_cram( aln_inputs.cram, ref_fasta )
@@ -183,10 +176,27 @@ workflow {
     //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
     count_variants ( vcf_inputs, autosomes_non_gap_regions_bed )
 
-// Channel to get sample id mapping
+// Conditional input option to rename metrics output file if vcf only given
     Channel
-        samples.map { it.biosample_id }
-        .set { sample_ids }
+        samples.branch { rec ->
+            def aln_file = rec.aln ? file( rec.aln ) : null
+
+            count: rec.biosample_id && !aln_file
+
+                return tuple( rec.biosample_id )
+        }
+        .view()
+        .set { variants_cond }
+
+    Channel
+        .empty()
+        variants_cond
+        .join( count_variants.out.metrics )
+        .view()
+        .set { ch_variants_metric }
+
+    metric_variants ( ch_variants_metric )
+
 
 /*
 // channel for samplelist vcf input file processed outputs
@@ -226,12 +236,47 @@ workflow {
 
     count_aln ( aln_count_in )
 
+// Conditional input option to rename metrics output file if aln only given
+    Channel
+        samples.branch { rec ->
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
 
-// channel for samplelist input file type aln and vcf processed outputs
+            count: rec.biosample_id && !vcf_file
+
+                return tuple( rec.biosample_id )
+        }
+        .view()
+        .set { aln_cond }
+
     Channel
         .empty()
-        sample_ids
-        .join( inputs_cond )
+        aln_cond
+        .join( count_aln.out.metrics )
+        .view()
+        .set { ch_aln_metric }
+
+    metric_aln ( ch_aln_metric )
+
+
+// Conditional input option to compile metrics if both input aln and vcf given
+    Channel
+        samples.branch { rec ->
+            def aln_file = rec.aln ? file( rec.aln ) : null
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
+
+            count: rec.biosample_id && aln_file && vcf_file
+
+                return tuple( rec.biosample_id )
+        }
+        //.view()
+        .set { inputs_cond }
+
+// channel for samplelist input file type both aln and vcf processed outputs
+    Channel
+        .empty()
+        //sample_ids
+        //.join( inputs_cond )
+        inputs_cond
         .join( count_aln.out.metrics )
         .join( count_variants.out.metrics )
         //.view()
