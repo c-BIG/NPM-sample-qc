@@ -92,7 +92,11 @@ include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_bam
 include { picard_collect_multiple_metrics as picard_collect_multiple_metrics_cram } from './modules/CollectMultipleMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_bam } from './modules/CollectWgsMetrics'
 include { picard_collect_wgs_metrics as picard_collect_wgs_metrics_cram } from './modules/CollectWgsMetrics'
-include { multiqc } from './modules/multiqc'
+// include { picard_collect_variant_calling_metrics_vcf } from './modules/CollectVariantCallingMetrics'
+include { bcftools_stats } from './modules/bcftools'
+include { count_variants } from './modules/count_variants'
+include { count_aln } from './modules/count_aln'
+include { compile_aln_vcf } from './modules/compile_aln_vcf'
 
 /*
 ----------------------------------------------------------------------
@@ -107,9 +111,11 @@ workflow {
     ref_fasta = file( params.reference )
     ref_fasta_idx = file( params.reference + ".fai" )
     autosomes_non_gap_regions = file( params.autosomes_non_gap_regions )
+    autosomes_non_gap_regions_bed = file( params.autosomes_non_gap_regions_bed )
     vbi2_ud = file( params.vbi2_ud )
     vbi2_bed = file( params.vbi2_bed )
     vbi2_mean = file( params.vbi2_mean )
+    //ref_dbsnp = file( params.ref_dbsnp )
 
     inputs = new YamlSlurper().parse(file(params.inputs_list))
 
@@ -118,6 +124,7 @@ workflow {
         .ifEmpty { ['biosample_id': params.biosample_id, 'aln': params.aln] }
         .set { samples }
 
+// Create channel branches for bam and cram input type
     Channel
         samples.branch { rec ->
             def aln_file = rec.aln ? file( rec.aln ) : null
@@ -134,6 +141,19 @@ workflow {
         }
         .set { aln_inputs }
 
+// Conditional input option to compile metrics if both input aln and vcf given
+    Channel
+        samples.branch { rec ->
+            def aln_file = rec.aln ? file( rec.aln ) : null
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
+
+            count: rec.biosample_id && aln_file && vcf_file
+
+                return tuple( rec.biosample_id )
+        }
+        //.view()
+        .set { inputs_cond }
+
 
     samtools_stats_bam( aln_inputs.bam, [] )
     samtools_stats_cram( aln_inputs.cram, ref_fasta )
@@ -147,32 +167,78 @@ workflow {
     picard_collect_wgs_metrics_bam( aln_inputs.bam, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
     picard_collect_wgs_metrics_cram( aln_inputs.cram, autosomes_non_gap_regions, ref_fasta, ref_fasta_idx )
 
+
+    Channel
+        samples.branch { rec ->
+            def vcf_file = rec.vcf ? file( rec.vcf ) : null
+
+            output: rec.biosample_id && vcf_file
+                def vcf_idx = file( "${rec.vcf}.tbi" )
+
+                return tuple( rec.biosample_id, vcf_file, vcf_idx )
+        }
+        .set { vcf_inputs }
+
+    bcftools_stats( vcf_inputs )
+    //picard_collect_variant_calling_metrics_vcf( vcf_inputs, ref_dbsnp )
+    count_variants ( vcf_inputs, autosomes_non_gap_regions_bed )
+
+// Channel to get sample id mapping
+    Channel
+        samples.map { it.biosample_id }
+        .set { sample_ids }
+
+/*
+// channel for samplelist vcf input file processed outputs
+    Channel
+        .empty()
+        sample_ids
+        .join( count_variants.out )
+        .join( bcftools_stats.out )
+        .set { vcf_qc }
+*/
+
 // channel for samplelist input file type bam processed outputs
     Channel
         .empty()
-        samtools_stats_bam.out.stats
-        .join( picard_collect_multiple_metrics_bam.out.insert_size )
-        .join( picard_collect_multiple_metrics_bam.out.quality )
-        .join( picard_collect_wgs_metrics_bam.out.wgs_coverage )
-        .join( verifybamid2_bam.out.freemix, remainder: true )
+        sample_ids
+        .join( samtools_stats_bam.out.metrics )
+        .join( picard_collect_multiple_metrics_bam.out.metrics )
+        .join( picard_collect_wgs_metrics_bam.out.metrics )
+        .join( verifybamid2_bam.out.metrics, remainder: true )
         .set { ch_bam }
 
 // channel for samplelist input file type cram processed outputs
     Channel
         .empty()
-        samtools_stats_cram.out.stats
-        .join( picard_collect_multiple_metrics_cram.out.insert_size )
-        .join( picard_collect_multiple_metrics_cram.out.quality )
-        .join( picard_collect_wgs_metrics_cram.out.wgs_coverage )
-        .join( verifybamid2_cram.out.freemix, remainder: true )
+        sample_ids
+        .join( samtools_stats_cram.out.metrics )
+        .join( picard_collect_multiple_metrics_cram.out.metrics )
+        .join( picard_collect_wgs_metrics_cram.out.metrics )
+        .join( verifybamid2_cram.out.metrics, remainder: true )
         .set { ch_cram }
+
 
 // channel to mix the bam/cram process outputs and map the verifybamid2 'null' to '[]' if the verifybamid2 process output is empty
     ch_bam.mix(ch_cram)
-        .map { sample, stats, insertsize, quality, wgs_coverage, freemix -> [ sample, stats, insertsize, quality, wgs_coverage, freemix ?: [] ] }
-        .set { multiqc_in }
+        .map { sample, stats, quality, wgs_coverage, freemix -> [ sample, stats, quality, wgs_coverage, freemix ?: [] ] }
+        .set { aln_count_in }
 
-    multiqc( multiqc_in )
+    count_aln ( aln_count_in )
+
+
+// channel for samplelist input file type aln and vcf processed outputs
+    Channel
+        .empty()
+        sample_ids
+        .join( inputs_cond )
+        .join( count_aln.out.metrics )
+        .join( count_variants.out.metrics )
+        //.view()
+        .set { ch_count }
+
+    compile_aln_vcf ( ch_count )
+
 
 }
 

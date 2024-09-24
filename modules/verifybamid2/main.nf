@@ -12,6 +12,7 @@ process verifybamid2 {
     output:
     tuple val(sample), path("${sample}.selfSM"), emit: freemix
     tuple val(sample), path("${sample}.Ancestry"), emit: ancestry
+    tuple val(sample), path("${sample}.selfSM.metrics"), emit: metrics
 
     script:
     def reference = ref_fasta ? /--Reference "${ref_fasta}"/ : ''
@@ -22,6 +23,7 @@ process verifybamid2 {
     
     verifybamid2 --NumPC 4 --NumThread ${task.cpus*2} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
+    cut -f7 "${sample}.selfSM"  | grep "FREEMIX" -A 1 | grep -v "FREEMIX" | awk '{print "cross_contamination_rate\t"\$1}' > "${sample}.selfSM.metrics"
     """
 }
 

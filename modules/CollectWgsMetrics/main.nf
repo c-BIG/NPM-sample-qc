@@ -10,6 +10,7 @@ process picard_collect_wgs_metrics {
 
     output:
     tuple val(sample), path("${sample}_wgs_metrics.txt"), emit: wgs_coverage
+    tuple val(sample), path("${sample}_wgs_metrics.metrics"), emit: metrics
 
     script:
     """
@@ -21,5 +22,16 @@ process picard_collect_wgs_metrics {
         R=${ref_fasta} \
         INTERVALS=${autosomes_non_gap_regions} \
         VALIDATION_STRINGENCY=SILENT
+
+    #cut -f2 "${sample}_wgs_metrics.txt"  | grep "MEAN_COVERAGE" -A 1 | grep -v "MEAN_COVERAGE" | awk '{print "mean_autosome_coverage\t"\$1}' > "${sample}_wgs_metrics.metrics"
+    avg=\$(cut -f2 "${sample}_wgs_metrics.txt"  | grep "MEAN_COVERAGE" -A 1 | tail -n 1)
+    avgcov=\$(awk -v avgval=\$avg 'BEGIN { printf ("%.2f", avgval) }')
+    echo "mean_autosome_coverage\t"\$avgcov >> "${sample}_wgs_metrics.metrics"
+
+    cov=\$(cut -f17 "${sample}_wgs_metrics.txt" | grep "PCT_15X" -A 1 | tail -n 1)
+    covpct=\$(awk -v covval=\$cov 'BEGIN { printf ("%.2f", 100 * covval) }')
+    echo "pct_autosomes_15x\t"\$covpct >> "${sample}_wgs_metrics.metrics"
+
+    cut -f5 "${sample}_wgs_metrics.txt"  | grep "MAD_COVERAGE"  -A 1 | grep -v "MAD_COVERAGE"  | awk '{print "mad_autosome_coverage\t"\$1}'  >> "${sample}_wgs_metrics.metrics"
     """
 }

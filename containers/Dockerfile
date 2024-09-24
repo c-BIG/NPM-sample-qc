@@ -27,6 +27,7 @@ RUN export DEBIAN_FRONTEND="noninteractive" && \
       datamash \
       graphviz \
       vim \
+      jq \
       && rm -rf /var/lib/apt/lists/*
 
 # install conda
@@ -44,6 +45,16 @@ RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
 # install MultiQC and MultiQC_NPM plugin
-RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
-WORKDIR /NPM-sample-qc/bin/multiqc_plugins
-RUN python3 setup.py install
+# RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
+
+RUN git clone -b feature/rework-aln-variant-metrics-json https://github.com/c-BIG/NPM-sample-qc.git
+# RUN git clone https://github.com/c-BIG/NPM-sample-qc.git
+# WORKDIR /NPM-sample-qc/bin/multiqc_plugins
+WORKDIR /NPM-sample-qc/bin
+
+RUN git checkout feature/rework-aln-variant-metrics-json
+
+## RUN python3 setup.py install
+
+# RUN python -m pip install .
+RUN pip3 install numpy scipy argparse
