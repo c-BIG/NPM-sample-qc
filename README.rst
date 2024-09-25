@@ -45,7 +45,7 @@ Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1
 
 This creates `output` directory with the results that can be compared to the content of `output_certified` ::
 
-  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/multiqc/NA12878-chr14-AKT1.metrics.json
+  diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/metrics/NA12878-chr14-AKT1.metrics.json
 
 Please refer to the workflow help for more information on its usage and access to additional options: ::
 
@@ -59,7 +59,7 @@ Resources
 
 The workflow requires the following resources given in the ``conf/resources.config``
 
-- *N-regions reference file*, used as an input for computing "non-gap regions autosome" coverages (mosdepth).
+- *N-regions reference file*, used as an input for computing "non-gap regions autosome" coverages (picard, bcftools).
 
   - Gaps in the GRCh38 (hg38) genome assembly, defined in the AGP file delivered with the sequence, are being closed during the finishing process on the human genome. GRCh38 (hg38) genome assembly still contains the following principal types of gaps:
 
@@ -74,6 +74,8 @@ The workflow requires the following resources given in the ``conf/resources.conf
 - *Human Reference Genome FASTA file*, used as an input for multiple tools. This file can be downloaded from ``s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta``.
 
 - *FASTA file index*. This file can be downloaded from ``s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai`` and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.
+
+- *Verify Bam ID 2 reference panel files*, 100K sites from 1000 Genome Project phase 3 build 38, downloaded from ``https://github.com/Griffan/VerifyBamID/tree/master/resource/``.
 
 Inputs
 ------
@@ -100,14 +102,15 @@ Upon completion, the workflow will create the following files in the ``outdir`` 
           timeline.html
           trace.txt
       results/          # final metrics.json and intermediate outputs
-          mosdepth/
-          multiqc/
+          bcftools/
+          metrics/
             <sample_id>.metrics.json
           picard_collect_multiple_metrics/
+          picard_collect_wgs_metrics/
           samtools/
           verifybamid2/
 
-If ``keep_workdir`` has been specified, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
+If ``cleanup = true`` in the nextflow.config is commented out, the contents of the Nextflow work directory (``work-dir``) will also be preserved.
 
 Docker image
 ------------
@@ -132,15 +135,11 @@ In a nutshell, this workflow generates QC metrics from single-sample WGS results
 
 **Metrics calculation**
 
-The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf``).
+The current workflow combines widely-used third-party tools (samtools, picard, bcftools, verifybamid2) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (``main.nf``). We also provide an example dag for a more visual representation (``tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf``).
 
 **Metrics parsing**
 
-Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling ``bin/multiqc_plugins/multiqc_npm/``, a MultiQC plugin that extends the base tool to support additional files.
-
-**Metrics reporting**
-
-Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the ``bin/compile_metrics.py`` script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the **Metric definitions** section).
+Next, output files from each individual tool are parsed and combined into a single json file.
 
 Metric definitions
 ==================
