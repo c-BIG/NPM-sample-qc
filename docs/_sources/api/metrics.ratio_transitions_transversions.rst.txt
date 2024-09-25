@@ -1,0 +1,6 @@
+ratio_transitions_transversions
+===============================
+
+.. currentmodule:: metrics
+
+.. autofunction:: ratio_transitions_transversions
