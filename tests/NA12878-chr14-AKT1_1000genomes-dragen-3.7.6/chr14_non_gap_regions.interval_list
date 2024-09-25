@@ -1,5 +1,5 @@
 @HD	VN:1.6	SO:coordinate
-@SQ	SN:chr14	LN:107043718	M5:e0f0eecc3bcab6178c62b6211565c807	UR:file:/Users/gnanakkan/NPM-sample-qc/tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/work/d7/208435b73576bd9dd7cc1a11c12341/hg38.fa
+@SQ	SN:chr14	LN:107043718	M5:e0f0eecc3bcab6178c62b6211565c807	UR:s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa
 chr14	16000001	16022537	+	.
 chr14	16022638	16053976	+	.
 chr14	16054460	16061677	+	.

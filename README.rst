@@ -13,10 +13,10 @@ Requirements
 
 * `Install Nextflow`_ 
 
-v23.08.1-edge or higher ::
+v23.10.4 or higher ::
   
   # Download the executable package
-  wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.08.1-edge/nextflow-23.08.1-edge-all | bash
+  wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.10.4/nextflow-23.10.4-all | bash
   # Make the binary executable on your system
   chmod -x nextflow
   # Optionally, move the nextflow file to a directory accessible by your $PATH variable
