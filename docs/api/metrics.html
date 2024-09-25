@@ -74,6 +74,27 @@
 <section id="module-metrics.metrics">
 <span id="metrics-metrics-module"></span><h2>metrics.metrics module<a class="headerlink" href="#module-metrics.metrics" title="Permalink to this heading"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.count_deletions">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_deletions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_deletions" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS/bcftools view -H -v indels -f PASS….DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.count_insertions">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_insertions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_insertions" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS). Insertions are only considered in this metric short, less than 50bp, insertions as commonly identified by most short reads variant callers. Structural variations which include insertions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.count_snvs">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_snvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_snvs" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The number of variant type SNVs in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view. (bcftools view -H -v snps -f PASS)</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.cross_contamination_rate">
 <span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">cross_contamination_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.cross_contamination_rate" title="Permalink to this definition"></a></dt>
 <dd><p>Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
@@ -127,6 +148,34 @@
 <span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
 <dd><p>Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of properly paired reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.ratio_heterozygous_homzygous_indel">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_indel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_indel" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS -g het / bcftools view -H -v indels -f PASS -g hom).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.ratio_heterozygous_homzygous_snv">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_snv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_snv" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v snps -f PASS -g het / bcftools view -H -v snps -f PASS -g hom).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.ratio_insertion_deletion">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_insertion_deletion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_insertion_deletion" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS/bcftools view -H -v indels -f PASS….DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.metrics.ratio_transitions_transversions">
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_transitions_transversions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_transitions_transversions" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality-variants by bcftools stats, (bcftools stats -f PASS … TSTV).</p>
 </dd></dl>
 
 <dl class="py function">

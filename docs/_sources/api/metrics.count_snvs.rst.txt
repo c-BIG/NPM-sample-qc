@@ -1,0 +1,6 @@
+count_snvs
+==========
+
+.. currentmodule:: metrics
+
+.. autofunction:: count_snvs

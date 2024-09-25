@@ -45,10 +45,10 @@ RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
 # Clone master
-# RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
+RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
 
 # Clone develop
-RUN git clone -b develop https://github.com/c-BIG/NPM-sample-qc.git
+# RUN git clone -b develop https://github.com/c-BIG/NPM-sample-qc.git
 
 WORKDIR /NPM-sample-qc/bin
 RUN pip3 install numpy scipy argparse

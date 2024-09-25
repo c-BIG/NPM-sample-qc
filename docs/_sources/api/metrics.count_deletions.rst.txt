@@ -1,0 +1,6 @@
+count_deletions
+===============
+
+.. currentmodule:: metrics
+
+.. autofunction:: count_deletions

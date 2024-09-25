@@ -1,0 +1,6 @@
+count_insertions
+================
+
+.. currentmodule:: metrics
+
+.. autofunction:: count_insertions

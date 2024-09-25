@@ -75,9 +75,9 @@
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
 </ul>
-<p>v23.08.1-edge or higher</p>
+<p>v23.10.4 or higher</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download the executable package</span>
-<span class="n">wget</span> <span class="o">-</span><span class="n">qO</span><span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="n">io</span><span class="o">/</span><span class="n">nextflow</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v23</span><span class="mf">.08.1</span><span class="o">-</span><span class="n">edge</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="mf">23.08.1</span><span class="o">-</span><span class="n">edge</span><span class="o">-</span><span class="nb">all</span> <span class="o">|</span> <span class="n">bash</span>
+<span class="n">wget</span> <span class="o">-</span><span class="n">qO</span><span class="o">-</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="n">io</span><span class="o">/</span><span class="n">nextflow</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v23</span><span class="mf">.10.4</span><span class="o">/</span><span class="n">nextflow</span><span class="o">-</span><span class="mf">23.10.4</span><span class="o">-</span><span class="nb">all</span> <span class="o">|</span> <span class="n">bash</span>
 <span class="c1"># Make the binary executable on your system</span>
 <span class="n">chmod</span> <span class="o">-</span><span class="n">x</span> <span class="n">nextflow</span>
 <span class="c1"># Optionally, move the nextflow file to a directory accessible by your $PATH variable</span>
@@ -103,7 +103,7 @@
 </pre></div>
 </div>
 <p>This creates <cite>output</cite> directory with the results that can be compared to the content of <cite>output_certified</cite></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">multiqc</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span> <span class="n">output_certified</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span> <span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">/</span><span class="n">metrics</span><span class="o">/</span><span class="n">NA12878</span><span class="o">-</span><span class="n">chr14</span><span class="o">-</span><span class="n">AKT1</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
 <p>Please refer to the workflow help for more information on its usage and access to additional options:</p>
@@ -117,7 +117,7 @@
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
 <p>The workflow requires the following resources given in the <code class="docutils literal notranslate"><span class="pre">conf/resources.config</span></code></p>
 <ul class="simple">
-<li><p><em>N-regions reference file</em>, used as an input for computing “non-gap regions autosome” coverages (mosdepth).</p>
+<li><p><em>N-regions reference file</em>, used as an input for computing “non-gap regions autosome” coverages (picard, bcftools).</p>
 <ul>
 <li><p>Gaps in the GRCh38 (hg38) genome assembly, defined in the AGP file delivered with the sequence, are being closed during the finishing process on the human genome. GRCh38 (hg38) genome assembly still contains the following principal types of gaps:</p>
 <ul>
@@ -133,6 +133,7 @@
 </li>
 <li><p><em>Human Reference Genome FASTA file</em>, used as an input for multiple tools. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://broad-references/hg38/v0/Homo_sapiens_assembly38.fasta</span></code>.</p></li>
 <li><p><em>FASTA file index</em>. This file can be downloaded from <code class="docutils literal notranslate"><span class="pre">s3://1000genomes-dragen-3.7.6/references/fasta/hg38.fa.fai</span></code> and not required to be specified in the config. The workflow will look fasta index file in a folder the fasta file is present.</p></li>
+<li><p><em>Verify Bam ID 2 reference panel files</em>, 100K sites from 1000 Genome Project phase 3 build 38, downloaded from <code class="docutils literal notranslate"><span class="pre">https://github.com/Griffan/VerifyBamID/tree/master/resource/</span></code>.</p></li>
 </ul>
 </section>
 <section id="inputs">
@@ -156,15 +157,16 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
         <span class="n">timeline</span><span class="o">.</span><span class="n">html</span>
         <span class="n">trace</span><span class="o">.</span><span class="n">txt</span>
     <span class="n">results</span><span class="o">/</span>          <span class="c1"># final metrics.json and intermediate outputs</span>
-        <span class="n">mosdepth</span><span class="o">/</span>
-        <span class="n">multiqc</span><span class="o">/</span>
+        <span class="n">bcftools</span><span class="o">/</span>
+        <span class="n">metrics</span><span class="o">/</span>
           <span class="o">&lt;</span><span class="n">sample_id</span><span class="o">&gt;.</span><span class="n">metrics</span><span class="o">.</span><span class="n">json</span>
         <span class="n">picard_collect_multiple_metrics</span><span class="o">/</span>
+        <span class="n">picard_collect_wgs_metrics</span><span class="o">/</span>
         <span class="n">samtools</span><span class="o">/</span>
         <span class="n">verifybamid2</span><span class="o">/</span>
 </pre></div>
 </div>
-<p>If <code class="docutils literal notranslate"><span class="pre">keep_workdir</span></code> has been specified, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">cleanup</span> <span class="pre">=</span> <span class="pre">true</span></code> in the nextflow.config is commented out, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
 </section>
 <section id="docker-image">
 <h3>Docker image<a class="headerlink" href="#docker-image" title="Permalink to this heading"></a></h3>
@@ -182,11 +184,9 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 <p>We provide a schematic representation of the workflow in the figure below:</p>
 <img src="./npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
-<p>The current workflow combines widely-used third-party tools (samtools, picard, mosdepth) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf</span></code>).</p>
+<p>The current workflow combines widely-used third-party tools (samtools, picard, bcftools, verifybamid2) and custom scripts. Full details on which processes are run/when can be found in the actual workflow definition (<code class="docutils literal notranslate"><span class="pre">main.nf</span></code>). We also provide an example dag for a more visual representation (<code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/dag.pdf</span></code>).</p>
 <p><strong>Metrics parsing</strong></p>
-<p>Next, output files from each individual tool are parsed and combined into a single json file. This is done by calling <code class="docutils literal notranslate"><span class="pre">bin/multiqc_plugins/multiqc_npm/</span></code>, a MultiQC plugin that extends the base tool to support additional files.</p>
-<p><strong>Metrics reporting</strong></p>
-<p>Finally, the contents of the MultiQC json are formatted into a final metrics report, also in json format. The reporting logic lives in the <code class="docutils literal notranslate"><span class="pre">bin/compile_metrics.py</span></code> script, and whilst its contents are simple, it enables automatic documentation of metric definitions from code comments (see the <strong>Metric definitions</strong> section).</p>
+<p>Next, output files from each individual tool are parsed and combined into a single json file.</p>
 </section>
 <section id="metric-definitions">
 <h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading"></a></h2>
