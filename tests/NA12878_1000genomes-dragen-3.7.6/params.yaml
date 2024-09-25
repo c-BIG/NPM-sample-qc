@@ -1,8 +1,6 @@
 samples:
 -
- biosample_id: NA12877
- aln: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12877/NA12877.bam
--
  biosample_id: NA12878 
  aln: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.bam
+ vcf: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA12878/NA12878.hard-filtered.vcf.gz
 aws_no_sign_request: true

@@ -1,0 +1,6 @@
+ratio_insertion_deletion
+========================
+
+.. currentmodule:: metrics
+
+.. autofunction:: ratio_insertion_deletion

@@ -1,0 +1,6 @@
+ratio_heterozygous_homzygous_indel
+==================================
+
+.. currentmodule:: metrics
+
+.. autofunction:: ratio_heterozygous_homzygous_indel

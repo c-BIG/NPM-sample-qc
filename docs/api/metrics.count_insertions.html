@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>count_insertions &mdash; NPM-sample-qc  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="count_snvs" href="metrics.count_snvs.html" />
+    <link rel="prev" title="count_deletions" href="metrics.count_deletions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NPM-sample-qc
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../metrics.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="metrics.count_deletions.html">count_deletions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">count_insertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.count_snvs.html">count_snvs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.cross_contamination_rate.html">cross_contamination_rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.insert_size_std_deviation.html">insert_size_std_deviation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mad_autosome_coverage.html">mad_autosome_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mean_autosome_coverage.html">mean_autosome_coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.mean_insert_size.html">mean_insert_size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_autosomes_15x.html">pct_autosomes_15x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_mapped.html">pct_reads_mapped</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.pct_reads_properly_paired.html">pct_reads_properly_paired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.ratio_heterozygous_homzygous_indel.html">ratio_heterozygous_homzygous_indel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.ratio_heterozygous_homzygous_snv.html">ratio_heterozygous_homzygous_snv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.ratio_insertion_deletion.html">ratio_insertion_deletion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.ratio_transitions_transversions.html">ratio_transitions_transversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics.yield_bp_q30.html">yield_bp_q30</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NPM-sample-qc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../metrics.html">Functions</a> &raquo;</li>
+      <li>count_insertions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/metrics.count_insertions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="count-insertions">
+<h1>count_insertions<a class="headerlink" href="#count-insertions" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="metrics.count_insertions">
+<span class="sig-prename descclassname"><span class="pre">metrics.</span></span><span class="sig-name descname"><span class="pre">count_insertions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.count_insertions" title="Permalink to this definition"></a></dt>
+<dd><p>Description: The number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants.</p>
+<p>Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS). Insertions are only considered in this metric short, less than 50bp, insertions as commonly identified by most short reads variant callers. Structural variations which include insertions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="metrics.count_deletions.html" class="btn btn-neutral float-left" title="count_deletions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="metrics.count_snvs.html" class="btn btn-neutral float-right" title="count_snvs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2023, GIS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

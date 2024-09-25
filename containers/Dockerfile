@@ -27,6 +27,7 @@ RUN export DEBIAN_FRONTEND="noninteractive" && \
       datamash \
       graphviz \
       vim \
+      jq \
       && rm -rf /var/lib/apt/lists/*
 
 # install conda
@@ -43,7 +44,11 @@ RUN conda install -c conda-forge -y awscli
 RUN conda env create -f /conda_env.yml
 RUN conda clean -a
 
-# install MultiQC and MultiQC_NPM plugin
+# Clone master
 RUN git clone --depth 1 https://github.com/c-BIG/NPM-sample-qc.git
-WORKDIR /NPM-sample-qc/bin/multiqc_plugins
-RUN python3 setup.py install
+
+# Clone develop
+# RUN git clone -b develop https://github.com/c-BIG/NPM-sample-qc.git
+
+WORKDIR /NPM-sample-qc/bin
+RUN pip3 install numpy scipy argparse
