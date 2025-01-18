@@ -20,10 +20,12 @@ process verifybamid2 {
     """
    # run verifybamid2
    # get the percentage of cross-individual contamination rate 
-    
+
     verifybamid2 --NumPC 4 --NumThread ${task.cpus*2} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
-    cut -f7 "${sample}.selfSM"  | grep "FREEMIX" -A 1 | grep -v "FREEMIX" | awk '{print "cross_contamination_rate\t"\$1}' > "${sample}.selfSM.metrics"
+    mix=\$(cut -f7 "${sample}.selfSM"  | grep "FREEMIX" -A 1 | grep -v "FREEMIX")
+    round=\$(awk -v var=\$mix 'BEGIN { printf "%.2f", var }' )
+    echo "cross_contamination_rate_round\t"\$round >> "${sample}.selfSM.metrics"
     """
 }
 
