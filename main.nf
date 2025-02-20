@@ -8,8 +8,8 @@ nextflow.enable.dsl=2
 Developed by the Genome Institute of Singapore for
 the National Precision Medicine Programme
 
-Copyright: 2022 Genome Institute of Singapore
-License: The MIT License (MIT)
+Copyright: 2020 - 2025 Genome Institute of Singapore
+License: Apache License Version 2.0
 
 See LICENSE for more copyright information
 */
