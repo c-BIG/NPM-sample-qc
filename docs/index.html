@@ -141,7 +141,7 @@
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
 <li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
-<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM. The workflow expects the BAM/CRAM index (bai/crai) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yaml</span></code> for an example.</p></li>
+<li><p><strong>Sample-specific settings</strong> contain paths to WGS data for a given sample, namely BAM/CRAM and/or VCF. The workflow expects the BAM/CRAM index (bai/crai) and/or VCF index (tbi) to be present in the same location. See <code class="docutils literal notranslate"><span class="pre">tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/params.yaml</span></code> for an example.</p></li>
 </ul>
 <p>If accessing AWS S3 public resources (for example reference genome .fa, .fai or bam/cram) without any AWS user credential,
 append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_request:</span> <span class="pre">true</span></code> to your parameter list (<code class="docutils literal notranslate"><span class="pre">params.yaml</span></code> or commandline argument).
