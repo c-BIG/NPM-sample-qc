@@ -25,7 +25,7 @@ process verifybamid2 {
 
     mix=\$(cut -f7 "${sample}.selfSM"  | grep "FREEMIX" -A 1 | grep -v "FREEMIX")
     round=\$(awk -v var=\$mix 'BEGIN { printf "%.2f", var }' )
-    echo "cross_contamination_rate_round\t"\$round >> "${sample}.selfSM.metrics"
+    echo "cross_contamination_rate\t"\$round >> "${sample}.selfSM.metrics"
     """
 }
 
