@@ -24,7 +24,7 @@ process verifybamid2 {
     verifybamid2 --NumPC 4 --NumThread ${task.cpus*2} --SVDPrefix ${params.vbi2_svdprefix} ${reference} --BamFile ${bam} --Output ${sample}
 
     mix=\$(cut -f7 "${sample}.selfSM"  | grep "FREEMIX" -A 1 | grep -v "FREEMIX")
-    round=\$(awk -v var=\$mix 'BEGIN { printf "%.2f", var }' )
+    round=\$(awk -v var=\$mix 'BEGIN { printf "%.4f", var }' )
     echo "cross_contamination_rate\t"\$round >> "${sample}.selfSM.metrics"
     """
 }
