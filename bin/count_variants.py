@@ -174,7 +174,8 @@ def count_variants(input_vcf, scratch_dir, regions):
     # label everything else as UNK and report its location
     cmd += " else { print \"UNK\" } }'"
     # count by label
-    cmd += " | sort | uniq -c"
+    # cmd += " | sort | uniq -c"
+    cmd += " | sort | grep -v UNK | uniq -c"
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     x = p.stdout.read()
