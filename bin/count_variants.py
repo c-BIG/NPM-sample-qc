@@ -164,7 +164,7 @@ def count_variants(input_vcf, scratch_dir, regions):
     # filter dragen annotation of variant records
     cmd += " | sed 's/,<NON_REF>//g'"
     # exclude multi-allelic sites
-    cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
+    # cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
     # if length(ALT) > length(REF), label as INS
     #cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS\" }"
     cmd += " | awk '{ if( length($5) > length($4) ) { print \"insertions\" }"
