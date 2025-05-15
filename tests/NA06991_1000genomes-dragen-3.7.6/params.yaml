@@ -1,0 +1,6 @@
+samples:
+-
+ biosample_id: NA06991 
+ aln: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA06991/NA06991.bam
+ vcf: s3://1000genomes-dragen-3.7.6/data/individuals/hg38-graph-based/NA06991/NA06991.hard-filtered.vcf.gz
+aws_no_sign_request: true
