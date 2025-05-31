@@ -10,16 +10,16 @@
             "mean_insert_size": 447.3,
             "pct_autosomes_15x": 0.0,
             "pct_reads_mapped": 99.63,
-            "pct_reads_properly_paired": 97.9,
+            "pct_reads_properly_paired": 97.88,
             "yield_bp_q30": 1996315
         },
         "variant_metrics": {
-            "count_deletions": 862,
-            "count_insertions": 968,
+            "count_deletions": 926,
+            "count_insertions": 953,
             "count_snvs": 8489,
             "ratio_heterozygous_homzygous_indel": 1.49,
             "ratio_heterozygous_homzygous_snv": 1.05,
-            "ratio_insertion_deletion": 1.12,
+            "ratio_insertion_deletion": 1.03,
             "ratio_transitions_transversions_snv": 2.13
         }
     }

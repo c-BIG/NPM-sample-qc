@@ -159,31 +159,17 @@ def count_variants(input_vcf, scratch_dir, regions):
     r["ratio_heterozygous_homzygous_indel"] = np.round(indel_het_hom, 2)
 
 
-    logging.info("Counting count_deletions, count_insertions...")
-    cmd = "bcftools view -H -v indels -f PASS -R %s %s" % (regions, input_vcf)
-    # filter dragen annotation of variant records
-    cmd += " | sed 's/,<NON_REF>//g'"
-    # exclude multi-allelic sites
-    # cmd += " | awk '$4 !~ /,/ && $5 !~ /,/'"
-    # if length(ALT) > length(REF), label as INS
-    #cmd += " | awk '{ if( length($5) > length($4) ) { print \"INS\" }"
-    cmd += " | awk '{ if( length($5) > length($4) ) { print \"insertions\" }"
-    # if length(ALT) < length(REF), label as DEL
-    #cmd += " else if ( length($5) < length($4) ) { print \"DEL\" }"
-    cmd += " else if ( length($5) < length($4) ) { print \"deletions\" }"
-    # label everything else as UNK and report its location
-    cmd += " else { print \"UNK\" } }'"
-    # count by label
-    # cmd += " | sort | uniq -c"
-    cmd += " | sort | grep -v UNK | uniq -c"
+    logging.info("Counting count_insertions...")
+    cmd = "bcftools view -H -v indels -f PASS -i 'ILEN>0' -R %s %s | wc -l" % (regions, input_vcf)
     logging.debug("CMD: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-    x = p.stdout.read()
-    for l in x.splitlines():
-        l = l.decode("utf-8").strip().split(" ")
-        k = "count_%s" % l[1].lower()
-        v = int(l[0])
-        r[k] = v
+    r["count_insertions"] = int(p.stdout.read())
+
+    logging.info("Counting count_deletions...")
+    cmd = "bcftools view -H -v indels -f PASS -i 'ILEN<0' -R %s %s | wc -l" % (regions, input_vcf)
+    logging.debug("CMD: %s" % cmd)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    r["count_deletions"] = int(p.stdout.read())
 
     logging.info("Calculating ratio_insertion_deletion...")
     ins_del = np.divide(r["count_insertions"], r["count_deletions"])
