@@ -10,5 +10,4 @@ nextflow run ../../main.nf \
 	-config ../../nextflow.config \
 	--inputs_list params.yaml \
 	-work-dir ./work \
-	-resume \
 	--publish_dir ./output
