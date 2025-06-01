@@ -156,3 +156,11 @@ When needed, page contents can be updated by running the following command: ::
   cd docsrc
   # Build the doc
   ./build.sh
+
+Citations
+=========
+
+
+In this work, we utilized the Nextflow workflow engine, as described by P. Di Tommaso et al. Nextflow enables reproducible computational workflows. Nature Biotechnology 35, 316–319 (2017) `doi:10.1038/nbt.3820`_
+
+.. _doi\:10.1038/nbt.3820: https://www.nature.com/articles/nbt.3820
