@@ -160,7 +160,11 @@ When needed, page contents can be updated by running the following command: ::
 Citations
 =========
 
-
 In this work, we utilized the Nextflow workflow engine, as described by P. Di Tommaso et al. Nextflow enables reproducible computational workflows. Nature Biotechnology 35, 316–319 (2017) `doi:10.1038/nbt.3820`_
 
 .. _doi\:10.1038/nbt.3820: https://www.nature.com/articles/nbt.3820
+
+Disclaimer
+==========
+
+This product provides a reference implementation of quality control metrics. Implementers are responsible for ensuring that any use involving data complies with their local institutional policies, data sharing agreements, and legal or ethical obligations, especially in contexts involving sensitive or personally identifiable information.
