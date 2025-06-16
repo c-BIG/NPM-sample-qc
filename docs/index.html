@@ -1,22 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NPM-sample-qc &mdash; NPM-sample-qc  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> NPM-sample-qc
+
+          
+          
+          <a href="#" class="icon icon-home">
+            NPM-sample-qc
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -56,8 +60,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>NPM-sample-qc</li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">NPM-sample-qc</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -68,10 +72,10 @@
            <div itemprop="articleBody">
              
   <section id="npm-sample-qc">
-<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Permalink to this heading"></a></h1>
+<h1>NPM-sample-qc<a class="headerlink" href="#npm-sample-qc" title="Link to this heading"></a></h1>
 <p>NPM-sample-qc is a <a class="reference external" href="https://www.nextflow.io/">Nextflow</a> workflow to obtain QC metrics from single-sample WGS results. It has been created to support QC efforts within the National Precision Medicine programme in Singapore (NPM). In collaboration with <a class="reference external" href="https://www.ga4gh.org/">GA4GH</a> , the <a class="reference external" href="https://www.ga4gh.org/product/wgs-quality-control-standards/">WGS_Quality_Control_Standards</a> was formed with this workflow as first reference implementation of the standards.</p>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.nextflow.io/docs/latest/getstarted.html#installation">Install Nextflow</a></p></li>
 </ul>
@@ -90,7 +94,7 @@
 </ul>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>Clone this repository</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">c</span><span class="o">-</span><span class="n">BIG</span><span class="o">/</span><span class="n">NPM</span><span class="o">-</span><span class="n">sample</span><span class="o">-</span><span class="n">qc</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -112,9 +116,9 @@
 </div>
 </section>
 <section id="understanding-the-workflow">
-<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Permalink to this heading"></a></h2>
+<h2>Understanding the workflow<a class="headerlink" href="#understanding-the-workflow" title="Link to this heading"></a></h2>
 <section id="resources">
-<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h3>
+<h3>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h3>
 <p>The workflow requires the following resources given in the <code class="docutils literal notranslate"><span class="pre">conf/resources.config</span></code></p>
 <ul class="simple">
 <li><p><em>N-regions reference file</em>, used as an input for computing “non-gap regions autosome” coverages (picard, bcftools).</p>
@@ -137,7 +141,7 @@
 </ul>
 </section>
 <section id="inputs">
-<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading"></a></h3>
+<h3>Inputs<a class="headerlink" href="#inputs" title="Link to this heading"></a></h3>
 <p>Input requirements can be split into two categories:</p>
 <ul class="simple">
 <li><p><strong>Generic workflow settings</strong> specify parameters that will not vary from run to run, e.g. Nextflow profile declarations, trace/timeline/report/dag options, output structure and paths to data resources. See <code class="docutils literal notranslate"><span class="pre">nextflow.config</span></code> for additional details.</p></li>
@@ -148,7 +152,7 @@ append <code class="docutils literal notranslate"><span class="pre">aws_no_sign_
 See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1000genomes-dragen-3.7.6/params.yaml</span></code> for an example.</p>
 </section>
 <section id="outputs">
-<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading"></a></h3>
+<h3>Outputs<a class="headerlink" href="#outputs" title="Link to this heading"></a></h3>
 <p>Upon completion, the workflow will create the following files in the <code class="docutils literal notranslate"><span class="pre">outdir</span></code> directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">outdir</span><span class="o">/</span>
     <span class="n">pipeline_info</span><span class="o">/</span>    <span class="c1"># dag, timeline and trace files</span>
@@ -169,7 +173,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 <p>If <code class="docutils literal notranslate"><span class="pre">cleanup</span> <span class="pre">=</span> <span class="pre">true</span></code> in the nextflow.config is commented out, the contents of the Nextflow work directory (<code class="docutils literal notranslate"><span class="pre">work-dir</span></code>) will also be preserved.</p>
 </section>
 <section id="docker-image">
-<h3>Docker image<a class="headerlink" href="#docker-image" title="Permalink to this heading"></a></h3>
+<h3>Docker image<a class="headerlink" href="#docker-image" title="Link to this heading"></a></h3>
 <p>By default the workflow pull the docker image from dockerhub. However you can also build docker image locally</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Move to containers</span>
 <span class="n">cd</span> <span class="n">containers</span>
@@ -180,7 +184,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 </section>
 </section>
 <section id="workflow-logic">
-<h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Permalink to this heading"></a></h2>
+<h2>Workflow logic<a class="headerlink" href="#workflow-logic" title="Link to this heading"></a></h2>
 <p>We provide a schematic representation of the workflow in the figure below:</p>
 <img src="./npm-sample-qc-overview.PNG" width="500px"/><p>In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: <strong>metrics calculation</strong>, <strong>parsing of intermediate outputs</strong> and <strong>generation of a final report</strong>. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.</p>
 <p><strong>Metrics calculation</strong></p>
@@ -189,7 +193,7 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 <p>Next, output files from each individual tool are parsed and combined into a single json file.</p>
 </section>
 <section id="metric-definitions">
-<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Permalink to this heading"></a></h2>
+<h2>Metric definitions<a class="headerlink" href="#metric-definitions" title="Link to this heading"></a></h2>
 <p>The full list of metrics reported by this workflow and details on how they’ve been calculated can be found <a class="reference external" href="https://c-big.github.io/NPM-sample-qc/metrics.html">here</a>.</p>
 <p>When needed, page contents can be updated by running the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install sphinx</span>
@@ -200,6 +204,15 @@ See <code class="docutils literal notranslate"><span class="pre">tests/NA12878_1
 <span class="o">./</span><span class="n">build</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
+</section>
+<section id="citations">
+<h2>Citations<a class="headerlink" href="#citations" title="Link to this heading"></a></h2>
+<p>In this work, we utilized the Nextflow workflow engine, as described by P. Di Tommaso et al. Nextflow enables reproducible computational workflows. Nature Biotechnology 35, 316–319 (2017) <a class="reference external" href="https://www.nature.com/articles/nbt.3820">doi:10.1038/nbt.3820</a></p>
+</section>
+<section id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Link to this heading"></a></h2>
+<p>This product provides a reference implementation of quality control metrics. Implementers are responsible for ensuring that any use involving data complies with their local institutional policies, data sharing agreements, and legal or ethical obligations, especially in contexts involving sensitive or personally identifiable information.</p>
+<p>The QC metrics JSON output should include a reference to a sample or WGS library identifier. We recommend that implementers avoid inadvertently disclosing in this identifier potentially sensitive or identifiable information and to leverage other GA4GH products (e.g., those from the Experiments Metadata Standard Working Group) to provide linkage between this identifier and upstream sample information which might be sensitive or provide a mean for unconsented or unaligned with legal or other obligation requirements identification.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Metric definitions</span></p>
 <ul>

@@ -1,22 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>metrics package &mdash; NPM-sample-qc  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -27,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> NPM-sample-qc
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            NPM-sample-qc
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -55,8 +59,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>metrics package</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">metrics package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/metrics.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -67,127 +71,127 @@
            <div itemprop="articleBody">
              
   <section id="metrics-package">
-<h1>metrics package<a class="headerlink" href="#metrics-package" title="Permalink to this heading"></a></h1>
+<h1>metrics package<a class="headerlink" href="#metrics-package" title="Link to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
 <section id="module-metrics.metrics">
-<span id="metrics-metrics-module"></span><h2>metrics.metrics module<a class="headerlink" href="#module-metrics.metrics" title="Permalink to this heading"></a></h2>
+<span id="metrics-metrics-module"></span><h2>metrics.metrics module<a class="headerlink" href="#module-metrics.metrics" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.count_deletions">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_deletions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_deletions" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_deletions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_deletions" title="Link to this definition"></a></dt>
 <dd><p>Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS/bcftools view -H -v indels -f PASS….DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.count_insertions">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_insertions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_insertions" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_insertions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_insertions" title="Link to this definition"></a></dt>
 <dd><p>Description: The number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type indels only insertions in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS). Insertions are only considered in this metric short, less than 50bp, insertions as commonly identified by most short reads variant callers. Structural variations which include insertions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.count_snvs">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_snvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_snvs" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">count_snvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.count_snvs" title="Link to this definition"></a></dt>
 <dd><p>Description: The number of variant type SNVs in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the number of variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view. (bcftools view -H -v snps -f PASS)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.cross_contamination_rate">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">cross_contamination_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.cross_contamination_rate" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">cross_contamination_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.cross_contamination_rate" title="Link to this definition"></a></dt>
 <dd><p>Description: Estimation of inter-sample contamination rate of short paired-end sequencing high quality, non duplicated reads, primary alignments, mapped on GRCh38 assembly. No minimum mapping quality is imposed. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads and clipped bases.</p>
 <p>Implementation details: The estimation of inter-sample DNA contamination of short paired-end sequencing high quality, aligned sequence reads (BAM/CRAM) mapped on GRCh38 assembly with pre-calculated reference panel of 1000 Genome Project dataset from the VerifyBamID resource using VerifyBamID2 with NumPC “4” (# of Principal Components used in estimation), the key information “FREEMIX” in “.selfSM” in the results indicates the estimated contamination level.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.insert_size_std_deviation">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">insert_size_std_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.insert_size_std_deviation" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">insert_size_std_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.insert_size_std_deviation" title="Link to this definition"></a></dt>
 <dd><p>Description: The insert size standard deviation of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the insert_size_standard_deviation field. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.mad_autosome_coverage">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mad_autosome_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_autosome_coverage" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mad_autosome_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mad_autosome_coverage" title="Link to this definition"></a></dt>
 <dd><p>Description: The median absolute deviation of sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing median absolute deviation coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.mean_autosome_coverage">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mean_autosome_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_autosome_coverage" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mean_autosome_coverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_autosome_coverage" title="Link to this definition"></a></dt>
 <dd><p>Description: The mean sequencing coverage derived from short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing mean coverage of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.mean_insert_size">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mean_insert_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_insert_size" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">mean_insert_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.mean_insert_size" title="Link to this definition"></a></dt>
 <dd><p>Description: The mean insert size of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the insert_size_average field. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.pct_autosomes_15x">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_autosomes_15x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_15x" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_autosomes_15x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_autosomes_15x" title="Link to this definition"></a></dt>
 <dd><p>Description: The percentage of bases attaining at least 15X sequencing coverage in short paired-end sequencing high quality, non duplicated reads, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater, in autosomes non gap regions of GRCh38 assembly. Overlapping bases are counted only once. It is critical that the (BAM/CRAM) alignment files be readily marked for duplicated reads.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, the genome-wide sequencing coverage percentage of bases attaining at least 15X of the non gap regions of GRCh38 assembly, autosomes only, non duplicated reads, non overlapping bases, primary alignments, achieving a base quality of 20 or greater and mapping quality of 20 or greater is derived from picard (2.27.0) CollectWgsMetrics.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.pct_reads_mapped">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_mapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_mapped" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_mapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_mapped" title="Link to this definition"></a></dt>
 <dd><p>Description: The percentage of short paired-end sequencing high quality reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.pct_reads_properly_paired">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_properly_paired" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">pct_reads_properly_paired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.pct_reads_properly_paired" title="Link to this definition"></a></dt>
 <dd><p>Description: The percentage of short paired-end sequencing high quality, properly paired reads, primary alignments, mapped on GRCh38 assembly. Duplicated reads are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using samtools stats, reporting the percentage of properly paired reads mapped on GRCh38 assembly. Duplicated reads are included. No mapping qualiy is applied.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.ratio_heterozygous_homzygous_indel">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_indel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_indel" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_indel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_indel" title="Link to this definition"></a></dt>
 <dd><p>Description: The ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type indels in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS -g het / bcftools view -H -v indels -f PASS -g hom).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.ratio_heterozygous_homzygous_snv">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_snv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_snv" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_heterozygous_homzygous_snv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_heterozygous_homzygous_snv" title="Link to this definition"></a></dt>
 <dd><p>Description: The ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of heterozygous and homozygous variant type SNVs in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v snps -f PASS -g het / bcftools view -H -v snps -f PASS -g hom).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.ratio_insertion_deletion">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_insertion_deletion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_insertion_deletion" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_insertion_deletion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_insertion_deletion" title="Link to this definition"></a></dt>
 <dd><p>Description: The ratio between number of insertion and deletion in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of insertions and deletion in VCF, only in autosomal regions, high quality variants by bcftools view, (bcftools view -H -v indels -f PASS….INS/bcftools view -H -v indels -f PASS….DEL). Insertions and Deletions are only considered in this metric short, less than 50bp, insertions, deletion as commonly identified by most short reads variant callers. Structural variations which include insertions, deletions larger than 50bp and which are typically identified using dedicated SV callers are not considered.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.ratio_transitions_transversions">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_transitions_transversions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_transitions_transversions" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">ratio_transitions_transversions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.ratio_transitions_transversions" title="Link to this definition"></a></dt>
 <dd><p>Description: The ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality variants.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation, calculate the ratio of transitions and transversions of bi-allelic SNVs in VCF, only in autosomal regions, high quality-variants by bcftools stats, (bcftools stats -f PASS … TSTV).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="metrics.metrics.yield_bp_q30">
-<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">yield_bp_q30</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_bp_q30" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">metrics.metrics.</span></span><span class="sig-name descname"><span class="pre">yield_bp_q30</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mqc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biosample_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metrics.metrics.yield_bp_q30" title="Link to this definition"></a></dt>
 <dd><p>Description: The number of bases in short paired-end sequencing high quality reads, primary alignments, achieving a base quality score of 30 or greater (Phred scale). Duplicated reads and clipped bases are included. No minimum mapping quality is imposed.</p>
 <p>Implementation details: In the NPM-sample-QC reference implementation it is computed using GATK Picard CollectQualityYieldMetrics, reporting the PF_Q30_BASES field. Only high quality bases from primary alignments are considered. No filter on duplicated reads, clipped bases or mapping qualiy is applied.</p>
 </dd></dl>
 
 </section>
 <section id="module-metrics">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-metrics" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-metrics" title="Link to this heading"></a></h2>
 </section>
 </section>
 
