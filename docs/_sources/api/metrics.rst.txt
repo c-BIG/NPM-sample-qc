@@ -9,13 +9,13 @@ metrics.metrics module
 
 .. automodule:: metrics.metrics
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: metrics
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
