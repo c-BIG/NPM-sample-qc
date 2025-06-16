@@ -168,3 +168,4 @@ Disclaimer
 ==========
 
 This product provides a reference implementation of quality control metrics. Implementers are responsible for ensuring that any use involving data complies with their local institutional policies, data sharing agreements, and legal or ethical obligations, especially in contexts involving sensitive or personally identifiable information.
+The QC metrics JSON output should include a reference to a sample or WGS library identifier. We recommend that implementers avoid inadvertently disclosing in this identifier potentially sensitive or identifiable information and to leverage other GA4GH products (e.g., those from the Experiments Metadata Standard Working Group) to provide linkage between this identifier and upstream sample information which might be sensitive or provide a mean for unconsented or unaligned with legal or other obligation requirements identification.
