@@ -6,7 +6,7 @@ NPM-sample-qc is a [Nextflow](https://www.nextflow.io/) workflow to obtain QC me
 
 - [Install Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation)
 
-v23.10.4 or higher:
+v23.10.4 or higher
 ```  
   # Download the executable package
   wget -qO- https://github.com/nextflow-io/nextflow/releases/download/v23.10.4/nextflow-23.10.4-all | bash
@@ -20,22 +20,22 @@ v23.10.4 or higher:
 
 ## Quick start
 
-Clone this repository ::
+Clone this repository
 ```
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 ```
-Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7 ::
+Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
 ```
   # Move to test folder
   cd tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/
   # Run the workflow
   sh run.sh
 ```
-This creates `output` directory with the results that can be compared to the content of `output_certified` ::
+This creates `output` directory with the results that can be compared to the content of `output_certified`
 ```
   diff output_certified/results/metrics/NA12878-chr14-AKT1.metrics.json output/results/metrics/NA12878-chr14-AKT1.metrics.json
 ```
-Please refer to the workflow help for more information on its usage and access to additional options: ::
+Please refer to the workflow help for more information on its usage and access to additional options:
 ```
   nextflow run NPM-sample-qc/main.nf --help
 ```
@@ -77,7 +77,7 @@ See ``tests/NA12878_1000genomes-dragen-3.7.6/params.yaml`` for an example.
 
 ### Outputs
 
-Upon completion, the workflow will create the following files in the ``outdir`` directory: ::
+Upon completion, the workflow will create the following files in the ``outdir`` directory:
 ```
   /path/to/outdir/
       pipeline_info/    # dag, timeline and trace files
@@ -98,7 +98,7 @@ If ``cleanup = true`` in the nextflow.config is commented out, the contents of t
 
 ### Docker image
 
-By default the workflow pull the docker image from dockerhub. However you can also build docker image locally ::
+By default the workflow pull the docker image from dockerhub. However you can also build docker image locally
 ```
   # Move to containers
   cd containers
@@ -109,8 +109,6 @@ By default the workflow pull the docker image from dockerhub. However you can al
 
 We provide a schematic representation of the workflow in the figure below:
   
-.. raw:: html
-
    <img src="./npm-sample-qc-overview.PNG" width="500px"/>   
 
 In a nutshell, this workflow generates QC metrics from single-sample WGS results in three stages: **metrics calculation**, **parsing of intermediate outputs** and **generation of a final report**. This makes it possible to take full advantage of the parallelisation capabilities of Nextflow, allows users to leverage third-party tools or add custom scripts, and enables auto-documentation of metrics from code comments.
@@ -127,7 +125,7 @@ Next, output files from each individual tool are parsed and combined into a sing
 
 The full list of metrics reported by this workflow and details on how they've been calculated can be found [here](https://c-big.github.io/NPM-sample-qc/metrics.html).
 
-When needed, page contents can be updated by running the following command: ::
+When needed, page contents can be updated by running the following command:
 ```
   # Install sphinx
   pip install sphinx_rtd_theme sphinx_automodapi
