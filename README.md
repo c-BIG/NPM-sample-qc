@@ -24,7 +24,7 @@ Clone this repository
 ```
   git clone git@github.com:c-BIG/NPM-sample-qc.git
 ```
-Run workflow on 45Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
+Run workflow on 90Mbp region around AKT1 gene, 30X, of sample NA12878 from the 1000 Genomes Phase 3 Reanalysis with DRAGEN 3.7
 ```
   # Move to test folder
   cd tests/NA12878-chr14-AKT1_1000genomes-dragen-3.7.6/
