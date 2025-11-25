@@ -1,64 +1,89 @@
 #!/usr/bin/env python3
-
 import argparse
 import json
-import pprint as pp
-import subprocess
-import numpy as np
-import sys
-import os
 from pathlib import Path
+
+GA4GH_METRIC_BASE = "https://ga4gh.github.io/quality-control-wgs/metrics_definitions/"
+
+# ---- Map JSON keys → GA4GH URL slugs ----
+# Key names must match exactly as they appear in your input JSON.
+METRIC_URLS = {
+    "mean_autosome_coverage": "mean-autosome-coverage/",
+    "mad_autosome_coverage": "mad-autosome-coverage/",
+    "pct_autosomes_15x": "pct-autosomes-15x/",
+    "pct_reads_mapped": "pct-reads-mapped/",
+    "pct_reads_properly_paired": "pct-reads-properly-paired/",
+    "insert_size_std_deviation": "insert-size-std-deviation/",
+    "mean_insert_size": "mean-insert-size/",
+    "cross_contamination_rate": "cross-contamination-rate/",
+    "yield_bp_q30": "yield-bp-q30/",
+
+    "count_snvs": "count-snvs/",
+    "count_insertions": "count-insertions/",
+    "count_deletions": "count-deletions/",
+    "ratio_insertion_deletion": "ratio-insertion-deletion/",
+    "ratio_transitions_transversions_snv": "ratio-transitions-transversions-snv/",
+    "ratio_heterozygous_homzygous_snv": "ratio-heterozygous-homzygous-snv/",
+    "ratio_heterozygous_homzygous_indel": "ratio-heterozygous-homzygous-indel/",
+}
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--sample_id", dest="sample_id", required=True,
-                        default=None,
-                        help="Sample ID")
-    parser.add_argument("--input_aln_metrics", dest="input_aln_metrics", required=True,
-                        default=None,
-                        help="Path to input aln metrics list")
-    parser.add_argument("--input_variants_metrics", dest="input_variants_metrics", required=True,
-                        default=None,
-                        help="Path to input variants metrics list")
-    parser.add_argument("--output_json", dest="output_json", required=False,
-                        default="./metrics.json",
-                        help="Path to output file for variant metrics. Default: ./variant_counts.json")
-    parser.add_argument("--scratch_dir", dest="scratch_dir", required=False,
-                        default="./",
-                        help="Path to scratch dir. Default: ./")
-    args = parser.parse_args()
-
-    # create scratch dir if it doesn't exist
-    Path(args.scratch_dir).mkdir(parents=True, exist_ok=True)
-
-    return args
+    parser.add_argument("--sample_id", required=True, help="Sample ID")
+    parser.add_argument("--input_aln_metrics", required=True)
+    parser.add_argument("--input_variants_metrics", required=True)
+    parser.add_argument("--output_jsonld", default="./metrics.jsonld",
+                        help="Output JSON-LD file path")
+    parser.add_argument("--scratch_dir", default="./")
+    return parser.parse_args()
 
 
-def data1(input_aln_metrics):
-    aln_input = {}
-    with open(input_aln_metrics, 'r') as f1:
-        aln_input = json.load(f1)
-    return aln_input
-
-def data2(input_variants_metrics):
-    variants_input = {}
-    with open(input_variants_metrics, 'r') as f2:
-        variants_input = json.load(f2)
-    return variants_input
+def load_json(path):
+    with open(path) as f:
+        return json.load(f)
 
 
-def save_output(data1, data2, outfile):
+def inject_jsonld_context(merged_dict):
+    """
+    Converts metrics to JSON-LD by attaching @context with GA4GH URLs
+    """
+    context = {}
+
+    # Populate @context for every recognized metric
+    qc = merged_dict.get("wgs_qc_metrics", {})
+    aln = qc.get("aln_metrics", {})
+    var = qc.get("variant_metrics", {})
+
+    for k in list(aln.keys()) + list(var.keys()):
+        if k in METRIC_URLS:
+            context[k] = GA4GH_METRIC_BASE + METRIC_URLS[k]
+
+    # Add GA4GH schema context root (recommended)
+    context["@vocab"] = "https://ga4gh.org/wgs_qc/"
+
+    merged_dict["@context"] = context
+    return merged_dict
+
+
+def save_jsonld(aln, variants, outfile):
+    # Merge metric blocks
+    aln["wgs_qc_metrics"]["variant_metrics"].update(
+        variants["wgs_qc_metrics"]["variant_metrics"]
+    )
+
+    # Convert to JSON-LD
+    merged = inject_jsonld_context(aln)
+
     with open(outfile, "w") as f:
-        data1['wgs_qc_metrics']['variant_metrics'].update(data2['wgs_qc_metrics']['variant_metrics'])
-        #data1['wgs_qc_metrics']['variant_metrics'] = data2['wgs_qc_metrics']['variant_metrics']
-        print(data1)
-        json.dump(data1, f, sort_keys=True, indent=4)
-        #json.dump({"biosample": data1["biosample"], "wgs_qc_metrics": {**data1["wgs_qc_metrics"], **data2["wgs_qc_metrics"]}}, f, sort_keys=True, indent=4)
+        json.dump(merged, f, indent=4, sort_keys=False)
         f.write("\n")
+
 
 if __name__ == "__main__":
     args = parse_args()
+    Path(args.scratch_dir).mkdir(parents=True, exist_ok=True)
 
-    aln = data1(args.input_aln_metrics)
-    variants = data2(args.input_variants_metrics)
-    save_output(aln, variants, args.output_json)
+    aln = load_json(args.input_aln_metrics)
+    variants = load_json(args.input_variants_metrics)
+    save_jsonld(aln, variants, args.output_jsonld)
